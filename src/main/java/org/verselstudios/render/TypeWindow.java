@@ -32,7 +32,7 @@ public class TypeWindow extends DraggableWindow {
     @Override
     public void render() {
         super.render();
-        Font.FontStyle style = new FontStyleBuilder().setColor(new Vector4d(0,0,0,1)).setSize(16).build();
+        Font.FontStyle style = system.style;
         //Font.DEFAULT.renderWrappedString(new Vector3d(getBounds().getPos().getX() + getBounds().getSize().getX()/16D, getBounds().getBound().getY() - style.size() - getBounds().getSize().getY()/8D, 0), text, getBounds().getSize().getX() - getBounds().getSize().getX()/8D, style);
         Font.renderFontSystem(system, new Vector3d(getBounds().getPos().getX() + getBounds().getSize().getX()/16D, getBounds().getBound().getY() - style.size() - getBounds().getSize().getY()/8D, 0), ShaderRegister.CORE);
     }

@@ -5,27 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad50ed4a-995b-4ae0-8128-8464f59ee063" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/Texture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/FontRenderSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/QuadRenderSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/VertexBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Matrix4d.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderRegister.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/core.fsh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/core.vsh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector3d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector3d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector4d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector4d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DraggableWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DraggableWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/TextWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/TextWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/TypeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/TypeWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
