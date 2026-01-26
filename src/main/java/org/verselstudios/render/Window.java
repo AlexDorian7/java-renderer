@@ -1,51 +1,45 @@
 package org.verselstudios.render;
 
-import org.lwjgl.opengl.GL20;
-import org.verselstudios.gl.GLHelper;
-import org.verselstudios.Image.Image;
-import org.verselstudios.Image.ImageUtils;
+import org.verselstudios.Image.Texture;
+import org.verselstudios.gl.QuadRenderSystem;
+import org.verselstudios.gl.RenderSystem;
+import org.verselstudios.math.Matrix4d;
 import org.verselstudios.math.Rectangle;
-import org.verselstudios.math.Vector3d;
-import org.verselstudios.render.font.Font;
+import org.verselstudios.shader.ShaderRegister;
 
+import static org.lwjgl.opengl.GL45.*;
 
 public abstract class Window implements Renderer {
 
+    private RenderSystem quad;
     private boolean renderBorder = true;
 
     private String windowName = "Window";
 
-    private Rectangle bounds = new Rectangle(1, 1);
+    private Rectangle bounds;
 
-    private final int textureId;
+    private final Texture texture;
 
-    protected Window() {
-        Image image = ImageUtils.loadImageFromResource("assets/textures/border.png");
-        textureId = GLHelper.createGLTexture(image);
+    protected Window(Rectangle bounds) {
+        this.bounds = bounds;
+        texture = new Texture("assets/textures/border.png");
+        quad = QuadRenderSystem.makeQuad(new Rectangle(1,1));
     }
 
     @Override
     public void render() {
         if (renderBorder) {
-            GL20.glColor3d(1,1,1);
-            GL20.glBindTexture(GL20.GL_TEXTURE_2D, textureId);
-            GL20.glBegin(GL20.GL_QUADS);
 
-            GL20.glTexCoord2d(0, 0);
-            GL20.glVertex2d(bounds.getPos().getX(), bounds.getPos().getY());
+            glEnable(GL_TEXTURE_2D);
+            texture.bind(ShaderRegister.CORE);
+            Matrix4d translation = Matrix4d.translation(bounds.getPos().getX(), bounds.getPos().getY(), 0);
+            Matrix4d transform = translation.multiply(Matrix4d.scale(bounds.getSize().getX(), bounds.getSize().getY(), 1));
+            ShaderRegister.CORE.setModelViewMatrix(transform);
+            ShaderRegister.CORE.use();
+            quad.draw();
+            glDisable(GL_TEXTURE_2D);
 
-            GL20.glTexCoord2d(0, 1);
-            GL20.glVertex2d(bounds.getPos().getX(), bounds.getBound().getY());
-
-            GL20.glTexCoord2d(1, 1);
-            GL20.glVertex2d(bounds.getBound().getX(), bounds.getBound().getY());
-
-            GL20.glTexCoord2d(1, 0);
-            GL20.glVertex2d(bounds.getBound().getX(), bounds.getPos().getY());
-
-            GL20.glEnd();
-
-            Font.DEFAULT.renderString(new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - Font.FontStyle.DEFAULT.size() - 4, 0), windowName);
+//            Font.DEFAULT.renderString(new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - Font.FontStyle.DEFAULT.size() - 4, 0), windowName);
         }
     }
 

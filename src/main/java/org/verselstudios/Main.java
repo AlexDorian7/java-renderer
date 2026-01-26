@@ -8,13 +8,15 @@ import org.verselstudios.events.CharacterEvent;
 import org.verselstudios.events.KeyEvent;
 import org.verselstudios.events.MouseMoveEvent;
 import org.verselstudios.events.MousePressEvent;
+import org.verselstudios.math.Matrix4d;
 import org.verselstudios.render.*;
+import org.verselstudios.shader.ShaderRegister;
 
 import java.nio.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -51,10 +53,10 @@ public class Main {
         frameCounterWindow = new TextWindow("Frames", "0");
 
         RenderStack.push(new TypeWindow("Type Here"));
-        RenderStack.push(new TextWindow("Text Window", "Hello World! I am a very long string that should wrap."));
+        RenderStack.push(new TextWindow("Text Window", "Hello World! I am a very long string that should wrap.\nSuper\nCool!"));
         RenderStack.push(frameCounterWindow);
-//        RenderStack.push(new DebugTextRenderer());
-        RenderStack.push(new DebugRenderer());
+
+        ShaderRegister.CORE.use();
     }
 
     private void init() {
@@ -148,20 +150,23 @@ public class Main {
     }
 
     private static void resize(int width, int height) {
-        GL11.glViewport(0, 0, width, height);
+        GL20.glViewport(0, 0, width, height);
 
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glLoadIdentity();
-        GL11.glOrtho(-width, width, -height, height, -1, 1);
-
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        ShaderRegister.PROJECTION_MATRIX = Matrix4d.ortho(-width, width, -height, height, -1, 1);
+        ShaderRegister.CORE.setProjectionMatrix(ShaderRegister.PROJECTION_MATRIX);
+        
+//        GL20.glMatrixMode(GL20.GL_PROJECTION);
+//        GL20.glLoadIdentity();
+//        GL20.glOrtho(-width, width, -height, height, -1, 1);
+//
+//        GL20.glMatrixMode(GL20.GL_MODELVIEW);
     }
 
     private void loop() {
         // Set the clear color
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
 
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL20.glEnable(GL20.GL_TEXTURE_2D);
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.

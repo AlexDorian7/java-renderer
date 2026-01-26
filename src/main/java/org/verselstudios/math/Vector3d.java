@@ -17,6 +17,16 @@ public class Vector3d {
         this(x, y, 0);
     }
 
+    public Vector3d(Vector2d vec) {
+        this(vec, 0);
+    }
+
+    public Vector3d(Vector2d vec, double z) {
+        this.x = vec.getX();
+        this.y = vec.getY();
+        this.z = z;
+    }
+
     public Vector3d(double x, double y, double z) {
         this.x = x;
         this.y = y;

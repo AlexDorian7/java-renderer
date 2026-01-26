@@ -4,6 +4,7 @@ import org.verselstudios.events.ActionType;
 import org.verselstudios.events.KeyEvent;
 import org.verselstudios.events.MouseMoveEvent;
 import org.verselstudios.events.MousePressEvent;
+import org.verselstudios.math.Rectangle;
 import org.verselstudios.math.Vector2d;
 
 public class DraggableWindow extends Window {
@@ -12,8 +13,8 @@ public class DraggableWindow extends Window {
     private Vector2d lastPos;
     private Vector2d offset;
 
-    public DraggableWindow() {
-        super();
+    public DraggableWindow(Rectangle bounds) {
+        super(bounds);
     }
 
     @Override

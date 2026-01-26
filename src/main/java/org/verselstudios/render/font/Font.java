@@ -1,31 +1,37 @@
 package org.verselstudios.render.font;
 
-import org.lwjgl.opengl.GL20;
-import org.verselstudios.Image.Image;
-import org.verselstudios.Image.ImageUtils;
-import org.verselstudios.gl.GLHelper;
+import org.verselstudios.Image.Texture;
+import org.verselstudios.gl.FontRenderSystem;
+import org.verselstudios.gl.RenderSystem;
+import org.verselstudios.gl.VertexBuilder;
+import org.verselstudios.math.Matrix4d;
+import org.verselstudios.math.Vector2d;
 import org.verselstudios.math.Vector3d;
 import org.verselstudios.math.Vector4d;
+import org.verselstudios.shader.ShaderProgram;
+
+import static org.lwjgl.opengl.GL45.*;
 
 public class Font {
 
     public static final Font DEFAULT = new Font("assets/textures/font/ascii.png");
     public static final Font EMOJI = new Font("assets/textures/font/emoji.png");
 
-    private final int textureId;
+    private final Texture texture;
     private final String fontResource;
 
     public Font(String fontResource) {
         this.fontResource = fontResource;
 
-        Image image = ImageUtils.loadImageFromResource(fontResource);
-        textureId = GLHelper.createGLTexture(image);
+        texture = new Texture(fontResource);
     }
 
+    @Deprecated
     public void renderString(Vector3d position, String string) {
         renderString(position, string, FontStyle.DEFAULT);
     }
 
+    @Deprecated
     public void renderString(Vector3d position, String string, FontStyle style) {
         int pos = 0;
         double fontSize = style.size;
@@ -43,23 +49,23 @@ public class Font {
                 double x1 = x + 1/16D;
                 double y1 = y + 1/16D;
 
-                GL20.glEnable(GL20.GL_BLEND);
-                GL20.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-                GL20.glBindTexture(GL20.GL_TEXTURE_2D, textureId);
-                GL20.glColor4d(shadowColor.getX(), shadowColor.getY(), shadowColor.getZ(), shadowColor.getW());
-                GL20.glBegin(GL20.GL_QUADS);
-
-                GL20.glTexCoord2d(x, y);
-                GL20.glVertex3d(position.getX() + shadowPos*fontSize, position.getY() - fontSize/8D, position.getZ());
-                GL20.glTexCoord2d(x, y1);
-                GL20.glVertex3d(position.getX() + shadowPos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
-                GL20.glTexCoord2d(x1, y1);
-                GL20.glVertex3d(position.getX() + shadowPos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
-                GL20.glTexCoord2d(x1, y);
-                GL20.glVertex3d(position.getX() + shadowPos*fontSize + fontSize, position.getY() - fontSize/8D, position.getZ());
-                GL20.glEnd();
-
-                GL20.glDisable(GL20.GL_BLEND);
+//                glEnable(GL_BLEND);
+//                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//                glBindTexture(GL_TEXTURE_2D, texture.textureId());
+//                glColor4d(shadowColor.getX(), shadowColor.getY(), shadowColor.getZ(), shadowColor.getW());
+//                glBegin(GL_QUADS);
+//
+//                glTexCoord2d(x, y);
+//                glVertex3d(position.getX() + shadowPos*fontSize, position.getY() - fontSize/8D, position.getZ());
+//                glTexCoord2d(x, y1);
+//                glVertex3d(position.getX() + shadowPos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
+//                glTexCoord2d(x1, y1);
+//                glVertex3d(position.getX() + shadowPos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
+//                glTexCoord2d(x1, y);
+//                glVertex3d(position.getX() + shadowPos*fontSize + fontSize, position.getY() - fontSize/8D, position.getZ());
+//                glEnd();
+//
+//                glDisable(GL_BLEND);
 
                 pos++;
             }
@@ -76,28 +82,29 @@ public class Font {
             double x1 = x + 1/16D;
             double y1 = y + 1/16D;
 
-            GL20.glEnable(GL20.GL_BLEND);
-            GL20.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-            GL20.glBindTexture(GL20.GL_TEXTURE_2D, textureId);
-            GL20.glColor4d(style.color().getX(), style.color().getY(), style.color().getZ(), style.color().getW());
-            GL20.glBegin(GL20.GL_QUADS);
-
-            GL20.glTexCoord2d(x, y);
-            GL20.glVertex3d(position.getX() + pos*fontSize, position.getY(), position.getZ());
-            GL20.glTexCoord2d(x, y1);
-            GL20.glVertex3d(position.getX() + pos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
-            GL20.glTexCoord2d(x1, y1);
-            GL20.glVertex3d(position.getX() + pos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
-            GL20.glTexCoord2d(x1, y);
-            GL20.glVertex3d(position.getX() + pos*fontSize + fontSize, position.getY(), position.getZ());
-            GL20.glEnd();
-
-            GL20.glDisable(GL20.GL_BLEND);
+//            glEnable(GL_BLEND);
+//            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//            glBindTexture(GL_TEXTURE_2D, texture.textureId());
+//            glColor4d(style.color().getX(), style.color().getY(), style.color().getZ(), style.color().getW());
+//            glBegin(GL_QUADS);
+//
+//            glTexCoord2d(x, y);
+//            glVertex3d(position.getX() + pos*fontSize, position.getY(), position.getZ());
+//            glTexCoord2d(x, y1);
+//            glVertex3d(position.getX() + pos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
+//            glTexCoord2d(x1, y1);
+//            glVertex3d(position.getX() + pos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
+//            glTexCoord2d(x1, y);
+//            glVertex3d(position.getX() + pos*fontSize + fontSize, position.getY(), position.getZ());
+//            glEnd();
+//
+//            glDisable(GL_BLEND);
 
             pos++;
         }
     }
 
+    @Deprecated
     public void renderWrappedString(
             Vector3d position,
             String text,
@@ -160,9 +167,149 @@ public class Font {
         }
     }
 
+    public FontRenderSystem createFontRenderSystem(String string) {
+        return createFontRenderSystem(string, FontStyle.DEFAULT);
+    }
 
-    public record FontStyle(double size, Vector4d color, Vector4d shadowColor, boolean italic, boolean shadow, boolean bold) {
+    public FontRenderSystem createFontRenderSystem(String string, FontStyle style) {
+        if (string.isEmpty()) string = " "; // Should fix this later. this prevents empty RenderSystem
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, this, style);
+        system.begin();
+        int pos = 0;
+        for (char c : string.toCharArray()) {
+            if (c > 255) {
+                c = 0;
+            }
+            int vi = c/16;
+            int ui = c%16;
+            double u = ui/16D;
+            double v  = 1D - (vi + 1) / 16D;
+            double u1 = u + 1/16D;
+            double v1 = v + 1/16D;
+
+            double x = pos;
+
+            RenderSystem.Vertex vx0 = new VertexBuilder().setPosition(new Vector3d(x, 0, 0)).setColor(style.color)
+                    .setTexCoord(new Vector2d(u, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx1 = new VertexBuilder().setPosition(new Vector3d(x + (style.italic ? 0.25 : 0), 1, 0)).setColor(style.color)
+                    .setTexCoord(new Vector2d(u, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx2 = new VertexBuilder().setPosition(new Vector3d(x+1 + (style.italic ? 0.25 : 0), 1, 0)).setColor(style.color)
+                    .setTexCoord(new Vector2d(u1, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx3 = new VertexBuilder().setPosition(new Vector3d(x+1, 0, 0)).setColor(style.color)
+                    .setTexCoord(new Vector2d(u1, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+
+            // tri 1
+            system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
+            // tri 2
+            system.addVertex(vx0).addVertex(vx3).addVertex(vx2);
+
+            pos++;
+        }
+        system.end();
+        return system;
+    }
+
+    public FontRenderSystem createFontRenderSystem(String string, FontStyle style, int maxWidth) {
+        if (string.isEmpty()) string = " ";
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, this, style);
+        system.begin();
+
+        int posX = 0;
+        int posY = 0;
+
+        // Split input into words while keeping line feeds
+        int i = 0;
+        while (i < string.length()) {
+            // Handle line feed immediately
+            if (string.charAt(i) == '\n') {
+                posX = 0;
+                posY -= 1;
+                i++;
+                continue;
+            }
+
+            // Find next word or space
+            int wordEnd = i;
+            while (wordEnd < string.length() && string.charAt(wordEnd) != ' ' && string.charAt(wordEnd) != '\n') {
+                wordEnd++;
+            }
+            int wordLength = wordEnd - i;
+
+            // Wrap word if it doesn't fit
+            if (posX + wordLength > maxWidth) {
+                posX = 0;
+                posY -= 1;
+            }
+
+            // Render each character in the word
+            for (int j = i; j < wordEnd; j++) {
+                char c = string.charAt(j);
+                if (c > 255) c = 0;
+
+                int vi = c / 16;
+                int ui = c % 16;
+                double u = ui / 16D;
+                double v  = 1D - (vi + 1) / 16D;
+                double u1 = u + 1 / 16D;
+                double v1 = v + 1 / 16D;
+
+                double x = posX;
+                double y = posY;
+
+                RenderSystem.Vertex vx0 = new VertexBuilder().setPosition(new Vector3d(x, y, 0)).setColor(style.color)
+                        .setTexCoord(new Vector2d(u, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+                RenderSystem.Vertex vx1 = new VertexBuilder().setPosition(new Vector3d(x + (style.italic ? 0.25 : 0), y + 1, 0)).setColor(style.color)
+                        .setTexCoord(new Vector2d(u, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+                RenderSystem.Vertex vx2 = new VertexBuilder().setPosition(new Vector3d(x + 1 + (style.italic ? 0.25 : 0), y + 1, 0)).setColor(style.color)
+                        .setTexCoord(new Vector2d(u1, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+                RenderSystem.Vertex vx3 = new VertexBuilder().setPosition(new Vector3d(x + 1, y, 0)).setColor(style.color)
+                        .setTexCoord(new Vector2d(u1, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+
+                system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
+                system.addVertex(vx0).addVertex(vx3).addVertex(vx2);
+
+                posX++;
+            }
+
+            // Skip space after word
+            if (wordEnd < string.length() && string.charAt(wordEnd) == ' ') {
+                posX++;
+            }
+
+            i = wordEnd + 1;
+        }
+
+        system.end();
+        return system;
+    }
+
+
+
+
+
+    public static void renderFontSystem(FontRenderSystem system, Vector3d position, ShaderProgram program) {
+        Matrix4d translate = Matrix4d.translation(position.getX(), position.getY(), position.getZ());
+        Matrix4d transform = translate.multiply(system.style.getScaleMat());
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_TEXTURE_2D);
+        system.font.texture.bind(program);
+        program.setModelViewMatrix(transform);
+        program.use();
+        system.draw();
+        glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
+
+
+    }
+
+    public record FontStyle(double size, Vector4d color, @Deprecated Vector4d shadowColor, boolean italic, @Deprecated boolean shadow, boolean bold) {
         public static final FontStyle DEFAULT = new FontStyleBuilder().build();
+
+        public Matrix4d getScaleMat() {
+            return Matrix4d.scale(size, size, size);
+        }
+
     }
 
 }

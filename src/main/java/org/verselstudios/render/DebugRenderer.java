@@ -11,6 +11,7 @@ import java.nio.IntBuffer;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.system.MemoryStack.stackPush;
 
+@Deprecated
 public class DebugRenderer implements Renderer {
 
     private KeyEvent keyEvent;

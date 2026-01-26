@@ -1,6 +1,7 @@
 package org.verselstudios.math;
 
 public class Vector4d {
+    public static final Vector4d ONE = new Vector4d(1,1,1,1);
     private double x;
     private double y;
     private double z;
@@ -20,6 +21,17 @@ public class Vector4d {
 
     public Vector4d(double x, double y, double z) {
         this(x, y, z, 0);
+    }
+
+    public Vector4d(Vector3d vec) {
+        this(vec, 1);
+    }
+
+    public Vector4d(Vector3d vec, double w) {
+        this.x = vec.getX();
+        this.y = vec.getY();
+        this.z = vec.getZ();
+        this.w = w;
     }
 
     public Vector4d(double x, double y, double z, double w) {
