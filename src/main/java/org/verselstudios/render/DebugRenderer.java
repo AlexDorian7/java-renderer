@@ -1,10 +1,7 @@
 package org.verselstudios.render;
 
 import org.lwjgl.system.MemoryStack;
-import org.verselstudios.events.ActionType;
-import org.verselstudios.events.KeyEvent;
-import org.verselstudios.events.MouseMoveEvent;
-import org.verselstudios.events.MousePressEvent;
+import org.verselstudios.events.*;
 import org.verselstudios.math.Vector3d;
 import org.verselstudios.math.Vector4d;
 import org.verselstudios.render.font.Font;
@@ -16,9 +13,10 @@ import static org.lwjgl.system.MemoryStack.stackPush;
 
 public class DebugRenderer implements Renderer {
 
-    KeyEvent keyEvent;
-    MouseMoveEvent mouseMoveEvent;
-    MousePressEvent mousePressEvent;
+    private KeyEvent keyEvent;
+    private MouseMoveEvent mouseMoveEvent;
+    private MousePressEvent mousePressEvent;
+    private CharacterEvent characterEvent;
 
     @Override
     public void render() {
@@ -35,6 +33,9 @@ public class DebugRenderer implements Renderer {
             }
             if (mousePressEvent != null) {
                 Font.DEFAULT.renderString(position.add(new Vector3d(0, 40, 0)), mousePressEvent.button() + " - " + mousePressEvent.isPressed());
+            }
+            if (characterEvent != null) {
+                Font.DEFAULT.renderString(position.add(new Vector3d(0, -40, 0)), String.valueOf(characterEvent.character()));
             }
             Font.DEFAULT.renderString(position.add(new Vector3d(0, 80, 0)), "[" + mouseMoveEvent.xpos() + ", " + mouseMoveEvent.ypos() + "]");
 
@@ -58,5 +59,11 @@ public class DebugRenderer implements Renderer {
     public ActionType onMousePress(MousePressEvent event) {
         mousePressEvent = event;
         return ActionType.PASS;
+    }
+
+    @Override
+    public ActionType onCharacter(CharacterEvent event) {
+        characterEvent = event;
+        return Renderer.super.onCharacter(event);
     }
 }

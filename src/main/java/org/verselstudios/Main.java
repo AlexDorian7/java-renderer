@@ -4,6 +4,7 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryStack;
+import org.verselstudios.events.CharacterEvent;
 import org.verselstudios.events.KeyEvent;
 import org.verselstudios.events.MouseMoveEvent;
 import org.verselstudios.events.MousePressEvent;
@@ -49,6 +50,7 @@ public class Main {
 
         frameCounterWindow = new TextWindow("Frames", "0");
 
+        RenderStack.push(new TypeWindow("Type Here"));
         RenderStack.push(new TextWindow("Text Window", "Hello World! I am a very long string that should wrap."));
         RenderStack.push(frameCounterWindow);
 //        RenderStack.push(new DebugTextRenderer());
@@ -79,6 +81,10 @@ public class Main {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
             RenderStack.onKeyPress(new KeyEvent(window, key, scancode, action, mods));
+        });
+        glfwSetCharCallback(window, (window, codepoint) -> {
+            char character = (char) codepoint;
+            RenderStack.onCharacter(new CharacterEvent(window, character));
         });
 
         glfwSetFramebufferSizeCallback(window, (window, width, height) -> {

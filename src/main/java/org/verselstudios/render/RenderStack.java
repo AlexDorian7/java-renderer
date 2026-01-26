@@ -1,9 +1,6 @@
 package org.verselstudios.render;
 
-import org.verselstudios.events.ActionType;
-import org.verselstudios.events.KeyEvent;
-import org.verselstudios.events.MouseMoveEvent;
-import org.verselstudios.events.MousePressEvent;
+import org.verselstudios.events.*;
 
 import java.util.ArrayList;
 
@@ -41,6 +38,13 @@ public class RenderStack {
     public static void onMousePress(MousePressEvent event) {
         for (Renderer renderer : RENDERERS.reversed()) {
             ActionType actionType = renderer.onMousePress(event);
+            if (actionType == ActionType.CONSUME) break;
+        }
+    }
+
+    public static void onCharacter(CharacterEvent event) {
+        for (Renderer renderer : RENDERERS.reversed()) {
+            ActionType actionType = renderer.onCharacter(event);
             if (actionType == ActionType.CONSUME) break;
         }
     }

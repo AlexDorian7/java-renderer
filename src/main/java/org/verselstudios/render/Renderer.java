@@ -1,9 +1,6 @@
 package org.verselstudios.render;
 
-import org.verselstudios.events.ActionType;
-import org.verselstudios.events.KeyEvent;
-import org.verselstudios.events.MouseMoveEvent;
-import org.verselstudios.events.MousePressEvent;
+import org.verselstudios.events.*;
 
 public interface Renderer {
 
@@ -18,6 +15,10 @@ public interface Renderer {
     }
 
     default ActionType onMousePress(MousePressEvent event) {
+        return ActionType.PASS;
+    }
+
+    default ActionType onCharacter(CharacterEvent event) {
         return ActionType.PASS;
     }
 }
