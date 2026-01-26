@@ -1,6 +1,6 @@
 package org.verselstudios.render.font;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 import org.verselstudios.Image.Image;
 import org.verselstudios.Image.ImageUtils;
 import org.verselstudios.gl.GLHelper;
@@ -43,23 +43,23 @@ public class Font {
                 double x1 = x + 1/16D;
                 double y1 = y + 1/16D;
 
-                GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
-                GL11.glColor4d(shadowColor.getX(), shadowColor.getY(), shadowColor.getZ(), shadowColor.getW());
-                GL11.glBegin(GL11.GL_QUADS);
+                GL20.glEnable(GL20.GL_BLEND);
+                GL20.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+                GL20.glBindTexture(GL20.GL_TEXTURE_2D, textureId);
+                GL20.glColor4d(shadowColor.getX(), shadowColor.getY(), shadowColor.getZ(), shadowColor.getW());
+                GL20.glBegin(GL20.GL_QUADS);
 
-                GL11.glTexCoord2d(x, y);
-                GL11.glVertex3d(position.getX() + shadowPos*fontSize, position.getY() - fontSize/8D, position.getZ());
-                GL11.glTexCoord2d(x, y1);
-                GL11.glVertex3d(position.getX() + shadowPos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
-                GL11.glTexCoord2d(x1, y1);
-                GL11.glVertex3d(position.getX() + shadowPos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
-                GL11.glTexCoord2d(x1, y);
-                GL11.glVertex3d(position.getX() + shadowPos*fontSize + fontSize, position.getY() - fontSize/8D, position.getZ());
-                GL11.glEnd();
+                GL20.glTexCoord2d(x, y);
+                GL20.glVertex3d(position.getX() + shadowPos*fontSize, position.getY() - fontSize/8D, position.getZ());
+                GL20.glTexCoord2d(x, y1);
+                GL20.glVertex3d(position.getX() + shadowPos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
+                GL20.glTexCoord2d(x1, y1);
+                GL20.glVertex3d(position.getX() + shadowPos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
+                GL20.glTexCoord2d(x1, y);
+                GL20.glVertex3d(position.getX() + shadowPos*fontSize + fontSize, position.getY() - fontSize/8D, position.getZ());
+                GL20.glEnd();
 
-                GL11.glDisable(GL11.GL_BLEND);
+                GL20.glDisable(GL20.GL_BLEND);
 
                 pos++;
             }
@@ -76,23 +76,23 @@ public class Font {
             double x1 = x + 1/16D;
             double y1 = y + 1/16D;
 
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
-            GL11.glColor4d(style.color().getX(), style.color().getY(), style.color().getZ(), style.color().getW());
-            GL11.glBegin(GL11.GL_QUADS);
+            GL20.glEnable(GL20.GL_BLEND);
+            GL20.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            GL20.glBindTexture(GL20.GL_TEXTURE_2D, textureId);
+            GL20.glColor4d(style.color().getX(), style.color().getY(), style.color().getZ(), style.color().getW());
+            GL20.glBegin(GL20.GL_QUADS);
 
-            GL11.glTexCoord2d(x, y);
-            GL11.glVertex3d(position.getX() + pos*fontSize, position.getY(), position.getZ());
-            GL11.glTexCoord2d(x, y1);
-            GL11.glVertex3d(position.getX() + pos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
-            GL11.glTexCoord2d(x1, y1);
-            GL11.glVertex3d(position.getX() + pos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
-            GL11.glTexCoord2d(x1, y);
-            GL11.glVertex3d(position.getX() + pos*fontSize + fontSize, position.getY(), position.getZ());
-            GL11.glEnd();
+            GL20.glTexCoord2d(x, y);
+            GL20.glVertex3d(position.getX() + pos*fontSize, position.getY(), position.getZ());
+            GL20.glTexCoord2d(x, y1);
+            GL20.glVertex3d(position.getX() + pos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
+            GL20.glTexCoord2d(x1, y1);
+            GL20.glVertex3d(position.getX() + pos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
+            GL20.glTexCoord2d(x1, y);
+            GL20.glVertex3d(position.getX() + pos*fontSize + fontSize, position.getY(), position.getZ());
+            GL20.glEnd();
 
-            GL11.glDisable(GL11.GL_BLEND);
+            GL20.glDisable(GL20.GL_BLEND);
 
             pos++;
         }

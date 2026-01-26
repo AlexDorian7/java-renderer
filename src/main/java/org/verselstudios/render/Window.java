@@ -1,6 +1,6 @@
 package org.verselstudios.render;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 import org.verselstudios.gl.GLHelper;
 import org.verselstudios.Image.Image;
 import org.verselstudios.Image.ImageUtils;
@@ -27,23 +27,23 @@ public abstract class Window implements Renderer {
     @Override
     public void render() {
         if (renderBorder) {
-            GL11.glColor3d(1,1,1);
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
-            GL11.glBegin(GL11.GL_QUADS);
+            GL20.glColor3d(1,1,1);
+            GL20.glBindTexture(GL20.GL_TEXTURE_2D, textureId);
+            GL20.glBegin(GL20.GL_QUADS);
 
-            GL11.glTexCoord2d(0, 0);
-            GL11.glVertex2d(bounds.getPos().getX(), bounds.getPos().getY());
+            GL20.glTexCoord2d(0, 0);
+            GL20.glVertex2d(bounds.getPos().getX(), bounds.getPos().getY());
 
-            GL11.glTexCoord2d(0, 1);
-            GL11.glVertex2d(bounds.getPos().getX(), bounds.getBound().getY());
+            GL20.glTexCoord2d(0, 1);
+            GL20.glVertex2d(bounds.getPos().getX(), bounds.getBound().getY());
 
-            GL11.glTexCoord2d(1, 1);
-            GL11.glVertex2d(bounds.getBound().getX(), bounds.getBound().getY());
+            GL20.glTexCoord2d(1, 1);
+            GL20.glVertex2d(bounds.getBound().getX(), bounds.getBound().getY());
 
-            GL11.glTexCoord2d(1, 0);
-            GL11.glVertex2d(bounds.getBound().getX(), bounds.getPos().getY());
+            GL20.glTexCoord2d(1, 0);
+            GL20.glVertex2d(bounds.getBound().getX(), bounds.getPos().getY());
 
-            GL11.glEnd();
+            GL20.glEnd();
 
             Font.DEFAULT.renderString(new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - Font.FontStyle.DEFAULT.size() - 4, 0), windowName);
         }
