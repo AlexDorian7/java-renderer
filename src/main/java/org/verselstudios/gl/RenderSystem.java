@@ -2,9 +2,11 @@ package org.verselstudios.gl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL45;
+import org.verselstudios.math.MatrixStack;
 import org.verselstudios.math.Vector2d;
 import org.verselstudios.math.Vector3d;
 import org.verselstudios.math.Vector4d;
+import org.verselstudios.shader.ShaderProgram;
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -100,10 +102,12 @@ public class RenderSystem {
         return this;
     }
 
-    public void draw() {
+    public void draw(ShaderProgram program, MatrixStack matrixStack) {
         if (state != 2) {
             throw new IllegalStateException("Render system is in state " + state + " expected 2.");
         }
+        program.use();
+        program.setModelViewMatrix(matrixStack.matrix());
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glDrawArrays(type.type, 0, indices);

@@ -5,10 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad50ed4a-995b-4ae0-8128-8464f59ee063" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/MatrixStack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/SimplexNoise.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Transform.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugHeightMapRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/FlatHeightMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/Heightmap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/NoiseHeightmap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SinHeightmap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/heightmap.fsh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/heightmap.vsh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/events/MouseMoveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/events/MouseMoveEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Matrix4d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Matrix4d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector3d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector3d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,25 +89,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.java_renderer [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.java_renderer [fatJar].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.java_renderer [:Main.main()].executor": "Run",
+    "Gradle.java_renderer [fatJar].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/alexd/Documents/LWJGL/java_renderer/src/main/resources/assets/shaders"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.verselstudios.shader" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alexd\Documents\LWJGL\java_renderer\src\main\resources\assets\shaders" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.verselstudios.surface" />
       <recent name="org.verselstudios.render" />
       <recent name="org.verselstudios.events" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.java_renderer [fatJar]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.verselstudios.Main" />
       <module name="java-renderer.main" />

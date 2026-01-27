@@ -8,6 +8,7 @@ import org.verselstudios.math.Matrix4d;
 import org.verselstudios.math.Vector2d;
 import org.verselstudios.math.Vector3d;
 import org.verselstudios.math.Vector4d;
+import org.verselstudios.render.RenderStack;
 import org.verselstudios.shader.ShaderProgram;
 
 import static org.lwjgl.opengl.GL45.*;
@@ -382,19 +383,18 @@ public class Font {
 
 
     public static void renderFontSystem(FontRenderSystem system, Vector3d position, ShaderProgram program) {
+        program.use();
         Matrix4d translate = Matrix4d.translation(position.getX(), position.getY(), position.getZ());
         Matrix4d transform = translate.multiply(system.style.getScaleMat());
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_TEXTURE_2D);
         system.font.texture.bind(program);
-        program.setModelViewMatrix(transform);
-        program.use();
-        system.draw();
+        RenderStack.getMatrixStack().push(transform);
+        system.draw(program, RenderStack.getMatrixStack());
+        RenderStack.getMatrixStack().pop();
         glDisable(GL_BLEND);
         glDisable(GL_TEXTURE_2D);
-
-
     }
 
     public record FontStyle(double size, Vector4d color, @Deprecated Vector4d shadowColor, boolean italic, @Deprecated boolean shadow, boolean bold) {

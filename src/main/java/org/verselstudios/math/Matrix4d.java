@@ -157,6 +157,15 @@ public class Matrix4d {
         return m1.multiply(matZ);
     }
 
+    public static Matrix4d rotationZYX(double radiansX, double radiansY, double radiansZ) {
+        Matrix4d matX = rotationX(radiansX);
+        Matrix4d matY = rotationY(radiansY);
+        Matrix4d matZ = rotationZ(radiansZ);
+
+        Matrix4d m1 = matZ.multiply(matY);
+        return m1.multiply(matX);
+    }
+
     /* =========================
        Projection matrices
        ========================= */
@@ -176,6 +185,29 @@ public class Matrix4d {
         mat.set(2, 3, -(far + near) / (far - near));
 
         return mat;
+    }
+
+    public static Matrix4d perspective(double fov, double left, double right,
+                                       double bottom, double top,
+                                       double near, double far) {
+        Matrix4d mat1 = Matrix4d.ortho(left, right, bottom, top, near, far);
+
+        Matrix4d mat = new Matrix4d();
+
+        double f = 1;
+        double n = 0;
+
+        double s = 1 / Math.tan(fov/2 * Math.PI/180);
+
+        mat.set(0, 0, s);
+        mat.set(1, 1, s);
+
+        mat.set(2, 2, -f/(f-n));
+        mat.set(3, 2, -f*n/(f-n));
+
+        mat.set(2, 3, -1);
+
+        return mat1.multiply(mat);
     }
 
     /* =========================

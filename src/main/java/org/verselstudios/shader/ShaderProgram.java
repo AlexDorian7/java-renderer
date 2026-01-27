@@ -117,6 +117,7 @@ public class ShaderProgram {
      */
     public void use() {
         glUseProgram(program);
+        setProjectionMatrix(ShaderRegister.PROJECTION_MATRIX); // Set the projection matrix right away
     }
 
     /**

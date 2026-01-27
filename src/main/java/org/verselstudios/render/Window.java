@@ -36,14 +36,14 @@ public abstract class Window implements Renderer {
     @Override
     public void render() {
         if (renderBorder) {
-
+            program.use();
             glEnable(GL_TEXTURE_2D);
-            texture.bind(ShaderRegister.CORE);
             Matrix4d translation = Matrix4d.translation(bounds.getPos().getX(), bounds.getPos().getY(), 0);
             Matrix4d transform = translation.multiply(Matrix4d.scale(bounds.getSize().getX(), bounds.getSize().getY(), 1));
-            ShaderRegister.CORE.setModelViewMatrix(transform);
-            ShaderRegister.CORE.use();
-            quad.draw();
+            RenderStack.getMatrixStack().push(transform);
+            texture.bind(program);
+            quad.draw(program, RenderStack.getMatrixStack());
+            RenderStack.getMatrixStack().pop();
             glDisable(GL_TEXTURE_2D);
 
             if (titleSystem != null) {

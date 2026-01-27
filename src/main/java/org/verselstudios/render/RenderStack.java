@@ -1,11 +1,18 @@
 package org.verselstudios.render;
 
 import org.verselstudios.events.*;
+import org.verselstudios.math.Camera;
+import org.verselstudios.math.Matrix4d;
+import org.verselstudios.math.MatrixStack;
 
 import java.util.ArrayList;
 
 public class RenderStack {
     private static final ArrayList<Renderer> RENDERERS = new ArrayList<>();
+
+    private static final MatrixStack MATRIX_STACK = new MatrixStack();
+
+    private static final Camera camera = new Camera();
 
     public static void push(Renderer renderer) {
         RENDERERS.add(renderer);
@@ -16,8 +23,13 @@ public class RenderStack {
     }
 
     public static void render() {
+        MATRIX_STACK.push(camera.getTransform().getMatrix()); // Push view matrix
         for (Renderer renderer : RENDERERS) {
             renderer.render();
+        }
+        MATRIX_STACK.pop(); // Pop view matrix
+        if (!MATRIX_STACK.isEmpty()) {
+            throw new IllegalStateException("Matrix stack not empty at end of frame!");
         }
     }
 
@@ -49,4 +61,7 @@ public class RenderStack {
         }
     }
 
+    public static MatrixStack getMatrixStack() {
+        return MATRIX_STACK;
+    }
 }

@@ -110,13 +110,14 @@ public class Vector3d {
         return new Vector3d(x / mag, y / mag, z / mag);
     }
 
-    public void normalize() {
+    public Vector3d normalize() {
         double mag = magnitude();
-        if (mag == 0.0) return;
+        if (mag == 0.0) return this;
 
         x /= mag;
         y /= mag;
         z /= mag;
+        return this;
     }
 
     @Override

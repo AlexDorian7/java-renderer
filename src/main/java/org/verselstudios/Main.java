@@ -9,6 +9,7 @@ import org.verselstudios.events.KeyEvent;
 import org.verselstudios.events.MouseMoveEvent;
 import org.verselstudios.events.MousePressEvent;
 import org.verselstudios.math.Matrix4d;
+import org.verselstudios.math.Rectangle;
 import org.verselstudios.render.*;
 import org.verselstudios.shader.ShaderRegister;
 
@@ -49,6 +50,9 @@ public class Main {
 
     private void registerInternals() {
         ShaderRegister.CORE.use();
+
+        RenderStack.push(new TextWindow("Hello World", "Hello World", new Rectangle(512, 512)));
+        RenderStack.push(new DebugHeightMapRenderer());
     }
 
     private void init() {
@@ -144,14 +148,8 @@ public class Main {
     private static void resize(int width, int height) {
         GL20.glViewport(0, 0, width, height);
 
-        ShaderRegister.PROJECTION_MATRIX = Matrix4d.ortho(-width, width, -height, height, -1, 1);
+        ShaderRegister.PROJECTION_MATRIX = Matrix4d.perspective(90, -width, width, -height, height, 0, 1); //Matrix4d.ortho(-width, width, -height, height, -1, 1);
         ShaderRegister.CORE.setProjectionMatrix(ShaderRegister.PROJECTION_MATRIX);
-        
-//        GL20.glMatrixMode(GL20.GL_PROJECTION);
-//        GL20.glLoadIdentity();
-//        GL20.glOrtho(-width, width, -height, height, -1, 1);
-//
-//        GL20.glMatrixMode(GL20.GL_MODELVIEW);
     }
 
     private void loop() {
