@@ -23,7 +23,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class Main {
 
     private long frames = 0;
-    TextWindow frameCounterWindow;
 
     public static void main(String[] args) {
         new Main().run();
@@ -49,13 +48,6 @@ public class Main {
     }
 
     private void registerInternals() {
-
-        frameCounterWindow = new TextWindow("Frames", "0");
-
-        RenderStack.push(new TypeWindow("Type Here"));
-        RenderStack.push(new TextWindow("Text Window", "Hello World! I am a very long string that should wrap.\nSuper\nCool!"));
-        RenderStack.push(frameCounterWindow);
-
         ShaderRegister.CORE.use();
     }
 
@@ -172,8 +164,6 @@ public class Main {
         // the window or has pressed the ESCAPE key.
         while ( !glfwWindowShouldClose(window) ) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
-            frameCounterWindow.setText(String.valueOf(frames));
 
             RenderStack.render();
 

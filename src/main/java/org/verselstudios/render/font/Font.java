@@ -16,6 +16,7 @@ public class Font {
 
     public static final Font DEFAULT = new Font("assets/textures/font/ascii.png");
     public static final Font EMOJI = new Font("assets/textures/font/emoji.png");
+    public static final Font PROGRESS = new Font("assets/textures/font/progress.png");
 
     private final Texture texture;
     private final String fontResource;
@@ -284,7 +285,100 @@ public class Font {
     }
 
 
+    public static FontRenderSystem createProgressBar(int width, double value, Vector4d progressColor) {
 
+        if (width < 2) width = 2;
+
+        Font font = PROGRESS;
+        FontStyle style = FontStyle.DEFAULT;
+
+        StringBuilder borderBuilder = new StringBuilder();
+
+        borderBuilder.append('\u0000');
+        for (int i=0; i< width-2; i++) {
+            borderBuilder.append('\u0001');
+        }
+        borderBuilder.append('\u0002');
+
+        StringBuilder progressBuilder = new StringBuilder();
+        double val1 = value*width;
+        int i = (int) val1;
+        double f = val1%1;
+        if (f < 0.00001) f = 0;
+        for (int j=0; j<i; j++) {
+            progressBuilder.append('\u000F');
+        }
+        if (f != 0) {
+            int k = 8+((int) (f*8));
+            progressBuilder.append(8+k);
+        }
+
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, font, style);
+        system.begin();
+        int pos = 0;
+        for (char c : progressBuilder.toString().toCharArray()) {
+            if (c > 255) {
+                c = 0;
+            }
+            int vi = c/16;
+            int ui = c%16;
+            double u = ui/16D;
+            double v  = 1D - (vi + 1) / 16D;
+            double u1 = u + 1/16D;
+            double v1 = v + 1/16D;
+
+            double x = pos;
+
+            RenderSystem.Vertex vx0 = new VertexBuilder().setPosition(new Vector3d(x, 0, 0)).setColor(progressColor)
+                    .setTexCoord(new Vector2d(u, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx1 = new VertexBuilder().setPosition(new Vector3d(x + (style.italic ? 0.25 : 0), 1, 0)).setColor(progressColor)
+                    .setTexCoord(new Vector2d(u, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx2 = new VertexBuilder().setPosition(new Vector3d(x+1 + (style.italic ? 0.25 : 0), 1, 0)).setColor(progressColor)
+                    .setTexCoord(new Vector2d(u1, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx3 = new VertexBuilder().setPosition(new Vector3d(x+1, 0, 0)).setColor(progressColor)
+                    .setTexCoord(new Vector2d(u1, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+
+            // tri 1
+            system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
+            // tri 2
+            system.addVertex(vx0).addVertex(vx3).addVertex(vx2);
+
+            pos++;
+        }
+
+        pos = 0;
+        for (char c : borderBuilder.toString().toCharArray()) {
+            if (c > 255) {
+                c = 0;
+            }
+            int vi = c/16;
+            int ui = c%16;
+            double u = ui/16D;
+            double v  = 1D - (vi + 1) / 16D;
+            double u1 = u + 1/16D;
+            double v1 = v + 1/16D;
+
+            double x = pos;
+
+            RenderSystem.Vertex vx0 = new VertexBuilder().setPosition(new Vector3d(x, 0, 0)).setColor(style.color)
+                    .setTexCoord(new Vector2d(u, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx1 = new VertexBuilder().setPosition(new Vector3d(x + (style.italic ? 0.25 : 0), 1, 0)).setColor(style.color)
+                    .setTexCoord(new Vector2d(u, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx2 = new VertexBuilder().setPosition(new Vector3d(x+1 + (style.italic ? 0.25 : 0), 1, 0)).setColor(style.color)
+                    .setTexCoord(new Vector2d(u1, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            RenderSystem.Vertex vx3 = new VertexBuilder().setPosition(new Vector3d(x+1, 0, 0)).setColor(style.color)
+                    .setTexCoord(new Vector2d(u1, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+
+            // tri 1
+            system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
+            // tri 2
+            system.addVertex(vx0).addVertex(vx3).addVertex(vx2);
+
+            pos++;
+        }
+        system.end();
+        return system;
+    }
 
 
     public static void renderFontSystem(FontRenderSystem system, Vector3d position, ShaderProgram program) {

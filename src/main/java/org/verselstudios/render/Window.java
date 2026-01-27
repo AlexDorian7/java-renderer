@@ -1,17 +1,21 @@
 package org.verselstudios.render;
 
 import org.verselstudios.Image.Texture;
+import org.verselstudios.gl.FontRenderSystem;
 import org.verselstudios.gl.QuadRenderSystem;
 import org.verselstudios.gl.RenderSystem;
 import org.verselstudios.math.Matrix4d;
 import org.verselstudios.math.Rectangle;
+import org.verselstudios.math.Vector3d;
+import org.verselstudios.render.font.Font;
+import org.verselstudios.shader.ShaderProgram;
 import org.verselstudios.shader.ShaderRegister;
 
 import static org.lwjgl.opengl.GL45.*;
 
 public abstract class Window implements Renderer {
 
-    private RenderSystem quad;
+    private final RenderSystem quad;
     private boolean renderBorder = true;
 
     private String windowName = "Window";
@@ -19,6 +23,9 @@ public abstract class Window implements Renderer {
     private Rectangle bounds;
 
     private final Texture texture;
+
+    private FontRenderSystem titleSystem;
+    private final ShaderProgram program = ShaderRegister.CORE;
 
     protected Window(Rectangle bounds) {
         this.bounds = bounds;
@@ -39,6 +46,10 @@ public abstract class Window implements Renderer {
             quad.draw();
             glDisable(GL_TEXTURE_2D);
 
+            if (titleSystem != null) {
+                Font.renderFontSystem(titleSystem, new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - titleSystem.style.size() - 4, 0), program);
+            }
+
 //            Font.DEFAULT.renderString(new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - Font.FontStyle.DEFAULT.size() - 4, 0), windowName);
         }
     }
@@ -57,6 +68,10 @@ public abstract class Window implements Renderer {
 
     protected void setWindowName(String windowName) {
         this.windowName = windowName;
+        if (titleSystem != null) {
+            titleSystem.destroy();
+        }
+        titleSystem = Font.DEFAULT.createFontRenderSystem(windowName);
     }
 
     public Rectangle getBounds() {
