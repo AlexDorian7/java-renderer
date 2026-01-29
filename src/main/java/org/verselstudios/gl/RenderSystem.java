@@ -38,7 +38,7 @@ public class RenderSystem {
         int stride = STRIDE * Float.BYTES;
 
         // position (location = 0)
-        glVertexAttribPointer(0, 3, GL_INT, false, stride, 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, stride, 0);
         glEnableVertexAttribArray(0);
 
         // texCoord (location = 1)
