@@ -187,19 +187,17 @@ public class Matrix4d {
         return mat;
     }
 
-    public static Matrix4d perspective(double fov, double left, double right,
-                                       double bottom, double top,
-                                       double near, double far) {
-        Matrix4d mat1 = Matrix4d.ortho(left, right, bottom, top, near, far);
-
+    public static Matrix4d perspective(double fov, double near, double far, double width, double height) {
         Matrix4d mat = new Matrix4d();
 
-        double f = 1;
-        double n = 0;
+        double f = far;
+        double n = near;
+
+        double aspect = width / height;
 
         double s = 1 / Math.tan(fov/2 * Math.PI/180);
 
-        mat.set(0, 0, s);
+        mat.set(0, 0, s / aspect);
         mat.set(1, 1, s);
 
         mat.set(2, 2, -f/(f-n));
@@ -207,7 +205,7 @@ public class Matrix4d {
 
         mat.set(2, 3, -1);
 
-        return mat1.multiply(mat);
+        return mat;
     }
 
     /* =========================
@@ -244,5 +242,17 @@ public class Matrix4d {
                 buffer.put((float) get(row, col));
             }
         }
+    }
+
+    public Vector3d getRightVector() {
+        return new Vector3d(get(0, 0), get(1, 0), get(2, 0)).normalize();
+    }
+
+    public Vector3d getUpVector() {
+        return new Vector3d(get(0, 1), get(1, 1), get(2, 1)).normalize();
+    }
+
+    public Vector3d getForwardVector() {
+        return new Vector3d(-get(0, 2), -get(1, 2), -get(2, 2)).normalize();
     }
 }

@@ -3,12 +3,12 @@ package org.verselstudios.surface;
 import org.verselstudios.gl.RenderSystem;
 import org.verselstudios.gl.VertexBuilder;
 import org.verselstudios.math.*;
-import org.verselstudios.render.RenderStack;
 import org.verselstudios.shader.ShaderProgram;
-import org.verselstudios.shader.ShaderRegister;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.lwjgl.opengl.GL45.*;
 
 public class SurfaceRenderSystem extends RenderSystem {
 
@@ -20,8 +20,8 @@ public class SurfaceRenderSystem extends RenderSystem {
     // Stores final emitted quads for LOD neighbor detection
     private final Map<Long, Integer> quadDepths = new HashMap<>();
 
-    public SurfaceRenderSystem(Heightmap heightmap, int resolution) {
-        super(RenderType.GL_TRIANGLES);
+    public SurfaceRenderSystem(Heightmap heightmap) {
+        super(RenderType.GL_TRIANGLES, heightmap.getProgram());
         this.heightmap = heightmap;
 
         begin();
@@ -189,18 +189,12 @@ public class SurfaceRenderSystem extends RenderSystem {
        Draw
        ============================================================ */
 
-    public void draw(MatrixStack matrixStack) {
-        draw(heightmap.getProgram(), matrixStack);
-    }
-
     @Override
-    public void draw(ShaderProgram program, MatrixStack matrixStack) {
-        program.use();
-        Matrix4d transform =
-                Matrix4d.rotationX(-Math.PI / 2)
-                        .multiply(Matrix4d.scale(500, 1, 500));
-        RenderStack.getMatrixStack().push(transform);
-        super.draw(program, matrixStack);
-        RenderStack.getMatrixStack().pop();
+    public void draw(MatrixStack matrixStack) {
+        glEnable(GL_DEPTH_TEST);
+        super.draw(matrixStack);
+        glDisable(GL_DEPTH_TEST);
+
+//        RenderStack.getMatrixStack().pop();
     }
 }

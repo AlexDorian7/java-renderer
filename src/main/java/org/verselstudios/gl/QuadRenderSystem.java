@@ -4,15 +4,16 @@ import org.verselstudios.math.Rectangle;
 import org.verselstudios.math.Vector2d;
 import org.verselstudios.math.Vector3d;
 import org.verselstudios.math.Vector4d;
+import org.verselstudios.shader.ShaderProgram;
 
 public class QuadRenderSystem {
 
-    public static RenderSystem makeQuad(Rectangle rectangle) {
+    public static RenderSystem makeQuad(ShaderProgram program, Rectangle rectangle) {
         Vector3d pos = new Vector3d(rectangle.getPos());
         Vector3d bound = new Vector3d(rectangle.getBound());
 
         VertexBuilder vb = new VertexBuilder();
-        RenderSystem rs = new RenderSystem(RenderSystem.RenderType.GL_TRIANGLE_STRIP).begin();
+        RenderSystem rs = new RenderSystem(RenderSystem.RenderType.GL_TRIANGLE_STRIP, program).begin();
 
         // vertices
         RenderSystem.Vertex v0 = vb.setPosition(new Vector3d(pos.getX(), pos.getY(), 0)).setTexCoord(new Vector2d(0, 0)).setColor(Vector4d.ONE)

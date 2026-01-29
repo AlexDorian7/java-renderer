@@ -23,7 +23,7 @@ public class RenderStack {
     }
 
     public static void render() {
-        MATRIX_STACK.push(camera.getTransform().getMatrix()); // Push view matrix
+        MATRIX_STACK.push(camera.getTransform().getInverseMatrix()); // Push view matrix
         for (Renderer renderer : RENDERERS) {
             renderer.render();
         }
@@ -63,5 +63,9 @@ public class RenderStack {
 
     public static MatrixStack getMatrixStack() {
         return MATRIX_STACK;
+    }
+
+    public static Camera getCamera() {
+        return camera;
     }
 }

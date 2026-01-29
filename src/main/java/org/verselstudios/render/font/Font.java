@@ -4,12 +4,10 @@ import org.verselstudios.Image.Texture;
 import org.verselstudios.gl.FontRenderSystem;
 import org.verselstudios.gl.RenderSystem;
 import org.verselstudios.gl.VertexBuilder;
-import org.verselstudios.math.Matrix4d;
-import org.verselstudios.math.Vector2d;
-import org.verselstudios.math.Vector3d;
-import org.verselstudios.math.Vector4d;
+import org.verselstudios.math.*;
 import org.verselstudios.render.RenderStack;
 import org.verselstudios.shader.ShaderProgram;
+import org.verselstudios.shader.ShaderRegister;
 
 import static org.lwjgl.opengl.GL45.*;
 
@@ -175,7 +173,7 @@ public class Font {
 
     public FontRenderSystem createFontRenderSystem(String string, FontStyle style) {
         if (string.isEmpty()) string = " "; // Should fix this later. this prevents empty RenderSystem
-        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, this, style);
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, ShaderRegister.CORE, this, style);
         system.begin();
         int pos = 0;
         for (char c : string.toCharArray()) {
@@ -213,7 +211,7 @@ public class Font {
 
     public FontRenderSystem createFontRenderSystem(String string, FontStyle style, int maxWidth) {
         if (string.isEmpty()) string = " ";
-        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, this, style);
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, ShaderRegister.CORE, this, style);
         system.begin();
 
         int posX = 0;
@@ -314,7 +312,7 @@ public class Font {
             progressBuilder.append(8+k);
         }
 
-        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, font, style);
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, ShaderRegister.CORE, font, style);
         system.begin();
         int pos = 0;
         for (char c : progressBuilder.toString().toCharArray()) {
@@ -382,17 +380,17 @@ public class Font {
     }
 
 
-    public static void renderFontSystem(FontRenderSystem system, Vector3d position, ShaderProgram program) {
-        program.use();
+    public static void renderFontSystem(FontRenderSystem system, Vector3d position, MatrixStack matrixStack) {
+        system.getProgram().use();
         Matrix4d translate = Matrix4d.translation(position.getX(), position.getY(), position.getZ());
         Matrix4d transform = translate.multiply(system.style.getScaleMat());
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_TEXTURE_2D);
-        system.font.texture.bind(program);
-        RenderStack.getMatrixStack().push(transform);
-        system.draw(program, RenderStack.getMatrixStack());
-        RenderStack.getMatrixStack().pop();
+        system.font.texture.bind(system.getProgram());
+        matrixStack.push(transform);
+        system.draw(matrixStack);
+        matrixStack.pop();
         glDisable(GL_BLEND);
         glDisable(GL_TEXTURE_2D);
     }

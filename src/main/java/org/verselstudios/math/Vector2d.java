@@ -1,6 +1,7 @@
 package org.verselstudios.math;
 
 public class Vector2d {
+    public static final Vector2d ZERO = new Vector2d(0,0);
     private double x;
     private double y;
 

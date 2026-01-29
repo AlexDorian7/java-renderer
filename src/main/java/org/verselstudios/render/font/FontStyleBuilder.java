@@ -3,7 +3,7 @@ package org.verselstudios.render.font;
 import org.verselstudios.math.Vector4d;
 
 public class FontStyleBuilder {
-    private double size = 32;
+    private double size = 1/32D;
     private Vector4d color = new Vector4d(1, 1, 1, 1);
     private Vector4d shadowColor = color.divide(2);
     private boolean italic = false;

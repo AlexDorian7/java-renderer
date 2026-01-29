@@ -30,7 +30,7 @@ public abstract class Window implements Renderer {
     protected Window(Rectangle bounds) {
         this.bounds = bounds;
         texture = new Texture("assets/textures/border.png");
-        quad = QuadRenderSystem.makeQuad(new Rectangle(1,1));
+        quad = QuadRenderSystem.makeQuad(program, new Rectangle(1,1));
     }
 
     @Override
@@ -42,12 +42,12 @@ public abstract class Window implements Renderer {
             Matrix4d transform = translation.multiply(Matrix4d.scale(bounds.getSize().getX(), bounds.getSize().getY(), 1));
             RenderStack.getMatrixStack().push(transform);
             texture.bind(program);
-            quad.draw(program, RenderStack.getMatrixStack());
+            quad.draw(RenderStack.getMatrixStack());
             RenderStack.getMatrixStack().pop();
             glDisable(GL_TEXTURE_2D);
 
             if (titleSystem != null) {
-                Font.renderFontSystem(titleSystem, new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - titleSystem.style.size() - 4, 0), program);
+                Font.renderFontSystem(titleSystem, new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - titleSystem.style.size() - 4, 0), RenderStack.getMatrixStack());
             }
 
 //            Font.DEFAULT.renderString(new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - Font.FontStyle.DEFAULT.size() - 4, 0), windowName);

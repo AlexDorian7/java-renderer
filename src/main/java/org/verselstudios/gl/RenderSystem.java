@@ -18,6 +18,7 @@ public class RenderSystem {
     private final int vao;
     private final int vbo;
     private final RenderType type;
+    private final ShaderProgram program;
     private int indices = 0;
 
     private static final int STRIDE = 18;
@@ -26,8 +27,9 @@ public class RenderSystem {
 
     private int state = 0;
 
-    public RenderSystem(RenderType type) {
+    public RenderSystem(RenderType type, ShaderProgram program) {
         this.type = type;
+        this.program = program;
         vao = glGenVertexArrays();
         vbo = glGenBuffers();
         glBindVertexArray(vao);
@@ -36,7 +38,7 @@ public class RenderSystem {
         int stride = STRIDE * Float.BYTES;
 
         // position (location = 0)
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, stride, 0);
+        glVertexAttribPointer(0, 3, GL_INT, false, stride, 0);
         glEnableVertexAttribArray(0);
 
         // texCoord (location = 1)
@@ -102,7 +104,7 @@ public class RenderSystem {
         return this;
     }
 
-    public void draw(ShaderProgram program, MatrixStack matrixStack) {
+    public void draw(MatrixStack matrixStack) {
         if (state != 2) {
             throw new IllegalStateException("Render system is in state " + state + " expected 2.");
         }
@@ -127,6 +129,10 @@ public class RenderSystem {
         buf.put(nx).put(ny).put(nz);        // normal
         buf.put(tx).put(ty).put(tz);        // tangent
         buf.put(bx).put(by).put(bz);        // bitangent
+    }
+
+    public final ShaderProgram getProgram() {
+        return program;
     }
 
     public record Vertex(Vector3d position, Vector2d texCoord, Vector4d color, Vector3d normal, Vector3d tangent, Vector3d bitangent) {

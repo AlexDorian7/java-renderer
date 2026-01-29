@@ -16,7 +16,11 @@ public record MouseMoveEvent(long window, double xpos, double ypos) {
             IntBuffer pHeight = stack.mallocInt(1); // int*
             glfwGetWindowSize(window, pWidth, pHeight);
 //            return new Vector2d(xpos / pWidth.get(), ypos / pHeight.get());
-            return new Vector2d(xpos * 2 - pWidth.get(), -(ypos * 2 - pHeight.get()));
+            int width = pWidth.get();
+            int height = pHeight.get();
+            Vector2d normalized = new Vector2d(xpos * 2 / width - 1, -(ypos * 2 / height - 1));
+            double aspect = (double) width / height;
+            return normalized.multiply(new Vector2d(aspect, 1));
         }
     }
 }

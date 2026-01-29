@@ -10,6 +10,7 @@ public class ShaderRegister {
     public static Matrix4d PROJECTION_MATRIX = new Matrix4d();
 
     public static final ShaderProgram CORE = loadProgram("core");
+    public static final ShaderProgram LINE = loadProgram("line");
 
     public static ShaderProgram loadProgram(String name) {
         InputStream vertexStream = ShaderRegister.class.getClassLoader().getResourceAsStream("assets/shaders/" + name + ".vsh");
