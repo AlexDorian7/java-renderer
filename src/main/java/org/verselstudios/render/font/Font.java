@@ -3,11 +3,10 @@ package org.verselstudios.render.font;
 import org.verselstudios.Image.Texture;
 import org.verselstudios.gl.FontRenderSystem;
 import org.verselstudios.gl.RenderSystem;
-import org.verselstudios.gl.VertexBuilder;
 import org.verselstudios.math.*;
-import org.verselstudios.render.RenderStack;
 import org.verselstudios.shader.ShaderProgram;
 import org.verselstudios.shader.ShaderRegister;
+import org.verselstudios.shader.Vertex;
 
 import static org.lwjgl.opengl.GL45.*;
 
@@ -173,7 +172,8 @@ public class Font {
 
     public FontRenderSystem createFontRenderSystem(String string, FontStyle style) {
         if (string.isEmpty()) string = " "; // Should fix this later. this prevents empty RenderSystem
-        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, ShaderRegister.CORE, this, style);
+        ShaderProgram program = ShaderRegister.getProgram("pos_color_tex");
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, program, this, style);
         system.begin();
         int pos = 0;
         for (char c : string.toCharArray()) {
@@ -189,14 +189,10 @@ public class Font {
 
             double x = pos;
 
-            RenderSystem.Vertex vx0 = new VertexBuilder().setPosition(new Vector3d(x, 0, 0)).setColor(style.color)
-                    .setTexCoord(new Vector2d(u, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx1 = new VertexBuilder().setPosition(new Vector3d(x + (style.italic ? 0.25 : 0), 1, 0)).setColor(style.color)
-                    .setTexCoord(new Vector2d(u, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx2 = new VertexBuilder().setPosition(new Vector3d(x+1 + (style.italic ? 0.25 : 0), 1, 0)).setColor(style.color)
-                    .setTexCoord(new Vector2d(u1, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx3 = new VertexBuilder().setPosition(new Vector3d(x+1, 0, 0)).setColor(style.color)
-                    .setTexCoord(new Vector2d(u1, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
 
             // tri 1
             system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
@@ -211,7 +207,8 @@ public class Font {
 
     public FontRenderSystem createFontRenderSystem(String string, FontStyle style, int maxWidth) {
         if (string.isEmpty()) string = " ";
-        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, ShaderRegister.CORE, this, style);
+        ShaderProgram program = ShaderRegister.getProgram("pos_color_tex");
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, program, this, style);
         system.begin();
 
         int posX = 0;
@@ -256,16 +253,14 @@ public class Font {
                 double x = posX;
                 double y = posY;
 
-                RenderSystem.Vertex vx0 = new VertexBuilder().setPosition(new Vector3d(x, y, 0)).setColor(style.color)
-                        .setTexCoord(new Vector2d(u, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-                RenderSystem.Vertex vx1 = new VertexBuilder().setPosition(new Vector3d(x + (style.italic ? 0.25 : 0), y + 1, 0)).setColor(style.color)
-                        .setTexCoord(new Vector2d(u, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-                RenderSystem.Vertex vx2 = new VertexBuilder().setPosition(new Vector3d(x + 1 + (style.italic ? 0.25 : 0), y + 1, 0)).setColor(style.color)
-                        .setTexCoord(new Vector2d(u1, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-                RenderSystem.Vertex vx3 = new VertexBuilder().setPosition(new Vector3d(x + 1, y, 0)).setColor(style.color)
-                        .setTexCoord(new Vector2d(u1, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+                Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, (float) y, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+                Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), (float) (y+1), 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+                Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), (float) (y+1), 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+                Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), (float) y, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
 
+                // tri 1
                 system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
+                // tri 2
                 system.addVertex(vx0).addVertex(vx3).addVertex(vx2);
 
                 posX++;
@@ -312,7 +307,8 @@ public class Font {
             progressBuilder.append(8+k);
         }
 
-        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, ShaderRegister.CORE, font, style);
+        ShaderProgram program = ShaderRegister.getProgram("pos_color_tex");
+        FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, program, font, style);
         system.begin();
         int pos = 0;
         for (char c : progressBuilder.toString().toCharArray()) {
@@ -328,14 +324,10 @@ public class Font {
 
             double x = pos;
 
-            RenderSystem.Vertex vx0 = new VertexBuilder().setPosition(new Vector3d(x, 0, 0)).setColor(progressColor)
-                    .setTexCoord(new Vector2d(u, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx1 = new VertexBuilder().setPosition(new Vector3d(x + (style.italic ? 0.25 : 0), 1, 0)).setColor(progressColor)
-                    .setTexCoord(new Vector2d(u, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx2 = new VertexBuilder().setPosition(new Vector3d(x+1 + (style.italic ? 0.25 : 0), 1, 0)).setColor(progressColor)
-                    .setTexCoord(new Vector2d(u1, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx3 = new VertexBuilder().setPosition(new Vector3d(x+1, 0, 0)).setColor(progressColor)
-                    .setTexCoord(new Vector2d(u1, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
 
             // tri 1
             system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
@@ -359,14 +351,10 @@ public class Font {
 
             double x = pos;
 
-            RenderSystem.Vertex vx0 = new VertexBuilder().setPosition(new Vector3d(x, 0, 0)).setColor(style.color)
-                    .setTexCoord(new Vector2d(u, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx1 = new VertexBuilder().setPosition(new Vector3d(x + (style.italic ? 0.25 : 0), 1, 0)).setColor(style.color)
-                    .setTexCoord(new Vector2d(u, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx2 = new VertexBuilder().setPosition(new Vector3d(x+1 + (style.italic ? 0.25 : 0), 1, 0)).setColor(style.color)
-                    .setTexCoord(new Vector2d(u1, v1)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
-            RenderSystem.Vertex vx3 = new VertexBuilder().setPosition(new Vector3d(x+1, 0, 0)).setColor(style.color)
-                    .setTexCoord(new Vector2d(u1, v)).setNormal(new Vector3d(0, 0, 1)).setTangent(new Vector3d(1, 0, 0)).createVertex();
+            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
 
             // tri 1
             system.addVertex(vx0).addVertex(vx2).addVertex(vx1);

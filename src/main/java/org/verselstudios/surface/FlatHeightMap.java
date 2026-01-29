@@ -7,7 +7,7 @@ import org.verselstudios.shader.ShaderRegister;
 public class FlatHeightMap implements Heightmap {
 
     private final double height;
-    private static final ShaderProgram PROGRAM = ShaderRegister.loadProgram("heightmap");
+    private static final ShaderProgram PROGRAM = ShaderRegister.getProgram("heightmap");
 
     public FlatHeightMap() {
         this(0);

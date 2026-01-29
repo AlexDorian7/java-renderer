@@ -5,7 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad50ed4a-995b-4ae0-8128-8464f59ee063" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/json/JsonRegistry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/heightmap.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/line.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.fsh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.vsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/QuadRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/QuadRenderSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/VertexBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/AxisRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/AxisRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/VaoBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/VaoBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/Vertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/Vertex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/FlatHeightMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/FlatHeightMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/NoiseHeightmap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/NoiseHeightmap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SinHeightmap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SinHeightmap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/core.fsh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/core.vsh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/heightmap.fsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/heightmap.fsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/heightmap.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/heightmap.vsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/line.fsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/line.fsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/line.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/line.vsh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +80,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="GLSL Shader" />
         <option value="Class" />
       </list>
     </option>
@@ -69,8 +99,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
     "Gradle.java_renderer [:Main.main()].executor": "Run",
     "Gradle.java_renderer [fatJar].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",

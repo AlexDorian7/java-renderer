@@ -1,0 +1,6 @@
+{
+  "VAOs": [
+    {"name": "position", "amount": 3, "normalized":  false},
+    {"name": "color", "amount": 4, "normalized":  false}
+  ]
+}

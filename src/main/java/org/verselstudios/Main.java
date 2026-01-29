@@ -49,7 +49,6 @@ public class Main {
     }
 
     private void registerInternals() {
-        ShaderRegister.CORE.use();
 
         RenderStack.push(new CameraControllRenderer(RenderStack.getCamera()));
 
@@ -152,7 +151,6 @@ public class Main {
         glViewport(0, 0, width, height);
 
         ShaderRegister.PROJECTION_MATRIX = Matrix4d.perspective(90, 0, 1, width, height); //Matrix4d.ortho(-width, width, -height, height, -1, 1);
-        ShaderRegister.CORE.setProjectionMatrix(ShaderRegister.PROJECTION_MATRIX);
     }
 
     private void loop() {

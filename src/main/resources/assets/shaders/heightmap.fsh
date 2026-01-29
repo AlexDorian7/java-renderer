@@ -10,8 +10,5 @@ in vec3 bitan;
 out vec4 FragColor;
 
 void main() {
-//    vec4 hColor = vec4(0,pos.y,0,1);
-//    FragColor = hColor * vColor;
-
     FragColor = vec4((nor+1)/2, 1);
 }

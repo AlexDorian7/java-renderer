@@ -7,7 +7,7 @@ import org.verselstudios.shader.ShaderRegister;
 
 public class NoiseHeightmap implements Heightmap {
 
-    private static final ShaderProgram PROGRAM = ShaderRegister.loadProgram("heightmap");
+    private static final ShaderProgram PROGRAM = ShaderRegister.getProgram("heightmap");
 
     public NoiseHeightmap() {
 

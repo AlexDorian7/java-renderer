@@ -1,9 +1,9 @@
 package org.verselstudios.surface;
 
 import org.verselstudios.gl.RenderSystem;
-import org.verselstudios.gl.VertexBuilder;
 import org.verselstudios.math.*;
-import org.verselstudios.shader.ShaderProgram;
+import org.verselstudios.shader.VaoBuilder;
+import org.verselstudios.shader.Vertex;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -88,15 +88,17 @@ public class SurfaceRenderSystem extends RenderSystem {
         Vector3d pmB = samplePosition(x + size * 0.5, z);
         Vector3d pmT = samplePosition(x + size * 0.5, z + size);
 
-        Vertex v0 = makeVertex(p0, x, z);
-        Vertex v1 = makeVertex(p1, x, z + size);
-        Vertex v2 = makeVertex(p2, x + size, z + size);
-        Vertex v3 = makeVertex(p3, x + size, z);
+        VaoBuilder builder = getProgram().getVaoBuilder();
 
-        Vertex vL = makeVertex(pmL, x, z + size * 0.5);
-        Vertex vR = makeVertex(pmR, x + size, z + size * 0.5);
-        Vertex vB = makeVertex(pmB, x + size * 0.5, z);
-        Vertex vT = makeVertex(pmT, x + size * 0.5, z + size);
+        Vertex v0 = makeVertex(builder, p0, x, z);
+        Vertex v1 = makeVertex(builder, p1, x, z + size);
+        Vertex v2 = makeVertex(builder, p2, x + size, z + size);
+        Vertex v3 = makeVertex(builder, p3, x + size, z);
+
+        Vertex vL = makeVertex(builder, pmL, x, z + size * 0.5);
+        Vertex vR = makeVertex(builder, pmR, x + size, z + size * 0.5);
+        Vertex vB = makeVertex(builder, pmB, x + size * 0.5, z);
+        Vertex vT = makeVertex(builder, pmT, x + size * 0.5, z + size);
 
         // Edge stitches
         if (stitchB) addVertex(v0).addVertex(v3).addVertex(vB);
@@ -127,17 +129,14 @@ public class SurfaceRenderSystem extends RenderSystem {
        Geometry helpers
        ============================================================ */
 
-    private Vertex makeVertex(Vector3d pos, double x, double z) {
+    private Vertex makeVertex(VaoBuilder builder, Vector3d pos, double x, double z) {
         Vector3d n = computeNormal(x, z, 0.001);
         Vector3d t = computeTangent(n);
+        Vector3d b = n.cross(t).normalize();
 
-        return new VertexBuilder()
-                .setPosition(pos)
-                .setTexCoord(new Vector2d(x, z))
-                .setColor(Vector4d.ONE)
-                .setNormal(n)
-                .setTangent(t)
-                .createVertex();
+        return builder.getNewVertex().setData("position", (float) pos.getX(), (float) pos.getY(), (float) pos.getZ()).setData("color", 1f, 1f, 1f, 1f)
+                .setData("texCoord", (float) x, (float) z).setData("normal", (float) n.getX(), (float) n.getY(), (float) n.getZ())
+                .setData("tangent", (float) t.getX(), (float) t.getY(), (float) t.getZ()).setData("bitangent", (float) b.getX(), (float) b.getY(), (float) b.getZ());
     }
 
     private Vector3d samplePosition(double x, double z) {

@@ -1,13 +1,12 @@
 package org.verselstudios.shader;
 
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.BufferUtils;
 import org.verselstudios.math.Matrix4d;
 
-import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.util.Map;
 
-import org.lwjgl.opengl.GL20;
 import org.verselstudios.math.Vector4d;
 
 import static org.lwjgl.opengl.GL20.*;
@@ -27,10 +26,10 @@ public class ShaderProgram {
     public final int program;
     public final int vertex;
     public final int fragment;
-    protected String log;
+    public final VaoBuilder vaoBuilder;
 
-    public ShaderProgram(String vertexSource, String fragmentSource) throws ShaderException {
-        this(vertexSource, fragmentSource, null);
+    public ShaderProgram(String vertexSource, String fragmentSource, VaoBuilder vaoBuilder) throws ShaderException {
+        this(vertexSource, fragmentSource, null, vaoBuilder);
     }
 
     /**
@@ -41,10 +40,11 @@ public class ShaderProgram {
      * @param attributes a map of attrib locations for GLSL 120
      * @throws ShaderException if the program could not be compiled and linked
      */
-    public ShaderProgram(String vertexShader, String fragmentShader, Map<Integer, String> attributes) throws ShaderException {
+    public ShaderProgram(String vertexShader, String fragmentShader, @Nullable Map<Integer, String> attributes, VaoBuilder vaoBuilder) throws ShaderException {
         //compile the String source
         vertex = compileShader(vertexShader, GL_VERTEX_SHADER);
         fragment = compileShader(fragmentShader, GL_FRAGMENT_SHADER);
+        this.vaoBuilder = vaoBuilder;
 
         //create the program
         program = glCreateProgram();
@@ -110,6 +110,10 @@ public class ShaderProgram {
             return "GL_FRAGMENT_SHADER";
         else
             return "shader";
+    }
+
+    public VaoBuilder getVaoBuilder() {
+        return vaoBuilder;
     }
 
     /**

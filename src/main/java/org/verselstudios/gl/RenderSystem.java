@@ -3,10 +3,9 @@ package org.verselstudios.gl;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL45;
 import org.verselstudios.math.MatrixStack;
-import org.verselstudios.math.Vector2d;
-import org.verselstudios.math.Vector3d;
-import org.verselstudios.math.Vector4d;
 import org.verselstudios.shader.ShaderProgram;
+import org.verselstudios.shader.Vao;
+import org.verselstudios.shader.Vertex;
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class RenderSystem {
     private final ShaderProgram program;
     private int indices = 0;
 
-    private static final int STRIDE = 18;
+    private final int stride;
 
     private final ArrayList<Vertex> verticies = new ArrayList<>();
 
@@ -30,36 +29,23 @@ public class RenderSystem {
     public RenderSystem(RenderType type, ShaderProgram program) {
         this.type = type;
         this.program = program;
+
+        this.stride = program.getVaoBuilder().getStride();
+
         vao = glGenVertexArrays();
         vbo = glGenBuffers();
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-        int stride = STRIDE * Float.BYTES;
+        int stride1 = program.getVaoBuilder().getStride() * Float.BYTES;
 
-        // position (location = 0)
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, stride, 0);
-        glEnableVertexAttribArray(0);
-
-        // texCoord (location = 1)
-        glVertexAttribPointer(1, 2, GL_FLOAT, false, stride, 3L * Float.BYTES);
-        glEnableVertexAttribArray(1);
-
-        // color (location = 2)
-        glVertexAttribPointer(2, 4, GL_FLOAT, false, stride, 5L * Float.BYTES);
-        glEnableVertexAttribArray(2);
-
-        // normal (location = 3)
-        glVertexAttribPointer(3, 3, GL_FLOAT, false, stride, 9L * Float.BYTES);
-        glEnableVertexAttribArray(3);
-
-        // tangent (location = 4)
-        glVertexAttribPointer(4, 3, GL_FLOAT, false, stride, 12L * Float.BYTES);
-        glEnableVertexAttribArray(4);
-
-        // bitangent (location = 5)
-        glVertexAttribPointer(5, 3, GL_FLOAT, false, stride, 15L * Float.BYTES);
-        glEnableVertexAttribArray(5);
+        long ptr = 0;
+        for (int i=0; i<program.getVaoBuilder().getVAOs().size(); i++) {
+            Vao vaoObj = program.getVaoBuilder().getVAOs().get(i);
+            glVertexAttribPointer(i, vaoObj.amount(), GL_FLOAT, vaoObj.normalized(), stride1, ptr * Float.BYTES);
+            glEnableVertexAttribArray(i);
+            ptr += vaoObj.amount();
+        }
     }
 
     public RenderSystem begin() {
@@ -74,6 +60,7 @@ public class RenderSystem {
         if (state != 1) {
             throw new IllegalStateException("Render system is in state " + state + " expected 1.");
         }
+        if (!vertex.getVaoBuilder().equals(program.getVaoBuilder())) throw new IllegalArgumentException("VAO builder of vertex does not match VAO builder of shader program");
         verticies.add(vertex);
         return this;
     }
@@ -88,14 +75,12 @@ public class RenderSystem {
         }
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        FloatBuffer buffer = BufferUtils.createFloatBuffer(verticies.size() * STRIDE);
+        FloatBuffer buffer = BufferUtils.createFloatBuffer(verticies.size() * stride);
         for (Vertex vertex : verticies) {
-            put(buffer, (float) vertex.position.getX(), (float) vertex.position.getY(), (float) vertex.position.getZ(),
-                    (float) vertex.texCoord.getX(), (float) vertex.texCoord.getY(),
-                    (float) vertex.color.getX(), (float) vertex.color.getY(), (float) vertex.color.getZ(), (float) vertex.color.getW(),
-                    (float) vertex.normal.getX(), (float) vertex.normal.getY(), (float) vertex.normal.getZ(),
-                    (float) vertex.tangent.getX(), (float) vertex.tangent.getY(), (float) vertex.tangent.getZ(),
-                    (float) vertex.bitangent.getX(), (float) vertex.bitangent.getY(), (float) vertex.bitangent.getZ());
+            for (float f : vertex.getData()) {
+                buffer.put(f);
+            }
+
         }
         buffer.flip();
         glBufferData(GL_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
@@ -133,17 +118,6 @@ public class RenderSystem {
 
     public final ShaderProgram getProgram() {
         return program;
-    }
-
-    public record Vertex(Vector3d position, Vector2d texCoord, Vector4d color, Vector3d normal, Vector3d tangent, Vector3d bitangent) {
-        public Vertex(Vector3d position, Vector2d texCoord, Vector4d color, Vector3d normal, Vector3d tangent, Vector3d bitangent) {
-            this.position = position;
-            this.texCoord = texCoord;
-            this.color = color;
-            this.normal = normal;
-            this.tangent = tangent;
-            this.bitangent = bitangent;
-        }
     }
 
     public enum RenderType {

@@ -30,6 +30,8 @@ dependencies {
     implementation "org.lwjgl:lwjgl-stb::$lwjglNatives"
 
     implementation 'com.google.code.gson:gson:2.13.2'
+
+    implementation "org.jetbrains:annotations:24.1.0"
 }
 
 

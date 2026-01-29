@@ -25,23 +25,22 @@ public abstract class Window implements Renderer {
     private final Texture texture;
 
     private FontRenderSystem titleSystem;
-    private final ShaderProgram program = ShaderRegister.CORE;
 
     protected Window(Rectangle bounds) {
         this.bounds = bounds;
         texture = new Texture("assets/textures/border.png");
-        quad = QuadRenderSystem.makeQuad(program, new Rectangle(1,1));
+        quad = QuadRenderSystem.makeQuad(new Rectangle(1,1));
     }
 
     @Override
     public void render() {
         if (renderBorder) {
-            program.use();
+            quad.getProgram().use();
             glEnable(GL_TEXTURE_2D);
             Matrix4d translation = Matrix4d.translation(bounds.getPos().getX(), bounds.getPos().getY(), 0);
             Matrix4d transform = translation.multiply(Matrix4d.scale(bounds.getSize().getX(), bounds.getSize().getY(), 1));
             RenderStack.getMatrixStack().push(transform);
-            texture.bind(program);
+            texture.bind(quad.getProgram());
             quad.draw(RenderStack.getMatrixStack());
             RenderStack.getMatrixStack().pop();
             glDisable(GL_TEXTURE_2D);

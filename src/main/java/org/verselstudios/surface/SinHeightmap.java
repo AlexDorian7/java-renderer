@@ -6,7 +6,7 @@ import org.verselstudios.shader.ShaderRegister;
 
 public class SinHeightmap implements Heightmap {
 
-    private static final ShaderProgram PROGRAM = ShaderRegister.loadProgram("heightmap");
+    private static final ShaderProgram PROGRAM = ShaderRegister.getProgram("heightmap");
 
     public SinHeightmap() {
 

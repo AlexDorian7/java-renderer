@@ -17,4 +17,13 @@ public class VaoBuilder {
         return new Vertex(this);
     }
 
+    public int getStride() {
+        int total = 0;
+        for (Vao vao : VAOs) {
+            total += vao.amount();
+        }
+        return total;
+
+    }
+
 }

@@ -1,28 +1,51 @@
 package org.verselstudios.shader;
 
+import org.verselstudios.json.JsonRegistry;
 import org.verselstudios.math.Matrix4d;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ShaderRegister {
 
     public static Matrix4d PROJECTION_MATRIX = new Matrix4d();
 
-    public static final ShaderProgram CORE = loadProgram("core");
-    public static final ShaderProgram LINE = loadProgram("line");
+    private static final HashMap<String, ShaderProgram> SHADERS = new HashMap<>();
 
     public static ShaderProgram loadProgram(String name) {
         InputStream vertexStream = ShaderRegister.class.getClassLoader().getResourceAsStream("assets/shaders/" + name + ".vsh");
         InputStream fragmentStream = ShaderRegister.class.getClassLoader().getResourceAsStream("assets/shaders/" + name + ".fsh");
+        InputStream vaoStream = ShaderRegister.class.getClassLoader().getResourceAsStream("assets/shaders/" + name + ".json");
         String vertexCode = readString(vertexStream);
         String fragmentCode = readString(fragmentStream);
+        VaoBuilder builder = JsonRegistry.getGson().fromJson(readString(vaoStream), VaoBuilder.class);
 
-        return new ShaderProgram(vertexCode, fragmentCode);
+        HashMap<Integer, String> attribs = new HashMap<>();
+
+        int i=0;
+        for (Vao vao : builder.getVAOs()) {
+            attribs.put(i, vao.name());
+            i++;
+        }
+
+
+        return new ShaderProgram(vertexCode, fragmentCode, attribs, builder);
     }
 
     private static String readString(InputStream stream) {
         Scanner s = new Scanner(stream).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
+    }
+
+    public static ShaderProgram getProgram(String name) {
+        if (SHADERS.containsKey(name)) return SHADERS.get(name);
+        try {
+            ShaderProgram program = loadProgram(name);
+            SHADERS.put(name, program);
+            return program;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("No shader found with name " + name, e);
+        }
     }
 }
