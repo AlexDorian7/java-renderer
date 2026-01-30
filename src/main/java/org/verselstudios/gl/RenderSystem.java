@@ -123,6 +123,26 @@ public class RenderSystem {
         return program;
     }
 
+    protected int getState() {
+        return state;
+    }
+
+    protected int getVao() {
+        return vao;
+    }
+
+    protected int getVbo() {
+        return vbo;
+    }
+
+    protected RenderType getType() {
+        return type;
+    }
+
+    protected int getIndices() {
+        return indices;
+    }
+
     public enum RenderType {
 
         GL_POINTS(GL45.GL_POINTS),

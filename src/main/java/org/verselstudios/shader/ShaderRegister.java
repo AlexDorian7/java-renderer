@@ -33,6 +33,26 @@ public class ShaderRegister {
         return new ShaderProgram(vertexCode, fragmentCode, attribs, builder);
     }
 
+    public static ShaderPostProgram loadPostProgram(String name) {
+        InputStream vertexStream = ShaderRegister.class.getClassLoader().getResourceAsStream("assets/shaders/postprocess.vsh");
+        InputStream fragmentStream = ShaderRegister.class.getClassLoader().getResourceAsStream("assets/shaders/postProcess/" + name + ".glsl");
+        InputStream vaoStream = ShaderRegister.class.getClassLoader().getResourceAsStream("assets/shaders/postprocess.json");
+        String vertexCode = readString(vertexStream);
+        String fragmentCode = readString(fragmentStream);
+        VaoBuilder builder = JsonRegistry.getGson().fromJson(readString(vaoStream), VaoBuilder.class);
+
+        HashMap<Integer, String> attribs = new HashMap<>();
+
+        int i=0;
+        for (Vao vao : builder.getVAOs()) {
+            attribs.put(i, vao.name());
+            i++;
+        }
+
+
+        return new ShaderPostProgram(vertexCode, fragmentCode, attribs, builder);
+    }
+
     private static String readString(InputStream stream) {
         Scanner s = new Scanner(stream).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";

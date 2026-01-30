@@ -9,21 +9,24 @@ import org.verselstudios.math.Time;
 import java.util.ArrayList;
 
 public class RenderStack {
-    private static final ArrayList<Renderer> RENDERERS = new ArrayList<>();
 
-    private static final MatrixStack MATRIX_STACK = new MatrixStack();
+    RenderStack() {} // Package Private
 
-    private static final Camera camera = new Camera();
+    private final ArrayList<Renderer> RENDERERS = new ArrayList<>();
 
-    public static void push(Renderer renderer) {
+    private final MatrixStack MATRIX_STACK = new MatrixStack();
+
+    private final Camera camera = new Camera();
+
+    public void push(Renderer renderer) {
         RENDERERS.add(renderer);
     }
 
-    public static Renderer pop() {
+    public Renderer pop() {
         return RENDERERS.removeLast();
     }
 
-    public static void render() {
+    public void render() {
         Time.update();
 
         MATRIX_STACK.push(camera.getTransform().getViewMatrix()); // Push view matrix
@@ -36,39 +39,39 @@ public class RenderStack {
         }
     }
 
-    public static void onKeyPress(KeyEvent event) {
+    public void onKeyPress(KeyEvent event) {
         for (Renderer renderer : RENDERERS.reversed()) {
             ActionType actionType = renderer.onKeyPress(event);
             if (actionType == ActionType.CONSUME) break;
         }
     }
 
-    public static void onMouseMove(MouseMoveEvent event) {
+    public void onMouseMove(MouseMoveEvent event) {
         for (Renderer renderer : RENDERERS.reversed()) {
             ActionType actionType = renderer.onMouseMove(event);
             if (actionType == ActionType.CONSUME) break;
         }
     }
 
-    public static void onMousePress(MousePressEvent event) {
+    public  void onMousePress(MousePressEvent event) {
         for (Renderer renderer : RENDERERS.reversed()) {
             ActionType actionType = renderer.onMousePress(event);
             if (actionType == ActionType.CONSUME) break;
         }
     }
 
-    public static void onCharacter(CharacterEvent event) {
+    public void onCharacter(CharacterEvent event) {
         for (Renderer renderer : RENDERERS.reversed()) {
             ActionType actionType = renderer.onCharacter(event);
             if (actionType == ActionType.CONSUME) break;
         }
     }
 
-    public static MatrixStack getMatrixStack() {
+    public MatrixStack getMatrixStack() {
         return MATRIX_STACK;
     }
 
-    public static Camera getCamera() {
+    public Camera getCamera() {
         return camera;
     }
 }

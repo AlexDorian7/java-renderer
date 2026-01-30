@@ -23,14 +23,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class Main {
 
-    private long frames = 0;
-
     public static void main(String[] args) {
         new Main().run();
     }
 
     // The window handle
     private long window;
+
+    // The RenderManager
+    private static RenderManager renderManager;
 
     public void run() {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
@@ -50,12 +51,14 @@ public class Main {
 
     private void registerInternals() {
 
-        RenderStack.push(new CameraControllRenderer(RenderStack.getCamera()));
+        renderManager = new RenderManager();
+
+        renderManager.getRenderStack().push(new CameraControllRenderer(renderManager.getRenderStack().getCamera()));
 
 //        RenderStack.push(new TextWindow("Hello World", "Hello World", new Rectangle(1, 1)));
-        RenderStack.push(new DebugWorldTextRenderer());
-        RenderStack.push(new DebugHeightMapRenderer());
-        RenderStack.push(new AxisRenderer());
+        renderManager.getRenderStack().push(new DebugWorldTextRenderer());
+        renderManager.getRenderStack().push(new DebugHeightMapRenderer());
+        renderManager.getRenderStack().push(new AxisRenderer(true));
     }
 
     private void init() {
@@ -81,11 +84,11 @@ public class Main {
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
-            RenderStack.onKeyPress(new KeyEvent(window, key, scancode, action, mods));
+            renderManager.getRenderStack().onKeyPress(new KeyEvent(window, key, scancode, action, mods));
         });
         glfwSetCharCallback(window, (window, codepoint) -> {
             char character = (char) codepoint;
-            RenderStack.onCharacter(new CharacterEvent(window, character));
+            renderManager.getRenderStack().onCharacter(new CharacterEvent(window, character));
         });
 
         glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
@@ -93,11 +96,11 @@ public class Main {
         });
 
         glfwSetMouseButtonCallback(window, (window, button, action, mods) -> {
-            RenderStack.onMousePress(new MousePressEvent(window, button, action, mods));
+            renderManager.getRenderStack().onMousePress(new MousePressEvent(window, button, action, mods));
         });
 
         glfwSetCursorPosCallback(window, (window, xpos, ypos) -> {
-            RenderStack.onMouseMove(new MouseMoveEvent(window, xpos, ypos));
+            renderManager.getRenderStack().onMouseMove(new MouseMoveEvent(window, xpos, ypos));
         });
 
 
@@ -150,35 +153,43 @@ public class Main {
 
     private static void resize(int width, int height) {
         glViewport(0, 0, width, height);
-
-        ShaderRegister.PROJECTION_MATRIX = Matrix4d.perspective(90, 0, 1000, width, height); //Matrix4d.ortho(-width, width, -height, height, -1, 1);
     }
 
     private void loop() {
         // Set the clear color
         glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
-        glClearDepth(1.0f);
+        glClearDepth(2.0f);
 
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while ( !glfwWindowShouldClose(window) ) {
-            glDepthMask(true);
-            glDepthFunc(GL_LESS);
-            glEnable(GL_CULL_FACE);
-//            glCullFace(GL_BACK);
-            glFrontFace(GL_CCW);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-            RenderStack.render();
+            // Get Window Size
+            try ( MemoryStack stack = stackPush() ) {
+                IntBuffer pWidth = stack.mallocInt(1); // int*
+                IntBuffer pHeight = stack.mallocInt(1); // int*
+
+                // Get the window size passed to glfwCreateWindow
+                glfwGetWindowSize(window, pWidth, pHeight);
+
+                renderManager.render(pWidth.get(), pHeight.get());
+
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to render frame", e);
+            } // the stack frame is popped automatically
+
+
 
             glfwSwapBuffers(window); // swap the color buffers
 
             // Poll for window events. The key callback above will only be
             // invoked during this call.
             glfwPollEvents();
-
-            frames++;
         }
+    }
+
+    public static RenderManager getRenderManager() {
+        return renderManager;
     }
 }

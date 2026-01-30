@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.lwjgl.opengl.GL45.*;
 
-public class SurfaceRenderSystem extends RenderSystem {
+public class SurfaceRenderSystemNew extends RenderSystem {
 
     private final Heightmap heightmap;
 
@@ -20,12 +20,18 @@ public class SurfaceRenderSystem extends RenderSystem {
     // Stores final emitted quads for LOD neighbor detection
     private final Map<Long, Integer> quadDepths = new HashMap<>();
 
-    public SurfaceRenderSystem(Heightmap heightmap) {
+    public SurfaceRenderSystemNew(Heightmap heightmap, int resolution) {
         super(RenderType.GL_TRIANGLES, heightmap.getProgram());
         this.heightmap = heightmap;
 
+        double res = 1D/resolution;
+
         begin();
-        buildQuad(0.0, 0.0, 1.0, 0);
+        for (double x=0; x<1; x+=res) {
+            for (double y=0; y<1; y+=res) {
+                emitQuad(x, y, res);
+            }
+        }
         end();
     }
 
@@ -134,7 +140,8 @@ public class SurfaceRenderSystem extends RenderSystem {
     @Override
     public void draw(MatrixStack matrixStack) {
         glEnable(GL_DEPTH_TEST);
-        matrixStack.push(Matrix4d.scale(5,5,5));
+        Transform transform = new Transform(0,0,0,0,0,0,10,10,10);
+        matrixStack.push(transform.getModelMatrix());
         super.draw(matrixStack);
         matrixStack.pop();
         glDisable(GL_DEPTH_TEST);

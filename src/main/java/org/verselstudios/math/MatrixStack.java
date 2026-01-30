@@ -15,7 +15,7 @@ public class MatrixStack {
     }
 
     public void push(Matrix4d matrix) {
-        stack.add(matrix.multiply(matrix()));
+        stack.add(matrix().multiply(matrix));
     }
 
     public void pop() {

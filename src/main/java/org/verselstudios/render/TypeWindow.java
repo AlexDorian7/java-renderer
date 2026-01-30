@@ -1,5 +1,6 @@
 package org.verselstudios.render;
 
+import org.verselstudios.Main;
 import org.verselstudios.events.ActionType;
 import org.verselstudios.events.CharacterEvent;
 import org.verselstudios.events.KeyEvent;
@@ -34,7 +35,7 @@ public class TypeWindow extends DraggableWindow {
         super.render();
         Font.FontStyle style = system.style;
         //Font.DEFAULT.renderWrappedString(new Vector3d(getBounds().getPos().getX() + getBounds().getSize().getX()/16D, getBounds().getBound().getY() - style.size() - getBounds().getSize().getY()/8D, 0), text, getBounds().getSize().getX() - getBounds().getSize().getX()/8D, style);
-        Font.renderFontSystem(system, new Vector3d(getBounds().getPos().getX() + getBounds().getSize().getX()/16D, getBounds().getBound().getY() - style.size() - getBounds().getSize().getY()/8D, 0), RenderStack.getMatrixStack());
+        Font.renderFontSystem(system, new Vector3d(getBounds().getPos().getX() + getBounds().getSize().getX()/16D, getBounds().getBound().getY() - style.size() - getBounds().getSize().getY()/8D, 0), Main.getRenderManager().getRenderStack().getMatrixStack());
     }
 
     public String getText() {

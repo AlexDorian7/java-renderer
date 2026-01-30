@@ -1,5 +1,6 @@
 package org.verselstudios.render;
 
+import org.verselstudios.Main;
 import org.verselstudios.gl.FontRenderSystem;
 import org.verselstudios.math.Matrix4d;
 import org.verselstudios.math.Transform;
@@ -16,10 +17,10 @@ public class DebugWorldTextRenderer implements Renderer {
     @Override
     public void render() {
         Matrix4d modelMatrix = transform.getModelMatrix();
-        RenderStack.getMatrixStack().push(modelMatrix);
+        Main.getRenderManager().getRenderStack().getMatrixStack().push(modelMatrix);
         glEnable(GL_DEPTH);
-        Font.renderFontSystem(text, RenderStack.getMatrixStack());
+        Font.renderFontSystem(text, Main.getRenderManager().getRenderStack().getMatrixStack());
         glDisable(GL_DEPTH);
-        RenderStack.getMatrixStack().pop();
+        Main.getRenderManager().getRenderStack().getMatrixStack().pop();
     }
 }

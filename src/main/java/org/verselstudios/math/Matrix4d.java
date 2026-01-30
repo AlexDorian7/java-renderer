@@ -188,21 +188,14 @@ public class Matrix4d {
     }
 
     public static Matrix4d perspective(double fov, double near, double far, double width, double height) {
-        Matrix4d mat = new Matrix4d();
-
-        double f = far;
-        double n = near;
-
         double aspect = width / height;
+        double f = 1.0 / Math.tan(Math.toRadians(fov) / 2.0);
 
-        double s = 1 / Math.tan(fov/2 * Math.PI/180);
-
-        mat.set(0, 0, s / aspect);
-        mat.set(1, 1, s);
-
-        mat.set(2, 2, -f/(f-n));
-        mat.set(2, 3, -f*n/(f-n));
-
+        Matrix4d mat = new Matrix4d();
+        mat.set(0, 0, f / aspect);
+        mat.set(1, 1, f);
+        mat.set(2, 2, (far + near) / (near - far));
+        mat.set(2, 3, (2 * far * near) / (near - far));
         mat.set(3, 2, -1);
         mat.set(3, 3, 0);
 
