@@ -138,7 +138,5 @@ public class SurfaceRenderSystem extends RenderSystem {
         super.draw(matrixStack);
         matrixStack.pop();
 //        glDisable(GL_DEPTH_TEST);
-
-//        RenderStack.getMatrixStack().pop();
     }
 }

@@ -47,20 +47,17 @@ public class Transform {
     public Matrix4d getViewMatrix() {
         Matrix4d view = new Matrix4d();
 
-        // Inverse rotation (note the minus signs)
-        view = Matrix4d.rotationZ(-rotation.getZ())
-                .multiply(view);
-        view = Matrix4d.rotationY(-rotation.getY())
-                .multiply(view);
-        view = Matrix4d.rotationX(-rotation.getX())
-                .multiply(view);
-
         // Inverse translation
         view = Matrix4d.translation(
                 -position.getX(),
                 -position.getY(),
                 -position.getZ()
         ).multiply(view);
+
+        // Inverse rotation (note the minus signs)
+        view = Matrix4d.rotationZ(-rotation.getZ()).multiply(view);
+        view = Matrix4d.rotationY(-rotation.getY()).multiply(view);
+        view = Matrix4d.rotationX(-rotation.getX()).multiply(view);
 
         return view;
     }
@@ -92,6 +89,11 @@ public class Transform {
 
     public Matrix4d getFlatRotationMatrix() {
         return Matrix4d.rotationY(rotation.getY());
+    }
+
+    @Override
+    public String toString() {
+        return "Transform\n    Position: " + position + "\n    Rotation: " + rotation + "\n    Scale: " + scale;
     }
 
 }

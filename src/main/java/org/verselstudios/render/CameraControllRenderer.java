@@ -33,9 +33,7 @@ public class CameraControllRenderer implements Renderer {
         Transform transform = camera.getTransform();
         Matrix4d basis = transform.getFlatRotationMatrix();
 
-        System.out.println(basis.getForwardVector());
-
-        Vector3d forward = basis.getForwardVector();
+        Vector3d forward = basis.getForwardVector().negate(); // Camera faces down -Z
         Vector3d right   = basis.getRightVector();
         Vector3d up      = basis.getUpVector();
 
@@ -47,11 +45,9 @@ public class CameraControllRenderer implements Renderer {
         if (keysDown.contains(GLFW.GLFW_KEY_SPACE)) movement = movement.add(up);
         if (keysDown.contains(GLFW.GLFW_KEY_LEFT_SHIFT)) movement = movement.subtract(up);
 
-        System.out.println(movement);
 
         if (!movement.isZero()) {
             movement = movement.normalize().multiply(MOVE_SPEED * dt);
-            System.out.println(movement);
             transform.setPosition(transform.getPosition().add(movement));
         }
     }

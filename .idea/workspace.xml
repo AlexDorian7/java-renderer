@@ -5,26 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad50ed4a-995b-4ae0-8128-8464f59ee063" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Time.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugWorldTextRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/events/MouseMoveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/events/MouseMoveEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Matrix4d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Matrix4d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Transform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector2d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector3d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector3d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector4d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector4d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/AxisRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/AxisRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/CameraControllRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/CameraControllRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/FontStyleBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/FontStyleBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.vsh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
