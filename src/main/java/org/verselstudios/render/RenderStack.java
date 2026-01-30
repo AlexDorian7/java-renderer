@@ -4,6 +4,7 @@ import org.verselstudios.events.*;
 import org.verselstudios.math.Camera;
 import org.verselstudios.math.Matrix4d;
 import org.verselstudios.math.MatrixStack;
+import org.verselstudios.math.Time;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,9 @@ public class RenderStack {
     }
 
     public static void render() {
-        MATRIX_STACK.push(camera.getTransform().getInverseMatrix()); // Push view matrix
+        Time.update();
+
+        MATRIX_STACK.push(camera.getTransform().getViewMatrix()); // Push view matrix
         for (Renderer renderer : RENDERERS) {
             renderer.render();
         }

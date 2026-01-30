@@ -13,6 +13,11 @@ import org.verselstudios.shader.ShaderRegister;
 
 import static org.lwjgl.opengl.GL45.*;
 
+@Deprecated
+/**
+ * Does not work well in 3D.
+ * A new 3D version will be made eventually
+ */
 public abstract class Window implements Renderer {
 
     private final RenderSystem quad;
@@ -37,17 +42,17 @@ public abstract class Window implements Renderer {
         if (renderBorder) {
             quad.getProgram().use();
             glEnable(GL_TEXTURE_2D);
-            Matrix4d translation = Matrix4d.translation(bounds.getPos().getX(), bounds.getPos().getY(), 0);
-            Matrix4d transform = translation.multiply(Matrix4d.scale(bounds.getSize().getX(), bounds.getSize().getY(), 1));
+            Matrix4d transform = bounds.getTransform().getModelMatrix();
             RenderStack.getMatrixStack().push(transform);
             texture.bind(quad.getProgram());
+//            glEnable(GL_DEPTH_TEST);
             quad.draw(RenderStack.getMatrixStack());
-            RenderStack.getMatrixStack().pop();
-            glDisable(GL_TEXTURE_2D);
-
+//            glDisable(GL_DEPTH_TEST);
             if (titleSystem != null) {
                 Font.renderFontSystem(titleSystem, new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - titleSystem.style.size() - 4, 0), RenderStack.getMatrixStack());
             }
+            RenderStack.getMatrixStack().pop();
+            glDisable(GL_TEXTURE_2D);
 
 //            Font.DEFAULT.renderString(new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - Font.FontStyle.DEFAULT.size() - 4, 0), windowName);
         }

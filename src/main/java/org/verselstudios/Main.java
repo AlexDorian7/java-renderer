@@ -52,7 +52,8 @@ public class Main {
 
         RenderStack.push(new CameraControllRenderer(RenderStack.getCamera()));
 
-        RenderStack.push(new TextWindow("Hello World", "Hello World", new Rectangle(1, 1)));
+//        RenderStack.push(new TextWindow("Hello World", "Hello World", new Rectangle(1, 1)));
+        RenderStack.push(new DebugWorldTextRenderer());
         RenderStack.push(new DebugHeightMapRenderer());
         RenderStack.push(new AxisRenderer());
     }
@@ -150,22 +151,22 @@ public class Main {
     private static void resize(int width, int height) {
         glViewport(0, 0, width, height);
 
-        ShaderRegister.PROJECTION_MATRIX = Matrix4d.perspective(90, 0, 1, width, height); //Matrix4d.ortho(-width, width, -height, height, -1, 1);
+        ShaderRegister.PROJECTION_MATRIX = Matrix4d.perspective(90, 0, 1000, width, height); //Matrix4d.ortho(-width, width, -height, height, -1, 1);
     }
 
     private void loop() {
         // Set the clear color
         glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
-        glClearDepth(0.0f);
+        glClearDepth(1.0f);
 
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while ( !glfwWindowShouldClose(window) ) {
             glDepthMask(true);
-            glDepthFunc(GL_GREATER);
+            glDepthFunc(GL_LESS);
             glEnable(GL_CULL_FACE);
-            glCullFace(GL_BACK);
+//            glCullFace(GL_BACK);
             glFrontFace(GL_CCW);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 

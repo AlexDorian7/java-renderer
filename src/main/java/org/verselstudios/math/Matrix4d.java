@@ -201,9 +201,10 @@ public class Matrix4d {
         mat.set(1, 1, s);
 
         mat.set(2, 2, -f/(f-n));
-        mat.set(3, 2, -f*n/(f-n));
+        mat.set(2, 3, -f*n/(f-n));
 
-        mat.set(2, 3, -1);
+        mat.set(3, 2, -1);
+        mat.set(3, 3, 0);
 
         return mat;
     }
@@ -253,6 +254,6 @@ public class Matrix4d {
     }
 
     public Vector3d getForwardVector() {
-        return new Vector3d(-get(0, 2), -get(1, 2), -get(2, 2)).normalize();
+        return new Vector3d(get(0, 2), get(1, 2), get(2, 2)).normalize();
     }
 }

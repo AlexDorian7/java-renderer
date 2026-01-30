@@ -149,4 +149,13 @@ public class Vector3d {
         result = 31 * result + Long.hashCode(lz);
         return result;
     }
+
+    public boolean isZero() {
+        return Math.abs(x+y+z) < 0.00001;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + x + ", " + y + ", " + z + "]";
+    }
 }

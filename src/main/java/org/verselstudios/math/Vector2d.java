@@ -108,4 +108,9 @@ public class Vector2d {
         result = 31 * result + Long.hashCode(ly);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "[" + x + ", " + y + "]";
+    }
 }

@@ -1,0 +1,25 @@
+package org.verselstudios.render;
+
+import org.verselstudios.gl.FontRenderSystem;
+import org.verselstudios.math.Matrix4d;
+import org.verselstudios.math.Transform;
+import org.verselstudios.math.Vector3d;
+import org.verselstudios.render.font.Font;
+
+import static org.lwjgl.opengl.GL45.*;
+
+public class DebugWorldTextRenderer implements Renderer {
+    private final FontRenderSystem text = Font.DEFAULT.createFontRenderSystem("Hello World");
+
+    private final Transform transform = new Transform();
+
+    @Override
+    public void render() {
+        Matrix4d modelMatrix = transform.getModelMatrix();
+        RenderStack.getMatrixStack().push(modelMatrix);
+        glEnable(GL_DEPTH);
+        Font.renderFontSystem(text, RenderStack.getMatrixStack());
+        glDisable(GL_DEPTH);
+        RenderStack.getMatrixStack().pop();
+    }
+}

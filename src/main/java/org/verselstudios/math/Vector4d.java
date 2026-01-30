@@ -158,4 +158,9 @@ public class Vector4d {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "[" + x + ", " + y + ", " + z + ", " + w + "]";
+    }
+
 }

@@ -23,4 +23,8 @@ public record MouseMoveEvent(long window, double xpos, double ypos) {
             return normalized.multiply(new Vector2d(aspect, 1));
         }
     }
+
+    public Vector2d getPos() {
+        return new Vector2d(xpos, ypos);
+    }
 }

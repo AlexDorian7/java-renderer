@@ -3,7 +3,9 @@ package org.verselstudios.gl;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL45;
 import org.verselstudios.math.MatrixStack;
+import org.verselstudios.render.RenderStack;
 import org.verselstudios.shader.ShaderProgram;
+import org.verselstudios.shader.ShaderRegister;
 import org.verselstudios.shader.Vao;
 import org.verselstudios.shader.Vertex;
 
@@ -95,6 +97,7 @@ public class RenderSystem {
         }
         program.use();
         program.setModelViewMatrix(matrixStack.matrix());
+        program.setProjectionMatrix(ShaderRegister.PROJECTION_MATRIX);
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glDrawArrays(type.type, 0, indices);

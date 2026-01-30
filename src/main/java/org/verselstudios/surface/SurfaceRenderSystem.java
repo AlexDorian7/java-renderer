@@ -29,27 +29,13 @@ public class SurfaceRenderSystem extends RenderSystem {
         end();
     }
 
-    private boolean neighborTooCoarse(double nx, double nz, int depth) {
-        for (int d = depth + 2; d <= MAX_DEPTH; d++) {
-            double size = 1.0 / (1 << d);
-            if (quadDepths.containsKey(quadKey(nx, nz, size))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     /* ============================================================
        Quadtree construction
        ============================================================ */
 
     private void buildQuad(double x, double z, double size, int depth) {
-        if (neighborTooCoarse(x - size, z, depth) ||
-                neighborTooCoarse(x + size, z, depth) ||
-                neighborTooCoarse(x, z - size, depth) ||
-                neighborTooCoarse(x, z + size, depth) ||
-                shouldSubdivide(x, z, size, depth)) {
+        if (shouldSubdivide(x, z, size, depth)) {
             double h = size * 0.5;
             buildQuad(x, z, h, depth + 1);
             buildQuad(x + h, z, h, depth + 1);
@@ -57,8 +43,6 @@ public class SurfaceRenderSystem extends RenderSystem {
             buildQuad(x + h, z + h, h, depth + 1);
             return;
         }
-
-        quadDepths.put(quadKey(x, z, size), depth);
         emitQuad(x, z, size);
     }
 
@@ -73,20 +57,10 @@ public class SurfaceRenderSystem extends RenderSystem {
 
     private void emitQuad(double x, double z, double size) {
 
-        boolean stitchL = neighborIsCoarser(x - size, z, size);
-        boolean stitchR = neighborIsCoarser(x + size, z, size);
-        boolean stitchB = neighborIsCoarser(x, z - size, size);
-        boolean stitchT = neighborIsCoarser(x, z + size, size);
-
         Vector3d p0 = samplePosition(x, z);
         Vector3d p1 = samplePosition(x, z + size);
         Vector3d p2 = samplePosition(x + size, z + size);
         Vector3d p3 = samplePosition(x + size, z);
-
-        Vector3d pmL = samplePosition(x, z + size * 0.5);
-        Vector3d pmR = samplePosition(x + size, z + size * 0.5);
-        Vector3d pmB = samplePosition(x + size * 0.5, z);
-        Vector3d pmT = samplePosition(x + size * 0.5, z + size);
 
         VaoBuilder builder = getProgram().getVaoBuilder();
 
@@ -95,35 +69,15 @@ public class SurfaceRenderSystem extends RenderSystem {
         Vertex v2 = makeVertex(builder, p2, x + size, z + size);
         Vertex v3 = makeVertex(builder, p3, x + size, z);
 
-        Vertex vL = makeVertex(builder, pmL, x, z + size * 0.5);
-        Vertex vR = makeVertex(builder, pmR, x + size, z + size * 0.5);
-        Vertex vB = makeVertex(builder, pmB, x + size * 0.5, z);
-        Vertex vT = makeVertex(builder, pmT, x + size * 0.5, z + size);
-
-        // Edge stitches
-        if (stitchB) addVertex(v0).addVertex(v3).addVertex(vB);
-        if (stitchT) addVertex(v1).addVertex(vT).addVertex(v2);
-        if (stitchL) addVertex(v0).addVertex(vL).addVertex(v1);
-        if (stitchR) addVertex(v3).addVertex(v2).addVertex(vR);
 
         // Interior fan
-        addVertex(vB).addVertex(v3).addVertex(vR);
-        addVertex(vB).addVertex(vR).addVertex(vT);
-        addVertex(vB).addVertex(vT).addVertex(vL);
-        addVertex(vB).addVertex(vL).addVertex(v0);
-        addVertex(vL).addVertex(vT).addVertex(v1);
-        addVertex(vT).addVertex(vR).addVertex(v2);
+
+        addVertex(v0).addVertex(v1).addVertex(v2); // for some reason I need to use CW winding here for the front face to point up
+        addVertex(v0).addVertex(v2).addVertex(v3);
+
+
     }
 
-    private boolean neighborIsCoarser(double nx, double nz, double size) {
-        if (quadDepths.containsKey(quadKey(nx, nz, size))) return false;
-
-        double parentSize = size * 2.0;
-        double px = Math.floor(nx / parentSize) * parentSize;
-        double pz = Math.floor(nz / parentSize) * parentSize;
-
-        return quadDepths.containsKey(quadKey(px, pz, parentSize));
-    }
 
     /* ============================================================
        Geometry helpers
@@ -174,25 +128,16 @@ public class SurfaceRenderSystem extends RenderSystem {
     }
 
     /* ============================================================
-       Quad key
-       ============================================================ */
-
-    private long quadKey(double x, double z, double size) {
-        long ix = Math.round(x / size);
-        long iz = Math.round(z / size);
-        long is = Math.round(1.0 / size);
-        return ix | (iz << 21) | (is << 42);
-    }
-
-    /* ============================================================
        Draw
        ============================================================ */
 
     @Override
     public void draw(MatrixStack matrixStack) {
-        glEnable(GL_DEPTH_TEST);
+//        glEnable(GL_DEPTH_TEST);
+        matrixStack.push(Matrix4d.scale(5,5,5));
         super.draw(matrixStack);
-        glDisable(GL_DEPTH_TEST);
+        matrixStack.pop();
+//        glDisable(GL_DEPTH_TEST);
 
 //        RenderStack.getMatrixStack().pop();
     }

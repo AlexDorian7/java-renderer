@@ -5,6 +5,8 @@ import org.verselstudios.math.Vector3d;
 import org.verselstudios.math.Vector4d;
 import org.verselstudios.shader.ShaderRegister;
 
+import static org.lwjgl.opengl.GL45.*;
+
 public class AxisRenderer implements Renderer {
 
     private final RenderSystem axisSystem;
@@ -31,6 +33,7 @@ public class AxisRenderer implements Renderer {
 
     @Override
     public void render() {
+        glLineWidth(4f);
         axisSystem.draw(RenderStack.getMatrixStack());
     }
 }

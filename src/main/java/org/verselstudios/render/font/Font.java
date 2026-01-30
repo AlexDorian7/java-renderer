@@ -368,6 +368,7 @@ public class Font {
     }
 
 
+    @Deprecated
     public static void renderFontSystem(FontRenderSystem system, Vector3d position, MatrixStack matrixStack) {
         system.getProgram().use();
         Matrix4d translate = Matrix4d.translation(position.getX(), position.getY(), position.getZ());
@@ -383,8 +384,22 @@ public class Font {
         glDisable(GL_TEXTURE_2D);
     }
 
+    public static void renderFontSystem(FontRenderSystem system, MatrixStack matrixStack) {
+        system.getProgram().use();
+        Matrix4d transform = system.style.getScaleMat();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_TEXTURE_2D);
+        system.font.texture.bind(system.getProgram());
+        matrixStack.push(transform);
+        system.draw(matrixStack);
+        matrixStack.pop();
+        glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
+    }
+
     public record FontStyle(double size, Vector4d color, @Deprecated Vector4d shadowColor, boolean italic, @Deprecated boolean shadow, boolean bold) {
-        public static final FontStyle DEFAULT = new FontStyleBuilder().build();
+        public static final FontStyle DEFAULT = new FontStyleBuilder().setSize(1/64D).build();
 
         public Matrix4d getScaleMat() {
             return Matrix4d.scale(size, size, size);

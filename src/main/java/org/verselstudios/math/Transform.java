@@ -44,15 +44,54 @@ public class Transform {
         this.scale = scale;
     }
 
-    public Matrix4d getMatrix() {
-        return Matrix4d.translation(position.getX(), position.getY(), position.getZ())
-                .multiply(Matrix4d.rotationXYZ(rotation.getX(), rotation.getY(), rotation.getZ())
-                        .multiply(Matrix4d.scale(scale.getX(), scale.getY(), scale.getZ())));
+    public Matrix4d getViewMatrix() {
+        Matrix4d view = new Matrix4d();
+
+        // Inverse rotation (note the minus signs)
+        view = Matrix4d.rotationZ(-rotation.getZ())
+                .multiply(view);
+        view = Matrix4d.rotationY(-rotation.getY())
+                .multiply(view);
+        view = Matrix4d.rotationX(-rotation.getX())
+                .multiply(view);
+
+        // Inverse translation
+        view = Matrix4d.translation(
+                -position.getX(),
+                -position.getY(),
+                -position.getZ()
+        ).multiply(view);
+
+        return view;
     }
 
-    public Matrix4d getInverseMatrix() {
-        return Matrix4d.scale(1/scale.getX(), 1/scale.getY(), 1/scale.getZ())
-                .multiply(Matrix4d.rotationZYX(-rotation.getX(), -rotation.getY(), -rotation.getZ())
-                        .multiply(Matrix4d.translation(-position.getX(), -position.getY(), -position.getZ())));
+    public Matrix4d getModelMatrix() {
+        Matrix4d model = new Matrix4d();
+
+        // Translation (last applied, first multiplied)
+        model = Matrix4d.translation(
+                position.getX(),
+                position.getY(),
+                position.getZ()
+        ).multiply(model);
+
+        // Rotation
+        model = Matrix4d.rotationZ(rotation.getZ()).multiply(model);
+        model = Matrix4d.rotationY(rotation.getY()).multiply(model);
+        model = Matrix4d.rotationX(rotation.getX()).multiply(model);
+
+        // Scale (first applied)
+        model = Matrix4d.scale(
+                scale.getX(),
+                scale.getY(),
+                scale.getZ()
+        ).multiply(model);
+
+        return model;
     }
+
+    public Matrix4d getFlatRotationMatrix() {
+        return Matrix4d.rotationY(rotation.getY());
+    }
+
 }

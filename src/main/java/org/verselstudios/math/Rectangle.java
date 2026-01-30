@@ -42,4 +42,8 @@ public class Rectangle {
     public boolean contains(Vector2d point) {
         return (point.getX() >= pos.getX() && point.getX() <= getBound().getX() && point.getY() >= pos.getY() && point.getY() <= getBound().getY());
     }
+
+    public Transform getTransform() {
+        return new Transform(pos.getX(), pos.getY(), 0, 0, 0, 0, size.getX(), size.getY(), 1);
+    }
 }

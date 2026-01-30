@@ -9,10 +9,12 @@ uniform mat4 modelView;
 
 out vec2 vTexCoord;
 out vec4 vColor;
+out vec4 vPos;
 
 void main() {
     vTexCoord = texCoord;
     vColor = color;
     vec4 viewPos = modelView * vec4(position, 1.0);
+    vPos = viewPos;
     gl_Position = projection * viewPos;
 }
