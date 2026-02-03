@@ -1,6 +1,6 @@
 package org.verselstudios.surface;
 
-import org.verselstudios.gl.RenderSystem;
+import org.verselstudios.model.RenderSystem;
 import org.verselstudios.math.*;
 import org.verselstudios.shader.VaoBuilder;
 import org.verselstudios.shader.Vertex;
@@ -13,6 +13,7 @@ import static org.lwjgl.opengl.GL45.*;
 public class SurfaceRenderSystemNew extends RenderSystem {
 
     private final Heightmap heightmap;
+    private final double scale;
 
     static final double MAX_ERROR = 0.001;
     static final int MAX_DEPTH = 8;
@@ -20,9 +21,10 @@ public class SurfaceRenderSystemNew extends RenderSystem {
     // Stores final emitted quads for LOD neighbor detection
     private final Map<Long, Integer> quadDepths = new HashMap<>();
 
-    public SurfaceRenderSystemNew(Heightmap heightmap, int resolution) {
+    public SurfaceRenderSystemNew(Heightmap heightmap, int resolution, double scale) {
         super(RenderType.GL_TRIANGLES, heightmap.getProgram());
         this.heightmap = heightmap;
+        this.scale = scale;
 
         double res = 1D/resolution;
 
@@ -100,15 +102,15 @@ public class SurfaceRenderSystemNew extends RenderSystem {
     }
 
     private Vector3d samplePosition(double x, double z) {
-        double y = heightmap.get(new Vector2d(x, z));
+        double y = heightmap.get(new Vector2d(x*scale, z*scale));
         return new Vector3d(x - 0.5, y, z - 0.5);
     }
 
     private Vector3d computeNormal(double x, double z, double step) {
-        double hL = heightmap.get(new Vector2d(x - step, z));
-        double hR = heightmap.get(new Vector2d(x + step, z));
-        double hD = heightmap.get(new Vector2d(x, z - step));
-        double hU = heightmap.get(new Vector2d(x, z + step));
+        double hL = heightmap.get(new Vector2d(x - step, z).multiply(scale));
+        double hR = heightmap.get(new Vector2d(x + step, z).multiply(scale));
+        double hD = heightmap.get(new Vector2d(x, z - step).multiply(scale));
+        double hU = heightmap.get(new Vector2d(x, z + step).multiply(scale));
 
         Vector3d n = new Vector3d(
                 hL - hR,
@@ -140,8 +142,7 @@ public class SurfaceRenderSystemNew extends RenderSystem {
     @Override
     public void draw(MatrixStack matrixStack) {
         glEnable(GL_DEPTH_TEST);
-        Transform transform = new Transform(0,0,0,0,0,0,10,10,10);
-        matrixStack.push(transform.getModelMatrix());
+        matrixStack.push(Matrix4d.scale(scale, 1, scale));
         super.draw(matrixStack);
         matrixStack.pop();
         glDisable(GL_DEPTH_TEST);

@@ -1,11 +1,12 @@
 package org.verselstudios.render;
 
-import org.lwjgl.glfw.GLFW;
 import org.verselstudios.events.*;
 import org.verselstudios.math.*;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class CameraControllRenderer implements Renderer {
 
@@ -17,8 +18,12 @@ public class CameraControllRenderer implements Renderer {
 
     // Input state
     private final Set<Integer> keysDown = new HashSet<>();
-    private Vector2d lastMousePos = null;
-    private boolean mouseCaptured = false;
+    private double windowWidth = 1, windowHeight = 1;
+    private double centerX = 0, centerY = 0;
+
+    // Store yaw/pitch internally
+    private double yaw = 0;
+    private double pitch = 0;
 
     public CameraControllRenderer(Camera camera) {
         this.camera = camera;
@@ -26,25 +31,22 @@ public class CameraControllRenderer implements Renderer {
 
     @Override
     public void render() {
-        double dt = Time.deltaTime(); // assume you have this
-
-        Vector3d movement = Vector3d.ZERO;
+        double dt = Time.deltaTime();
 
         Transform transform = camera.getTransform();
         Matrix4d basis = transform.getFlatRotationMatrix();
 
-        Vector3d forward = basis.getForwardVector().negate(); // Camera faces down -Z
+        Vector3d forward = basis.getForwardVector().negate(); // Camera looks down -Z
         Vector3d right   = basis.getRightVector();
         Vector3d up      = basis.getUpVector();
 
-
-        if (keysDown.contains(GLFW.GLFW_KEY_W)) movement = movement.add(forward);
-        if (keysDown.contains(GLFW.GLFW_KEY_S)) movement = movement.subtract(forward);
-        if (keysDown.contains(GLFW.GLFW_KEY_D)) movement = movement.add(right);
-        if (keysDown.contains(GLFW.GLFW_KEY_A)) movement = movement.subtract(right);
-        if (keysDown.contains(GLFW.GLFW_KEY_SPACE)) movement = movement.add(up);
-        if (keysDown.contains(GLFW.GLFW_KEY_LEFT_SHIFT)) movement = movement.subtract(up);
-
+        Vector3d movement = Vector3d.ZERO;
+        if (keysDown.contains(GLFW_KEY_W)) movement = movement.add(forward);
+        if (keysDown.contains(GLFW_KEY_S)) movement = movement.subtract(forward);
+        if (keysDown.contains(GLFW_KEY_D)) movement = movement.add(right);
+        if (keysDown.contains(GLFW_KEY_A)) movement = movement.subtract(right);
+        if (keysDown.contains(GLFW_KEY_SPACE)) movement = movement.add(up);
+        if (keysDown.contains(GLFW_KEY_LEFT_SHIFT)) movement = movement.subtract(up);
 
         if (!movement.isZero()) {
             movement = movement.normalize().multiply(MOVE_SPEED * dt);
@@ -63,35 +65,55 @@ public class CameraControllRenderer implements Renderer {
     }
 
     @Override
-    public ActionType onMousePress(MousePressEvent event) {
-        if (event.button() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-            mouseCaptured = event.isPressed();
-            lastMousePos = null;
-            return ActionType.CONSUME;
+    public ActionType onMouseMove(MouseMoveEvent event) {
+        long window = event.window();
+
+        // Initialize window size if not set
+        if (windowWidth <= 1 || windowHeight <= 1) {
+            int[] w = new int[1], h = new int[1];
+            glfwGetWindowSize(window, w, h);
+            windowWidth = w[0];
+            windowHeight = h[0];
+            centerX = windowWidth / 2.0;
+            centerY = windowHeight / 2.0;
+
+            // Lock mouse to center initially
+            glfwSetCursorPos(window, centerX, centerY);
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+            // Initialize yaw/pitch from current camera rotation
+            Vector3d rot = camera.getTransform().getRotation();
+            pitch = rot.getX();
+            yaw = rot.getY();
         }
-        return ActionType.PASS;
+
+        // Get delta from center
+        double dx = event.xpos() - centerX;
+        double dy = event.ypos() - centerY;
+
+        // Update angles
+        yaw   -= dx * LOOK_SENSITIVITY;
+        pitch -= dy * LOOK_SENSITIVITY;
+
+        // Clamp pitch
+        pitch = Math.max(-Math.PI / 2 + 0.01, Math.min(Math.PI / 2 - 0.01, pitch));
+
+        // Apply rotation
+        camera.getTransform().setRotation(new Vector3d(pitch, yaw, 0));
+
+        // Reset mouse to center
+        glfwSetCursorPos(window, centerX, centerY);
+
+        return ActionType.CONSUME;
     }
 
     @Override
-    public ActionType onMouseMove(MouseMoveEvent event) {
-        if (!mouseCaptured) return ActionType.PASS;
-        if (lastMousePos == null) {
-            lastMousePos = event.getPos();
-            return ActionType.CONSUME;
-        }
+    public ActionType onMousePress(MousePressEvent event) {
+        return ActionType.PASS; // No longer needed for look
+    }
 
-        Vector2d delta = event.getPos().subtract(lastMousePos);
-        lastMousePos = event.getPos();
-
-        Vector3d rot = camera.getTransform().getRotation();
-
-        double yaw   = rot.getY() - delta.getX() * LOOK_SENSITIVITY;
-        double pitch = rot.getX() - delta.getY() * LOOK_SENSITIVITY;
-
-        // Clamp pitch (no flips)
-        pitch = Math.max(-Math.PI / 2 + 0.01, Math.min(Math.PI / 2 - 0.01, pitch));
-
-        camera.getTransform().setRotation(new Vector3d(pitch, yaw, 0));
-        return ActionType.CONSUME;
+    @Override
+    public ActionType onCharacter(CharacterEvent event) {
+        return ActionType.PASS;
     }
 }

@@ -1,13 +1,10 @@
 package org.verselstudios.render;
 
 import org.verselstudios.Main;
-import org.verselstudios.gl.FontRenderSystem;
+import org.verselstudios.model.FontRenderSystem;
 import org.verselstudios.math.Rectangle;
 import org.verselstudios.math.Vector3d;
-import org.verselstudios.math.Vector4d;
 import org.verselstudios.render.font.Font;
-import org.verselstudios.render.font.FontStyleBuilder;
-import org.verselstudios.shader.ShaderRegister;
 
 public class TextWindow extends DraggableWindow {
 

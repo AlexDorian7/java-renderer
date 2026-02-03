@@ -1,7 +1,7 @@
 package org.verselstudios.render;
 
-import org.verselstudios.gl.QuadRenderSystem;
-import org.verselstudios.gl.RenderPostSystem;
+import org.verselstudios.model.QuadRenderSystem;
+import org.verselstudios.model.RenderPostSystem;
 import org.verselstudios.math.Matrix4d;
 import org.verselstudios.shader.PostProcessStack;
 import org.verselstudios.shader.ShaderRegister;

@@ -1,8 +1,8 @@
 package org.verselstudios.render.font;
 
 import org.verselstudios.Image.Texture;
-import org.verselstudios.gl.FontRenderSystem;
-import org.verselstudios.gl.RenderSystem;
+import org.verselstudios.model.FontRenderSystem;
+import org.verselstudios.model.RenderSystem;
 import org.verselstudios.math.*;
 import org.verselstudios.shader.ShaderProgram;
 import org.verselstudios.shader.ShaderRegister;
@@ -172,7 +172,7 @@ public class Font {
 
     public FontRenderSystem createFontRenderSystem(String string, FontStyle style) {
         if (string.isEmpty()) string = " "; // Should fix this later. this prevents empty RenderSystem
-        ShaderProgram program = ShaderRegister.getProgram("pos_color_tex");
+        ShaderProgram program = ShaderRegister.getProgram("position_color_tex");
         FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, program, this, style);
         system.begin();
         int pos = 0;
@@ -210,7 +210,7 @@ public class Font {
 
     public FontRenderSystem createFontRenderSystem(String string, FontStyle style, int maxWidth) {
         if (string.isEmpty()) string = " ";
-        ShaderProgram program = ShaderRegister.getProgram("pos_color_tex");
+        ShaderProgram program = ShaderRegister.getProgram("position_color_tex");
         FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, program, this, style);
         system.begin();
 
@@ -253,13 +253,16 @@ public class Font {
                 double u1 = u + 1 / 16D;
                 double v1 = v + 1 / 16D;
 
-                double x = posX;
-                double y = posY;
+                double x = posX * style.size;
+                double x1 = x + style.size;
+                double y = posY * style.size;
+                double y1 = y + style.size;
+                double italic = style.italic ? style.size * 0.25 : 0;
 
                 Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, (float) y, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-                Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), (float) (y+1), 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-                Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), (float) (y+1), 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-                Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), (float) y, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+                Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + italic), (float) y1, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+                Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1 + italic), (float) y1, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+                Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1), (float) y, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
 
                 // tri 1
                 system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
@@ -310,7 +313,7 @@ public class Font {
             progressBuilder.append(8+k);
         }
 
-        ShaderProgram program = ShaderRegister.getProgram("pos_color_tex");
+        ShaderProgram program = ShaderRegister.getProgram("position_color_tex");
         FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, program, font, style);
         system.begin();
         int pos = 0;

@@ -1,0 +1,2571 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007fff5f8b1c29, pid=30176, tid=41848
+#
+# JRE version: OpenJDK Runtime Environment Temurin-21.0.7+6 (21.0.7+6) (build 21.0.7+6-LTS)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-21.0.7+6 (21.0.7+6-LTS, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# Problematic frame:
+# C  [nvoglv64.dll+0x641c29]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/adoptium/adoptium-support/issues
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dfile.encoding=windows-1252 -Duser.country=US -Duser.language=en -Duser.variant org.verselstudios.Main
+
+Host: 12th Gen Intel(R) Core(TM) i7-12700KF, 20 cores, 31G,  Windows 11 , 64 bit Build 22621 (10.0.22621.5415)
+Time: Tue Feb  3 14:22:13 2026 Central Standard Time elapsed time: 20.366822 seconds (0d 0h 0m 20s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001ed51130cd0):  JavaThread "main"             [_thread_in_native, id=41848, stack(0x0000009326a00000,0x0000009326b00000) (1024K)]
+
+Stack: [0x0000009326a00000,0x0000009326b00000],  sp=0x0000009326aff170,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [nvoglv64.dll+0x641c29]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 1380  org.lwjgl.opengl.GL30C.glBindVertexArray(I)V (0 bytes) @ 0x000001ed63857f19 [0x000001ed63857ec0+0x0000000000000059]
+J 1564 c2 org.verselstudios.model.RenderSystem.draw(Lorg/verselstudios/math/MatrixStack;)V (89 bytes) @ 0x000001ed6386b4a8 [0x000001ed6386aaa0+0x0000000000000a08]
+J 1493 c1 org.verselstudios.model.verselModel.VerselModel.draw(Lorg/verselstudios/math/MatrixStack;)V (48 bytes) @ 0x000001ed5bec1b2c [0x000001ed5bec1320+0x000000000000080c]
+J 1492 c1 org.verselstudios.render.VerselModelRenderer.render()V (41 bytes) @ 0x000001ed5bebf134 [0x000001ed5bebef20+0x0000000000000214]
+J 1500 c1 org.verselstudios.render.RenderStack.render()V (84 bytes) @ 0x000001ed5bec52ec [0x000001ed5bec47c0+0x0000000000000b2c]
+J 1473 c1 org.verselstudios.render.RenderManager.render(II)V (271 bytes) @ 0x000001ed5beb20e4 [0x000001ed5beb1c40+0x00000000000004a4]
+j  org.verselstudios.Main.loop()V+61
+j  org.verselstudios.Main.run()V+23
+j  org.verselstudios.Main.main([Ljava/lang/String;)V+7
+v  ~StubRoutines::call_stub 0x000001ed630a100d
+
+siginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), reading address 0xffffffffffffffff
+
+
+Registers:
+RAX=0x0000000000000001, RBX=0x005d4e4e13000013, RCX=0x00007fff61a6d4c0, RDX=0x000001ed455c5160
+RSP=0x0000009326aff170, RBP=0x0000009326aff3d0, RSI=0x000001ed455c5b28, RDI=0x000001ed78ef0000
+R8 =0x000001ed4508b0c0, R9 =0x0000000000000001, R10=0x00007fff84585b3d, R11=0x000001ed78f48390
+R12=0x0000000000000000, R13=0x00000000c444d178, R14=0x000001ed455c5160, R15=0x0000000000000019
+RIP=0x00007fff5f8b1c29, EFLAGS=0x0000000000010202
+
+XMM[0]=0x0000000000000000 0x0000000000000000
+XMM[1]=0x000000003f4327b1 0x3e4006e7bf1e9310
+XMM[2]=0x0000000000000000 0xbff0000000000000
+XMM[3]=0x0000000000000000 0x000000000000000d
+XMM[4]=0x0000000000000000 0x00000000be4d0148
+XMM[5]=0x00000000bf19fbe2 0xbe178409bf48f915
+XMM[6]=0x0000000000000000 0x000000003f800000
+XMM[7]=0x0000000000000000 0x0000000000000000
+XMM[8]=0x0000000000000000 0x3ff0000000000001
+XMM[9]=0x0000000000000000 0x3fef12d9df2d4557
+XMM[10]=0x0000000000000000 0x00000000053bc2eb
+XMM[11]=0x0000000000000000 0x71bd477489e83b5c
+XMM[12]=0x0000000000000000 0x00000000182af3e8
+XMM[13]=0x0000000000000000 0x0000000000000000
+XMM[14]=0x0000000000000000 0x0000000000000000
+XMM[15]=0x0000000000000000 0x0000000000000000
+  MXCSR=0x00001fa0
+
+
+Register to memory mapping:
+
+RAX=0x0000000000000001 is an unknown value
+RBX=0x005d4e4e13000013 is an unknown value
+RCX=0x00007fff61a6d4c0 nvoglv64.dll
+RDX=0x000001ed455c5160 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00
+RSP=0x0000009326aff170 is pointing into the stack for thread: 0x000001ed51130cd0
+RBP=0x0000009326aff3d0 is pointing into the stack for thread: 0x000001ed51130cd0
+RSI=0x000001ed455c5b28 points into unknown readable memory: 0x005d4e4e13000013 | 13 00 00 13 4e 4e 5d 00
+RDI=0x000001ed78ef0000 points into unknown readable memory: 0x000001ed7d4abf10 | 10 bf 4a 7d ed 01 00 00
+R8 =0x000001ed4508b0c0 points into unknown readable memory: 0x0000000000000001 | 01 00 00 00 00 00 00 00
+R9 =0x0000000000000001 is an unknown value
+R10=0x00007fff84585b3d jvm.dll
+R11=0x000001ed78f48390 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00
+R12=0x0 is null
+R13=3292844408 is a compressed pointer to object: org.verselstudios.math.Matrix4d 
+{0x0000000622268bc0} - klass: 'org/verselstudios/math/Matrix4d'
+ - ---- fields (total size 2 words):
+ - private final 'm' '[D' @12  [D{0x0000000622268bd0} (0xc444d17a)
+R14=0x000001ed455c5160 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00
+R15=0x0000000000000019 is an unknown value
+
+Top of Stack: (sp=0x0000009326aff170)
+0x0000009326aff170:   000001ed78ef0000 0000009326aff3d0
+0x0000009326aff180:   000001ed455c5160 0000000000000048
+0x0000009326aff190:   000001ed78f48378 000000000000000b
+0x0000009326aff1a0:   00007fff619f2bf0 00007fff5f8b1675
+0x0000009326aff1b0:   000001ed78ef0000 000001ed455c5160
+0x0000009326aff1c0:   000001ed455c5b80 000001ed78ef0228
+0x0000009326aff1d0:   0000000000000013 000001ed455c5160
+0x0000009326aff1e0:   0000000000000010 00007fff5fe3a1e6
+0x0000009326aff1f0:   000001ed78ef0000 000001ed7d453170
+0x0000009326aff200:   000001ed7d677b00 000001ed78ef0228
+0x0000009326aff210:   0000000000000002 000001ed78f3c250
+0x0000009326aff220:   000001ed7d677b00 00007fff5fe34316
+0x0000009326aff230:   000001ed7d677b00 0000000000000001
+0x0000009326aff240:   000001ed7d677b00 000001ed7d677b00
+0x0000009326aff250:   000001ed7d4abf10 000001ed78ef0000
+0x0000009326aff260:   4a02d7b71359d1a3 459709eac466d69d
+0x0000009326aff270:   99703030855c99fc 134e04502df76936
+0x0000009326aff280:   76bef1a8047d1c13 3bfadb02bbe99d81
+0x0000009326aff290:   d3ffc5dfc85ae250 f03fe2104836ac15
+0x0000009326aff2a0:   db7eb34cb8e9defb 1ab3413a635a17c9
+0x0000009326aff2b0:   e47c533349bbe080 1e653ef5e17781b6
+0x0000009326aff2c0:   0000000000000000 000001ed7d677b00
+0x0000009326aff2d0:   000001ed455c5178 00007fff5fe6f8a5
+0x0000009326aff2e0:   0000000000000000 0000000000000001
+0x0000009326aff2f0:   00000000c444d178 0000000000000000
+0x0000009326aff300:   00000000c444d178 0000000000000000
+0x0000009326aff310:   000001ed51130cd0 0000009326aff3c0
+0x0000009326aff320:   0000000000000000 000001ed45154b50
+0x0000009326aff330:   000001ed78ef0000 00007fff5f8b1e01
+0x0000009326aff340:   0000000033983218 000001ed78f48378
+0x0000009326aff350:   000001ed00000000 0000000000070000
+0x0000009326aff360:   000001ed45154b20 000001ed63857fb0 
+
+Instructions: (pc=0x00007fff5f8b1c29)
+0x00007fff5f8b1b29:   b9 02 05 00 00 e8 3d 4c 04 00 e8 58 f0 04 00 84
+0x00007fff5f8b1b39:   c0 74 32 48 8d 15 4d ae 30 01 b9 02 05 00 00 e8
+0x00007fff5f8b1b49:   63 e8 04 00 33 c0 48 8b 5c 24 30 48 8b 74 24 38
+0x00007fff5f8b1b59:   48 83 c4 20 5f c3 8b d3 48 8b cf e8 97 e9 ff ff
+0x00007fff5f8b1b69:   48 85 c0 75 02 33 c0 48 8b 5c 24 30 48 8b 74 24
+0x00007fff5f8b1b79:   38 48 83 c4 20 5f c3 40 57 41 56 48 83 ec 28 83
+0x00007fff5f8b1b89:   2a 01 4c 8b f2 48 8b f9 0f 85 cf 01 00 00 48 8b
+0x00007fff5f8b1b99:   89 28 02 00 00 48 89 5c 24 40 48 89 74 24 48 4c
+0x00007fff5f8b1ba9:   89 64 24 50 4c 89 7c 24 20 48 85 c9 74 0b 48 83
+0x00007fff5f8b1bb9:   c1 40 e8 40 ce ea ff eb 4f 80 3d 88 e2 1b 02 00
+0x00007fff5f8b1bc9:   75 46 80 3d 6f e2 1b 02 00 74 07 e8 d7 27 49 00
+0x00007fff5f8b1bd9:   eb 36 0f b6 05 6e e2 1b 02 84 c0 75 0e 8b 05 58
+0x00007fff5f8b1be9:   e2 1b 02 ff c0 89 05 50 e2 1b 02 8b 05 52 e2 1b
+0x00007fff5f8b1bf9:   02 83 f8 01 76 12 48 8d 0d 7a b8 1b 02 e8 b5 f8
+0x00007fff5f8b1c09:   e6 ff ff 05 2f b8 1b 02 49 8d b6 88 09 00 00 41
+0x00007fff5f8b1c19:   bf 21 00 00 00 45 33 e4 48 8b 1e 48 85 db 74 49
+0x00007fff5f8b1c29:   83 2b 01 75 41 44 39 a3 38 01 00 00 74 0e 45 33
+0x00007fff5f8b1c39:   c0 48 8b d3 48 8b cf e8 8b 14 6d 00 81 8f 68 c2
+0x00007fff5f8b1c49:   04 00 00 04 00 00 0f b6 43 5e 24 38 3c 08 75 0b
+0x00007fff5f8b1c59:   48 8b d3 48 8b cf e8 6c 2f 02 00 48 8b d3 48 8b
+0x00007fff5f8b1c69:   cf e8 c1 37 44 00 4c 89 26 48 83 c6 08 49 83 ef
+0x00007fff5f8b1c79:   01 75 a5 48 8b 8f 28 02 00 00 4c 8b 7c 24 20 48
+0x00007fff5f8b1c89:   8b 74 24 48 48 8b 5c 24 40 48 85 c9 74 0e 48 83
+0x00007fff5f8b1c99:   c1 40 e8 f0 cc ea ff e9 7d 00 00 00 44 38 25 a5
+0x00007fff5f8b1ca9:   e1 1b 02 75 74 44 38 25 8c e1 1b 02 74 07 e8 24
+0x00007fff5f8b1cb9:   2d 49 00 eb 64 8b 05 7c b7 1b 02 85 c0 74 41 ff
+0x00007fff5f8b1cc9:   c8 44 38 25 cf b7 1b 02 89 05 69 b7 1b 02 74 1e
+0x00007fff5f8b1cd9:   83 2d a4 b7 1b 02 01 75 27 48 8d 0d d7 b7 1b 02
+0x00007fff5f8b1ce9:   44 89 25 d8 b7 1b 02 e8 fb 0e e0 ff eb 12 83 2d
+0x00007fff5f8b1cf9:   86 b7 1b 02 01 75 09 41 8b c4 87 05 77 b7 1b 02
+0x00007fff5f8b1d09:   0f b6 05 40 e1 1b 02 84 c0 75 0e 8b 05 2a e1 1b
+0x00007fff5f8b1d19:   02 ff c8 89 05 22 e1 1b 02 49 8b 86 d8 0a 00 00 
+
+
+Stack slot to memory mapping:
+
+stack at sp + 0 slots: 0x000001ed78ef0000 points into unknown readable memory: 0x000001ed7d4abf10 | 10 bf 4a 7d ed 01 00 00
+stack at sp + 1 slots: 0x0000009326aff3d0 is pointing into the stack for thread: 0x000001ed51130cd0
+stack at sp + 2 slots: 0x000001ed455c5160 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00
+stack at sp + 3 slots: 0x0000000000000048 is an unknown value
+stack at sp + 4 slots: 0x000001ed78f48378 points into unknown readable memory: 0x0000000000000002 | 02 00 00 00 00 00 00 00
+stack at sp + 5 slots: 0x000000000000000b is an unknown value
+stack at sp + 6 slots: 0x00007fff619f2bf0 nvoglv64.dll
+stack at sp + 7 slots: 0x00007fff5f8b1675 nvoglv64.dll
+
+
+Compiled method (n/a) 20406 1380     n 0       org.lwjgl.opengl.GL30C::glBindVertexArray (native)
+ total in heap  [0x000001ed63857d10,0x000001ed638580e0] = 976
+ relocation     [0x000001ed63857e70,0x000001ed63857ea8] = 56
+ main code      [0x000001ed63857ec0,0x000001ed638580d4] = 532
+ stub code      [0x000001ed638580d4,0x000001ed638580d8] = 4
+ oops           [0x000001ed638580d8,0x000001ed638580e0] = 8
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x000001ed7973dc88} 'glBindVertexArray' '(I)V' in 'org/lwjgl/opengl/GL30C'
+  # parm0:    rdx       = int
+  #           [sp+0x70]  (sp of caller)
+  0x000001ed63857ec0: 448b 5208 | 49bb 0000 | 0000 ed01 | 0000 4d03 | d349 3bc2 | 0f84 0600 
+
+  0x000001ed63857ed8: ;   {runtime_call ic_miss_stub}
+  0x000001ed63857ed8: 0000 e9a1 | 6889 ff90 
+[Verified Entry Point]
+  0x000001ed63857ee0: 8984 2400 | 80ff ff55 | 488b ec48 | 83ec 6090 | 4181 7f20 | 0100 0000 
+
+  0x000001ed63857ef8: ;   {runtime_call StubRoutines (final stubs)}
+  0x000001ed63857ef8: 7405 e861 | ce87 ff4c 
+
+  0x000001ed63857f00: ;   {oop(a 'java/lang/Class'{0x0000000620832618} = 'org/lwjgl/opengl/GL30C')}
+  0x000001ed63857f00: 8bc2 49be | 1826 8320 | 0600 0000 | 4c89 7424 | 504c 8d74 | 2450 498b | d6c5 f877 
+
+  0x000001ed63857f1c: ;   {internal_word}
+  0x000001ed63857f1c: 49ba 197f | 8563 ed01 | 0000 4d89 | 97a0 0300 | 0049 89a7 | 9803 0000 
+
+  0x000001ed63857f34: ;   {external_word}
+  0x000001ed63857f34: 49ba 3d5b | 5884 ff7f | 0000 4180 | 3a00 0f84 | 4a00 0000 
+
+  0x000001ed63857f48: ;   {metadata({method} {0x000001ed7973dc88} 'glBindVertexArray' '(I)V' in 'org/lwjgl/opengl/GL30C')}
+  0x000001ed63857f48: 5241 5048 | ba80 dc73 | 79ed 0100 | 0049 8bcf | 4883 ec20 | 40f6 c40f | 0f84 1900 | 0000 4883 
+  0x000001ed63857f68: ;   {runtime_call}
+  0x000001ed63857f68: ec08 48b8 | 504b 0284 | ff7f 0000 | ffd0 4883 | c408 e90c 
+
+  0x000001ed63857f7c: ;   {runtime_call}
+  0x000001ed63857f7c: 0000 0048 | b850 4b02 | 84ff 7f00 | 00ff d048 | 83c4 2041 | 585a 498d | 8fb8 0300 | 0041 c787 
+  0x000001ed63857f9c: 4404 0000 | 0400 0000 
+
+  0x000001ed63857fa4: ;   {runtime_call}
+  0x000001ed63857fa4: 48b8 90fc | 174b f87f | 0000 ffd0 | c5f8 7741 | c787 4404 | 0000 0500 | 0000 f083 | 4424 c000 
+  0x000001ed63857fc4: 493b af48 | 0400 000f | 870e 0000 | 0041 83bf | 4004 0000 | 000f 8423 | 0000 00c5 | f877 498b 
+  0x000001ed63857fe4: cf4c 8be4 | 4883 ec20 | 4883 e4f0 
+
+  0x000001ed63857ff0: ;   {runtime_call}
+  0x000001ed63857ff0: 48b8 00d1 | cd83 ff7f | 0000 ffd0 | 498b e44d | 33e4 41c7 | 8744 0400 | 0008 0000 | 0041 83bf 
+  0x000001ed63858010: c004 0000 | 020f 8494 
+
+  0x000001ed63858018: ;   {external_word}
+  0x000001ed63858018: 0000 0049 | ba3d 5b58 | 84ff 7f00 | 0041 803a | 000f 8444 
+
+  0x000001ed6385802c: ;   {metadata({method} {0x000001ed7973dc88} 'glBindVertexArray' '(I)V' in 'org/lwjgl/opengl/GL30C')}
+  0x000001ed6385802c: 0000 0048 | ba80 dc73 | 79ed 0100 | 0049 8bcf | 4883 ec20 | 40f6 c40f | 0f84 1900 | 0000 4883 
+  0x000001ed6385804c: ;   {runtime_call}
+  0x000001ed6385804c: ec08 48b8 | 504b 0284 | ff7f 0000 | ffd0 4883 | c408 e90c 
+
+  0x000001ed63858060: ;   {runtime_call}
+  0x000001ed63858060: 0000 0048 | b850 4b02 | 84ff 7f00 | 00ff d048 | 83c4 2049 | c787 9803 | 0000 0000 | 0000 49c7 
+  0x000001ed63858080: 87a0 0300 | 0000 0000 | 00c5 f877 | 498b 8f28 | 0400 00c7 | 8100 0100 | 0000 0000 | 00c9 4983 
+  0x000001ed638580a0: 7f08 000f | 8501 0000 
+
+  0x000001ed638580a8: ;   {runtime_call StubRoutines (initial stubs)}
+  0x000001ed638580a8: 00c3 e951 | 8e84 ffc5 | f877 4c8b | e448 83ec | 2048 83e4 
+
+  0x000001ed638580bc: ;   {runtime_call}
+  0x000001ed638580bc: f048 b830 | 8302 84ff | 7f00 00ff | d049 8be4 | 4d33 e4e9 | 47ff ffff 
+[Stub Code]
+  0x000001ed638580d4: f4f4 f4f4 
+[/MachCode]
+
+
+Compiled method (c2) 20410 1564       4       org.verselstudios.model.RenderSystem::draw (89 bytes)
+ total in heap  [0x000001ed6386a790,0x000001ed6386ce18] = 9864
+ relocation     [0x000001ed6386a8f0,0x000001ed6386aa98] = 424
+ main code      [0x000001ed6386aaa0,0x000001ed6386bdc0] = 4896
+ stub code      [0x000001ed6386bdc0,0x000001ed6386be70] = 176
+ oops           [0x000001ed6386be70,0x000001ed6386be98] = 40
+ metadata       [0x000001ed6386be98,0x000001ed6386c008] = 368
+ scopes data    [0x000001ed6386c008,0x000001ed6386c7f8] = 2032
+ scopes pcs     [0x000001ed6386c7f8,0x000001ed6386cbb8] = 960
+ dependencies   [0x000001ed6386cbb8,0x000001ed6386cc10] = 88
+ handler table  [0x000001ed6386cc10,0x000001ed6386cd78] = 360
+ nul chk table  [0x000001ed6386cd78,0x000001ed6386ce18] = 160
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x000001ed7972e7a8} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/RenderSystem'
+  # this:     rdx:rdx   = 'org/verselstudios/model/RenderSystem'
+  # parm0:    r8:r8     = 'org/verselstudios/math/MatrixStack'
+  #           [sp+0x50]  (sp of caller)
+  0x000001ed6386aaa0: 448b 5208 | 49bb 0000 | 0000 ed01 | 0000 4d03 | d349 3bc2 
+
+  0x000001ed6386aab4: ;   {runtime_call ic_miss_stub}
+  0x000001ed6386aab4: 0f85 c63c | 88ff 6690 | 0f1f 4000 
+[Verified Entry Point]
+  0x000001ed6386aac0: 8984 2400 | 80ff ff55 | 4883 ec40 | 4181 7f20 | 0100 0000 | 0f85 dc12 | 0000 4c89 | 0424 4889 
+  0x000001ed6386aae0: 5424 088b | 6a1c 83fd | 020f 8579 | 0e00 0044 | 8b52 2443 | 8b54 d40c | 4d8b 9780 | 0300 004d 
+  0x000001ed6386ab00: 8b12 4c89 
+
+  0x000001ed6386ab04: ;   {static_call}
+  0x000001ed6386ab04: 5424 10e8 
+
+  0x000001ed6386ab08: ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop }
+                      ;*invokestatic glUseProgram {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20::glUseProgram@1 (line 236)
+                      ; - org.verselstudios.shader.ShaderProgram::use@4 (line 123)
+                      ; - org.verselstudios.model.RenderSystem::draw@29 (line 97)
+  0x000001ed6386ab08: d4e7 feff 
+
+  0x000001ed6386ab0c: ;   {other}
+  0x000001ed6386ab0c: 0f1f 8400 | 7c03 0000 | 4c8b 1424 
+
+  0x000001ed6386ab18: ; implicit exception: dispatches to 0x000001ed6386bb28
+  0x000001ed6386ab18: 458b 5a0c 
+
+  0x000001ed6386ab1c: ; implicit exception: dispatches to 0x000001ed6386bb3c
+  0x000001ed6386ab1c: 478b 4cdc | 104c 8b54 | 2408 458b | 5224 458d | 41ff 4585 | c00f 8c45 | 0e00 0043 | 8b6c dc14 
+  0x000001ed6386ab3c: ; implicit exception: dispatches to 0x000001ed6386bb50
+  0x000001ed6386ab3c: 458b 5cec | 0c45 3bc3 | 0f83 430a | 0000 4d8d | 1cec 438b | 6c8b 0c45 | 8b44 ec08 
+
+  0x000001ed6386ab58: ;   {metadata('org/verselstudios/math/Matrix4d')}
+  0x000001ed6386ab58: 4181 f860 | 0402 010f | 853b 0f00 | 004d 8d1c | ec47 8b4c | d40c 488b | 7c24 1044 | 8b47 4c43 
+  0x000001ed6386ab78: 8b6c c414 
+
+  0x000001ed6386ab7c: ; implicit exception: dispatches to 0x000001ed6386bb9c
+  0x000001ed6386ab7c: 418b 5cec | 0c8d 4bff | 81e1 f1ab | 7bac 85db | 0f86 3d0a | 0000 498d | 1cec 8b5c | 8b10 4b8d 
+  0x000001ed6386ab9c: 14d4 85db | 0f84 1d09 | 0000 418b 
+
+  0x000001ed6386aba8: ;   {oop(a 'java/lang/ThreadLocal$SuppliedThreadLocal'{0x0000000620828b58})}
+  0x000001ed6386aba8: 44dc 0c81 | f86b 5110 | c40f 85d5 | 0a00 0049 | 8d04 dc44 | 8b40 1c49 | 8bd8 48c1 | e303 448b 
+  0x000001ed6386abc8: ;   {metadata('org/lwjgl/system/MemoryStack')}
+  0x000001ed6386abc8: 4308 4181 | f8c8 4201 | 010f 85e9 | 0e00 0044 | 8b43 1848 | 8b73 1049 | 63c8 488d | 4c31 f648 
+  0x000001ed6386abe8: 83e1 f848 | 8bc1 482b | c68b e889 | 6b18 85ed | 0f8c 9e0d | 0000 4489 | 4424 1448 | 895c 2428 
+  0x000001ed6386ac08: 4889 5424 | 204c 895c | 2418 4489 | 5424 1048 | 893c 244c | 8bd1 41c6 | 026d 4d8b | da49 83c3 
+  0x000001ed6386ac28: 0549 83c2 | 0141 c602 | 6f41 c642 | 0164 41c6 | 4202 6541 | c642 036c | 41c6 0356 | 41c6 4301 
+  0x000001ed6386ac48: 6941 c643 | 0265 41c6 | 4303 7745 | 8863 0444 | 8bc5 4c03 | c641 8bd1 
+
+  0x000001ed6386ac60: ;   {static_call}
+  0x000001ed6386ac60: 6666 90e8 
+
+  0x000001ed6386ac64: ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=NarrowOop [24]=Oop [32]=Oop [40]=Oop }
+                      ;*invokestatic nglGetUniformLocation {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@25 (line 539)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386ac64: 78ce feff 
+
+  0x000001ed6386ac68: ;   {other}
+  0x000001ed6386ac68: 0f1f 8400 | d804 0001 | 448b 5c24 | 1445 85db | 0f8c 790c | 0000 4c8b | 5424 2841 | 8b6a 0c41 
+  0x000001ed6386ac88: 3beb 0f8c | 400d 0000 | 4589 5a18 | 8bc8 83f8 | ff0f 8461 
+
+  0x000001ed6386ac9c: ;   {oop(a 'java/lang/Class'{0x0000000620832000} = 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed6386ac9c: 0d00 0049 | ba00 2083 | 2006 0000 | 0045 8b4a | 7047 8b54 | cc20 4789 | 54cc 1c47 | 8964 cc18 
+  0x000001ed6386acbc: 43c7 44cc | 0cff ffff | ff47 3b64 | cc24 0f85 | 3809 0000 | 488b 7424 | 188b 560c 
+
+  0x000001ed6386acd8: ; implicit exception: dispatches to 0x000001ed6386b60d
+  0x000001ed6386acd8: 458b 5cd4 | 0c45 85db | 0f86 2709 | 0000 4183 | fb0c 0f86 | 1d09 0000 | 4183 fb03 | 0f86 1309 
+  0x000001ed6386acf8: 0000 4183 | fb0f 0f86 | 0909 0000 | c4c1 5b5a | 64d4 1045 | 85d2 0f8e | 060a 0000 | 43c7 44cc 
+  0x000001ed6386ad18: 1801 0000 | 004b 8b5c | cc10 c4c1 | 535a 6cd4 | 1848 8bfb | c5fa 1127 | 4183 fa01 | 0f8e 180a 
+  0x000001ed6386ad38: 0000 c5fa | 116f 0443 | c744 cc18 | 0200 0000 | c4c1 5b5a | 64d4 2041 | 83fa 020f | 8ebf 0c00 
+  0x000001ed6386ad58: 00c5 fa11 | 6708 43c7 | 44cc 1803 | 0000 00c4 | c153 5a6c | d428 4183 | fa03 0f8e | b30c 0000 
+  0x000001ed6386ad78: c5f9 6ed0 | 4c8b f6c5 | fa11 6f0c | 43c7 44cc | 1804 0000 | 0049 8b8f | 5004 0000 | 4963 f24f 
+  0x000001ed6386ad98: 8d2c cc4c 
+
+  0x000001ed6386ad9c: ;   {no_reloc}
+  0x000001ed6386ad9c: 8d5e fd4c | 8d46 fe49 | c1fb 3f49 | c1f8 3f49 | c1eb 3e49 | 8d44 33fd | 49c1 e83e | 4d8d 5c30 
+  0x000001ed6386adbc: fe48 c1f8 | 0249 c1fb | 024c 3bd8 | 490f 4cc3 | 4c8d 5eff | 4c8b c649 | c1f8 3f49 | c1fb 3f49 
+  0x000001ed6386addc: c1e8 3e4c | 03c6 49c1 | eb3e 4d8d | 5c33 ff49 | c1f8 0249 | c1fb 024c | 3bd8 490f | 4cc3 4c3b 
+  0x000001ed6386adfc: c049 0f4c | c048 83f8 | 0441 bb04 | 0000 0049 | 0f4f c344 | 8bd8 41ff 
+
+  0x000001ed6386ae14: ; ImmutableOopMap {r9=NarrowOop rdx=NarrowOop r13=Oop r14=Oop [0]=Oop [8]=Oop }
+                      ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.math.Matrix4d::store@35 (line 234)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@9 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+                      ;   {poll}
+  0x000001ed6386ae14: cb85 0141 | 83fb 010f | 8e93 0700 | 0043 c744 | cc18 0c00 | 0000 c4c1 | 7b10 44d4 | 30c4 417b 
+  0x000001ed6386ae34: 104c d438 | c4c1 7b10 | 5cd4 68c4 | c17b 1064 | d460 c4c1 | 7b10 6cd4 | 58c4 c17b | 1074 d450 
+  0x000001ed6386ae54: c4c1 7b10 | 4cd4 48c4 | c17b 107c | d440 c53b | 5ac0 c57a | 1147 10c5 | 3b5a c7c5 | f35a c9c5 
+  0x000001ed6386ae74: cb5a f6c5 | fb5a c5c5 | db5a e4c5 | d35a ebc4 | c163 5ad9 | c5fa 115f | 14c5 7a11 | 4718 c5fa 
+  0x000001ed6386ae94: 114f 1cc5 | fa11 7720 | c5fa 1147 | 24c5 fa11 | 6728 c5fa | 116f 2c41 | bb03 0000 | 0048 c1e2 
+  0x000001ed6386aeb4: 0341 b802 | 0000 00b9 | 0300 0000 | c4c1 796e | c944 8944 | 2424 894c | 2428 468d | 049d 0000 
+  0x000001ed6386aed4: 0000 4963 | c8c5 db5a | 64ca 1045 | 3bc2 0f8d | 2408 0000 | c5d3 5a6c | ca18 488d | 2c8d 0000 
+  0x000001ed6386aef4: 0000 488d | 042b 458d | 4801 c4c1 | 796e c1c4 | c179 7ec9 | c5f9 7ec6 | 4389 74cc | 184c 8bc8 
+  0x000001ed6386af14: ;   {no_reloc}
+  0x000001ed6386af14: c4c1 7a11 | 2144 8bce | 453b ca0f | 8d1a 0800 | 0048 8bc7 | 4803 c5c5 | db5a 64ca | 20c5 fa11 
+  0x000001ed6386af34: 6804 458d | 4802 c4c1 | 796e c1c4 | c179 7ec9 | c5f9 7ec6 | 4389 74cc | 1844 8bce | 453b ca0f 
+  0x000001ed6386af54: 8dcb 0700 | 00c5 fa11 | 6008 c5d3 | 5a6c ca28 | 458d 4803 | 418b e9c4 | c179 7ec9 | 4389 6ccc 
+  0x000001ed6386af74: 1844 8bcd | 453b ca0f | 8de1 0700 | 00c5 fa11 | 680c 498b | 8f50 0400 | 0041 83c0 | 04c4 c179 
+  0x000001ed6386af94: 7ec9 4789 | 44cc 1841 
+
+  0x000001ed6386af9c: ; ImmutableOopMap {r9=NarrowOop rdx=Oop r13=Oop r14=Oop xmm1=NarrowOop [0]=Oop [8]=Oop }
+                      ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.math.Matrix4d::store@35 (line 234)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@9 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+                      ;   {poll}
+  0x000001ed6386af9c: ffc3 8501 | 4183 fb04 | 0f8c 24ff | ffff 4789 | 44cc 1c47 | 8964 cc18 | 41c1 f804 | c5f9 7ed2 
+  0x000001ed6386afbc: 4533 c948 
+
+  0x000001ed6386afc0: ;   {static_call}
+  0x000001ed6386afc0: 8bfb 90e8 
+
+  0x000001ed6386afc4: ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                      ;*invokestatic nglUniformMatrix4fv {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20C::glUniformMatrix4fv@12 (line 382)
+                      ; - org.lwjgl.opengl.GL20::glUniformMatrix4fv@3 (line 431)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@46 (line 172)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@9 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386afc4: 18df feff 
+
+  0x000001ed6386afc8: ;   {other}
+  0x000001ed6386afc8: 0f1f 8400 | 3808 0004 | 4c8b 4424 | 0845 8b50 
+
+  0x000001ed6386afd8: ;   {oop(a 'java/lang/Class'{0x000000062080a138} = 'org/verselstudios/shader/ShaderRegister')}
+  0x000001ed6386afd8: 2449 bb38 | a180 2006 | 0000 0045 | 8b4b 7047 | 8b5c d40c | 488b 3c24 | 8b4f 4c41 | 8b5c cc14 
+  0x000001ed6386aff8: ; implicit exception: dispatches to 0x000001ed6386bc04
+  0x000001ed6386aff8: 418b 54dc | 0c8d 42ff | 25f1 ab7b | ac85 d20f | 8627 0600 | 004b 8d14 | d448 c1e3 | 038b 6c83 
+  0x000001ed6386b018: 1085 ed0f | 840d 0500 | 0041 8b74 
+
+  0x000001ed6386b024: ;   {oop(a 'java/lang/ThreadLocal$SuppliedThreadLocal'{0x0000000620828b58})}
+  0x000001ed6386b024: ec0c 81fe | 6b51 10c4 | 0f85 a206 | 0000 498d | 04ec 8b48 | 1c48 8bf9 | 48c1 e703 
+
+  0x000001ed6386b040: ; implicit exception: dispatches to 0x000001ed6386bc2c
+                      ;   {metadata('org/lwjgl/system/MemoryStack')}
+  0x000001ed6386b040: 8b4f 0881 | f9c8 4201 | 010f 859d | 0a00 008b | 4f18 488b | 7710 4863 | d948 8d5c | 33f5 4883 
+  0x000001ed6386b060: e3f8 488b | c348 2bc6 | 8be8 896f | 1885 ed0f | 8cc9 0900 | 0089 4c24 | 2048 897c | 2418 4889 
+  0x000001ed6386b080: 5424 1044 | 894c 240c | 4489 5424 | 084c 8904 | 244c 8bd3 | 41c6 0270 | 4d8b c249 | 83c0 0641 
+  0x000001ed6386b0a0: c642 0172 | 4983 c202 | 41c6 026f | 41c6 4201 | 6a41 c642 | 0265 41c6 | 4203 6341 | c600 7441 
+  0x000001ed6386b0c0: c640 0169 | 41c6 4002 | 6f41 c640 | 036e 4588 | 6004 448b | c54c 03c6 
+
+  0x000001ed6386b0d8: ;   {static_call}
+  0x000001ed6386b0d8: 418b d3e8 
+
+  0x000001ed6386b0dc: ; ImmutableOopMap {[0]=Oop [8]=NarrowOop [12]=NarrowOop [16]=Oop [24]=Oop }
+                      ;*invokestatic nglGetUniformLocation {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@25 (line 539)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b0dc: 00ca feff 
+
+  0x000001ed6386b0e0: ;   {other}
+  0x000001ed6386b0e0: 0f1f 8400 | 5009 0005 | 448b 5c24 | 2045 85db | 0f8c 3608 | 0000 4c8b | 5424 1841 | 8b6a 0c41 
+  0x000001ed6386b100: 3beb 0f8c | 6409 0000 | 4589 5a18 | 83f8 ff0f | 846f 0900 
+
+  0x000001ed6386b114: ;   {oop(a 'java/lang/Class'{0x0000000620832000} = 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed6386b114: 0049 ba00 | 2083 2006 | 0000 0045 | 8b52 7043 | 8b5c d420 | 4389 5cd4 | 1c43 c744 | d40c ffff 
+  0x000001ed6386b134: ffff 4789 | 64d4 1844 | 8b6c 240c 
+
+  0x000001ed6386b140: ; implicit exception: dispatches to 0x000001ed6386bc50
+  0x000001ed6386b140: 438b 54ec | 0c47 3b64 | d424 0f85 | 1c05 0000 
+
+  0x000001ed6386b150: ; implicit exception: dispatches to 0x000001ed6386b66c
+  0x000001ed6386b150: 458b 5cd4 | 0c45 85db | 0f86 0e05 | 0000 4183 | fb0c 0f86 | 0405 0000 | 4183 fb03 | 0f86 fa04 
+  0x000001ed6386b170: 0000 4183 | fb0f 0f86 | f004 0000 | c4c1 5b5a | 64d4 1085 | db0f 8e2e | 0600 0043 | c744 d418 
+  0x000001ed6386b190: 0100 0000 | c4c1 535a | 6cd4 184b | 8b7c d410 | 4c8b cfc4 | c17a 1121 | 83fb 010f | 8e58 0600 
+  0x000001ed6386b1b0: 00c4 c17a | 1169 0443 | c744 d418 | 0200 0000 | c4c1 5b5a | 64d4 2083 | fb02 0f8e | 0a06 0000 
+  0x000001ed6386b1d0: c4c1 7a11 | 6108 43c7 | 44d4 1803 | 0000 00c4 | c153 5a6c | d428 83fb | 030f 8e40 | 0600 0044 
+  0x000001ed6386b1f0: 8bf0 c4c1 | 7a11 690c | 43c7 44d4 | 1804 0000 | 004d 8b9f | 5004 0000 | 4b8d 04ec | 4b8d 0cd4 
+  0x000001ed6386b210: c4c1 796e 
+
+  0x000001ed6386b214: ;   {no_reloc}
+  0x000001ed6386b214: ca89 5c24 | 084c 63c3 | 4d8d 50fd | 498b d848 | c1fb 3f49 | c1fa 3f48 | c1eb 3e49 | 03d8 49c1 
+  0x000001ed6386b234: ea3e 4b8d | 7402 fd48 | c1fb 0248 | c1fe 024d | 8d50 ff49 | 8d68 fe49 | c1fa 3f48 | c1fd 3f49 
+  0x000001ed6386b254: c1ea 3e4f | 8d54 02ff | 48c1 ed3e | 4e8d 4405 | fe49 c1fa | 0249 c1f8 | 0249 3bf0 | 4c0f 4cc6 
+  0x000001ed6386b274: 4d3b c24d | 0f4c d04c | 3bd3 490f | 4cda 4883 | fb04 41ba | 0400 0000 | 490f 4fda | 448b d341 
+  0x000001ed6386b294: ; ImmutableOopMap {rcx=Oop rdx=NarrowOop rax=Oop r13=NarrowOop xmm1=NarrowOop [0]=Oop }
+                      ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.math.Matrix4d::store@35 (line 234)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@9 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+                      ;   {poll}
+  0x000001ed6386b294: ffca 4185 | 0341 83fa | 010f 8e1c | 0300 00c4 | c179 7eca | 43c7 44d4 | 180c 0000 | 00c4 c17b 
+  0x000001ed6386b2b4: 1044 d430 | c441 7b10 | 44d4 38c4 | c17b 1054 | d468 c4c1 | 7b10 5cd4 | 60c4 c17b | 1064 d458 
+  0x000001ed6386b2d4: c4c1 7b10 | 6cd4 50c4 | c17b 1074 | d448 c4c1 | 7b10 7cd4 | 40c5 f35a | c8c4 c17a | 1149 10c5 
+  0x000001ed6386b2f4: c35a ffc5 | fb5a c6c5 | d35a edc5 | f35a ccc5 | db5a e3c5 | e35a dac4 | c14b 5af0 | c4c1 7a11 
+  0x000001ed6386b314: 7114 c4c1 | 7a11 7918 | c4c1 7a11 | 411c c4c1 | 7a11 6920 | c4c1 7a11 | 4924 c4c1 | 7a11 6128 
+  0x000001ed6386b334: c4c1 7a11 | 592c 41bb | 0300 0000 | 498d 1cd4 | 468d 049d | 0000 0000 | 4963 d0c5 | db5a 64d3 
+  0x000001ed6386b354: 1044 3b44 | 2408 0f8d | 5004 0000 | c4c1 796e | c3c4 c179 | 6eca c5d3 | 5a6c d318 | 488d 2c95 
+  0x000001ed6386b374: 0000 0000 | 488d 342f | 458d 5001 | c4c1 796e | dac4 c179 | 7eca c4c1 | 797e db47 | 895c d418 
+  0x000001ed6386b394: ;   {no_reloc}
+  0x000001ed6386b394: 4c8b d6c4 | c17a 1122 | 458b d344 | 3b54 2408 | 0f8d 4704 | 0000 498b | f148 03f5 | c5db 5a64 
+  0x000001ed6386b3b4: d320 c5fa | 116e 0445 | 8d50 0241 | 8bea c4c1 | 797e ca43 | 896c d418 | 448b d544 | 3b54 2408 
+  0x000001ed6386b3d4: 0f8d ea03 | 0000 c5fa | 1166 08c5 | d35a 6cd3 | 2845 8d50 | 0341 8bea | c4c1 797e | ca43 896c 
+  0x000001ed6386b3f4: d418 448b | d544 3b54 | 2408 0f8d | 1504 0000 | c5fa 116e | 0c49 8b97 | 5004 0000 | 4183 c004 
+  0x000001ed6386b414: c4c1 797e | ca47 8944 | d418 c4c1 | 797e c341 
+
+  0x000001ed6386b424: ; ImmutableOopMap {r10=NarrowOop rcx=Oop rbx=Oop rax=Oop r13=NarrowOop [0]=Oop }
+                      ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.math.Matrix4d::store@35 (line 234)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@9 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+                      ;   {poll}
+  0x000001ed6386b424: ffc3 8502 | 4183 fb04 | 0f8c 12ff | ffff 4789 | 44d4 1c47 | 8964 d418 | 41c1 f804 | 418b d645 
+  0x000001ed6386b444: ;   {static_call}
+  0x000001ed6386b444: 33c9 90e8 
+
+  0x000001ed6386b448: ; ImmutableOopMap {[0]=Oop }
+                      ;*invokestatic nglUniformMatrix4fv {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20C::glUniformMatrix4fv@12 (line 382)
+                      ; - org.lwjgl.opengl.GL20::glUniformMatrix4fv@3 (line 431)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@46 (line 172)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@9 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b448: 94da feff 
+
+  0x000001ed6386b44c: ;   {other}
+  0x000001ed6386b44c: 0f1f 8400 | bc0c 0008 | 488b 2c24 
+
+  0x000001ed6386b458: ;   {static_call}
+  0x000001ed6386b458: 8b55 0ce8 
+
+  0x000001ed6386b45c: ; ImmutableOopMap {rbp=Oop }
+                      ;*invokestatic glBindVertexArray {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL30::glBindVertexArray@1 (line 1262)
+                      ; - org.verselstudios.model.RenderSystem::draw@57 (line 100)
+  0x000001ed6386b45c: 80ca feff 
+
+  0x000001ed6386b460: ;   {other}
+  0x000001ed6386b460: 0f1f 8400 | d00c 0009 | 448b 4510 | ba92 8800 
+
+  0x000001ed6386b470: ;   {static_call}
+  0x000001ed6386b470: 0066 90e8 
+
+  0x000001ed6386b474: ; ImmutableOopMap {rbp=Oop }
+                      ;*invokestatic glBindBuffer {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL15::glBindBuffer@2 (line 97)
+                      ; - org.verselstudios.model.RenderSystem::draw@66 (line 101)
+  0x000001ed6386b474: 68e6 feff 
+
+  0x000001ed6386b478: ;   {other}
+  0x000001ed6386b478: 0f1f 8400 | e80c 000a | 448b 5520 
+
+  0x000001ed6386b484: ; implicit exception: dispatches to 0x000001ed6386bc68
+  0x000001ed6386b484: 438b 54d4 | 1844 8b4d | 1445 33c0 
+
+  0x000001ed6386b490: ;   {static_call}
+  0x000001ed6386b490: 6666 90e8 
+
+  0x000001ed6386b494: ; ImmutableOopMap {}
+                      ;*invokestatic glDrawArrays {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glDrawArrays@3 (line 1204)
+                      ; - org.verselstudios.model.RenderSystem::draw@81 (line 102)
+  0x000001ed6386b494: 48ea feff 
+
+  0x000001ed6386b498: ;   {other}
+  0x000001ed6386b498: 0f1f 8400 | 080d 000b 
+
+  0x000001ed6386b4a0: ;   {static_call}
+  0x000001ed6386b4a0: 33d2 90e8 
+
+  0x000001ed6386b4a4: ; ImmutableOopMap {}
+                      ;*invokestatic glBindVertexArray {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL30::glBindVertexArray@1 (line 1262)
+                      ; - org.verselstudios.model.RenderSystem::draw@85 (line 103)
+  0x000001ed6386b4a4: 38ca feff 
+
+  0x000001ed6386b4a8: ;   {other}
+  0x000001ed6386b4a8: 0f1f 8400 | 180d 000c | 4883 c440 
+
+  0x000001ed6386b4b4: ;   {poll_return}
+  0x000001ed6386b4b4: 5d49 3ba7 | 4804 0000 | 0f87 de08 | 0000 c348 | 8954 2420 | 4489 4c24 | 144c 895c | 2418 4489 
+  0x000001ed6386b4d4: 5424 1048 | 893c 2448 | 8b6c 2408 | 4b8d 14c4 
+
+  0x000001ed6386b4e4: ;   {oop(a 'java/lang/ThreadLocal$SuppliedThreadLocal'{0x0000000620828b58})}
+  0x000001ed6386b4e4: 49b8 588b | 8220 0600 | 0000 448b 
+
+  0x000001ed6386b4f0: ;   {optimized virtual_call}
+  0x000001ed6386b4f0: c933 ffe8 
+
+  0x000001ed6386b4f4: ; ImmutableOopMap {rbp=Oop [0]=Oop [16]=NarrowOop [24]=Oop [32]=Oop }
+                      ;*invokevirtual getEntryAfterMiss {reexecute=0 rethrow=0 return_oop=1}
+                      ; - java.lang.ThreadLocal$ThreadLocalMap::getEntry@38 (line 504)
+                      ; - java.lang.ThreadLocal::get@12 (line 187)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b4f4: 8835 88ff 
+
+  0x000001ed6386b4f8: ;   {other}
+  0x000001ed6386b4f8: 0f1f 8400 | 680d 000d | 4885 c00f | 846f 0300 | 0048 896c | 2408 4c8b | 0424 448b | 5424 104c 
+  0x000001ed6386b518: 8b5c 2418 | 448b 4c24 | 1448 8b54 | 2420 498b | f8e9 8df6 | ffff 4889 | 5424 1844 | 895c 2410 
+  0x000001ed6386b538: 4489 4c24 | 0c44 8954 | 2408 498b | e849 8d14 
+
+  0x000001ed6386b548: ;   {oop(a 'java/lang/ThreadLocal$SuppliedThreadLocal'{0x0000000620828b58})}
+  0x000001ed6386b548: cc49 b858 | 8b82 2006 | 0000 0044 | 8bc8 33ff 
+
+  0x000001ed6386b558: ;   {optimized virtual_call}
+  0x000001ed6386b558: 6666 90e8 
+
+  0x000001ed6386b55c: ; ImmutableOopMap {rbp=Oop [0]=Oop [8]=NarrowOop [12]=NarrowOop [24]=Oop }
+                      ;*invokevirtual getEntryAfterMiss {reexecute=0 rethrow=0 return_oop=1}
+                      ; - java.lang.ThreadLocal$ThreadLocalMap::getEntry@38 (line 504)
+                      ; - java.lang.ThreadLocal::get@12 (line 187)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b55c: 2035 88ff 
+
+  0x000001ed6386b560: ;   {other}
+  0x000001ed6386b560: 0f1f 8400 | d00d 000e | 4885 c00f | 844b 0300 | 004c 8bc5 | 448b 5424 | 0844 8b4c | 240c 448b 
+  0x000001ed6386b580: 5c24 1048 | 8b54 2418 | e9a9 faff | ffba e4ff | ffff 48ff | 7424 0848 | 8f04 2444 | 8954 2408 
+  0x000001ed6386b5a0: 4489 4424 
+
+  0x000001ed6386b5a4: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b5a4: 0c66 90e8 
+
+  0x000001ed6386b5a8: ; ImmutableOopMap {rbp=NarrowOop [0]=Oop [8]=NarrowOop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.util.ArrayList::elementData@5 (line 411)
+                      ; - java.util.ArrayList::getLast@21 (line 456)
+                      ; - org.verselstudios.math.MatrixStack::matrix@4 (line 14)
+                      ; - org.verselstudios.model.RenderSystem::draw@37 (line 98)
+  0x000001ed6386b5a8: 5490 88ff 
+
+  0x000001ed6386b5ac: ;   {other}
+  0x000001ed6386b5ac: 0f1f 8400 | 1c0e 000f | 41bb 0100 | 0000 e9f2 | f8ff ff41 | bb01 0000 | 00c4 c179 | 7eca e971 
+  0x000001ed6386b5cc: fdff ffba | e4ff ffff | 48ff 7424 | 0848 8f04 | 244c 895c | 2408 4489 | 5424 1044 | 894c 2414 
+  0x000001ed6386b5ec: 4889 7c24 | 1844 8944 | 2420 894c 
+
+  0x000001ed6386b5f8: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b5f8: 2428 90e8 
+
+  0x000001ed6386b5fc: ; ImmutableOopMap {rbp=NarrowOop [0]=Oop [8]=Oop [16]=NarrowOop [24]=Oop [32]=NarrowOop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.lang.ThreadLocal$ThreadLocalMap::getEntry@18 (line 500)
+                      ; - java.lang.ThreadLocal::get@12 (line 187)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b5fc: 0090 88ff 
+
+  0x000001ed6386b600: ;   {other}
+  0x000001ed6386b600: 0f1f 8400 | 700e 0010 | 488b 7424 | 18ba beff | ffff 488b | 6c24 0889 | 0424 4889 | 7424 0844 
+  0x000001ed6386b620: 894c 2404 
+
+  0x000001ed6386b624: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b624: 6666 90e8 
+
+  0x000001ed6386b628: ; ImmutableOopMap {rbp=Oop [4]=NarrowOop [8]=Oop }
+                      ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.math.Matrix4d::store@4 (line 234)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@9 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b628: d48f 88ff 
+
+  0x000001ed6386b62c: ;   {other}
+  0x000001ed6386b62c: 0f1f 8400 | 9c0e 0011 | bae4 ffff | ff48 8b6c | 2408 4489 | 0c24 4489 | 5424 0444 | 895c 2408 
+  0x000001ed6386b64c: 4889 7c24 | 1089 4c24 | 0c89 5c24 | 1c89 4424 
+
+  0x000001ed6386b65c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b65c: 2066 90e8 
+
+  0x000001ed6386b660: ; ImmutableOopMap {rbp=Oop [0]=NarrowOop [4]=NarrowOop [12]=NarrowOop [16]=Oop [28]=NarrowOop }
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.lang.ThreadLocal$ThreadLocalMap::getEntry@18 (line 500)
+                      ; - java.lang.ThreadLocal::get@12 (line 187)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b660: 9c8f 88ff 
+
+  0x000001ed6386b664: ;   {other}
+  0x000001ed6386b664: 0f1f 8400 | d40e 0012 | babe ffff | ff48 8b2c | 2489 0424 | 4489 5424 
+
+  0x000001ed6386b67c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b67c: 0866 90e8 
+
+  0x000001ed6386b680: ; ImmutableOopMap {rbp=Oop [8]=NarrowOop [12]=NarrowOop }
+                      ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.math.Matrix4d::store@4 (line 234)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@9 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b680: 7c8f 88ff 
+
+  0x000001ed6386b684: ;   {other}
+  0x000001ed6386b684: 0f1f 8400 | f40e 0013 
+
+  0x000001ed6386b68c: ;   {oop(a 'java/lang/ThreadLocal$SuppliedThreadLocal'{0x0000000620828b58})}
+  0x000001ed6386b68c: 33ed 81f8 | 6b51 10c4 | 400f 94c5 | ba45 ffff | ff48 ff74 | 2408 488f | 0424 4c89 | 5c24 0844 
+  0x000001ed6386b6ac: 8954 2410 | 4489 4c24 | 1448 897c | 2418 4489 | 4424 2089 | 4c24 2489 
+
+  0x000001ed6386b6c4: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b6c4: 5c24 28e8 
+
+  0x000001ed6386b6c8: ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=NarrowOop [24]=Oop [32]=NarrowOop [40]=NarrowOop }
+                      ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.lang.ThreadLocal$ThreadLocalMap::getEntry@29 (line 501)
+                      ; - java.lang.ThreadLocal::get@12 (line 187)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b6c8: 348f 88ff 
+
+  0x000001ed6386b6cc: ;   {other}
+  0x000001ed6386b6cc: 0f1f 8400 | 3c0f 0014 | ba45 ffff | ff48 ff74 | 2408 488f | 0424 4489 | 4c24 0844 | 8954 240c 
+  0x000001ed6386b6ec: 4489 5c24 | 1048 897c | 2418 894c | 2414 8944 
+
+  0x000001ed6386b6fc: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b6fc: 2420 90e8 
+
+  0x000001ed6386b700: ; ImmutableOopMap {rbp=NarrowOop [0]=Oop [8]=NarrowOop [12]=NarrowOop [20]=NarrowOop [24]=Oop }
+                      ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.lang.ThreadLocal$ThreadLocalMap::getEntry@29 (line 501)
+                      ; - java.lang.ThreadLocal::get@12 (line 187)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b700: fc8e 88ff 
+
+  0x000001ed6386b704: ;   {other}
+  0x000001ed6386b704: 0f1f 8400 | 740f 0015 | 498b f6c5 | f97e d1c4 | c179 7ec9 | eb06 4533 | db45 33c0 | 33db eb15 
+  0x000001ed6386b724: 498b f6c5 | f97e d1c4 | c179 7ec9 | 8b5c 2424 | c4c1 797e | c0c5 f97e | e5eb 3a49 | 8bf6 c5f9 
+  0x000001ed6386b744: 7ed1 c4c1 | 797e c9c4 | c179 7ec0 | eb09 4533 | db41 b801 | 0000 00bb | 0100 0000 | eb13 498b 
+  0x000001ed6386b764: f6c5 f97e | d1c4 c179 | 7ec9 8b5c | 2428 448b | c5c5 f97e | edba 45ff | ffff 4489 | 1c24 4489 
+  0x000001ed6386b784: 5424 0489 | 4c24 1048 | 8974 2418 | 895c 2420 | 4489 4c24 | 2444 894c | 2428 4489 
+
+  0x000001ed6386b7a0: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b7a0: 4424 2ce8 
+
+  0x000001ed6386b7a4: ; ImmutableOopMap {[8]=Oop [24]=Oop [36]=NarrowOop [40]=NarrowOop }
+                      ;*if_icmplt {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.nio.Buffer::nextPutIndex@10 (line 735)
+                      ; - java.nio.DirectFloatBufferU::put@10 (line 362)
+                      ; - org.verselstudios.math.Matrix4d::store@22 (line 236)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@9 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b7a4: 588e 88ff 
+
+  0x000001ed6386b7a8: ;   {other}
+  0x000001ed6386b7a8: 0f1f 8400 | 1810 0016 | 418b c68b | 5c24 08eb | 0645 33c0 | 4533 db45 | 33c9 eb24 | 418b c6c4 
+  0x000001ed6386b7c8: c179 7eca | 8b5c 2408 | c4c1 797e | c344 8bc5 | eb09 4533 | db41 b802 | 0000 0044 | 8b4c 2424 
+  0x000001ed6386b7e8: c5f9 7ee5 | 418b c9eb | 4f41 8bc6 | c4c1 797e | ca8b 5c24 | 08c4 c179 | 7ec3 c4c1 | 797e d8eb 
+  0x000001ed6386b808: 0945 33db | 41b8 0100 | 0000 b901 | 0000 00eb | 2341 8bc6 | c4c1 797e | ca8b 5c24 | 08c4 c179 
+  0x000001ed6386b828: 7ec3 448b | c5eb 0945 | 33db 41b8 | 0300 0000 | 8b4c 2428 | c5f9 7eed | ba45 ffff | ff89 4424 
+  0x000001ed6386b848: 0844 896c | 240c 4489 | 5c24 1489 | 4c24 1844 | 8954 241c | 4489 5424 | 2044 8944 | 2424 895c 
+  0x000001ed6386b868: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b868: 2428 90e8 
+
+  0x000001ed6386b86c: ; ImmutableOopMap {[0]=Oop [12]=NarrowOop [28]=NarrowOop [32]=NarrowOop }
+                      ;*if_icmplt {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.nio.Buffer::nextPutIndex@10 (line 735)
+                      ; - java.nio.DirectFloatBufferU::put@10 (line 362)
+                      ; - org.verselstudios.math.Matrix4d::store@22 (line 236)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@9 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b86c: 908d 88ff 
+
+  0x000001ed6386b870: ;   {other}
+  0x000001ed6386b870: 0f1f 8400 | e010 0017 
+
+  0x000001ed6386b878: ;   {oop(a 'java/lang/ThreadLocal$SuppliedThreadLocal'{0x0000000620828b58})}
+  0x000001ed6386b878: 48ba 588b | 8220 0600 | 0000 4c8b 
+
+  0x000001ed6386b884: ;   {optimized virtual_call}
+  0x000001ed6386b884: 0424 90e8 
+
+  0x000001ed6386b888: ; ImmutableOopMap {rbp=Oop [0]=Oop [16]=NarrowOop [24]=Oop [32]=Oop }
+                      ;*invokevirtual setInitialValue {reexecute=0 rethrow=0 return_oop=1}
+                      ; - java.lang.ThreadLocal::get@31 (line 194)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b888: f431 88ff 
+
+  0x000001ed6386b88c: ;   {other}
+  0x000001ed6386b88c: 0f1f 8400 | fc10 0018 | 4889 6c24 | 0848 8b0c | 2444 8b54 | 2410 4c8b | 5c24 1844 | 8b4c 2414 
+  0x000001ed6386b8ac: 488b 5424 | 2048 8bd8 | 488b f9e9 | 0af3 ffff 
+
+  0x000001ed6386b8bc: ;   {oop(a 'java/lang/ThreadLocal$SuppliedThreadLocal'{0x0000000620828b58})}
+  0x000001ed6386b8bc: 48ba 588b | 8220 0600 | 0000 4c8b 
+
+  0x000001ed6386b8c8: ;   {optimized virtual_call}
+  0x000001ed6386b8c8: 0424 90e8 
+
+  0x000001ed6386b8cc: ; ImmutableOopMap {rbp=Oop [8]=NarrowOop [12]=NarrowOop [24]=Oop }
+                      ;*invokevirtual setInitialValue {reexecute=0 rethrow=0 return_oop=1}
+                      ; - java.lang.ThreadLocal::get@31 (line 194)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b8cc: b031 88ff 
+
+  0x000001ed6386b8d0: ;   {other}
+  0x000001ed6386b8d0: 0f1f 8400 | 4011 0019 | 4c8b c544 | 8b54 2408 | 448b 4c24 | 0c44 8b5c | 2410 488b | 5424 1848 
+  0x000001ed6386b8f0: 8bf8 e949 | f7ff ffba | 45ff ffff | 488b 6c24 | 084c 8b54 | 2418 4c89 | 1424 448b | 4424 1044 
+  0x000001ed6386b910: 8944 2408 | 8944 240c | 4489 5c24 
+
+  0x000001ed6386b91c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b91c: 1c66 90e8 
+
+  0x000001ed6386b920: ; ImmutableOopMap {rbp=Oop [0]=Oop [8]=NarrowOop [40]=Oop }
+                      ;*iflt {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.system.MemoryStack::checkPointer@1 (line 284)
+                      ; - org.lwjgl.system.MemoryStack::setPointer@8 (line 277)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@32 (line 541)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b920: dc8c 88ff 
+
+  0x000001ed6386b924: ;   {other}
+  0x000001ed6386b924: 0f1f 8400 | 9411 001a | ba45 ffff | ff48 8b2c | 2444 8b44 | 240c 4489 | 0424 448b | 5424 0844 
+  0x000001ed6386b944: 8954 2404 | 8944 2408 | 4c8b 5424 | 184c 8954 | 2410 4489 
+
+  0x000001ed6386b958: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b958: 5c24 18e8 
+
+  0x000001ed6386b95c: ; ImmutableOopMap {rbp=Oop [0]=NarrowOop [4]=NarrowOop [16]=Oop }
+                      ;*iflt {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.system.MemoryStack::checkPointer@1 (line 284)
+                      ; - org.lwjgl.system.MemoryStack::setPointer@8 (line 277)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@32 (line 541)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386b95c: a08c 88ff 
+
+  0x000001ed6386b960: ;   {other}
+  0x000001ed6386b960: 0f1f 8400 | d011 001b | ba45 ffff 
+
+  0x000001ed6386b96c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b96c: ff66 90e8 
+
+  0x000001ed6386b970: ; ImmutableOopMap {[8]=Oop }
+                      ;*if_icmpeq {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.model.RenderSystem::draw@5 (line 94)
+  0x000001ed6386b970: 8c8c 88ff 
+
+  0x000001ed6386b974: ;   {other}
+  0x000001ed6386b974: 0f1f 8400 | e411 001c | ba45 ffff | ff48 8b6c | 2408 4489 | 1424 4489 
+
+  0x000001ed6386b98c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b98c: 4424 04e8 
+
+  0x000001ed6386b990: ; ImmutableOopMap {rbp=Oop [0]=NarrowOop }
+                      ;*ifge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.util.ArrayList::getLast@8 (line 453)
+                      ; - org.verselstudios.math.MatrixStack::matrix@4 (line 14)
+                      ; - org.verselstudios.model.RenderSystem::draw@37 (line 98)
+  0x000001ed6386b990: 6c8c 88ff 
+
+  0x000001ed6386b994: ;   {other}
+  0x000001ed6386b994: 0f1f 8400 | 0412 001d | ba45 ffff | ff48 ff74 | 2408 488f | 0424 4c89 | 5c24 0844 | 8954 2410 
+  0x000001ed6386b9b4: 4489 4c24 | 1448 895c | 2418 4489 
+
+  0x000001ed6386b9c0: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b9c0: 4424 20e8 
+
+  0x000001ed6386b9c4: ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=NarrowOop [24]=Oop }
+                      ;*ifge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.system.MemoryStack::nmalloc@46 (line 320)
+                      ; - org.lwjgl.system.MemoryStack::nASCII@9 (line 762)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@12 (line 537)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b9c4: 388c 88ff 
+
+  0x000001ed6386b9c8: ;   {other}
+  0x000001ed6386b9c8: 0f1f 8400 | 3812 001e | ba45 ffff | ff4c 8b44 | 2408 4c89 | 0424 4c8b | 4424 184c | 8944 2408 
+  0x000001ed6386b9e8: 8944 2414 | 4489 5c24 
+
+  0x000001ed6386b9f0: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386b9f0: 2466 90e8 
+
+  0x000001ed6386b9f4: ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=NarrowOop [40]=Oop }
+                      ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.system.MemoryStack::checkPointer@9 (line 284)
+                      ; - org.lwjgl.system.MemoryStack::setPointer@8 (line 277)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@32 (line 541)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386b9f4: 088c 88ff 
+
+  0x000001ed6386b9f8: ;   {other}
+  0x000001ed6386b9f8: 0f1f 8400 | 6812 001f | ba45 ffff | ff89 0424 
+
+  0x000001ed6386ba08: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386ba08: 6666 90e8 
+
+  0x000001ed6386ba0c: ; ImmutableOopMap {[8]=Oop }
+                      ;*if_icmpne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.shader.ShaderProgram::setUniformMatrix@2 (line 166)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@9 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386ba0c: f08b 88ff 
+
+  0x000001ed6386ba10: ;   {other}
+  0x000001ed6386ba10: 0f1f 8400 | 8012 0020 | 4533 dbbb | 0200 0000 | 41b8 0200 | 0000 e90e | fdff ff45 | 33db bb03 
+  0x000001ed6386ba30: 0000 0041 | b803 0000 | 00e9 37fd | ffff ba45 | ffff ff4c | 8904 2444 | 894c 2408 | 4489 5424 
+  0x000001ed6386ba50: 0c44 895c | 2410 4889 | 7c24 1889 
+
+  0x000001ed6386ba5c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386ba5c: 4c24 14e8 
+
+  0x000001ed6386ba60: ; ImmutableOopMap {[0]=Oop [8]=NarrowOop [12]=NarrowOop [24]=Oop }
+                      ;*ifge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.system.MemoryStack::nmalloc@46 (line 320)
+                      ; - org.lwjgl.system.MemoryStack::nASCII@9 (line 762)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@12 (line 537)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386ba60: 9c8b 88ff 
+
+  0x000001ed6386ba64: ;   {other}
+  0x000001ed6386ba64: 0f1f 8400 | d412 0021 | ba45 ffff | ff89 4424 
+
+  0x000001ed6386ba74: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386ba74: 1066 90e8 
+
+  0x000001ed6386ba78: ; ImmutableOopMap {[0]=Oop [8]=NarrowOop [12]=NarrowOop [24]=Oop }
+                      ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.lwjgl.system.MemoryStack::checkPointer@9 (line 284)
+                      ; - org.lwjgl.system.MemoryStack::setPointer@8 (line 277)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@32 (line 541)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386ba78: 848b 88ff 
+
+  0x000001ed6386ba7c: ;   {other}
+  0x000001ed6386ba7c: 0f1f 8400 | ec12 0022 | ba45 ffff | ff48 8b2c | 2489 0424 
+
+  0x000001ed6386ba90: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386ba90: 6666 90e8 
+
+  0x000001ed6386ba94: ; ImmutableOopMap {rbp=Oop }
+                      ;*if_icmpne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.shader.ShaderProgram::setUniformMatrix@2 (line 166)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@9 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386ba94: 688b 88ff 
+
+  0x000001ed6386ba98: ;   {other}
+  0x000001ed6386ba98: 0f1f 8400 | 0813 0023 | bade ffff | ff48 ff74 | 2408 488f | 0424 4489 
+
+  0x000001ed6386bab0: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bab0: 5424 08e8 
+
+  0x000001ed6386bab4: ; ImmutableOopMap {rbp=NarrowOop [0]=Oop [8]=NarrowOop }
+                      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.math.MatrixStack::matrix@7 (line 14)
+                      ; - org.verselstudios.model.RenderSystem::draw@37 (line 98)
+  0x000001ed6386bab4: 488b 88ff 
+
+  0x000001ed6386bab8: ;   {other}
+  0x000001ed6386bab8: 0f1f 8400 | 2813 0024 | bade ffff | ff48 8b6c | 2408 4c89 | 1c24 4489 | 5424 0844 | 894c 240c 
+  0x000001ed6386bad8: 4889 5c24 
+
+  0x000001ed6386badc: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386badc: 1066 90e8 
+
+  0x000001ed6386bae0: ; ImmutableOopMap {rbp=Oop [0]=Oop [8]=NarrowOop [16]=Oop }
+                      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.system.MemoryStack::stackGet@6 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386bae0: 1c8b 88ff 
+
+  0x000001ed6386bae4: ;   {other}
+  0x000001ed6386bae4: 0f1f 8400 | 5413 0025 | bade ffff | ff49 8be8 | 4489 0c24 | 4489 5424 | 0444 895c | 2408 4889 
+  0x000001ed6386bb04: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bb04: 7c24 10e8 
+
+  0x000001ed6386bb08: ; ImmutableOopMap {rbp=Oop [0]=NarrowOop [4]=NarrowOop [16]=Oop }
+                      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.system.MemoryStack::stackGet@6 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386bb08: f48a 88ff 
+
+  0x000001ed6386bb0c: ;   {other}
+  0x000001ed6386bb0c: 0f1f 8400 | 7c13 0026 | baf6 ffff 
+
+  0x000001ed6386bb18: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bb18: ff66 90e8 
+
+  0x000001ed6386bb1c: ; ImmutableOopMap {}
+                      ;*invokevirtual use {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.model.RenderSystem::draw@29 (line 97)
+  0x000001ed6386bb1c: e08a 88ff 
+
+  0x000001ed6386bb20: ;   {other}
+  0x000001ed6386bb20: 0f1f 8400 | 9013 0027 | baf6 ffff 
+
+  0x000001ed6386bb2c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bb2c: ff66 90e8 
+
+  0x000001ed6386bb30: ; ImmutableOopMap {}
+                      ;*invokevirtual matrix {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.model.RenderSystem::draw@37 (line 98)
+  0x000001ed6386bb30: cc8a 88ff 
+
+  0x000001ed6386bb34: ;   {other}
+  0x000001ed6386bb34: 0f1f 8400 | a413 0028 | baf6 ffff 
+
+  0x000001ed6386bb40: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bb40: ff66 90e8 
+
+  0x000001ed6386bb44: ; ImmutableOopMap {}
+                      ;*invokevirtual getLast {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.math.MatrixStack::matrix@4 (line 14)
+                      ; - org.verselstudios.model.RenderSystem::draw@37 (line 98)
+  0x000001ed6386bb44: b88a 88ff 
+
+  0x000001ed6386bb48: ;   {other}
+  0x000001ed6386bb48: 0f1f 8400 | b813 0029 | baf6 ffff | ff41 8be8 
+
+  0x000001ed6386bb58: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bb58: 6666 90e8 
+
+  0x000001ed6386bb5c: ; ImmutableOopMap {}
+                      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.util.ArrayList::elementData@5 (line 411)
+                      ; - java.util.ArrayList::getLast@21 (line 456)
+                      ; - org.verselstudios.math.MatrixStack::matrix@4 (line 14)
+                      ; - org.verselstudios.model.RenderSystem::draw@37 (line 98)
+  0x000001ed6386bb5c: a08a 88ff 
+
+  0x000001ed6386bb60: ;   {other}
+  0x000001ed6386bb60: 0f1f 8400 | d013 002a | baf4 ffff | ff48 8b6c | 2408 4489 
+
+  0x000001ed6386bb74: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bb74: 1424 90e8 
+
+  0x000001ed6386bb78: ; ImmutableOopMap {rbp=Oop [0]=NarrowOop }
+                      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.math.MatrixStack::matrix@7 (line 14)
+                      ; - org.verselstudios.model.RenderSystem::draw@37 (line 98)
+  0x000001ed6386bb78: 848a 88ff 
+
+  0x000001ed6386bb7c: ;   {other}
+  0x000001ed6386bb7c: 0f1f 8400 | ec13 002b | baf6 ffff | ff49 8beb 
+
+  0x000001ed6386bb8c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bb8c: 6666 90e8 
+
+  0x000001ed6386bb90: ; ImmutableOopMap {rbp=Oop }
+                      ;*invokevirtual setModelViewMatrix {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386bb90: 6c8a 88ff 
+
+  0x000001ed6386bb94: ;   {other}
+  0x000001ed6386bb94: 0f1f 8400 | 0414 002c | baf6 ffff | ff48 8b6c | 2408 4c89 | 1c24 4489 | 5424 0844 | 894c 240c 
+  0x000001ed6386bbb4: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bbb4: 6666 90e8 
+
+  0x000001ed6386bbb8: ; ImmutableOopMap {rbp=Oop [0]=Oop [8]=NarrowOop }
+                      ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.lang.ThreadLocal$ThreadLocalMap::getEntry@8 (line 499)
+                      ; - java.lang.ThreadLocal::get@12 (line 187)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386bbb8: 448a 88ff 
+
+  0x000001ed6386bbbc: ;   {other}
+  0x000001ed6386bbbc: 0f1f 8400 | 2c14 002d | baf4 ffff | ff48 8b6c | 2408 4c89 | 1c24 4489 | 5424 0844 | 894c 240c 
+  0x000001ed6386bbdc: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bbdc: 6666 90e8 
+
+  0x000001ed6386bbe0: ; ImmutableOopMap {rbp=Oop [0]=Oop [8]=NarrowOop }
+                      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.system.MemoryStack::stackGet@6 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386bbe0: 1c8a 88ff 
+
+  0x000001ed6386bbe4: ;   {other}
+  0x000001ed6386bbe4: 0f1f 8400 | 5414 002e | baf6 ffff | ff41 8be9 
+
+  0x000001ed6386bbf4: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bbf4: 6666 90e8 
+
+  0x000001ed6386bbf8: ; ImmutableOopMap {rbp=NarrowOop }
+                      ;*invokevirtual setProjectionMatrix {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386bbf8: 048a 88ff 
+
+  0x000001ed6386bbfc: ;   {other}
+  0x000001ed6386bbfc: 0f1f 8400 | 6c14 002f | baf6 ffff | ff48 8b6c | 2408 4489 | 0c24 4489 | 5424 0444 | 895c 2408 
+  0x000001ed6386bc1c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bc1c: 6666 90e8 
+
+  0x000001ed6386bc20: ; ImmutableOopMap {rbp=Oop [0]=NarrowOop [4]=NarrowOop }
+                      ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.lang.ThreadLocal$ThreadLocalMap::getEntry@8 (line 499)
+                      ; - java.lang.ThreadLocal::get@12 (line 187)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386bc20: dc89 88ff 
+
+  0x000001ed6386bc24: ;   {other}
+  0x000001ed6386bc24: 0f1f 8400 | 9414 0030 | baf4 ffff | ff49 8be8 | 4489 0c24 | 4489 5424 | 0444 895c 
+
+  0x000001ed6386bc40: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bc40: 2408 90e8 
+
+  0x000001ed6386bc44: ; ImmutableOopMap {rbp=Oop [0]=NarrowOop [4]=NarrowOop }
+                      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.system.MemoryStack::stackGet@6 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386bc44: b889 88ff 
+
+  0x000001ed6386bc48: ;   {other}
+  0x000001ed6386bc48: 0f1f 8400 | b814 0031 | baf6 ffff | ff41 8bea 
+
+  0x000001ed6386bc58: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bc58: 6666 90e8 
+
+  0x000001ed6386bc5c: ; ImmutableOopMap {rbp=NarrowOop }
+                      ;*invokevirtual store {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformMatrix@31 (line 170)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@9 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386bc5c: a089 88ff 
+
+  0x000001ed6386bc60: ;   {other}
+  0x000001ed6386bc60: 0f1f 8400 | d014 0032 | baf6 ffff 
+
+  0x000001ed6386bc6c: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bc6c: ff66 90e8 
+
+  0x000001ed6386bc70: ; ImmutableOopMap {}
+                      ;*getfield type {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.model.RenderSystem::draw@73 (line 102)
+  0x000001ed6386bc70: 8c89 88ff 
+
+  0x000001ed6386bc74: ;   {other}
+  0x000001ed6386bc74: 0f1f 8400 | e414 0033 | ba45 ffff | ff48 8b6c | 2408 4c89 | 1c24 4489 | 5424 0844 | 894c 240c 
+  0x000001ed6386bc94: 4489 4424 
+
+  0x000001ed6386bc98: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bc98: 1c66 90e8 
+
+  0x000001ed6386bc9c: ; ImmutableOopMap {rbp=Oop [0]=Oop [8]=NarrowOop [16]=Oop [28]=NarrowOop }
+                      ;*ifnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.lang.ThreadLocal::get@7 (line 186)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386bc9c: 6089 88ff 
+
+  0x000001ed6386bca0: ;   {other}
+  0x000001ed6386bca0: 0f1f 8400 | 1015 0034 | ba45 ffff | ff48 8b6c | 2408 8904 | 2444 894c 
+
+  0x000001ed6386bcb8: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bcb8: 2404 90e8 
+
+  0x000001ed6386bcbc: ; ImmutableOopMap {rbp=Oop [4]=NarrowOop [24]=Oop }
+                      ;*ifnonnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.shader.ShaderProgram::setUniformMatrix@9 (line 167)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@9 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386bcbc: 4089 88ff 
+
+  0x000001ed6386bcc0: ;   {other}
+  0x000001ed6386bcc0: 0f1f 8400 | 3015 0035 | ba45 ffff | ff48 8b6c | 2408 4489 | 0c24 4489 | 5424 0444 | 895c 2408 
+  0x000001ed6386bce0: 4889 7c24 | 1089 4c24 
+
+  0x000001ed6386bce8: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bce8: 1866 90e8 
+
+  0x000001ed6386bcec: ; ImmutableOopMap {rbp=Oop [0]=NarrowOop [4]=NarrowOop [16]=Oop [24]=NarrowOop }
+                      ;*ifnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.lang.ThreadLocal::get@7 (line 186)
+                      ; - java.lang.ThreadLocal::get@4 (line 172)
+                      ; - org.lwjgl.system.MemoryStack::stackGet@3 (line 899)
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@0 (line 535)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386bcec: 1089 88ff 
+
+  0x000001ed6386bcf0: ;   {other}
+  0x000001ed6386bcf0: 0f1f 8400 | 6015 0036 | ba45 ffff | ff48 8b2c | 2489 0424 | 4489 5424 
+
+  0x000001ed6386bd08: ;   {runtime_call UncommonTrapBlob}
+  0x000001ed6386bd08: 0866 90e8 
+
+  0x000001ed6386bd0c: ; ImmutableOopMap {rbp=Oop [8]=NarrowOop [12]=NarrowOop }
+                      ;*ifnonnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.shader.ShaderProgram::setUniformMatrix@9 (line 167)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@9 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386bd0c: f088 88ff 
+
+  0x000001ed6386bd10: ;   {other}
+  0x000001ed6386bd10: 0f1f 8400 | 8015 0037 | eb4d eb77 | eb49 eb73 | eb45 eb6f | 488b d0eb | 6d48 8bd0 | eb68 488b 
+  0x000001ed6386bd30: d0eb 6348 | 8bd0 eb5e | 488b d0eb | 5948 8bd0 | eb54 488b | d0eb 4f48 | 8be8 488b | 5424 1844 
+  0x000001ed6386bd50: 8b44 2420 
+
+  0x000001ed6386bd54: ;   {optimized virtual_call}
+  0x000001ed6386bd54: 6666 90e8 
+
+  0x000001ed6386bd58: ; ImmutableOopMap {rbp=Oop [0]=Oop [12]=NarrowOop [16]=Oop }
+                      ;*invokevirtual setPointer {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@42 (line 541)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setProjectionMatrix@4 (line 180)
+                      ; - org.verselstudios.model.RenderSystem::draw@50 (line 99)
+  0x000001ed6386bd58: 242d 88ff 
+
+  0x000001ed6386bd5c: ;   {other}
+  0x000001ed6386bd5c: 0f1f 8400 | cc15 0038 | 488b c548 | 8bd0 eb2a | 488b e848 | 8b54 2428 | 448b 4424 | 144c 8b54 
+  0x000001ed6386bd7c: 2408 4c89 
+
+  0x000001ed6386bd80: ;   {optimized virtual_call}
+  0x000001ed6386bd80: 1424 90e8 
+
+  0x000001ed6386bd84: ; ImmutableOopMap {rbp=Oop [0]=Oop [24]=Oop [32]=Oop }
+                      ;*invokevirtual setPointer {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20C::glGetUniformLocation@42 (line 541)
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.shader.ShaderProgram::setModelViewMatrix@4 (line 176)
+                      ; - org.verselstudios.model.RenderSystem::draw@40 (line 98)
+  0x000001ed6386bd84: f82c 88ff 
+
+  0x000001ed6386bd88: ;   {other}
+  0x000001ed6386bd88: 0f1f 8400 | f815 0039 | 488b c548 | 8bd0 4883 
+
+  0x000001ed6386bd98: ;   {runtime_call _rethrow_Java}
+  0x000001ed6386bd98: c440 5de9 | 601c 95ff 
+
+  0x000001ed6386bda0: ;   {internal_word}
+  0x000001ed6386bda0: 49ba b5b4 | 8663 ed01 | 0000 4d89 | 9760 0400 
+
+  0x000001ed6386bdb0: ;   {runtime_call SafepointBlob}
+  0x000001ed6386bdb0: 00e9 4a99 
+
+  0x000001ed6386bdb4: ;   {runtime_call StubRoutines (final stubs)}
+  0x000001ed6386bdb4: 88ff e8a5 | 8f86 ffe9 | 1aed ffff 
+[Stub Code]
+  0x000001ed6386bdc0: ;   {no_reloc}
+  0x000001ed6386bdc0: 48bb 0000 | 0000 0000 
+
+  0x000001ed6386bdc8: ;   {runtime_call nmethod}
+  0x000001ed6386bdc8: 0000 e9fb 
+
+  0x000001ed6386bdcc: ;   {static_stub}
+  0x000001ed6386bdcc: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001ed6386bdd8: ;   {runtime_call nmethod}
+  0x000001ed6386bdd8: 00e9 fbff 
+
+  0x000001ed6386bddc: ;   {static_stub}
+  0x000001ed6386bddc: ffff 48bb | 0000 0000 | 0000 0000 
+
+  0x000001ed6386bde8: ;   {runtime_call nmethod}
+  0x000001ed6386bde8: e9fb ffff 
+
+  0x000001ed6386bdec: ;   {static_stub}
+  0x000001ed6386bdec: ff48 bb00 | 0000 0000 
+
+  0x000001ed6386bdf4: ;   {runtime_call nmethod}
+  0x000001ed6386bdf4: 0000 00e9 | fbff ffff 
+
+  0x000001ed6386bdfc: ;   {static_stub}
+  0x000001ed6386bdfc: 48bb 0000 | 0000 0000 
+
+  0x000001ed6386be04: ;   {runtime_call nmethod}
+  0x000001ed6386be04: 0000 e9fb 
+
+  0x000001ed6386be08: ;   {static_stub}
+  0x000001ed6386be08: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001ed6386be14: ;   {runtime_call nmethod}
+  0x000001ed6386be14: 00e9 fbff 
+
+  0x000001ed6386be18: ;   {static_stub}
+  0x000001ed6386be18: ffff 48bb | 0000 0000 | 0000 0000 
+
+  0x000001ed6386be24: ;   {runtime_call nmethod}
+  0x000001ed6386be24: e9fb ffff 
+
+  0x000001ed6386be28: ;   {static_stub}
+  0x000001ed6386be28: ff48 bb00 | 0000 0000 
+
+  0x000001ed6386be30: ;   {runtime_call nmethod}
+  0x000001ed6386be30: 0000 00e9 | fbff ffff 
+
+  0x000001ed6386be38: ;   {static_stub}
+  0x000001ed6386be38: 48bb 0000 | 0000 0000 
+
+  0x000001ed6386be40: ;   {runtime_call nmethod}
+  0x000001ed6386be40: 0000 e9fb 
+
+  0x000001ed6386be44: ;   {static_stub}
+  0x000001ed6386be44: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001ed6386be50: ;   {runtime_call nmethod}
+  0x000001ed6386be50: 00e9 fbff 
+
+  0x000001ed6386be54: ;   {runtime_call ExceptionBlob}
+  0x000001ed6386be54: ffff e925 | 0995 ffe8 | 0000 0000 | 4883 2c24 
+
+  0x000001ed6386be64: ;   {runtime_call DeoptimizationBlob}
+  0x000001ed6386be64: 05e9 368b | 88ff f4f4 | f4f4 f4f4 
+[/MachCode]
+
+
+Compiled method (c1) 20435 1493       3       org.verselstudios.model.verselModel.VerselModel::draw (48 bytes)
+ total in heap  [0x000001ed5bec1090,0x000001ed5bec2268] = 4568
+ relocation     [0x000001ed5bec11f0,0x000001ed5bec1320] = 304
+ main code      [0x000001ed5bec1320,0x000001ed5bec1da8] = 2696
+ stub code      [0x000001ed5bec1da8,0x000001ed5bec1e68] = 192
+ oops           [0x000001ed5bec1e68,0x000001ed5bec1e80] = 24
+ metadata       [0x000001ed5bec1e80,0x000001ed5bec1f08] = 136
+ scopes data    [0x000001ed5bec1f08,0x000001ed5bec2088] = 384
+ scopes pcs     [0x000001ed5bec2088,0x000001ed5bec2238] = 432
+ dependencies   [0x000001ed5bec2238,0x000001ed5bec2248] = 16
+ nul chk table  [0x000001ed5bec2248,0x000001ed5bec2268] = 32
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel'
+  # this:     rdx:rdx   = 'org/verselstudios/model/verselModel/VerselModel'
+  # parm0:    r8:r8     = 'org/verselstudios/math/MatrixStack'
+  #           [sp+0xd0]  (sp of caller)
+  0x000001ed5bec1320: 448b 5208 | 49bb 0000 | 0000 ed01 | 0000 4d03 | d34c 3bd0 
+
+  0x000001ed5bec1334: ;   {runtime_call ic_miss_stub}
+  0x000001ed5bec1334: 0f85 46d4 | 2207 660f | 1f44 0000 
+[Verified Entry Point]
+  0x000001ed5bec1340: 8984 2400 | 80ff ff55 | 4881 ecc0 | 0000 0090 | 4181 7f20 | 0100 0000 
+
+  0x000001ed5bec1358: ;   {runtime_call StubRoutines (final stubs)}
+  0x000001ed5bec1358: 7405 e801 | 3a21 0748 | 8994 2490 
+
+  0x000001ed5bec1364: ;   {metadata(method data for {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec1364: 0000 0048 | be88 6c79 | 79ed 0100 | 008b becc | 0000 0083 | c702 89be | cc00 0000 | 81e7 fe07 
+  0x000001ed5bec1384: 0000 85ff | 0f84 1c08 | 0000 8b72 | 1c48 c1e6 | 0348 85f6 
+
+  0x000001ed5bec1398: ;   {metadata(method data for {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec1398: 48be 886c | 7979 ed01 | 0000 48c7 | c710 0100 | 0075 0748 | c7c7 2001 | 0000 488b | 1c3e 488d 
+  0x000001ed5bec13b8: 5b01 4889 | 1c3e 4c89 | 8424 9800 | 0000 0f85 | 2800 0000 
+
+  0x000001ed5bec13cc: ;   {metadata(method data for {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec13cc: 488b f248 | bf88 6c79 | 79ed 0100 | 0048 8387 | 3001 0000 | 0148 8bf2 
+
+  0x000001ed5bec13e4: ;   {optimized virtual_call}
+  0x000001ed5bec13e4: 488b d6e8 
+
+  0x000001ed5bec13e8: ; ImmutableOopMap {[144]=Oop [152]=Oop }
+                      ;*invokevirtual makeSystems {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@8 (line 116)
+  0x000001ed5bec13e8: 94d6 2207 
+
+  0x000001ed5bec13ec: ;   {other}
+  0x000001ed5bec13ec: 0f1f 8400 | 5c03 0000 
+
+  0x000001ed5bec13f4: ;   {metadata(method data for {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec13f4: 48be 886c | 7979 ed01 | 0000 4883 | 8668 0100 
+
+  0x000001ed5bec1404: ;   {metadata(method data for {method} {0x000001ed7961dc08} 'glEnable' '(I)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec1404: 0001 48be | 00a0 7879 | ed01 0000 | 8bbe cc00 | 0000 83c7 | 0289 becc | 0000 0081 | e7fe ff1f 
+  0x000001ed5bec1424: 0085 ff0f | 849e 0700 
+
+  0x000001ed5bec142c: ;   {metadata(method data for {method} {0x000001ed7961dc08} 'glEnable' '(I)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec142c: 0048 be00 | a078 79ed | 0100 0048 | 8386 1001 | 0000 01ba | 710b 0000 
+
+  0x000001ed5bec1444: ;   {static_call}
+  0x000001ed5bec1444: 6666 90e8 
+
+  0x000001ed5bec1448: ; ImmutableOopMap {[144]=Oop [152]=Oop }
+                      ;*invokestatic glEnable {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glEnable@1 (line 655)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@14 (line 117)
+  0x000001ed5bec1448: 946e 9907 
+
+  0x000001ed5bec144c: ;   {other}
+  0x000001ed5bec144c: 0f1f 8400 | bc03 0001 
+
+  0x000001ed5bec1454: ;   {oop(a 'org/verselstudios/shader/ShaderProgram'{0x0000000620800600})}
+  0x000001ed5bec1454: 48be 0006 | 8020 0600 | 0000 4889 | b424 a000 | 0000 488b 
+
+  0x000001ed5bec1468: ;   {metadata(method data for {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec1468: d648 bf88 | 6c79 79ed | 0100 008b | 5208 49ba | 0000 0000 | ed01 0000 | 4903 d248 | 3b97 8801 
+  0x000001ed5bec1488: 0000 750d | 4883 8790 | 0100 0001 | e960 0000 | 0048 3b97 | 9801 0000 | 750d 4883 | 87a0 0100 
+  0x000001ed5bec14a8: 0001 e94a | 0000 0048 | 83bf 8801 | 0000 0075 | 1748 8997 | 8801 0000 | 48c7 8790 | 0100 0001 
+  0x000001ed5bec14c8: 0000 00e9 | 2900 0000 | 4883 bf98 | 0100 0000 | 7517 4889 | 9798 0100 | 0048 c787 | a001 0000 
+  0x000001ed5bec14e8: 0100 0000 | e908 0000 | 0048 8387 | 7801 0000 
+
+  0x000001ed5bec14f8: ;   {metadata(method data for {method} {0x000001ed796f6118} 'use' '()V' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec14f8: 0148 ba68 | 9978 79ed | 0100 008b | bacc 0000 | 0083 c702 | 89ba cc00 | 0000 81e7 | feff 1f00 
+  0x000001ed5bec1518: 85ff 0f84 | cc06 0000 
+
+  0x000001ed5bec1520: ; implicit exception: dispatches to 0x000001ed5bec1c0d
+                      ;   {metadata(method data for {method} {0x000001ed796f6118} 'use' '()V' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec1520: 8b56 0c48 | bf68 9978 | 79ed 0100 | 0048 8387 | 1001 0000 
+
+  0x000001ed5bec1534: ;   {metadata(method data for {method} {0x000001ed795f2b80} 'glUseProgram' '(I)V' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec1534: 0148 bfc8 | 9a78 79ed | 0100 008b | 9fcc 0000 | 0083 c302 | 899f cc00 | 0000 81e3 | feff 1f00 
+  0x000001ed5bec1554: 85db 0f84 | b606 0000 
+
+  0x000001ed5bec155c: ;   {metadata(method data for {method} {0x000001ed795f2b80} 'glUseProgram' '(I)V' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec155c: 48bf c89a | 7879 ed01 | 0000 4883 | 8710 0100 
+
+  0x000001ed5bec156c: ;   {static_call}
+  0x000001ed5bec156c: 0001 90e8 
+
+  0x000001ed5bec1570: ; ImmutableOopMap {[144]=Oop [152]=Oop [160]=Oop }
+                      ;*invokestatic glUseProgram {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20::glUseProgram@1 (line 236)
+                      ; - org.verselstudios.shader.ShaderProgram::use@4 (line 123)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@20 (line 118)
+  0x000001ed5bec1570: 6c7d 9907 
+
+  0x000001ed5bec1574: ;   {other}
+  0x000001ed5bec1574: 0f1f 8400 | e404 0002 | 488b 9424 | 9000 0000 | 8b72 2048 | c1e6 0348 | 3b06 488b 
+
+  0x000001ed5bec1590: ;   {metadata(method data for {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec1590: fe48 bb88 | 6c79 79ed | 0100 008b | 7f08 49ba | 0000 0000 | ed01 0000 | 4903 fa48 | 3bbb c001 
+  0x000001ed5bec15b0: 0000 750d | 4883 83c8 | 0100 0001 | e960 0000 | 0048 3bbb | d001 0000 | 750d 4883 | 83d8 0100 
+  0x000001ed5bec15d0: 0001 e94a | 0000 0048 | 83bb c001 | 0000 0075 | 1748 89bb | c001 0000 | 48c7 83c8 | 0100 0001 
+  0x000001ed5bec15f0: 0000 00e9 | 2900 0000 | 4883 bbd0 | 0100 0000 | 7517 4889 | bbd0 0100 | 0048 c783 | d801 0000 
+  0x000001ed5bec1610: 0100 0000 | e908 0000 | 0048 8383 | b001 0000 
+
+  0x000001ed5bec1620: ;   {metadata(method data for {method} {0x000001ed7974ca68} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec1620: 0148 bf00 | 6f79 79ed | 0100 008b | 9fcc 0000 | 0083 c302 | 899f cc00 | 0000 81e3 | feff 1f00 
+  0x000001ed5bec1640: 85db 0f84 | f005 0000 
+
+  0x000001ed5bec1648: ;   {metadata(method data for {method} {0x000001ed7974ca68} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec1648: 488b fe48 | bb00 6f79 | 79ed 0100 | 008b 7f08 | 49ba 0000 | 0000 ed01 | 0000 4903 | fa48 3bbb 
+  0x000001ed5bec1668: 2001 0000 | 750d 4883 | 8328 0100 | 0001 e960 | 0000 0048 | 3bbb 3001 | 0000 750d | 4883 8338 
+  0x000001ed5bec1688: 0100 0001 | e94a 0000 | 0048 83bb | 2001 0000 | 0075 1748 | 89bb 2001 | 0000 48c7 | 8328 0100 
+  0x000001ed5bec16a8: 0001 0000 | 00e9 2900 | 0000 4883 | bb30 0100 | 0000 7517 | 4889 bb30 | 0100 0048 | c783 3801 
+  0x000001ed5bec16c8: 0000 0100 | 0000 e908 | 0000 0048 | 8383 1001 
+
+  0x000001ed5bec16d8: ;   {metadata(method data for {method} {0x000001ed7974cb58} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;Ljava/lang/String;I)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec16d8: 0000 0148 | bf90 7079 | 79ed 0100 | 008b 9fcc | 0000 0083 | c302 899f | cc00 0000 | 81e3 feff 
+  0x000001ed5bec16f8: 1f00 85db | 0f84 5705 
+
+  0x000001ed5bec1700: ;   {metadata(method data for {method} {0x000001ed7974cb58} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;Ljava/lang/String;I)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec1700: 0000 48bf | 9070 7979 | ed01 0000 | 4883 8710 | 0100 0001 
+
+  0x000001ed5bec1714: ;   {metadata(method data for {method} {0x000001ed7960c360} 'glActiveTexture' '(I)V' in 'org/lwjgl/opengl/GL13')}
+  0x000001ed5bec1714: 48bf 88bb | 7879 ed01 | 0000 8b9f | cc00 0000 | 83c3 0289 | 9fcc 0000 | 0081 e3fe | ff1f 0085 
+  0x000001ed5bec1734: db0f 843f 
+
+  0x000001ed5bec1738: ;   {metadata(method data for {method} {0x000001ed7960c360} 'glActiveTexture' '(I)V' in 'org/lwjgl/opengl/GL13')}
+  0x000001ed5bec1738: 0500 0048 | bf88 bb78 | 79ed 0100 | 0048 8387 | 1001 0000 | 01ba c084 | 0000 4889 | b424 a800 
+  0x000001ed5bec1758: 0000 0f1f 
+
+  0x000001ed5bec175c: ;   {static_call}
+  0x000001ed5bec175c: 4400 00e8 
+
+  0x000001ed5bec1760: ; ImmutableOopMap {[144]=Oop [152]=Oop [160]=Oop [168]=Oop }
+                      ;*invokestatic glActiveTexture {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL13::glActiveTexture@1 (line 288)
+                      ; - org.verselstudios.Image.Texture::bind@4 (line 102)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1760: 7c8b 9907 
+
+  0x000001ed5bec1764: ;   {other}
+  0x000001ed5bec1764: 0f1f 8400 | d406 0003 | 488b b424 | a800 0000 | 448b 460c 
+
+  0x000001ed5bec1778: ;   {metadata(method data for {method} {0x000001ed7974cb58} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;Ljava/lang/String;I)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec1778: 48ba 9070 | 7979 ed01 | 0000 4883 | 8220 0100 
+
+  0x000001ed5bec1788: ;   {metadata(method data for {method} {0x000001ed7961e420} 'glBindTexture' '(II)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec1788: 0001 48ba | 68b0 7879 | ed01 0000 | 8bb2 cc00 | 0000 83c6 | 0289 b2cc | 0000 0081 | e6fe ff1f 
+  0x000001ed5bec17a8: 0085 f60f | 84ea 0400 
+
+  0x000001ed5bec17b0: ;   {metadata(method data for {method} {0x000001ed7961e420} 'glBindTexture' '(II)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec17b0: 0048 ba68 | b078 79ed | 0100 0048 | 8382 1001 | 0000 01ba | e10d 0000 | 0f1f 8000 
+
+  0x000001ed5bec17cc: ;   {static_call}
+  0x000001ed5bec17cc: 0000 00e8 
+
+  0x000001ed5bec17d0: ; ImmutableOopMap {[144]=Oop [152]=Oop [160]=Oop }
+                      ;*invokestatic glBindTexture {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glBindTexture@2 (line 718)
+                      ; - org.verselstudios.Image.Texture::bind@14 (line 103)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec17d0: 0c7f 9907 
+
+  0x000001ed5bec17d4: ;   {other}
+  0x000001ed5bec17d4: 0f1f 8400 | 4407 0004 | 488b b424 | a000 0000 
+
+  0x000001ed5bec17e4: ;   {metadata(method data for {method} {0x000001ed7974cb58} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;Ljava/lang/String;I)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec17e4: 48ba 9070 | 7979 ed01 | 0000 8b76 | 0849 ba00 | 0000 00ed | 0100 0049 | 03f2 483b | b240 0100 
+  0x000001ed5bec1804: 0075 0d48 | 8382 4801 | 0000 01e9 | 6000 0000 | 483b b250 | 0100 0075 | 0d48 8382 | 5801 0000 
+  0x000001ed5bec1824: 01e9 4a00 | 0000 4883 | ba40 0100 | 0000 7517 | 4889 b240 | 0100 0048 | c782 4801 | 0000 0100 
+  0x000001ed5bec1844: 0000 e929 | 0000 0048 | 83ba 5001 | 0000 0075 | 1748 89b2 | 5001 0000 | 48c7 8258 | 0100 0001 
+  0x000001ed5bec1864: 0000 00e9 | 0800 0000 | 4883 8230 | 0100 0001 
+
+  0x000001ed5bec1874: ;   {metadata(method data for {method} {0x000001ed796f6280} 'getUniformLocation' '(Ljava/lang/String;)I' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec1874: 48ba b8f9 | 7879 ed01 | 0000 448b | 82cc 0000 | 0041 83c0 | 0244 8982 | cc00 0000 | 4181 e0fe 
+  0x000001ed5bec1894: ff1f 0045 | 85c0 0f84 | 1c04 0000 | 488b b424 | a000 0000 
+
+  0x000001ed5bec18a8: ;   {metadata(method data for {method} {0x000001ed796f6280} 'getUniformLocation' '(Ljava/lang/String;)I' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec18a8: 8b56 0c49 | b8b8 f978 | 79ed 0100 | 0049 8380 | 1001 0000 
+
+  0x000001ed5bec18bc: ;   {metadata(method data for {method} {0x000001ed795f5908} 'glGetUniformLocation' '(ILjava/lang/CharSequence;)I' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec18bc: 0149 b850 | f878 79ed | 0100 0041 | 8bb8 cc00 | 0000 83c7 | 0241 89b8 | cc00 0000 | 81e7 feff 
+  0x000001ed5bec18dc: 1f00 85ff | 0f84 f703 
+
+  0x000001ed5bec18e4: ;   {metadata(method data for {method} {0x000001ed795f5908} 'glGetUniformLocation' '(ILjava/lang/CharSequence;)I' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec18e4: 0000 49b8 | 50f8 7879 | ed01 0000 | 4983 8010 | 0100 0001 
+
+  0x000001ed5bec18f8: ;   {oop("sampler0"{0x0000000620800620})}
+  0x000001ed5bec18f8: 49b8 2006 | 8020 0600 | 0000 0f1f 
+
+  0x000001ed5bec1904: ;   {static_call}
+  0x000001ed5bec1904: 4400 00e8 
+
+  0x000001ed5bec1908: ; ImmutableOopMap {[144]=Oop [152]=Oop [160]=Oop }
+                      ;*invokestatic glGetUniformLocation {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@2 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.Image.Texture::bind@20 (line 106)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1908: 1441 9a07 
+
+  0x000001ed5bec190c: ;   {other}
+  0x000001ed5bec190c: 0f1f 8400 | 7c08 0005 | 488b b424 | a000 0000 
+
+  0x000001ed5bec191c: ;   {metadata(method data for {method} {0x000001ed7974cb58} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;Ljava/lang/String;I)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec191c: 48ba 9070 | 7979 ed01 | 0000 8b76 | 0849 ba00 | 0000 00ed | 0100 0049 | 03f2 483b | b278 0100 
+  0x000001ed5bec193c: 0075 0d48 | 8382 8001 | 0000 01e9 | 6000 0000 | 483b b288 | 0100 0075 | 0d48 8382 | 9001 0000 
+  0x000001ed5bec195c: 01e9 4a00 | 0000 4883 | ba78 0100 | 0000 7517 | 4889 b278 | 0100 0048 | c782 8001 | 0000 0100 
+  0x000001ed5bec197c: 0000 e929 | 0000 0048 | 83ba 8801 | 0000 0075 | 1748 89b2 | 8801 0000 | 48c7 8290 | 0100 0001 
+  0x000001ed5bec199c: 0000 00e9 | 0800 0000 | 4883 8268 | 0100 0001 
+
+  0x000001ed5bec19ac: ;   {metadata(method data for {method} {0x000001ed796f6350} 'setUniformi' '(II)V' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec19ac: 48ba e8bc | 7879 ed01 | 0000 448b | 82cc 0000 | 0041 83c0 | 0244 8982 | cc00 0000 | 4181 e0fe 
+  0x000001ed5bec19cc: ff1f 0045 | 85c0 0f84 | 2603 0000 
+
+  0x000001ed5bec19d8: ;   {metadata(method data for {method} {0x000001ed796f6350} 'setUniformi' '(II)V' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec19d8: 83f8 ff48 | bae8 bc78 | 79ed 0100 | 0049 c7c0 | 2001 0000 | 7407 49c7 | c010 0100 | 004a 8b34 
+  0x000001ed5bec19f8: 0248 8d76 | 014a 8934 | 020f 846d 
+
+  0x000001ed5bec1a04: ;   {metadata(method data for {method} {0x000001ed796f6350} 'setUniformi' '(II)V' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec1a04: 0000 0048 | bae8 bc78 | 79ed 0100 | 0048 8382 | 3001 0000 
+
+  0x000001ed5bec1a18: ;   {metadata(method data for {method} {0x000001ed795f3140} 'glUniform1i' '(II)V' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec1a18: 0148 ba00 | 9878 79ed | 0100 0044 | 8b82 cc00 | 0000 4183 | c002 4489 | 82cc 0000 | 0041 81e0 
+  0x000001ed5bec1a38: feff 1f00 | 4585 c00f | 84da 0200 
+
+  0x000001ed5bec1a44: ;   {metadata(method data for {method} {0x000001ed795f3140} 'glUniform1i' '(II)V' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec1a44: 0048 ba00 | 9878 79ed | 0100 0048 | 8382 1001 | 0000 0148 | 8bd0 41b8 | 0000 0000 | 0f1f 8000 
+  0x000001ed5bec1a64: ;   {static_call}
+  0x000001ed5bec1a64: 0000 00e8 
+
+  0x000001ed5bec1a68: ; ImmutableOopMap {[144]=Oop [152]=Oop }
+                      ;*invokestatic glUniform1i {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL20::glUniform1i@2 (line 278)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformi@8 (line 151)
+                      ; - org.verselstudios.Image.Texture::bind@24 (line 105)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1a68: 74a2 9907 
+
+  0x000001ed5bec1a6c: ;   {other}
+  0x000001ed5bec1a6c: 0f1f 8400 | dc09 0006 | 4c8b 8424 | 9800 0000 | 488b 9424 | 9000 0000 | 8b52 1c48 | c1e2 0348 
+  0x000001ed5bec1a8c: 3b02 488b 
+
+  0x000001ed5bec1a90: ;   {metadata(method data for {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec1a90: f248 bf88 | 6c79 79ed | 0100 008b | 7608 49ba | 0000 0000 | ed01 0000 | 4903 f248 | 3bb7 f801 
+  0x000001ed5bec1ab0: 0000 750d | 4883 8700 | 0200 0001 | e960 0000 | 0048 3bb7 | 0802 0000 | 750d 4883 | 8710 0200 
+  0x000001ed5bec1ad0: 0001 e94a | 0000 0048 | 83bf f801 | 0000 0075 | 1748 89b7 | f801 0000 | 48c7 8700 | 0200 0001 
+  0x000001ed5bec1af0: 0000 00e9 | 2900 0000 | 4883 bf08 | 0200 0000 | 7517 4889 | b708 0200 | 0048 c787 | 1002 0000 
+  0x000001ed5bec1b10: 0100 0000 | e908 0000 | 0048 8387 | e801 0000 | 0166 0f1f 
+
+  0x000001ed5bec1b24: ;   {optimized virtual_call}
+  0x000001ed5bec1b24: 4400 00e8 
+
+  0x000001ed5bec1b28: ; ImmutableOopMap {}
+                      ;*invokevirtual draw {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@38 (line 120)
+  0x000001ed5bec1b28: 948f 9a07 
+
+  0x000001ed5bec1b2c: ;   {other}
+  0x000001ed5bec1b2c: 0f1f 8400 | 9c0a 0007 
+
+  0x000001ed5bec1b34: ;   {metadata(method data for {method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec1b34: 48ba 886c | 7979 ed01 | 0000 4883 | 8220 0200 
+
+  0x000001ed5bec1b44: ;   {metadata(method data for {method} {0x000001ed7961dcd8} 'glDisable' '(I)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec1b44: 0001 48ba | 60a1 7879 | ed01 0000 | 8bb2 cc00 | 0000 83c6 | 0289 b2cc | 0000 0081 | e6fe ff1f 
+  0x000001ed5bec1b64: 0085 f60f | 84d8 0100 
+
+  0x000001ed5bec1b6c: ;   {metadata(method data for {method} {0x000001ed7961dcd8} 'glDisable' '(I)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec1b6c: 0048 ba60 | a178 79ed | 0100 0048 | 8382 1001 | 0000 01ba | 710b 0000 
+
+  0x000001ed5bec1b84: ;   {static_call}
+  0x000001ed5bec1b84: 6666 90e8 
+
+  0x000001ed5bec1b88: ; ImmutableOopMap {}
+                      ;*invokestatic glDisable {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.lwjgl.opengl.GL11::glDisable@1 (line 662)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@44 (line 121)
+  0x000001ed5bec1b88: 546b 9907 
+
+  0x000001ed5bec1b8c: ;   {other}
+  0x000001ed5bec1b8c: 0f1f 8400 | fc0a 0008 | 4881 c4c0 | 0000 005d 
+
+  0x000001ed5bec1b9c: ;   {poll_return}
+  0x000001ed5bec1b9c: 493b a748 | 0400 000f | 87bd 0100 
+
+  0x000001ed5bec1ba8: ;   {metadata({method} {0x000001ed797497a0} 'draw' '(Lorg/verselstudios/math/MatrixStack;)V' in 'org/verselstudios/model/verselModel/VerselModel')}
+  0x000001ed5bec1ba8: 00c3 49ba | 9897 7479 | ed01 0000 | 4c89 5424 | 0848 c704 | 24ff ffff 
+
+  0x000001ed5bec1bc0: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1bc0: ffe8 ba82 
+
+  0x000001ed5bec1bc4: ; ImmutableOopMap {rdx=Oop r8=Oop [144]=Oop }
+                      ;*synchronization entry
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@-1 (line 115)
+  0x000001ed5bec1bc4: 2f07 e9c3 
+
+  0x000001ed5bec1bc8: ;   {metadata({method} {0x000001ed7961dc08} 'glEnable' '(I)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec1bc8: f7ff ff49 | ba00 dc61 | 79ed 0100 | 004c 8954 | 2408 48c7 | 0424 ffff 
+
+  0x000001ed5bec1be0: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1be0: ffff e899 
+
+  0x000001ed5bec1be4: ; ImmutableOopMap {[144]=Oop [152]=Oop }
+                      ;*synchronization entry
+                      ; - org.lwjgl.opengl.GL11::glEnable@-1 (line 655)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@14 (line 117)
+  0x000001ed5bec1be4: 822f 07e9 | 41f8 ffff 
+
+  0x000001ed5bec1bec: ;   {metadata({method} {0x000001ed796f6118} 'use' '()V' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec1bec: 49ba 1061 | 6f79 ed01 | 0000 4c89 | 5424 0848 | c704 24ff 
+
+  0x000001ed5bec1c00: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1c00: ffff ffe8 
+
+  0x000001ed5bec1c04: ; ImmutableOopMap {rsi=Oop [144]=Oop [152]=Oop [160]=Oop }
+                      ;*synchronization entry
+                      ; - org.verselstudios.shader.ShaderProgram::use@-1 (line 123)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@20 (line 118)
+  0x000001ed5bec1c04: 7882 2f07 | e913 f9ff 
+
+  0x000001ed5bec1c0c: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ed5bec1c0c: ffe8 ee26 
+
+  0x000001ed5bec1c10: ; ImmutableOopMap {rsi=Oop [144]=Oop [152]=Oop [160]=Oop }
+                      ;*getfield program {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.verselstudios.shader.ShaderProgram::use@1 (line 123)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@20 (line 118)
+                      ;   {metadata({method} {0x000001ed795f2b80} 'glUseProgram' '(I)V' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec1c10: 2f07 49ba | 782b 5f79 | ed01 0000 | 4c89 5424 | 0848 c704 | 24ff ffff 
+
+  0x000001ed5bec1c28: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1c28: ffe8 5282 
+
+  0x000001ed5bec1c2c: ; ImmutableOopMap {rsi=Oop [144]=Oop [152]=Oop [160]=Oop }
+                      ;*synchronization entry
+                      ; - org.lwjgl.opengl.GL20::glUseProgram@-1 (line 236)
+                      ; - org.verselstudios.shader.ShaderProgram::use@4 (line 123)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@20 (line 118)
+  0x000001ed5bec1c2c: 2f07 e929 
+
+  0x000001ed5bec1c30: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ed5bec1c30: f9ff ffe8 
+
+  0x000001ed5bec1c34: ; ImmutableOopMap {rdx=Oop rsi=Oop [144]=Oop [152]=Oop [160]=Oop }
+                      ;*invokevirtual bind {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1c34: c826 2f07 
+
+  0x000001ed5bec1c38: ;   {metadata({method} {0x000001ed7974ca68} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec1c38: 49ba 60ca | 7479 ed01 | 0000 4c89 | 5424 0848 | c704 24ff 
+
+  0x000001ed5bec1c4c: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1c4c: ffff ffe8 
+
+  0x000001ed5bec1c50: ; ImmutableOopMap {rdx=Oop rsi=Oop [144]=Oop [152]=Oop [160]=Oop }
+                      ;*synchronization entry
+                      ; - org.verselstudios.Image.Texture::bind@-1 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1c50: 2c82 2f07 | e9ef f9ff 
+
+  0x000001ed5bec1c58: ;   {metadata({method} {0x000001ed7974cb58} 'bind' '(Lorg/verselstudios/shader/ShaderProgram;Ljava/lang/String;I)V' in 'org/verselstudios/Image/Texture')}
+  0x000001ed5bec1c58: ff49 ba50 | cb74 79ed | 0100 004c | 8954 2408 | 48c7 0424 | ffff ffff 
+
+  0x000001ed5bec1c70: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1c70: e80b 822f 
+
+  0x000001ed5bec1c74: ; ImmutableOopMap {rdx=Oop rsi=Oop [144]=Oop [152]=Oop [160]=Oop }
+                      ;*synchronization entry
+                      ; - org.verselstudios.Image.Texture::bind@-1 (line 102)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1c74: 07e9 88fa 
+
+  0x000001ed5bec1c78: ;   {metadata({method} {0x000001ed7960c360} 'glActiveTexture' '(I)V' in 'org/lwjgl/opengl/GL13')}
+  0x000001ed5bec1c78: ffff 49ba | 58c3 6079 | ed01 0000 | 4c89 5424 | 0848 c704 | 24ff ffff 
+
+  0x000001ed5bec1c90: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1c90: ffe8 ea81 
+
+  0x000001ed5bec1c94: ; ImmutableOopMap {rdx=Oop rsi=Oop [144]=Oop [152]=Oop [160]=Oop }
+                      ;*synchronization entry
+                      ; - org.lwjgl.opengl.GL13::glActiveTexture@-1 (line 288)
+                      ; - org.verselstudios.Image.Texture::bind@4 (line 102)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1c94: 2f07 e9a0 
+
+  0x000001ed5bec1c98: ;   {metadata({method} {0x000001ed7961e420} 'glBindTexture' '(II)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec1c98: faff ff49 | ba18 e461 | 79ed 0100 | 004c 8954 | 2408 48c7 | 0424 ffff 
+
+  0x000001ed5bec1cb0: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1cb0: ffff e8c9 
+
+  0x000001ed5bec1cb4: ; ImmutableOopMap {[144]=Oop [152]=Oop [160]=Oop }
+                      ;*synchronization entry
+                      ; - org.lwjgl.opengl.GL11::glBindTexture@-1 (line 718)
+                      ; - org.verselstudios.Image.Texture::bind@14 (line 103)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1cb4: 812f 07e9 | f5fa ffff 
+
+  0x000001ed5bec1cbc: ;   {metadata({method} {0x000001ed796f6280} 'getUniformLocation' '(Ljava/lang/String;)I' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec1cbc: 49ba 7862 | 6f79 ed01 | 0000 4c89 | 5424 0848 | c704 24ff 
+
+  0x000001ed5bec1cd0: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1cd0: ffff ffe8 
+
+  0x000001ed5bec1cd4: ; ImmutableOopMap {[144]=Oop [152]=Oop [160]=Oop }
+                      ;*synchronization entry
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@-1 (line 139)
+                      ; - org.verselstudios.Image.Texture::bind@20 (line 106)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1cd4: a881 2f07 | e9c3 fbff 
+
+  0x000001ed5bec1cdc: ;   {metadata({method} {0x000001ed795f5908} 'glGetUniformLocation' '(ILjava/lang/CharSequence;)I' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec1cdc: ff49 ba00 | 595f 79ed | 0100 004c | 8954 2408 | 48c7 0424 | ffff ffff 
+
+  0x000001ed5bec1cf4: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1cf4: e887 812f 
+
+  0x000001ed5bec1cf8: ; ImmutableOopMap {rsi=Oop [144]=Oop [152]=Oop [160]=Oop }
+                      ;*synchronization entry
+                      ; - org.lwjgl.opengl.GL20::glGetUniformLocation@-1 (line 546)
+                      ; - org.verselstudios.shader.ShaderProgram::getUniformLocation@5 (line 139)
+                      ; - org.verselstudios.Image.Texture::bind@20 (line 106)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1cf8: 07e9 e8fb 
+
+  0x000001ed5bec1cfc: ;   {metadata({method} {0x000001ed796f6350} 'setUniformi' '(II)V' in 'org/verselstudios/shader/ShaderProgram')}
+  0x000001ed5bec1cfc: ffff 49ba | 4863 6f79 | ed01 0000 | 4c89 5424 | 0848 c704 | 24ff ffff 
+
+  0x000001ed5bec1d14: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1d14: ffe8 6681 
+
+  0x000001ed5bec1d18: ; ImmutableOopMap {[144]=Oop [152]=Oop }
+                      ;*synchronization entry
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformi@-1 (line 150)
+                      ; - org.verselstudios.Image.Texture::bind@24 (line 105)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1d18: 2f07 e9b9 
+
+  0x000001ed5bec1d1c: ;   {metadata({method} {0x000001ed795f3140} 'glUniform1i' '(II)V' in 'org/lwjgl/opengl/GL20')}
+  0x000001ed5bec1d1c: fcff ff49 | ba38 315f | 79ed 0100 | 004c 8954 | 2408 48c7 | 0424 ffff 
+
+  0x000001ed5bec1d34: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1d34: ffff e845 
+
+  0x000001ed5bec1d38: ; ImmutableOopMap {[144]=Oop [152]=Oop }
+                      ;*synchronization entry
+                      ; - org.lwjgl.opengl.GL20::glUniform1i@-1 (line 278)
+                      ; - org.verselstudios.shader.ShaderProgram::setUniformi@8 (line 151)
+                      ; - org.verselstudios.Image.Texture::bind@24 (line 105)
+                      ; - org.verselstudios.Image.Texture::bind@5 (line 98)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@30 (line 119)
+  0x000001ed5bec1d38: 812f 07e9 | 05fd ffff 
+
+  0x000001ed5bec1d40: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ed5bec1d40: e8bb 252f 
+
+  0x000001ed5bec1d44: ; ImmutableOopMap {r8=Oop rdx=Oop }
+                      ;*invokevirtual draw {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@38 (line 120)
+                      ;   {metadata({method} {0x000001ed7961dcd8} 'glDisable' '(I)V' in 'org/lwjgl/opengl/GL11')}
+  0x000001ed5bec1d44: 0749 bad0 | dc61 79ed | 0100 004c | 8954 2408 | 48c7 0424 | ffff ffff 
+
+  0x000001ed5bec1d5c: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ed5bec1d5c: e81f 812f 
+
+  0x000001ed5bec1d60: ; ImmutableOopMap {}
+                      ;*synchronization entry
+                      ; - org.lwjgl.opengl.GL11::glDisable@-1 (line 662)
+                      ; - org.verselstudios.model.verselModel.VerselModel::draw@44 (line 121)
+  0x000001ed5bec1d60: 07e9 07fe 
+
+  0x000001ed5bec1d64: ;   {internal_word}
+  0x000001ed5bec1d64: ffff 49ba | 9c1b ec5b | ed01 0000 | 4d89 9760 
+
+  0x000001ed5bec1d74: ;   {runtime_call SafepointBlob}
+  0x000001ed5bec1d74: 0400 00e9 | 8439 2307 | 498b 87f8 | 0400 0049 | c787 f804 | 0000 0000 | 0000 49c7 | 8700 0500 
+  0x000001ed5bec1d94: 0000 0000 | 0048 81c4 | c000 0000 
+
+  0x000001ed5bec1da0: ;   {runtime_call unwind_exception Runtime1 stub}
+  0x000001ed5bec1da0: 5de9 da11 | 2f07 f4f4 
+[Stub Code]
+  0x000001ed5bec1da8: ;   {no_reloc}
+  0x000001ed5bec1da8: 0f1f 4400 
+
+  0x000001ed5bec1dac: ;   {static_stub}
+  0x000001ed5bec1dac: 0048 bb00 | 0000 0000 
+
+  0x000001ed5bec1db4: ;   {runtime_call nmethod}
+  0x000001ed5bec1db4: 0000 00e9 | fbff ffff 
+
+  0x000001ed5bec1dbc: ;   {static_stub}
+  0x000001ed5bec1dbc: 48bb 0000 | 0000 0000 
+
+  0x000001ed5bec1dc4: ;   {runtime_call nmethod}
+  0x000001ed5bec1dc4: 0000 e9fb 
+
+  0x000001ed5bec1dc8: ;   {static_stub}
+  0x000001ed5bec1dc8: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001ed5bec1dd4: ;   {runtime_call nmethod}
+  0x000001ed5bec1dd4: 00e9 fbff 
+
+  0x000001ed5bec1dd8: ;   {static_stub}
+  0x000001ed5bec1dd8: ffff 48bb | 0000 0000 | 0000 0000 
+
+  0x000001ed5bec1de4: ;   {runtime_call nmethod}
+  0x000001ed5bec1de4: e9fb ffff 
+
+  0x000001ed5bec1de8: ;   {static_stub}
+  0x000001ed5bec1de8: ff48 bb00 | 0000 0000 
+
+  0x000001ed5bec1df0: ;   {runtime_call nmethod}
+  0x000001ed5bec1df0: 0000 00e9 | fbff ffff 
+
+  0x000001ed5bec1df8: ;   {static_stub}
+  0x000001ed5bec1df8: 48bb 0000 | 0000 0000 
+
+  0x000001ed5bec1e00: ;   {runtime_call nmethod}
+  0x000001ed5bec1e00: 0000 e9fb 
+
+  0x000001ed5bec1e04: ;   {static_stub}
+  0x000001ed5bec1e04: ffff ff48 | bb00 0000 | 0000 0000 
+
+  0x000001ed5bec1e10: ;   {runtime_call nmethod}
+  0x000001ed5bec1e10: 00e9 fbff 
+
+  0x000001ed5bec1e14: ;   {static_stub}
+  0x000001ed5bec1e14: ffff 48bb | 0000 0000 | 0000 0000 
+
+  0x000001ed5bec1e20: ;   {runtime_call nmethod}
+  0x000001ed5bec1e20: e9fb ffff 
+
+  0x000001ed5bec1e24: ;   {static_stub}
+  0x000001ed5bec1e24: ff48 bb00 | 0000 0000 
+
+  0x000001ed5bec1e2c: ;   {runtime_call nmethod}
+  0x000001ed5bec1e2c: 0000 00e9 | fbff ffff 
+[Exception Handler]
+  0x000001ed5bec1e34: ;   {runtime_call handle_exception_from_callee Runtime1 stub}
+  0x000001ed5bec1e34: e847 4d2f 
+
+  0x000001ed5bec1e38: ;   {external_word}
+  0x000001ed5bec1e38: 0748 b990 | 7f2e 84ff | 7f00 0048 
+
+  0x000001ed5bec1e44: ;   {runtime_call}
+  0x000001ed5bec1e44: 83e4 f048 | b8e0 44f1 | 83ff 7f00 | 00ff d0f4 
+[Deopt Handler Code]
+  0x000001ed5bec1e54: ;   {section_word}
+  0x000001ed5bec1e54: 49ba 541e | ec5b ed01 | 0000 4152 
+
+  0x000001ed5bec1e60: ;   {runtime_call DeoptimizationBlob}
+  0x000001ed5bec1e60: e93b 2b23 | 07f4 f4f4 
+[/MachCode]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001ed4568dea0, length=11, elements={
+0x000001ed51130cd0, 0x000001ed7592fd20, 0x000001ed75930c30, 0x000001ed75932eb0,
+0x000001ed75934c40, 0x000001ed75938580, 0x000001ed75941110, 0x000001ed75943fd0,
+0x000001ed75948090, 0x000001ed78b215f0, 0x000001ed78b26640
+}
+
+Java Threads: ( => current thread )
+=>0x000001ed51130cd0 JavaThread "main"                              [_thread_in_native, id=41848, stack(0x0000009326a00000,0x0000009326b00000) (1024K)]
+  0x000001ed7592fd20 JavaThread "Reference Handler"          daemon [_thread_blocked, id=11696, stack(0x0000009327200000,0x0000009327300000) (1024K)]
+  0x000001ed75930c30 JavaThread "Finalizer"                  daemon [_thread_blocked, id=42652, stack(0x0000009327300000,0x0000009327400000) (1024K)]
+  0x000001ed75932eb0 JavaThread "Signal Dispatcher"          daemon [_thread_blocked, id=41168, stack(0x0000009327400000,0x0000009327500000) (1024K)]
+  0x000001ed75934c40 JavaThread "Attach Listener"            daemon [_thread_blocked, id=22440, stack(0x0000009327500000,0x0000009327600000) (1024K)]
+  0x000001ed75938580 JavaThread "Service Thread"             daemon [_thread_blocked, id=31788, stack(0x0000009327600000,0x0000009327700000) (1024K)]
+  0x000001ed75941110 JavaThread "Monitor Deflation Thread"   daemon [_thread_blocked, id=39564, stack(0x0000009327700000,0x0000009327800000) (1024K)]
+  0x000001ed75943fd0 JavaThread "C2 CompilerThread0"         daemon [_thread_blocked, id=37356, stack(0x0000009327800000,0x0000009327900000) (1024K)]
+  0x000001ed75948090 JavaThread "C1 CompilerThread0"         daemon [_thread_blocked, id=42348, stack(0x0000009327900000,0x0000009327a00000) (1024K)]
+  0x000001ed78b215f0 JavaThread "Notification Thread"        daemon [_thread_blocked, id=36744, stack(0x0000009327c00000,0x0000009327d00000) (1024K)]
+  0x000001ed78b26640 JavaThread "Common-Cleaner"             daemon [_thread_blocked, id=41888, stack(0x0000009327d00000,0x0000009327e00000) (1024K)]
+Total: 11
+
+Other Threads:
+  0x000001ed75915950 VMThread "VM Thread"                           [id=15892, stack(0x0000009327100000,0x0000009327200000) (1024K)]
+  0x000001ed75904840 WatcherThread "VM Periodic Task Thread"        [id=34924, stack(0x0000009327000000,0x0000009327100000) (1024K)]
+  0x000001ed53604760 WorkerThread "GC Thread#0"                     [id=20880, stack(0x0000009326b00000,0x0000009326c00000) (1024K)]
+  0x000001ed7d14dbc0 WorkerThread "GC Thread#1"                     [id=38644, stack(0x0000009327a00000,0x0000009327b00000) (1024K)]
+  0x000001ed7d14e370 WorkerThread "GC Thread#2"                     [id=42384, stack(0x0000009327b00000,0x0000009327c00000) (1024K)]
+  0x000001ed7d14e710 WorkerThread "GC Thread#3"                     [id=29312, stack(0x0000009327e00000,0x0000009327f00000) (1024K)]
+  0x000001ed7d14eab0 WorkerThread "GC Thread#4"                     [id=37232, stack(0x0000009328500000,0x0000009328600000) (1024K)]
+  0x000001ed7d14f660 WorkerThread "GC Thread#5"                     [id=13620, stack(0x0000009328600000,0x0000009328700000) (1024K)]
+  0x000001ed45058270 WorkerThread "GC Thread#6"                     [id=17176, stack(0x0000009328700000,0x0000009328800000) (1024K)]
+  0x000001ed45058610 WorkerThread "GC Thread#7"                     [id=3352, stack(0x0000009328800000,0x0000009328900000) (1024K)]
+  0x000001ed4563c760 WorkerThread "GC Thread#8"                     [id=35924, stack(0x0000009328900000,0x0000009328a00000) (1024K)]
+  0x000001ed53566470 WorkerThread "GC Thread#9"                     [id=25856, stack(0x0000009328a00000,0x0000009328b00000) (1024K)]
+  0x000001ed53565250 WorkerThread "GC Thread#10"                    [id=40240, stack(0x0000009328b00000,0x0000009328c00000) (1024K)]
+  0x000001ed53564b10 WorkerThread "GC Thread#11"                    [id=39756, stack(0x0000009328c00000,0x0000009328d00000) (1024K)]
+  0x000001ed75792010 ConcurrentGCThread "G1 Main Marker"            [id=10784, stack(0x0000009326c00000,0x0000009326d00000) (1024K)]
+  0x000001ed757931c0 WorkerThread "G1 Conc#0"                       [id=26524, stack(0x0000009326d00000,0x0000009326e00000) (1024K)]
+  0x000001ed75842e80 ConcurrentGCThread "G1 Refine#0"               [id=41352, stack(0x0000009326e00000,0x0000009326f00000) (1024K)]
+  0x000001ed758439f0 ConcurrentGCThread "G1 Service"                [id=42360, stack(0x0000009326f00000,0x0000009327000000) (1024K)]
+Total: 18
+
+Threads with active compile tasks:
+Total: 0
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x0000000602400000, size: 8156 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x000001ed00000000-0x000001ed00c80000-0x000001ed00c80000), size 13107200, SharedBaseAddress: 0x000001ed00000000, ArchiveRelocationMode: 1.
+Compressed class space mapped at: 0x000001ed01000000-0x000001ed41000000, reserved size: 1073741824
+Narrow klass base: 0x000001ed00000000, Narrow klass shift: 0, Narrow klass range: 0x100000000
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 32 size 80 Howl #buckets 8 coarsen threshold 7372 Howl Bitmap #cards 1024 size 144 coarsen threshold 921 Card regions per heap region 1 cards per card region 8192
+ CPUs: 20 total, 20 available
+ Memory: 32609M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (Zero based)
+ Heap Region Size: 4M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 512M
+ Heap Max Capacity: 8156M
+ Pre-touch: Disabled
+ Parallel Workers: 15
+ Concurrent Workers: 4
+ Concurrent Refinement Workers: 15
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 524288K, used 2802K [0x0000000602400000, 0x0000000800000000)
+  region size 4096K, 2 young (8192K), 1 survivors (4096K)
+ Metaspace       used 6653K, committed 6976K, reserved 1114112K
+  class space    used 470K, committed 640K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, TAMS=top-at-mark-start, PB=parsable bottom
+|   0|0x0000000602400000, 0x0000000602400000, 0x0000000602800000|  0%| F|  |TAMS 0x0000000602400000| PB 0x0000000602400000| Untracked 
+|   1|0x0000000602800000, 0x0000000602800000, 0x0000000602c00000|  0%| F|  |TAMS 0x0000000602800000| PB 0x0000000602800000| Untracked 
+|   2|0x0000000602c00000, 0x0000000602c00000, 0x0000000603000000|  0%| F|  |TAMS 0x0000000602c00000| PB 0x0000000602c00000| Untracked 
+|   3|0x0000000603000000, 0x0000000603000000, 0x0000000603400000|  0%| F|  |TAMS 0x0000000603000000| PB 0x0000000603000000| Untracked 
+|   4|0x0000000603400000, 0x0000000603400000, 0x0000000603800000|  0%| F|  |TAMS 0x0000000603400000| PB 0x0000000603400000| Untracked 
+|   5|0x0000000603800000, 0x0000000603800000, 0x0000000603c00000|  0%| F|  |TAMS 0x0000000603800000| PB 0x0000000603800000| Untracked 
+|   6|0x0000000603c00000, 0x0000000603c00000, 0x0000000604000000|  0%| F|  |TAMS 0x0000000603c00000| PB 0x0000000603c00000| Untracked 
+|   7|0x0000000604000000, 0x0000000604000000, 0x0000000604400000|  0%| F|  |TAMS 0x0000000604000000| PB 0x0000000604000000| Untracked 
+|   8|0x0000000604400000, 0x0000000604400000, 0x0000000604800000|  0%| F|  |TAMS 0x0000000604400000| PB 0x0000000604400000| Untracked 
+|   9|0x0000000604800000, 0x0000000604800000, 0x0000000604c00000|  0%| F|  |TAMS 0x0000000604800000| PB 0x0000000604800000| Untracked 
+|  10|0x0000000604c00000, 0x0000000604c00000, 0x0000000605000000|  0%| F|  |TAMS 0x0000000604c00000| PB 0x0000000604c00000| Untracked 
+|  11|0x0000000605000000, 0x0000000605000000, 0x0000000605400000|  0%| F|  |TAMS 0x0000000605000000| PB 0x0000000605000000| Untracked 
+|  12|0x0000000605400000, 0x0000000605400000, 0x0000000605800000|  0%| F|  |TAMS 0x0000000605400000| PB 0x0000000605400000| Untracked 
+|  13|0x0000000605800000, 0x0000000605800000, 0x0000000605c00000|  0%| F|  |TAMS 0x0000000605800000| PB 0x0000000605800000| Untracked 
+|  14|0x0000000605c00000, 0x0000000605c00000, 0x0000000606000000|  0%| F|  |TAMS 0x0000000605c00000| PB 0x0000000605c00000| Untracked 
+|  15|0x0000000606000000, 0x0000000606000000, 0x0000000606400000|  0%| F|  |TAMS 0x0000000606000000| PB 0x0000000606000000| Untracked 
+|  16|0x0000000606400000, 0x0000000606400000, 0x0000000606800000|  0%| F|  |TAMS 0x0000000606400000| PB 0x0000000606400000| Untracked 
+|  17|0x0000000606800000, 0x0000000606800000, 0x0000000606c00000|  0%| F|  |TAMS 0x0000000606800000| PB 0x0000000606800000| Untracked 
+|  18|0x0000000606c00000, 0x0000000606c00000, 0x0000000607000000|  0%| F|  |TAMS 0x0000000606c00000| PB 0x0000000606c00000| Untracked 
+|  19|0x0000000607000000, 0x0000000607000000, 0x0000000607400000|  0%| F|  |TAMS 0x0000000607000000| PB 0x0000000607000000| Untracked 
+|  20|0x0000000607400000, 0x0000000607400000, 0x0000000607800000|  0%| F|  |TAMS 0x0000000607400000| PB 0x0000000607400000| Untracked 
+|  21|0x0000000607800000, 0x0000000607800000, 0x0000000607c00000|  0%| F|  |TAMS 0x0000000607800000| PB 0x0000000607800000| Untracked 
+|  22|0x0000000607c00000, 0x0000000607c00000, 0x0000000608000000|  0%| F|  |TAMS 0x0000000607c00000| PB 0x0000000607c00000| Untracked 
+|  23|0x0000000608000000, 0x0000000608000000, 0x0000000608400000|  0%| F|  |TAMS 0x0000000608000000| PB 0x0000000608000000| Untracked 
+|  24|0x0000000608400000, 0x0000000608400000, 0x0000000608800000|  0%| F|  |TAMS 0x0000000608400000| PB 0x0000000608400000| Untracked 
+|  25|0x0000000608800000, 0x0000000608800000, 0x0000000608c00000|  0%| F|  |TAMS 0x0000000608800000| PB 0x0000000608800000| Untracked 
+|  26|0x0000000608c00000, 0x0000000608c00000, 0x0000000609000000|  0%| F|  |TAMS 0x0000000608c00000| PB 0x0000000608c00000| Untracked 
+|  27|0x0000000609000000, 0x0000000609000000, 0x0000000609400000|  0%| F|  |TAMS 0x0000000609000000| PB 0x0000000609000000| Untracked 
+|  28|0x0000000609400000, 0x0000000609400000, 0x0000000609800000|  0%| F|  |TAMS 0x0000000609400000| PB 0x0000000609400000| Untracked 
+|  29|0x0000000609800000, 0x0000000609800000, 0x0000000609c00000|  0%| F|  |TAMS 0x0000000609800000| PB 0x0000000609800000| Untracked 
+|  30|0x0000000609c00000, 0x0000000609c00000, 0x000000060a000000|  0%| F|  |TAMS 0x0000000609c00000| PB 0x0000000609c00000| Untracked 
+|  31|0x000000060a000000, 0x000000060a000000, 0x000000060a400000|  0%| F|  |TAMS 0x000000060a000000| PB 0x000000060a000000| Untracked 
+|  32|0x000000060a400000, 0x000000060a400000, 0x000000060a800000|  0%| F|  |TAMS 0x000000060a400000| PB 0x000000060a400000| Untracked 
+|  33|0x000000060a800000, 0x000000060a800000, 0x000000060ac00000|  0%| F|  |TAMS 0x000000060a800000| PB 0x000000060a800000| Untracked 
+|  34|0x000000060ac00000, 0x000000060ac00000, 0x000000060b000000|  0%| F|  |TAMS 0x000000060ac00000| PB 0x000000060ac00000| Untracked 
+|  35|0x000000060b000000, 0x000000060b000000, 0x000000060b400000|  0%| F|  |TAMS 0x000000060b000000| PB 0x000000060b000000| Untracked 
+|  36|0x000000060b400000, 0x000000060b400000, 0x000000060b800000|  0%| F|  |TAMS 0x000000060b400000| PB 0x000000060b400000| Untracked 
+|  37|0x000000060b800000, 0x000000060b800000, 0x000000060bc00000|  0%| F|  |TAMS 0x000000060b800000| PB 0x000000060b800000| Untracked 
+|  38|0x000000060bc00000, 0x000000060bc00000, 0x000000060c000000|  0%| F|  |TAMS 0x000000060bc00000| PB 0x000000060bc00000| Untracked 
+|  39|0x000000060c000000, 0x000000060c000000, 0x000000060c400000|  0%| F|  |TAMS 0x000000060c000000| PB 0x000000060c000000| Untracked 
+|  40|0x000000060c400000, 0x000000060c400000, 0x000000060c800000|  0%| F|  |TAMS 0x000000060c400000| PB 0x000000060c400000| Untracked 
+|  41|0x000000060c800000, 0x000000060c800000, 0x000000060cc00000|  0%| F|  |TAMS 0x000000060c800000| PB 0x000000060c800000| Untracked 
+|  42|0x000000060cc00000, 0x000000060cc00000, 0x000000060d000000|  0%| F|  |TAMS 0x000000060cc00000| PB 0x000000060cc00000| Untracked 
+|  43|0x000000060d000000, 0x000000060d000000, 0x000000060d400000|  0%| F|  |TAMS 0x000000060d000000| PB 0x000000060d000000| Untracked 
+|  44|0x000000060d400000, 0x000000060d400000, 0x000000060d800000|  0%| F|  |TAMS 0x000000060d400000| PB 0x000000060d400000| Untracked 
+|  45|0x000000060d800000, 0x000000060d800000, 0x000000060dc00000|  0%| F|  |TAMS 0x000000060d800000| PB 0x000000060d800000| Untracked 
+|  46|0x000000060dc00000, 0x000000060dc00000, 0x000000060e000000|  0%| F|  |TAMS 0x000000060dc00000| PB 0x000000060dc00000| Untracked 
+|  47|0x000000060e000000, 0x000000060e000000, 0x000000060e400000|  0%| F|  |TAMS 0x000000060e000000| PB 0x000000060e000000| Untracked 
+|  48|0x000000060e400000, 0x000000060e400000, 0x000000060e800000|  0%| F|  |TAMS 0x000000060e400000| PB 0x000000060e400000| Untracked 
+|  49|0x000000060e800000, 0x000000060e800000, 0x000000060ec00000|  0%| F|  |TAMS 0x000000060e800000| PB 0x000000060e800000| Untracked 
+|  50|0x000000060ec00000, 0x000000060ec00000, 0x000000060f000000|  0%| F|  |TAMS 0x000000060ec00000| PB 0x000000060ec00000| Untracked 
+|  51|0x000000060f000000, 0x000000060f000000, 0x000000060f400000|  0%| F|  |TAMS 0x000000060f000000| PB 0x000000060f000000| Untracked 
+|  52|0x000000060f400000, 0x000000060f400000, 0x000000060f800000|  0%| F|  |TAMS 0x000000060f400000| PB 0x000000060f400000| Untracked 
+|  53|0x000000060f800000, 0x000000060f800000, 0x000000060fc00000|  0%| F|  |TAMS 0x000000060f800000| PB 0x000000060f800000| Untracked 
+|  54|0x000000060fc00000, 0x000000060fc00000, 0x0000000610000000|  0%| F|  |TAMS 0x000000060fc00000| PB 0x000000060fc00000| Untracked 
+|  55|0x0000000610000000, 0x0000000610000000, 0x0000000610400000|  0%| F|  |TAMS 0x0000000610000000| PB 0x0000000610000000| Untracked 
+|  56|0x0000000610400000, 0x0000000610400000, 0x0000000610800000|  0%| F|  |TAMS 0x0000000610400000| PB 0x0000000610400000| Untracked 
+|  57|0x0000000610800000, 0x0000000610800000, 0x0000000610c00000|  0%| F|  |TAMS 0x0000000610800000| PB 0x0000000610800000| Untracked 
+|  58|0x0000000610c00000, 0x0000000610c00000, 0x0000000611000000|  0%| F|  |TAMS 0x0000000610c00000| PB 0x0000000610c00000| Untracked 
+|  59|0x0000000611000000, 0x0000000611000000, 0x0000000611400000|  0%| F|  |TAMS 0x0000000611000000| PB 0x0000000611000000| Untracked 
+|  60|0x0000000611400000, 0x0000000611400000, 0x0000000611800000|  0%| F|  |TAMS 0x0000000611400000| PB 0x0000000611400000| Untracked 
+|  61|0x0000000611800000, 0x0000000611800000, 0x0000000611c00000|  0%| F|  |TAMS 0x0000000611800000| PB 0x0000000611800000| Untracked 
+|  62|0x0000000611c00000, 0x0000000611c00000, 0x0000000612000000|  0%| F|  |TAMS 0x0000000611c00000| PB 0x0000000611c00000| Untracked 
+|  63|0x0000000612000000, 0x0000000612000000, 0x0000000612400000|  0%| F|  |TAMS 0x0000000612000000| PB 0x0000000612000000| Untracked 
+|  64|0x0000000612400000, 0x0000000612400000, 0x0000000612800000|  0%| F|  |TAMS 0x0000000612400000| PB 0x0000000612400000| Untracked 
+|  65|0x0000000612800000, 0x0000000612800000, 0x0000000612c00000|  0%| F|  |TAMS 0x0000000612800000| PB 0x0000000612800000| Untracked 
+|  66|0x0000000612c00000, 0x0000000612c00000, 0x0000000613000000|  0%| F|  |TAMS 0x0000000612c00000| PB 0x0000000612c00000| Untracked 
+|  67|0x0000000613000000, 0x0000000613000000, 0x0000000613400000|  0%| F|  |TAMS 0x0000000613000000| PB 0x0000000613000000| Untracked 
+|  68|0x0000000613400000, 0x0000000613400000, 0x0000000613800000|  0%| F|  |TAMS 0x0000000613400000| PB 0x0000000613400000| Untracked 
+|  69|0x0000000613800000, 0x0000000613800000, 0x0000000613c00000|  0%| F|  |TAMS 0x0000000613800000| PB 0x0000000613800000| Untracked 
+|  70|0x0000000613c00000, 0x0000000613c00000, 0x0000000614000000|  0%| F|  |TAMS 0x0000000613c00000| PB 0x0000000613c00000| Untracked 
+|  71|0x0000000614000000, 0x0000000614000000, 0x0000000614400000|  0%| F|  |TAMS 0x0000000614000000| PB 0x0000000614000000| Untracked 
+|  72|0x0000000614400000, 0x0000000614400000, 0x0000000614800000|  0%| F|  |TAMS 0x0000000614400000| PB 0x0000000614400000| Untracked 
+|  73|0x0000000614800000, 0x0000000614800000, 0x0000000614c00000|  0%| F|  |TAMS 0x0000000614800000| PB 0x0000000614800000| Untracked 
+|  74|0x0000000614c00000, 0x0000000614c00000, 0x0000000615000000|  0%| F|  |TAMS 0x0000000614c00000| PB 0x0000000614c00000| Untracked 
+|  75|0x0000000615000000, 0x0000000615000000, 0x0000000615400000|  0%| F|  |TAMS 0x0000000615000000| PB 0x0000000615000000| Untracked 
+|  76|0x0000000615400000, 0x0000000615400000, 0x0000000615800000|  0%| F|  |TAMS 0x0000000615400000| PB 0x0000000615400000| Untracked 
+|  77|0x0000000615800000, 0x0000000615800000, 0x0000000615c00000|  0%| F|  |TAMS 0x0000000615800000| PB 0x0000000615800000| Untracked 
+|  78|0x0000000615c00000, 0x0000000615c00000, 0x0000000616000000|  0%| F|  |TAMS 0x0000000615c00000| PB 0x0000000615c00000| Untracked 
+|  79|0x0000000616000000, 0x0000000616000000, 0x0000000616400000|  0%| F|  |TAMS 0x0000000616000000| PB 0x0000000616000000| Untracked 
+|  80|0x0000000616400000, 0x0000000616400000, 0x0000000616800000|  0%| F|  |TAMS 0x0000000616400000| PB 0x0000000616400000| Untracked 
+|  81|0x0000000616800000, 0x0000000616800000, 0x0000000616c00000|  0%| F|  |TAMS 0x0000000616800000| PB 0x0000000616800000| Untracked 
+|  82|0x0000000616c00000, 0x0000000616c00000, 0x0000000617000000|  0%| F|  |TAMS 0x0000000616c00000| PB 0x0000000616c00000| Untracked 
+|  83|0x0000000617000000, 0x0000000617000000, 0x0000000617400000|  0%| F|  |TAMS 0x0000000617000000| PB 0x0000000617000000| Untracked 
+|  84|0x0000000617400000, 0x0000000617400000, 0x0000000617800000|  0%| F|  |TAMS 0x0000000617400000| PB 0x0000000617400000| Untracked 
+|  85|0x0000000617800000, 0x0000000617800000, 0x0000000617c00000|  0%| F|  |TAMS 0x0000000617800000| PB 0x0000000617800000| Untracked 
+|  86|0x0000000617c00000, 0x0000000617c00000, 0x0000000618000000|  0%| F|  |TAMS 0x0000000617c00000| PB 0x0000000617c00000| Untracked 
+|  87|0x0000000618000000, 0x0000000618000000, 0x0000000618400000|  0%| F|  |TAMS 0x0000000618000000| PB 0x0000000618000000| Untracked 
+|  88|0x0000000618400000, 0x0000000618400000, 0x0000000618800000|  0%| F|  |TAMS 0x0000000618400000| PB 0x0000000618400000| Untracked 
+|  89|0x0000000618800000, 0x0000000618800000, 0x0000000618c00000|  0%| F|  |TAMS 0x0000000618800000| PB 0x0000000618800000| Untracked 
+|  90|0x0000000618c00000, 0x0000000618c00000, 0x0000000619000000|  0%| F|  |TAMS 0x0000000618c00000| PB 0x0000000618c00000| Untracked 
+|  91|0x0000000619000000, 0x0000000619000000, 0x0000000619400000|  0%| F|  |TAMS 0x0000000619000000| PB 0x0000000619000000| Untracked 
+|  92|0x0000000619400000, 0x0000000619400000, 0x0000000619800000|  0%| F|  |TAMS 0x0000000619400000| PB 0x0000000619400000| Untracked 
+|  93|0x0000000619800000, 0x0000000619800000, 0x0000000619c00000|  0%| F|  |TAMS 0x0000000619800000| PB 0x0000000619800000| Untracked 
+|  94|0x0000000619c00000, 0x0000000619c00000, 0x000000061a000000|  0%| F|  |TAMS 0x0000000619c00000| PB 0x0000000619c00000| Untracked 
+|  95|0x000000061a000000, 0x000000061a000000, 0x000000061a400000|  0%| F|  |TAMS 0x000000061a000000| PB 0x000000061a000000| Untracked 
+|  96|0x000000061a400000, 0x000000061a400000, 0x000000061a800000|  0%| F|  |TAMS 0x000000061a400000| PB 0x000000061a400000| Untracked 
+|  97|0x000000061a800000, 0x000000061a800000, 0x000000061ac00000|  0%| F|  |TAMS 0x000000061a800000| PB 0x000000061a800000| Untracked 
+|  98|0x000000061ac00000, 0x000000061ac00000, 0x000000061b000000|  0%| F|  |TAMS 0x000000061ac00000| PB 0x000000061ac00000| Untracked 
+|  99|0x000000061b000000, 0x000000061b000000, 0x000000061b400000|  0%| F|  |TAMS 0x000000061b000000| PB 0x000000061b000000| Untracked 
+| 100|0x000000061b400000, 0x000000061b400000, 0x000000061b800000|  0%| F|  |TAMS 0x000000061b400000| PB 0x000000061b400000| Untracked 
+| 101|0x000000061b800000, 0x000000061b800000, 0x000000061bc00000|  0%| F|  |TAMS 0x000000061b800000| PB 0x000000061b800000| Untracked 
+| 102|0x000000061bc00000, 0x000000061bc00000, 0x000000061c000000|  0%| F|  |TAMS 0x000000061bc00000| PB 0x000000061bc00000| Untracked 
+| 103|0x000000061c000000, 0x000000061c000000, 0x000000061c400000|  0%| F|  |TAMS 0x000000061c000000| PB 0x000000061c000000| Untracked 
+| 104|0x000000061c400000, 0x000000061c400000, 0x000000061c800000|  0%| F|  |TAMS 0x000000061c400000| PB 0x000000061c400000| Untracked 
+| 105|0x000000061c800000, 0x000000061c800000, 0x000000061cc00000|  0%| F|  |TAMS 0x000000061c800000| PB 0x000000061c800000| Untracked 
+| 106|0x000000061cc00000, 0x000000061cc00000, 0x000000061d000000|  0%| F|  |TAMS 0x000000061cc00000| PB 0x000000061cc00000| Untracked 
+| 107|0x000000061d000000, 0x000000061d000000, 0x000000061d400000|  0%| F|  |TAMS 0x000000061d000000| PB 0x000000061d000000| Untracked 
+| 108|0x000000061d400000, 0x000000061d400000, 0x000000061d800000|  0%| F|  |TAMS 0x000000061d400000| PB 0x000000061d400000| Untracked 
+| 109|0x000000061d800000, 0x000000061d800000, 0x000000061dc00000|  0%| F|  |TAMS 0x000000061d800000| PB 0x000000061d800000| Untracked 
+| 110|0x000000061dc00000, 0x000000061dc00000, 0x000000061e000000|  0%| F|  |TAMS 0x000000061dc00000| PB 0x000000061dc00000| Untracked 
+| 111|0x000000061e000000, 0x000000061e000000, 0x000000061e400000|  0%| F|  |TAMS 0x000000061e000000| PB 0x000000061e000000| Untracked 
+| 112|0x000000061e400000, 0x000000061e400000, 0x000000061e800000|  0%| F|  |TAMS 0x000000061e400000| PB 0x000000061e400000| Untracked 
+| 113|0x000000061e800000, 0x000000061e800000, 0x000000061ec00000|  0%| F|  |TAMS 0x000000061e800000| PB 0x000000061e800000| Untracked 
+| 114|0x000000061ec00000, 0x000000061ec00000, 0x000000061f000000|  0%| F|  |TAMS 0x000000061ec00000| PB 0x000000061ec00000| Untracked 
+| 115|0x000000061f000000, 0x000000061f000000, 0x000000061f400000|  0%| F|  |TAMS 0x000000061f000000| PB 0x000000061f000000| Untracked 
+| 116|0x000000061f400000, 0x000000061f400000, 0x000000061f800000|  0%| F|  |TAMS 0x000000061f400000| PB 0x000000061f400000| Untracked 
+| 117|0x000000061f800000, 0x000000061f800000, 0x000000061fc00000|  0%| F|  |TAMS 0x000000061f800000| PB 0x000000061f800000| Untracked 
+| 118|0x000000061fc00000, 0x000000061fc00000, 0x0000000620000000|  0%| F|  |TAMS 0x000000061fc00000| PB 0x000000061fc00000| Untracked 
+| 119|0x0000000620000000, 0x0000000620000000, 0x0000000620400000|  0%| F|  |TAMS 0x0000000620000000| PB 0x0000000620000000| Untracked 
+| 120|0x0000000620400000, 0x0000000620400000, 0x0000000620800000|  0%| F|  |TAMS 0x0000000620400000| PB 0x0000000620400000| Untracked 
+| 121|0x0000000620800000, 0x0000000620abc848, 0x0000000620c00000| 68%| S|CS|TAMS 0x0000000620800000| PB 0x0000000620800000| Complete 
+| 122|0x0000000620c00000, 0x0000000620c00000, 0x0000000621000000|  0%| F|  |TAMS 0x0000000620c00000| PB 0x0000000620c00000| Untracked 
+| 123|0x0000000621000000, 0x0000000621000000, 0x0000000621400000|  0%| F|  |TAMS 0x0000000621000000| PB 0x0000000621000000| Untracked 
+| 124|0x0000000621400000, 0x0000000621400000, 0x0000000621800000|  0%| F|  |TAMS 0x0000000621400000| PB 0x0000000621400000| Untracked 
+| 125|0x0000000621800000, 0x0000000621800000, 0x0000000621c00000|  0%| F|  |TAMS 0x0000000621800000| PB 0x0000000621800000| Untracked 
+| 126|0x0000000621c00000, 0x0000000621c00000, 0x0000000622000000|  0%| F|  |TAMS 0x0000000621c00000| PB 0x0000000621c00000| Untracked 
+| 127|0x0000000622000000, 0x0000000622293d38, 0x0000000622400000| 64%| E|  |TAMS 0x0000000622000000| PB 0x0000000622000000| Complete 
+
+Card table byte_map: [0x000001ed6c6e0000,0x000001ed6d6d0000] _byte_map_base: 0x000001ed696ce000
+
+Marking Bits: (CMBitMap*) 0x000001ed53604e60
+ Bits: [0x000001ed6d6d0000, 0x000001ed75640000)
+
+Polling page: 0x000001ed51370000
+
+Metaspace:
+
+Usage:
+  Non-class:      6.04 MB used.
+      Class:    470.76 KB used.
+       Both:      6.50 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,       6.19 MB ( 10%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,     640.00 KB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,       6.81 MB ( <1%) committed. 
+
+Chunk freelists:
+   Non-Class:  8.38 MB
+       Class:  15.42 MB
+        Both:  23.80 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 21.00 MB
+CDS: on
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - use_allocation_guard: 0.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 0.
+num_arena_births: 256.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 107.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 0.
+num_chunks_taken_from_freelist: 467.
+num_chunk_merges: 0.
+num_chunk_splits: 298.
+num_chunks_enlarged: 167.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=119168Kb used=501Kb max_used=501Kb free=118666Kb
+ bounds [0x000001ed637f0000, 0x000001ed63a60000, 0x000001ed6ac50000]
+CodeHeap 'profiled nmethods': size=119104Kb used=2583Kb max_used=2583Kb free=116521Kb
+ bounds [0x000001ed5bc50000, 0x000001ed5bee0000, 0x000001ed630a0000]
+CodeHeap 'non-nmethods': size=7488Kb used=2161Kb max_used=3869Kb free=5326Kb
+ bounds [0x000001ed630a0000, 0x000001ed63470000, 0x000001ed637f0000]
+ total_blobs=2686 nmethods=1566 adapters=1025
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 15.556 Thread 0x000001ed75948090 1558       3       java.util.concurrent.locks.ReentrantLock$NonfairSync::initialTryLock (58 bytes)
+Event: 15.556 Thread 0x000001ed75948090 nmethod 1558 0x000001ed5bed4d10 code [0x000001ed5bed4f00, 0x000001ed5bed52f0]
+Event: 15.556 Thread 0x000001ed75948090 1552       1       java.util.concurrent.locks.AbstractQueuedSynchronizer::setState (6 bytes)
+Event: 15.556 Thread 0x000001ed75948090 nmethod 1552 0x000001ed63869190 code [0x000001ed63869320, 0x000001ed638693f0]
+Event: 16.512 Thread 0x000001ed75948090 1559       3       sun.misc.Unsafe::getInt (9 bytes)
+Event: 16.513 Thread 0x000001ed75948090 nmethod 1559 0x000001ed5bed5410 code [0x000001ed5bed55a0, 0x000001ed5bed56b0]
+Event: 16.579 Thread 0x000001ed75943fd0 1560   !   4       org.lwjgl.system.MemoryUtil::wrapBufferInt (74 bytes)
+Event: 16.580 Thread 0x000001ed75943fd0 nmethod 1560 0x000001ed63869490 code [0x000001ed63869620, 0x000001ed63869738]
+Event: 16.688 Thread 0x000001ed75943fd0 1561       4       org.verselstudios.math.Matrix4d::rotationY (52 bytes)
+Event: 16.692 Thread 0x000001ed75943fd0 nmethod 1561 0x000001ed63869810 code [0x000001ed638699e0, 0x000001ed63869da0]
+Event: 16.706 Thread 0x000001ed75943fd0 1562       4       org.lwjgl.system.MemoryStack::mallocInt (13 bytes)
+Event: 16.708 Thread 0x000001ed75943fd0 nmethod 1562 0x000001ed63869f90 code [0x000001ed6386a120, 0x000001ed6386a2a0]
+Event: 16.827 Thread 0x000001ed75943fd0 1563   !   4       java.nio.DirectIntBufferU::get (33 bytes)
+Event: 16.829 Thread 0x000001ed75943fd0 nmethod 1563 0x000001ed6386a410 code [0x000001ed6386a5a0, 0x000001ed6386a688]
+Event: 16.833 Thread 0x000001ed75943fd0 1564       4       org.verselstudios.model.RenderSystem::draw (89 bytes)
+Event: 16.850 Thread 0x000001ed75943fd0 nmethod 1564 0x000001ed6386a790 code [0x000001ed6386aaa0, 0x000001ed6386be70]
+Event: 16.870 Thread 0x000001ed75948090 1565       3       org.lwjgl.system.MemoryUtil::memGetInt (9 bytes)
+Event: 16.870 Thread 0x000001ed75948090 nmethod 1565 0x000001ed5bed5790 code [0x000001ed5bed5940, 0x000001ed5bed5b18]
+Event: 20.342 Thread 0x000001ed75943fd0 1566       4       org.lwjgl.system.MemoryStack::stackPush (7 bytes)
+Event: 20.344 Thread 0x000001ed75943fd0 nmethod 1566 0x000001ed6386ce90 code [0x000001ed6386d060, 0x000001ed6386d2d0]
+
+GC Heap History (2 events):
+Event: 15.549 GC heap before
+{Heap before GC invocations=0 (full 0):
+ garbage-first heap   total 524288K, used 24576K [0x0000000602400000, 0x0000000800000000)
+  region size 4096K, 6 young (24576K), 0 survivors (0K)
+ Metaspace       used 6648K, committed 6976K, reserved 1114112K
+  class space    used 470K, committed 640K, reserved 1048576K
+}
+Event: 15.556 GC heap after
+{Heap after GC invocations=1 (full 0):
+ garbage-first heap   total 524288K, used 2802K [0x0000000602400000, 0x0000000800000000)
+  region size 4096K, 1 young (4096K), 1 survivors (4096K)
+ Metaspace       used 6648K, committed 6976K, reserved 1114112K
+  class space    used 470K, committed 640K, reserved 1048576K
+}
+
+Dll operation events (9 events):
+Event: 0.004 Loaded shared library C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\java.dll
+Event: 0.020 Loaded shared library C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\jsvml.dll
+Event: 0.036 Loaded shared library C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\net.dll
+Event: 0.037 Loaded shared library C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\nio.dll
+Event: 0.038 Loaded shared library C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\zip.dll
+Event: 0.070 Loaded shared library C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\jimage.dll
+Event: 0.080 Loaded shared library C:\Users\alexd\AppData\Local\Temp\lwjgl_alexd\3.4.0+20\x64\lwjgl.dll
+Event: 0.292 Loaded shared library C:\Users\alexd\AppData\Local\Temp\lwjgl_alexd\3.4.0+20\x64\lwjgl_opengl.dll
+Event: 0.543 Loaded shared library C:\Users\alexd\AppData\Local\Temp\lwjgl_alexd\3.4.0+20\x64\lwjgl_stb.dll
+
+Deoptimization events (20 events):
+Event: 0.457 Thread 0x000001ed51130cd0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001ed6382556c relative=0x000000000000058c
+Event: 0.457 Thread 0x000001ed51130cd0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001ed6382556c method=java.lang.AbstractStringBuilder.inflateIfNeededFor(Ljava/lang/String;)V @ 14 c2
+Event: 0.457 Thread 0x000001ed51130cd0 DEOPT PACKING pc=0x000001ed6382556c sp=0x0000009326aff350
+Event: 0.457 Thread 0x000001ed51130cd0 DEOPT UNPACKING pc=0x000001ed630f46a2 sp=0x0000009326aff200 mode 2
+Event: 0.457 Thread 0x000001ed51130cd0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001ed6381ea90 relative=0x00000000000000f0
+Event: 0.457 Thread 0x000001ed51130cd0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001ed6381ea90 method=java.lang.String.getBytes([BIB)V @ 5 c2
+Event: 0.457 Thread 0x000001ed51130cd0 DEOPT PACKING pc=0x000001ed6381ea90 sp=0x0000009326aff280
+Event: 0.457 Thread 0x000001ed51130cd0 DEOPT UNPACKING pc=0x000001ed630f46a2 sp=0x0000009326aff228 mode 2
+Event: 0.463 Thread 0x000001ed51130cd0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001ed6382f028 relative=0x0000000000000348
+Event: 0.463 Thread 0x000001ed51130cd0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001ed6382f028 method=java.util.regex.Pattern$BmpCharPropertyGreedy.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 12 c2
+Event: 0.463 Thread 0x000001ed51130cd0 DEOPT PACKING pc=0x000001ed6382f028 sp=0x0000009326afd480
+Event: 0.463 Thread 0x000001ed51130cd0 DEOPT UNPACKING pc=0x000001ed630f46a2 sp=0x0000009326afd438 mode 2
+Event: 0.486 Thread 0x000001ed51130cd0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001ed63831bac relative=0x000000000000076c
+Event: 0.486 Thread 0x000001ed51130cd0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001ed63831bac method=java.util.regex.Matcher.search(I)Z @ 30 c2
+Event: 0.486 Thread 0x000001ed51130cd0 DEOPT PACKING pc=0x000001ed63831bac sp=0x0000009326aff420
+Event: 0.486 Thread 0x000001ed51130cd0 DEOPT UNPACKING pc=0x000001ed630f46a2 sp=0x0000009326aff400 mode 2
+Event: 0.486 Thread 0x000001ed51130cd0 DEOPT PACKING pc=0x000001ed5bce85f9 sp=0x0000009326afe1c0
+Event: 0.486 Thread 0x000001ed51130cd0 DEOPT UNPACKING pc=0x000001ed630f4e42 sp=0x0000009326afd630 mode 0
+Event: 1.234 Thread 0x000001ed51130cd0 DEOPT PACKING pc=0x000001ed5be8cc0b sp=0x0000009326aff530
+Event: 1.234 Thread 0x000001ed51130cd0 DEOPT UNPACKING pc=0x000001ed630f4e42 sp=0x0000009326afea08 mode 0
+
+Classes loaded (20 events):
+Event: 0.546 Loading class java/lang/invoke/MethodHandleImpl$Makers
+Event: 0.546 Loading class java/lang/invoke/MethodHandleImpl$Makers done
+Event: 0.546 Loading class java/lang/invoke/MethodHandleImpl$Makers$1
+Event: 0.546 Loading class java/lang/invoke/MethodHandleImpl$Makers$1 done
+Event: 0.546 Loading class java/lang/invoke/MethodHandleImpl$Makers$2
+Event: 0.546 Loading class java/lang/invoke/MethodHandleImpl$Makers$2 done
+Event: 0.546 Loading class java/lang/invoke/MethodHandleImpl$Makers$3
+Event: 0.546 Loading class java/lang/invoke/MethodHandleImpl$Makers$3 done
+Event: 0.548 Loading class java/lang/runtime/ObjectMethods$1
+Event: 0.548 Loading class java/lang/runtime/ObjectMethods$1 done
+Event: 0.550 Loading class java/lang/invoke/DirectMethodHandle$1
+Event: 0.551 Loading class java/lang/invoke/DirectMethodHandle$1 done
+Event: 3.344 Loading class java/util/ReverseOrderListView
+Event: 3.344 Loading class java/util/ReverseOrderListView done
+Event: 3.344 Loading class java/util/ReverseOrderListView$Rand
+Event: 3.344 Loading class java/util/ReverseOrderListView$Rand done
+Event: 3.344 Loading class java/util/ReverseOrderListView$DescendingIterator
+Event: 3.344 Loading class java/util/ReverseOrderListView$DescendingIterator done
+Event: 3.344 Loading class java/util/ArrayList$ListItr
+Event: 3.344 Loading class java/util/ArrayList$ListItr done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 0.529 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x00000006217b3818}: 'void java.lang.invoke.DelegatingMethodHandle$Holder.reinvoke_L(java.lang.Object, java.lang.Object, int)'> (0x00000006217b3818) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.529 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x00000006217ba138}: 'void java.lang.invoke.Invokers$Holder.invokeExact_MT(java.lang.Object, java.lang.Object, int, java.lang.Object)'> (0x00000006217ba138) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.531 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x00000006217d08b8}: 'double java.lang.invoke.DelegatingMethodHandle$Holder.reinvoke_L(java.lang.Object, java.lang.Object)'> (0x00000006217d08b8) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.531 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x00000006217da9e0}: 'void java.lang.invoke.DelegatingMethodHandle$Holder.reinvoke_L(java.lang.Object, java.lang.Object, double)'> (0x00000006217da9e0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.537 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000621033530}: 'void java.lang.System.load(java.lang.String, java.lang.Class)'> (0x0000000621033530) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.538 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000621035fa0}: 'void java.lang.System.loadLibrary(java.lang.String, java.lang.Class)'> (0x0000000621035fa0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.542 Thread 0x000001ed51130cd0 Exception <a 'sun/nio/fs/WindowsException'{0x00000006210455f8}> (0x00000006210455f8) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.542 Thread 0x000001ed51130cd0 Exception <a 'sun/nio/fs/WindowsException'{0x0000000621045978}> (0x0000000621045978) 
+thrown [s\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.546 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000621053208}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000621053208) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.546 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000621058cf0}: 'java.lang.Object java.lang.invoke.Invokers$Holder.invoke_MT(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000621058cf0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.548 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x00000006210782c8}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000006210782c8) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.548 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x000000062107bbd0}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object)'> (0x000000062107bbd0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.549 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x000000062107ff10}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x000000062107ff10) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.549 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000621083578}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, int, int)'> (0x0000000621083578) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.549 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x000000062108aa70}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, long, long)'> (0x000000062108aa70) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.549 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000621091508}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, float, float)'> (0x0000000621091508) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.549 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000621097f98}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, double, double)'> (0x0000000621097f98) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.550 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x000000062109c3b0}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, long)'> (0x000000062109c3b0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.552 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x00000006210af058}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, int)'> (0x00000006210af058) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+Event: 0.553 Thread 0x000001ed51130cd0 Exception <a 'java/lang/NoSuchMethodError'{0x00000006210c3c20}: 'int java.lang.invoke.Invokers$Holder.linkToTargetMethod(java.lang.Object, java.lang.Object)'> (0x00000006210c3c20) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 773]
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (20 events):
+Event: 1.083 Executing VM operation: Cleanup
+Event: 1.083 Executing VM operation: Cleanup done
+Event: 3.097 Executing VM operation: Cleanup
+Event: 3.097 Executing VM operation: Cleanup done
+Event: 3.344 Executing VM operation: HandshakeAllThreads (Deoptimize)
+Event: 3.344 Executing VM operation: HandshakeAllThreads (Deoptimize) done
+Event: 4.344 Executing VM operation: Cleanup
+Event: 4.344 Executing VM operation: Cleanup done
+Event: 5.356 Executing VM operation: Cleanup
+Event: 5.356 Executing VM operation: Cleanup done
+Event: 6.371 Executing VM operation: Cleanup
+Event: 6.372 Executing VM operation: Cleanup done
+Event: 9.392 Executing VM operation: Cleanup
+Event: 9.392 Executing VM operation: Cleanup done
+Event: 10.396 Executing VM operation: Cleanup
+Event: 10.396 Executing VM operation: Cleanup done
+Event: 15.549 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause)
+Event: 15.556 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause) done
+Event: 16.557 Executing VM operation: Cleanup
+Event: 16.557 Executing VM operation: Cleanup done
+
+Memory protections (0 events):
+No events
+
+Nmethod flushes (0 events):
+No events
+
+Events (20 events):
+Event: 0.019 Thread 0x000001ed51130cd0 Thread added: 0x000001ed75932eb0
+Event: 0.019 Thread 0x000001ed51130cd0 Thread added: 0x000001ed75934c40
+Event: 0.019 Thread 0x000001ed51130cd0 Thread added: 0x000001ed75938580
+Event: 0.019 Thread 0x000001ed51130cd0 Thread added: 0x000001ed75941110
+Event: 0.019 Thread 0x000001ed51130cd0 Thread added: 0x000001ed75943fd0
+Event: 0.019 Thread 0x000001ed51130cd0 Thread added: 0x000001ed75948090
+Event: 0.030 Thread 0x000001ed75948090 Thread added: 0x000001ed78a7a2c0
+Event: 0.030 Thread 0x000001ed75948090 Thread added: 0x000001ed78b14370
+Event: 0.031 Thread 0x000001ed51130cd0 Thread added: 0x000001ed78b215f0
+Event: 0.032 Thread 0x000001ed51130cd0 Thread added: 0x000001ed78b26640
+Event: 0.110 Thread 0x000001ed78a7a2c0 Thread added: 0x000001ed7d147a10
+Event: 0.256 Thread 0x000001ed7d147a10 Thread exited: 0x000001ed7d147a10
+Event: 0.293 Thread 0x000001ed78b14370 Thread added: 0x000001ed45057a60
+Event: 0.297 Thread 0x000001ed45057a60 Thread added: 0x000001ed78d290e0
+Event: 0.563 Thread 0x000001ed78d290e0 Thread added: 0x000001ed45650db0
+Event: 0.707 Thread 0x000001ed45650db0 Thread exited: 0x000001ed45650db0
+Event: 0.707 Thread 0x000001ed78d290e0 Thread exited: 0x000001ed78d290e0
+Event: 1.949 Thread 0x000001ed45057a60 Thread exited: 0x000001ed45057a60
+Event: 3.538 Thread 0x000001ed78a7a2c0 Thread exited: 0x000001ed78a7a2c0
+Event: 3.538 Thread 0x000001ed78b14370 Thread exited: 0x000001ed78b14370
+
+
+Dynamic libraries:
+0x00007ff6f8d10000 - 0x00007ff6f8d1e000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\java.exe
+0x00007ff8aae50000 - 0x00007ff8ab068000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ff8aa5a0000 - 0x00007ff8aa664000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ff8a8710000 - 0x00007ff8a8ae3000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ff8a7f60000 - 0x00007ff8a8071000 	C:\Windows\System32\ucrtbase.dll
+0x00007ff86fd90000 - 0x00007ff86fda8000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\jli.dll
+0x00007ff873590000 - 0x00007ff8735ae000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\VCRUNTIME140.dll
+0x00007ff8aac30000 - 0x00007ff8aade2000 	C:\Windows\System32\USER32.dll
+0x00007ff8a8080000 - 0x00007ff8a80a6000 	C:\Windows\System32\win32u.dll
+0x00007ff8aa270000 - 0x00007ff8aa299000 	C:\Windows\System32\GDI32.dll
+0x00007ff890f00000 - 0x00007ff89119c000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.6060_none_2712eda17382d24b\COMCTL32.dll
+0x00007ff8a80b0000 - 0x00007ff8a81cb000 	C:\Windows\System32\gdi32full.dll
+0x00007ff8aa100000 - 0x00007ff8aa1a7000 	C:\Windows\System32\msvcrt.dll
+0x00007ff8a8200000 - 0x00007ff8a829a000 	C:\Windows\System32\msvcp_win.dll
+0x00007ff8aa1d0000 - 0x00007ff8aa201000 	C:\Windows\System32\IMM32.DLL
+0x00007ff881b70000 - 0x00007ff881b7c000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\vcruntime140_1.dll
+0x00007ff86d1d0000 - 0x00007ff86d25d000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\msvcp140.dll
+0x00007fff838f0000 - 0x00007fff84680000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\server\jvm.dll
+0x00007ff8aa7f0000 - 0x00007ff8aa8a1000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ff8aa9c0000 - 0x00007ff8aaa68000 	C:\Windows\System32\sechost.dll
+0x00007ff8a81d0000 - 0x00007ff8a81f8000 	C:\Windows\System32\bcrypt.dll
+0x00007ff8a8b70000 - 0x00007ff8a8c88000 	C:\Windows\System32\RPCRT4.dll
+0x00007ff8a8af0000 - 0x00007ff8a8b61000 	C:\Windows\System32\WS2_32.dll
+0x00007ff8a6d70000 - 0x00007ff8a6dbd000 	C:\Windows\SYSTEM32\POWRPROF.dll
+0x00007ff8a0040000 - 0x00007ff8a004a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ff8a31b0000 - 0x00007ff8a31e4000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ff8a6d50000 - 0x00007ff8a6d63000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007ff8a6ff0000 - 0x00007ff8a7008000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ff87fce0000 - 0x00007ff87fcea000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\jimage.dll
+0x00007ff89a810000 - 0x00007ff89aa43000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ff8a8fa0000 - 0x00007ff8a9331000 	C:\Windows\System32\combase.dll
+0x00007ff8aa300000 - 0x00007ff8aa3d8000 	C:\Windows\System32\OLEAUT32.dll
+0x00007ff87df80000 - 0x00007ff87dfb2000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ff8a8550000 - 0x00007ff8a85cb000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ff86fd70000 - 0x00007ff86fd8f000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\java.dll
+0x00007ff8a93e0000 - 0x00007ff8a9c7c000 	C:\Windows\System32\SHELL32.dll
+0x00007ff8a85d0000 - 0x00007ff8a870f000 	C:\Windows\System32\wintypes.dll
+0x00007ff8a5e20000 - 0x00007ff8a673a000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007ff8aaa70000 - 0x00007ff8aab74000 	C:\Windows\System32\SHCORE.dll
+0x00007ff8aa780000 - 0x00007ff8aa7e9000 	C:\Windows\System32\shlwapi.dll
+0x00007ff8a7e90000 - 0x00007ff8a7eb5000 	C:\Windows\SYSTEM32\profapi.dll
+0x00007ff86d0f0000 - 0x00007ff86d1c7000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\jsvml.dll
+0x00007ff8747b0000 - 0x00007ff8747c0000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\net.dll
+0x00007ff8a2fb0000 - 0x00007ff8a30dc000 	C:\Windows\SYSTEM32\WINHTTP.dll
+0x00007ff8a74b0000 - 0x00007ff8a7519000 	C:\Windows\system32\mswsock.dll
+0x00007ff86fd30000 - 0x00007ff86fd46000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\nio.dll
+0x00007ff86fd50000 - 0x00007ff86fd68000 	C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\zip.dll
+0x00007ff849c10000 - 0x00007ff849c91000 	C:\Users\alexd\AppData\Local\Temp\lwjgl_alexd\3.4.0+20\x64\lwjgl.dll
+0x00007ff8493b0000 - 0x00007ff84943a000 	C:\Users\alexd\AppData\Local\Temp\lwjgl_alexd\3.4.0+20\x64\glfw.dll
+0x00007ff8502a0000 - 0x00007ff8502e6000 	C:\Windows\SYSTEM32\dinput8.dll
+0x00007ff876460000 - 0x00007ff876471000 	C:\Windows\SYSTEM32\xinput1_4.dll
+0x00007ff8a7c20000 - 0x00007ff8a7c6e000 	C:\Windows\SYSTEM32\cfgmgr32.dll
+0x00007ff8a7c70000 - 0x00007ff8a7c9c000 	C:\Windows\SYSTEM32\DEVOBJ.dll
+0x00007ff8a56f0000 - 0x00007ff8a571b000 	C:\Windows\SYSTEM32\dwmapi.dll
+0x00007ff879fa0000 - 0x00007ff87a1b5000 	C:\Windows\SYSTEM32\inputhost.dll
+0x00007ff8a25b0000 - 0x00007ff8a26e3000 	C:\Windows\SYSTEM32\CoreMessaging.dll
+0x00007ff8a5460000 - 0x00007ff8a5513000 	C:\Windows\system32\uxtheme.dll
+0x00007ff8a76c0000 - 0x00007ff8a76cc000 	C:\Windows\SYSTEM32\CRYPTBASE.DLL
+0x00007ff8a8c90000 - 0x00007ff8a8df0000 	C:\Windows\System32\MSCTF.dll
+0x00007ff896260000 - 0x00007ff896360000 	C:\Windows\SYSTEM32\opengl32.dll
+0x00007ff895fc0000 - 0x00007ff895fed000 	C:\Windows\SYSTEM32\GLU32.dll
+0x00007ff8a5760000 - 0x00007ff8a5797000 	C:\Windows\SYSTEM32\dxcore.dll
+0x00007ff8aab80000 - 0x00007ff8aac30000 	C:\Windows\System32\clbcatq.dll
+0x00007fff5f270000 - 0x00007fff61bc3000 	C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_901d8cfde13e2b8b\nvoglv64.dll
+0x00007ff8a9c80000 - 0x00007ff8aa0f4000 	C:\Windows\System32\SETUPAPI.dll
+0x00007ff8a8df0000 - 0x00007ff8a8f91000 	C:\Windows\System32\ole32.dll
+0x00007ff8a6dc0000 - 0x00007ff8a6dd4000 	C:\Windows\SYSTEM32\WTSAPI32.dll
+0x00007ff8a77a0000 - 0x00007ff8a77b2000 	C:\Windows\SYSTEM32\msasn1.dll
+0x00007ff89ffe0000 - 0x00007ff8a0012000 	C:\Windows\SYSTEM32\cryptnet.dll
+0x00007ff8a82a0000 - 0x00007ff8a8408000 	C:\Windows\System32\CRYPT32.dll
+0x00007ff8a7830000 - 0x00007ff8a7880000 	C:\Windows\SYSTEM32\wldp.dll
+0x00007ff89fe30000 - 0x00007ff89ff8a000 	C:\Windows\SYSTEM32\drvstore.dll
+0x00007ff8a8410000 - 0x00007ff8a848c000 	C:\Windows\System32\WINTRUST.dll
+0x00007ff8a7100000 - 0x00007ff8a7134000 	C:\Windows\SYSTEM32\ntmarta.dll
+0x00007ff8a9340000 - 0x00007ff8a935f000 	C:\Windows\System32\imagehlp.dll
+0x00007ff8a7700000 - 0x00007ff8a771b000 	C:\Windows\SYSTEM32\CRYPTSP.dll
+0x00007ff8a6f50000 - 0x00007ff8a6f87000 	C:\Windows\system32\rsaenh.dll
+0x00007ff8915f0000 - 0x00007ff895384000 	C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_901d8cfde13e2b8b\nvgpucomp64.dll
+0x00007ff881c90000 - 0x00007ff881dd7000 	C:\Windows\system32\nvspcap64.dll
+0x00007ff8a6990000 - 0x00007ff8a69fc000 	C:\Windows\SYSTEM32\WINSTA.dll
+0x00007ff881a00000 - 0x00007ff881b45000 	C:\Windows\SYSTEM32\textinputframework.dll
+0x00007ff89ec20000 - 0x00007ff89ef8c000 	C:\Windows\SYSTEM32\CoreUIComponents.dll
+0x00007ff84b170000 - 0x00007ff84b1cc000 	C:\Users\alexd\AppData\Local\Temp\lwjgl_alexd\3.4.0+20\x64\lwjgl_opengl.dll
+0x00007ff837700000 - 0x00007ff837796000 	C:\Users\alexd\AppData\Local\Temp\lwjgl_alexd\3.4.0+20\x64\lwjgl_stb.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.6060_none_2712eda17382d24b;C:\Users\alexd\.gradle\jdks\eclipse_adoptium-21-amd64-windows.2\bin\server;C:\Users\alexd\AppData\Local\Temp\lwjgl_alexd\3.4.0+20\x64;C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_901d8cfde13e2b8b
+
+VM Arguments:
+jvm_args: -Dfile.encoding=windows-1252 -Duser.country=US -Duser.language=en -Duser.variant 
+java_command: org.verselstudios.Main
+java_class_path (initial): C:\Users\alexd\Documents\LWJGL\java_renderer\build\classes\java\main;C:\Users\alexd\Documents\LWJGL\java_renderer\build\resources\main;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-assimp\3.4.0\4c958db45767dafbd4ba2a2985cc8e68a6213852\lwjgl-assimp-3.4.0.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-assimp\3.4.0\97d6a2b5c7475992946d172c00e74aee591a03db\lwjgl-assimp-3.4.0-natives-windows.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-glfw\3.4.0\bb282ac212eb91f6b2add25ac31dce896f9c5b64\lwjgl-glfw-3.4.0.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-glfw\3.4.0\770e27000b7a1c945a357a532e2008e65cab3a88\lwjgl-glfw-3.4.0-natives-windows.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-openal\3.4.0\84d61bc4367e21a567fcc4ee9efefd1e11b3cd05\lwjgl-openal-3.4.0.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-openal\3.4.0\89db5313d51ee27485ba2e96c1d2f3fca55cd1e5\lwjgl-openal-3.4.0-natives-windows.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-opengl\3.4.0\5947ab24b5dbe93a9e011ac4fd5f8f14dfb138c2\lwjgl-opengl-3.4.0.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-opengl\3.4.0\e8443b8558d12ccffb16248ebfe0d670d3bfdb29\lwjgl-opengl-3.4.0-natives-windows.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-renderdoc\3.4.0\6380ac702fa663c613e1620def257385b24a6499\lwjgl-renderdoc-3.4.0.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-stb\3.4.0\8bd174a85c684943b6a90281c30cd1037d1faee0\lwjgl-stb-3.4.0.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl-stb\3.4.0\bcac98b40b53b1b35c4ac3d1a3e1802b12e4c5a6\lwjgl-stb-3.4.0-natives-windows.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl\3.4.0\201de49386cbba233b36eca434ce9e56345a5f8a\lwjgl-3.4.0.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.lwjgl\lwjgl\3.4.0\93e881238b992ab309c3d58d60976586b3dfe810\lwjgl-3.4.0-natives-windows.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.13.2\48b8230771e573b54ce6e867a9001e75977fe78e\gson-2.13.2.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\24.1.0\7af6a669488450c4a07c2c3254e2151df42d7d04\annotations-24.1.0.jar;C:\Users\alexd\.gradle\caches\modules-2\files-2.1\com.google.errorprone\error_prone_annotations\2.41.0\4381275efdef6ddfae38f002c31e84cd001c97f0\error_prone_annotations-2.41.0.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 12                                        {product} {ergonomic}
+     uint ConcGCThreads                            = 4                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 15                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 4194304                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 536870912                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 8552185856                                {product} {ergonomic}
+   size_t MaxNewSize                               = 5129633792                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 4194304                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 7602480                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122027880                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122027880                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 8552185856                             {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-24
+PATH=C:\Program Files\Eclipse Adoptium\jdk-25.0.1.8-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\vcpkg;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\Maven\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\CMake\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\Git LFS;C:\Users\alexd\AppData\Local\UniGetUI\Chocolatey\bin;C:\Users\alexd\AppData\Local\Microsoft\WindowsApps;C:\Users\alexd\.dotnet\tools;C:\Users\alexd\.dotnet\tools;C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin;C:\Users\alexd\AppData\Roaming\npm
+USERNAME=alexd
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 151 Stepping 2, GenuineIntel
+TMP=C:\Users\alexd\AppData\Local\Temp
+TEMP=C:\Users\alexd\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22621 (10.0.22621.5415)
+OS uptime: 2 days 20:08 hours
+Hyper-V role detected
+
+CPU: total 20 (initial active 20) (10 cores per cpu, 2 threads per core) family 6 model 151 stepping 2 microcode 0x32, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt, clwb, hv, serialize, rdtscp, rdpid, fsrm, f16c, cet_ibt, cet_ss
+Processor Information for the first 20 processors :
+  Max Mhz: 3600, Current Mhz: 3600, Mhz Limit: 3600
+
+Memory: 4k page, system-wide physical 32609M (7160M free)
+TotalPageFile size 78896M (AvailPageFile size 38565M)
+current process WorkingSet (physical memory assigned to process): 117M, peak: 119M
+current process commit charge ("private bytes"): 734M, peak: 740M
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.7+6-LTS) for windows-amd64 JRE (21.0.7+6-LTS), built on 2025-04-15T00:00:00Z by "admin" with MS VC++ 17.7 (VS2022)
+
+END.

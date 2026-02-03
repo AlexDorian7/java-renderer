@@ -1,4 +1,4 @@
-package org.verselstudios.gl;
+package org.verselstudios.model;
 
 import org.verselstudios.math.Rectangle;
 import org.verselstudios.math.Vector3d;
@@ -12,7 +12,7 @@ public class QuadRenderSystem {
         Vector3d pos = new Vector3d(rectangle.getPos());
         Vector3d bound = new Vector3d(rectangle.getBound());
 
-        ShaderProgram program = ShaderRegister.getProgram("pos_color_tex");
+        ShaderProgram program = ShaderRegister.getProgram("position_color_tex");
         RenderSystem rs = new RenderSystem(RenderSystem.RenderType.GL_TRIANGLE_STRIP, program).begin();
 
         // vertices

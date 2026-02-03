@@ -8,19 +8,43 @@ import java.util.Objects;
 
 import static org.lwjgl.opengl.GL20.*;
 
-public final class Texture {
+public class Texture {
     private static final HashMap<String, Integer> CACHE = new HashMap<>();
 
-    private final int textureId;
-    private final int width;
-    private final int height;
-    private final String resourcePath;
+    protected final int textureId;
+    protected final int width;
+    protected final int height;
+    protected final String resourcePath;
 
     public Texture(String resourcePath) {
-        this.resourcePath = resourcePath;
-        Image image = ImageUtils.loadImageFromResource(resourcePath);
+        this(resourcePath, false);
+    }
+
+    public Texture(String resource, boolean isWeb) {
+        this.resourcePath = resource;
+        Image image;
+        if (isWeb) {
+            image = ImageUtils.loadImageFromUrl(resource);
+        } else {
+            image = ImageUtils.loadImageFromResource(resource);
+        }
         width = image.width();
         height = image.height();
+        if (CACHE.containsKey(resource)) {
+            textureId = CACHE.get(resource);
+        } else {
+            textureId = GLHelper.createGLTexture(image);
+            CACHE.put(resource, textureId);
+        }
+    }
+
+
+
+    protected Texture(Image image) {
+        width = image.width();
+        height = image.height();
+        String resourcePath = "GENERATED_" + image.hashCode();
+        this.resourcePath = resourcePath;
         if (CACHE.containsKey(resourcePath)) {
             textureId = CACHE.get(resourcePath);
         } else {

@@ -8,10 +8,7 @@ import org.verselstudios.events.CharacterEvent;
 import org.verselstudios.events.KeyEvent;
 import org.verselstudios.events.MouseMoveEvent;
 import org.verselstudios.events.MousePressEvent;
-import org.verselstudios.math.Matrix4d;
-import org.verselstudios.math.Rectangle;
 import org.verselstudios.render.*;
-import org.verselstudios.shader.ShaderRegister;
 
 import java.nio.*;
 
@@ -55,9 +52,6 @@ public class Main {
 
         renderManager.getRenderStack().push(new CameraControllRenderer(renderManager.getRenderStack().getCamera()));
 
-//        RenderStack.push(new TextWindow("Hello World", "Hello World", new Rectangle(1, 1)));
-        renderManager.getRenderStack().push(new DebugWorldTextRenderer());
-        renderManager.getRenderStack().push(new DebugHeightMapRenderer());
         renderManager.getRenderStack().push(new AxisRenderer(true));
     }
 
@@ -76,7 +70,7 @@ public class Main {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
         // Create the window
-        window = glfwCreateWindow(600, 600, "Work In Progress", NULL, NULL);
+        window = glfwCreateWindow(1000, 1000, "Work In Progress", NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 

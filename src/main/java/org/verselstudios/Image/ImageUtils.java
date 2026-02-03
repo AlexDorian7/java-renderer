@@ -6,8 +6,12 @@ import org.lwjgl.system.MemoryStack;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.channels.Channels;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.nio.channels.ReadableByteChannel;
 
 public class ImageUtils {
 
@@ -43,6 +47,32 @@ public class ImageUtils {
         buffer.flip();
         return buffer;
     }
+
+    private static ByteBuffer readUrlToBuffer(String urlString) throws IOException {
+        URL url = new URL(urlString);
+        URLConnection connection = url.openConnection();
+        connection.setUseCaches(false);
+
+        try (InputStream source = connection.getInputStream();
+            ReadableByteChannel rbc = Channels.newChannel(source)) {
+
+            ByteBuffer buffer = BufferUtils.createByteBuffer(8 * 1024);
+
+            while (true) {
+                int bytes = rbc.read(buffer);
+                if (bytes == -1)
+                    break;
+
+                if (buffer.remaining() == 0) {
+                    buffer = resizeBuffer(buffer, buffer.capacity() * 2);
+                }
+            }
+
+            buffer.flip();
+            return buffer;
+        }
+    }
+
 
     private static ByteBuffer resizeBuffer(ByteBuffer buffer, int newCapacity) {
         ByteBuffer newBuffer = BufferUtils.createByteBuffer(newCapacity);
@@ -80,5 +110,35 @@ public class ImageUtils {
             throw new RuntimeException("Failed to read resource: " + resourcePath, e);
         }
     }
+
+    public static Image loadImageFromUrl(String urlString) {
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+
+            ByteBuffer imageBuffer = readUrlToBuffer(urlString);
+
+            IntBuffer width  = stack.mallocInt(1);
+            IntBuffer height = stack.mallocInt(1);
+            IntBuffer comp   = stack.mallocInt(1);
+
+            ByteBuffer pixels = STBImage.stbi_load_from_memory(
+                    imageBuffer,
+                    width,
+                    height,
+                    comp,
+                    4 // force RGBA
+            );
+
+            if (pixels == null) {
+                throw new RuntimeException("Failed to load image: " +
+                        STBImage.stbi_failure_reason());
+            }
+
+            return new Image(width.get(0), height.get(0), pixels);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read URL: " + urlString, e);
+        }
+    }
+
 
 }

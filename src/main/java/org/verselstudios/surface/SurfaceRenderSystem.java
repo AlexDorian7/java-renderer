@@ -1,6 +1,6 @@
 package org.verselstudios.surface;
 
-import org.verselstudios.gl.RenderSystem;
+import org.verselstudios.model.RenderSystem;
 import org.verselstudios.math.*;
 import org.verselstudios.shader.VaoBuilder;
 import org.verselstudios.shader.Vertex;

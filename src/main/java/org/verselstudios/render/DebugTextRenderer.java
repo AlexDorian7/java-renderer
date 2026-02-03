@@ -3,6 +3,7 @@ package org.verselstudios.render;
 import org.verselstudios.math.Vector3d;
 import org.verselstudios.render.font.Font;
 
+@Deprecated
 public class DebugTextRenderer implements Renderer {
     @Override
     public void render() {

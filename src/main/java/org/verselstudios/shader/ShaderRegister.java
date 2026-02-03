@@ -5,7 +5,8 @@ import org.verselstudios.math.Matrix4d;
 
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Scanner;
+
+import static org.verselstudios.util.Util.readString;
 
 public class ShaderRegister {
 
@@ -51,11 +52,6 @@ public class ShaderRegister {
 
 
         return new ShaderPostProgram(vertexCode, fragmentCode, attribs, builder);
-    }
-
-    private static String readString(InputStream stream) {
-        Scanner s = new Scanner(stream).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
     }
 
     public static ShaderProgram getProgram(String name) {

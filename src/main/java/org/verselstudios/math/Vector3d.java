@@ -1,14 +1,15 @@
 package org.verselstudios.math;
 
 public class Vector3d {
-    private double x;
-    private double y;
-    private double z;
-
+    public static final Vector3d ONE = new Vector3d(1,1,1);
     public static final Vector3d ZERO = new Vector3d(0,0,0);
     public static final Vector3d X = new Vector3d(1,0,0);
     public static final Vector3d Y = new Vector3d(0,1,0);
     public static final Vector3d Z = new Vector3d(0,0,1);
+
+    private double x;
+    private double y;
+    private double z;
 
     public Vector3d() {
         this(0, 0, 0);
@@ -157,5 +158,13 @@ public class Vector3d {
     @Override
     public String toString() {
         return "[" + x + ", " + y + ", " + z + "]";
+    }
+
+    public Vector3d transform(Matrix4d transformMatrix) {
+        double w = 1;
+        double x = transformMatrix.get(0, 0)*this.x + transformMatrix.get(0, 1)*this.y + transformMatrix.get(0, 2)*this.z + transformMatrix.get(0, 3)*w;
+        double y = transformMatrix.get(1, 0)*this.x + transformMatrix.get(1, 1)*this.y + transformMatrix.get(1, 2)*this.z + transformMatrix.get(1, 3)*w;
+        double z = transformMatrix.get(2, 0)*this.x + transformMatrix.get(2, 1)*this.y + transformMatrix.get(2, 2)*this.z + transformMatrix.get(2, 3)*w;
+        return new Vector3d(x, y, z);
     }
 }

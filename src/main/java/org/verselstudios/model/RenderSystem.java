@@ -1,9 +1,8 @@
-package org.verselstudios.gl;
+package org.verselstudios.model;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL45;
 import org.verselstudios.math.MatrixStack;
-import org.verselstudios.render.RenderStack;
 import org.verselstudios.shader.ShaderProgram;
 import org.verselstudios.shader.ShaderRegister;
 import org.verselstudios.shader.Vao;

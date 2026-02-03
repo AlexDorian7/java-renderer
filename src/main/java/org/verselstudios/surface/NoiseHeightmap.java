@@ -16,7 +16,7 @@ public class NoiseHeightmap implements Heightmap {
 
     @Override
     public double get(Vector2d pos) {
-//        pos = pos.multiply(0.25);
+        pos = pos.multiply(0.25);
         return (SimplexNoise.noise(pos.getX(), pos.getY())+1)/2D;
     }
 

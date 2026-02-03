@@ -87,6 +87,16 @@ public class Vector2d {
         y /= mag;
     }
 
+    public Vector2d rotate(double radians) {
+        double cos = Math.cos(radians);
+        double sin = Math.sin(radians);
+
+        double newX = x * cos - y * sin;
+        double newY = x * sin + y * cos;
+
+        return new Vector2d(newX, newY);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

@@ -2,15 +2,13 @@ package org.verselstudios.render;
 
 import org.verselstudios.Image.Texture;
 import org.verselstudios.Main;
-import org.verselstudios.gl.FontRenderSystem;
-import org.verselstudios.gl.QuadRenderSystem;
-import org.verselstudios.gl.RenderSystem;
+import org.verselstudios.model.FontRenderSystem;
+import org.verselstudios.model.QuadRenderSystem;
+import org.verselstudios.model.RenderSystem;
 import org.verselstudios.math.Matrix4d;
 import org.verselstudios.math.Rectangle;
 import org.verselstudios.math.Vector3d;
 import org.verselstudios.render.font.Font;
-import org.verselstudios.shader.ShaderProgram;
-import org.verselstudios.shader.ShaderRegister;
 
 import static org.lwjgl.opengl.GL45.*;
 

@@ -1,7 +1,7 @@
 package org.verselstudios.render;
 
 import org.verselstudios.Main;
-import org.verselstudios.gl.RenderSystem;
+import org.verselstudios.model.RenderSystem;
 import org.verselstudios.math.Vector3d;
 import org.verselstudios.math.Vector4d;
 import org.verselstudios.shader.ShaderRegister;
@@ -15,9 +15,9 @@ public class AxisRenderer implements Renderer {
     private static final Vector4d RED = new Vector4d(1,0,0,1);
     private static final Vector4d GREEN = new Vector4d(0,1,0,1);
     private static final Vector4d BLUE = new Vector4d(0,0,1,1);
-    private static final Vector4d YELLOW = new Vector4d(1,1,0,1);
-    private static final Vector4d CYAN = new Vector4d(0,1,1,1);
-    private static final Vector4d MAGENTA = new Vector4d(1,0,1,1);
+    private static final Vector4d YELLOW = new Vector4d(1,1,0,0.125);
+    private static final Vector4d CYAN = new Vector4d(0,1,1,0.125);
+    private static final Vector4d MAGENTA = new Vector4d(1,0,1,0.125);
 
     public AxisRenderer(boolean grid) {
         axisSystem = new RenderSystem(RenderSystem.RenderType.GL_LINES, ShaderRegister.getProgram("line"));
@@ -58,7 +58,10 @@ public class AxisRenderer implements Renderer {
     public void render() {
         glLineWidth(4f);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         axisSystem.draw(Main.getRenderManager().getRenderStack().getMatrixStack());
+        glDisable(GL_BLEND);
         glDisable(GL_DEPTH_TEST);
     }
 }

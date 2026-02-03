@@ -19,6 +19,10 @@ public class Rectangle {
         this.size = size;
     }
 
+    public Rectangle(Vector4d vec) {
+        this(vec.getX(), vec.getY(), vec.getZ(), vec.getW());
+    }
+
     public Vector2d getPos() {
         return pos;
     }

@@ -1,10 +1,7 @@
-package org.verselstudios.gl;
+package org.verselstudios.model;
 
-import org.verselstudios.math.MatrixStack;
-import org.verselstudios.render.RenderManager;
 import org.verselstudios.shader.ShaderPostProgram;
 import org.verselstudios.shader.ShaderProgram;
-import org.verselstudios.shader.ShaderRegister;
 
 import static org.lwjgl.opengl.GL45.*;
 

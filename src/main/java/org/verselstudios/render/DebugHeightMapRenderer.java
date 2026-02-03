@@ -6,7 +6,7 @@ import org.verselstudios.surface.SurfaceRenderSystemNew;
 
 public class DebugHeightMapRenderer implements Renderer {
 
-    private final SurfaceRenderSystemNew system = new SurfaceRenderSystemNew(new NoiseHeightmap(), 256);
+    private final SurfaceRenderSystemNew system = new SurfaceRenderSystemNew(new NoiseHeightmap(), 128, 32);
 
     @Override
     public void render() {

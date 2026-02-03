@@ -5,35 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad50ed4a-995b-4ae0-8128-8464f59ee063" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderPostSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/PostProcessStack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderPostProgram.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystemNew.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/postProcess/blit.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/postProcess/depth.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/postProcess/negate.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/postprocess.fsh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/postprocess.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/postprocess.vsh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/AtlasTexture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/ObjRenderSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/verselModel/Cube.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/verselModel/Direction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/verselModel/Face.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/verselModel/Meta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/verselModel/ModelTexture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/verselModel/VerselModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/ObjRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/VerselModelRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/util/Pair.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/util/Triple.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/util/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/ImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/ImageUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/Texture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/QuadRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/QuadRenderSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Matrix4d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Matrix4d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/MatrixStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/MatrixStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/FontRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/FontRenderSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/QuadRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/QuadRenderSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderPostSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/RenderPostSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/gl/RenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/RenderSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector2d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector3d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Vector3d.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/AxisRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/AxisRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/CameraControllRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/CameraControllRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugHeightMapRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugHeightMapRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugTextRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugTextRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugWorldTextRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugWorldTextRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/TextWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/TextWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/TypeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/TypeWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/Vertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/Vertex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/NoiseHeightmap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/NoiseHeightmap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.fsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.fsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystemNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/surface/SurfaceRenderSystemNew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.fsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex.fsh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/pos_color_tex.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex.vsh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,8 +93,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="GLSL Shader" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -113,6 +127,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.verselstudios.model.verselModel" />
       <recent name="org.verselstudios.gl" />
       <recent name="org.verselstudios.shader" />
     </key>
@@ -121,8 +136,8 @@
       <recent name="C:\Users\alexd\Documents\LWJGL\java_renderer\src\main\resources\assets\shaders\postProcess" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.verselstudios.surface" />
       <recent name="org.verselstudios.render" />
+      <recent name="org.verselstudios.surface" />
       <recent name="org.verselstudios.events" />
     </key>
   </component>

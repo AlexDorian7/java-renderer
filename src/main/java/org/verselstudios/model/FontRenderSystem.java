@@ -1,4 +1,4 @@
-package org.verselstudios.gl;
+package org.verselstudios.model;
 
 import org.verselstudios.render.font.Font;
 import org.verselstudios.shader.ShaderProgram;

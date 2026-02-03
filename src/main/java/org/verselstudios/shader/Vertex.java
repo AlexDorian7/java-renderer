@@ -1,5 +1,9 @@
 package org.verselstudios.shader;
 
+import org.verselstudios.math.Vector2d;
+import org.verselstudios.math.Vector3d;
+import org.verselstudios.math.Vector4d;
+
 import java.util.ArrayList;
 
 public class Vertex {
@@ -31,6 +35,18 @@ public class Vertex {
             pos += vao.amount();
         }
         throw new IllegalArgumentException("Vao with name " + vaoName + " not found");
+    }
+
+    public Vertex setData(String name, Vector2d vector) {
+        return setData(name, (float) vector.getX(), (float) vector.getY());
+    }
+
+    public Vertex setData(String name, Vector3d vector) {
+        return setData(name, (float) vector.getX(), (float) vector.getY(), (float) vector.getZ());
+    }
+
+    public Vertex setData(String name, Vector4d vector) {
+        return setData(name, (float) vector.getX(), (float) vector.getY(), (float) vector.getZ(), (float) vector.getW());
     }
 
     public VaoBuilder getVaoBuilder() {
