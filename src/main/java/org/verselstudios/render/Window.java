@@ -5,9 +5,9 @@ import org.verselstudios.Main;
 import org.verselstudios.model.FontRenderSystem;
 import org.verselstudios.model.QuadRenderSystem;
 import org.verselstudios.model.RenderSystem;
-import org.verselstudios.math.Matrix4d;
+import org.joml.Matrix4d;
 import org.verselstudios.math.Rectangle;
-import org.verselstudios.math.Vector3d;
+import org.joml.Vector3d;
 import org.verselstudios.render.font.Font;
 
 import static org.lwjgl.opengl.GL45.*;
@@ -48,7 +48,7 @@ public abstract class Window implements Renderer {
             quad.draw(Main.getRenderManager().getRenderStack().getMatrixStack());
 //            glDisable(GL_DEPTH_TEST);
             if (titleSystem != null) {
-                Font.renderFontSystem(titleSystem, new Vector3d(bounds.getPos().getX() + 4, bounds.getBound().getY() - titleSystem.style.size() - 4, 0), Main.getRenderManager().getRenderStack().getMatrixStack());
+                Font.renderFontSystem(titleSystem, new Vector3d(bounds.getPos().x + 4, bounds.getBound().y - titleSystem.style.size() - 4, 0), Main.getRenderManager().getRenderStack().getMatrixStack());
             }
             Main.getRenderManager().getRenderStack().getMatrixStack().pop();
             glDisable(GL_TEXTURE_2D);

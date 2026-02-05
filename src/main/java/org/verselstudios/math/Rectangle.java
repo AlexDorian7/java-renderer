@@ -1,5 +1,8 @@
 package org.verselstudios.math;
 
+import org.joml.Vector2d;
+import org.joml.Vector4d;
+
 public class Rectangle {
 
     private Vector2d pos;
@@ -20,7 +23,7 @@ public class Rectangle {
     }
 
     public Rectangle(Vector4d vec) {
-        this(vec.getX(), vec.getY(), vec.getZ(), vec.getW());
+        this(vec.x, vec.y, vec.z, vec.w);
     }
 
     public Vector2d getPos() {
@@ -44,10 +47,10 @@ public class Rectangle {
     }
 
     public boolean contains(Vector2d point) {
-        return (point.getX() >= pos.getX() && point.getX() <= getBound().getX() && point.getY() >= pos.getY() && point.getY() <= getBound().getY());
+        return (point.x >= pos.x && point.x <= getBound().x && point.y >= pos.y && point.y <= getBound().y);
     }
 
     public Transform getTransform() {
-        return new Transform(pos.getX(), pos.getY(), 0, 0, 0, 0, size.getX(), size.getY(), 1);
+        return new Transform(pos.x, pos.y, 0, 0, 0, 0, size.x, size.y, 1);
     }
 }

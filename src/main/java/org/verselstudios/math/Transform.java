@@ -1,9 +1,13 @@
 package org.verselstudios.math;
 
+import org.joml.Matrix4d;
+import org.joml.Quaterniond;
+import org.joml.Vector3d;
+
 public class Transform {
 
     private Vector3d position;
-    private Vector3d rotation;
+    private Quaterniond rotation;
     private Vector3d scale;
 
     public Transform() {
@@ -11,10 +15,10 @@ public class Transform {
     }
 
     public Transform(double x, double y, double z, double rx, double ry, double rz, double sx, double sy, double sz) {
-        this(new Vector3d(x, y, z), new Vector3d(rx, ry, rz), new Vector3d(sx, sy, sz));
+        this(new Vector3d(x, y, z), new Quaterniond().rotateX(rx).rotateY(ry).rotateZ(rz), new Vector3d(sx, sy, sz));
     }
 
-    public Transform (Vector3d position, Vector3d rotation, Vector3d scale) {
+    public Transform (Vector3d position, Quaterniond rotation, Vector3d scale) {
         this.position = position;
         this.rotation = rotation;
         this.scale = scale;
@@ -28,11 +32,11 @@ public class Transform {
         this.position = position;
     }
 
-    public Vector3d getRotation() {
+    public Quaterniond getRotation() {
         return rotation;
     }
 
-    public void setRotation(Vector3d rotation) {
+    public void setRotation(Quaterniond rotation) {
         this.rotation = rotation;
     }
 
@@ -45,51 +49,32 @@ public class Transform {
     }
 
     public Matrix4d getViewMatrix() {
-        Matrix4d view = new Matrix4d();
-
-        // Inverse translation
-        view = Matrix4d.translation(
-                -position.getX(),
-                -position.getY(),
-                -position.getZ()
-        ).multiply(view);
-
-        // Inverse rotation (note the minus signs)
-        view = Matrix4d.rotationZ(-rotation.getZ()).multiply(view);
-        view = Matrix4d.rotationY(-rotation.getY()).multiply(view);
-        view = Matrix4d.rotationX(-rotation.getX()).multiply(view);
-
-        return view;
+        Quaterniond inverse = new Quaterniond();
+        rotation.invert(inverse);
+        return new Matrix4d()
+                .rotate(inverse)
+                .translate(-position.x, -position.y, -position.z);
     }
+
 
     public Matrix4d getModelMatrix() {
-        Matrix4d model = new Matrix4d();
-
-        // Translation (last applied, first multiplied)
-        model = Matrix4d.translation(
-                position.getX(),
-                position.getY(),
-                position.getZ()
-        ).multiply(model);
-
-        // Rotation
-        model = Matrix4d.rotationZ(rotation.getZ()).multiply(model);
-        model = Matrix4d.rotationY(rotation.getY()).multiply(model);
-        model = Matrix4d.rotationX(rotation.getX()).multiply(model);
-
-        // Scale (first applied)
-        model = Matrix4d.scale(
-                scale.getX(),
-                scale.getY(),
-                scale.getZ()
-        ).multiply(model);
-
-        return model;
+        return new Matrix4d()
+                .translate(position)
+                .rotate(rotation)
+                .scale(scale);
     }
+
 
     public Matrix4d getFlatRotationMatrix() {
-        return Matrix4d.rotationY(rotation.getY());
+        // Extract yaw from the quaternion
+        double yaw = Math.atan2(
+                2.0 * (rotation.w * rotation.y + rotation.x * rotation.z),
+                1.0 - 2.0 * (rotation.y * rotation.y + rotation.x * rotation.x)
+        );
+
+        return new Matrix4d().rotateY(yaw);
     }
+
 
     @Override
     public String toString() {

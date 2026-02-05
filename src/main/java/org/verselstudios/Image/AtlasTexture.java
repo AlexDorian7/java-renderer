@@ -1,7 +1,7 @@
 package org.verselstudios.Image;
 
+import org.joml.Vector4d;
 import org.verselstudios.math.Rectangle;
-import org.verselstudios.math.Vector4d;
 
 import java.nio.ByteBuffer;
 import java.util.*;
@@ -135,10 +135,10 @@ public class AtlasTexture extends Texture {
         Rectangle r = getRegion(path);
 
         return new Vector4d(
-                r.getPos().getX() / width,
-                r.getPos().getY() / height,
-                r.getBound().getX() / width,
-                r.getBound().getY() / height
+                r.getPos().x / width,
+                r.getPos().y / height,
+                r.getBound().x / width,
+                r.getBound().y / height
         );
     }
 

@@ -1,11 +1,11 @@
 package org.verselstudios.render.font;
 
-import org.verselstudios.math.Vector4d;
+import org.joml.Vector4d;
 
 public class FontStyleBuilder {
     private double size = 1/64D;
     private Vector4d color = new Vector4d(1, 1, 1, 1);
-    private Vector4d shadowColor = color.divide(2);
+    private Vector4d shadowColor = color.div(2);
     private boolean italic = false;
     private boolean shadow = false;
     private boolean bold = false;

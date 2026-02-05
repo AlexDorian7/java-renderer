@@ -1,13 +1,13 @@
 package org.verselstudios.shader;
 
 import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4d;
+import org.joml.Vector4d;
 import org.lwjgl.BufferUtils;
-import org.verselstudios.math.Matrix4d;
 
 import java.nio.FloatBuffer;
 import java.util.Map;
 
-import org.verselstudios.math.Vector4d;
 
 import static org.lwjgl.opengl.GL20.*;
 
@@ -153,7 +153,7 @@ public class ShaderProgram {
 
     public void setUniform4v(int loc, Vector4d vec) {
         if (loc==-1) return;
-        glUniform4f(loc, (float) vec.getX(), (float) vec.getY(), (float) vec.getZ(), (float) vec.getW());
+        glUniform4f(loc, (float) vec.x, (float) vec.y, (float) vec.z, (float) vec.w);
     }
 
     /**
@@ -167,8 +167,7 @@ public class ShaderProgram {
         if (buf16Pool == null)
             buf16Pool = BufferUtils.createFloatBuffer(16);
         buf16Pool.clear();
-        mat.store(buf16Pool);
-        buf16Pool.flip();
+        mat.get(buf16Pool);
         glUniformMatrix4fv(loc, transposed, buf16Pool);
     }
 

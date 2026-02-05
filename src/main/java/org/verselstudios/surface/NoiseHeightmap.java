@@ -1,7 +1,7 @@
 package org.verselstudios.surface;
 
 import org.verselstudios.math.SimplexNoise;
-import org.verselstudios.math.Vector2d;
+import org.joml.Vector2d;
 import org.verselstudios.shader.ShaderProgram;
 import org.verselstudios.shader.ShaderRegister;
 
@@ -16,8 +16,8 @@ public class NoiseHeightmap implements Heightmap {
 
     @Override
     public double get(Vector2d pos) {
-        pos = pos.multiply(0.25);
-        return (SimplexNoise.noise(pos.getX(), pos.getY())+1)/2D;
+        pos = pos.mul(0.25);
+        return (SimplexNoise.noise(pos.x, pos.y)+1)/2D;
     }
 
     @Override

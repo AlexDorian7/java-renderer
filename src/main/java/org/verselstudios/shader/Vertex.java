@@ -1,8 +1,8 @@
 package org.verselstudios.shader;
 
-import org.verselstudios.math.Vector2d;
-import org.verselstudios.math.Vector3d;
-import org.verselstudios.math.Vector4d;
+import org.joml.Vector2d;
+import org.joml.Vector3d;
+import org.joml.Vector4d;
 
 import java.util.ArrayList;
 
@@ -38,15 +38,15 @@ public class Vertex {
     }
 
     public Vertex setData(String name, Vector2d vector) {
-        return setData(name, (float) vector.getX(), (float) vector.getY());
+        return setData(name, (float) vector.x, (float) vector.y);
     }
 
     public Vertex setData(String name, Vector3d vector) {
-        return setData(name, (float) vector.getX(), (float) vector.getY(), (float) vector.getZ());
+        return setData(name, (float) vector.x, (float) vector.y, (float) vector.z);
     }
 
     public Vertex setData(String name, Vector4d vector) {
-        return setData(name, (float) vector.getX(), (float) vector.getY(), (float) vector.getZ(), (float) vector.getW());
+        return setData(name, (float) vector.x, (float) vector.y, (float) vector.z, (float) vector.w);
     }
 
     public VaoBuilder getVaoBuilder() {

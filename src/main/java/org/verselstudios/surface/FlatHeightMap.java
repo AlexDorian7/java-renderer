@@ -1,6 +1,6 @@
 package org.verselstudios.surface;
 
-import org.verselstudios.math.Vector2d;
+import org.joml.Vector2d;
 import org.verselstudios.shader.ShaderProgram;
 import org.verselstudios.shader.ShaderRegister;
 

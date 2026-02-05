@@ -2,7 +2,6 @@ package org.verselstudios.render;
 
 import org.verselstudios.events.*;
 import org.verselstudios.math.Camera;
-import org.verselstudios.math.Matrix4d;
 import org.verselstudios.math.MatrixStack;
 import org.verselstudios.math.Time;
 
@@ -29,7 +28,7 @@ public class RenderStack {
     public void render() {
         Time.update();
 
-        MATRIX_STACK.push(camera.getTransform().getViewMatrix()); // Push view matrix
+        MATRIX_STACK.pushView(camera.getTransform().getViewMatrix()); // Push view matrix
         for (Renderer renderer : RENDERERS) {
             renderer.render();
         }

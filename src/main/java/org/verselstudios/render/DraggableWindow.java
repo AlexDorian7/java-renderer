@@ -5,8 +5,9 @@ import org.verselstudios.events.KeyEvent;
 import org.verselstudios.events.MouseMoveEvent;
 import org.verselstudios.events.MousePressEvent;
 import org.verselstudios.math.Rectangle;
-import org.verselstudios.math.Vector2d;
+import org.joml.Vector2d;
 
+@Deprecated
 public class DraggableWindow extends Window {
 
     private boolean dragging = false;
@@ -24,9 +25,9 @@ public class DraggableWindow extends Window {
 
     @Override
     public ActionType onMouseMove(MouseMoveEvent event) {
-        lastPos = event.getWorldPos();
+        lastPos = new Vector2d(0,0);
         if (dragging) {
-            getBounds().setPos(lastPos.subtract(offset));
+            getBounds().setPos(lastPos.sub(offset));
         }
         return ActionType.PASS;
     }
@@ -35,7 +36,7 @@ public class DraggableWindow extends Window {
     public ActionType onMousePress(MousePressEvent event) {
         if (lastPos == null || !getBounds().contains(lastPos)) return ActionType.PASS;
         dragging = event.isPressed() && event.button() == 0;
-        offset = lastPos.subtract(getBounds().getPos());
+        offset = lastPos.sub(getBounds().getPos());
         return dragging ? ActionType.CONSUME : ActionType.PASS;
     }
 }

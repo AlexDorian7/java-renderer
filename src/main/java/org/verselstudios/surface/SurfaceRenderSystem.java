@@ -1,7 +1,10 @@
 package org.verselstudios.surface;
 
+import org.joml.Vector2d;
+import org.joml.Vector3d;
+import org.joml.Matrix4d;
+import org.verselstudios.math.MatrixStack;
 import org.verselstudios.model.RenderSystem;
-import org.verselstudios.math.*;
 import org.verselstudios.shader.VaoBuilder;
 import org.verselstudios.shader.Vertex;
 
@@ -88,9 +91,9 @@ public class SurfaceRenderSystem extends RenderSystem {
         Vector3d t = computeTangent(n);
         Vector3d b = n.cross(t).normalize();
 
-        return builder.getNewVertex().setData("position", (float) pos.getX(), (float) pos.getY(), (float) pos.getZ()).setData("color", 1f, 1f, 1f, 1f)
-                .setData("texCoord", (float) x, (float) z).setData("normal", (float) n.getX(), (float) n.getY(), (float) n.getZ())
-                .setData("tangent", (float) t.getX(), (float) t.getY(), (float) t.getZ()).setData("bitangent", (float) b.getX(), (float) b.getY(), (float) b.getZ());
+        return builder.getNewVertex().setData("position", (float) pos.x, (float) pos.y, (float) pos.z).setData("color", 1f, 1f, 1f, 1f)
+                .setData("texCoord", (float) x, (float) z).setData("normal", (float) n.x, (float) n.y, (float) n.z)
+                .setData("tangent", (float) t.x, (float) t.y, (float) t.z).setData("bitangent", (float) b.x, (float) b.y, (float) b.z);
     }
 
     private Vector3d samplePosition(double x, double z) {
@@ -114,7 +117,7 @@ public class SurfaceRenderSystem extends RenderSystem {
 
     private Vector3d computeTangent(Vector3d normal) {
         Vector3d t = new Vector3d(1, 0, 0);
-        return t.subtract(normal.multiply(normal.dot(t))).normalize();
+        return t.sub(normal.mul(normal.dot(t))).normalize();
     }
 
     private double computeError(double x, double z, double size) {
@@ -134,7 +137,7 @@ public class SurfaceRenderSystem extends RenderSystem {
     @Override
     public void draw(MatrixStack matrixStack) {
         glEnable(GL_DEPTH_TEST);
-        matrixStack.push(Matrix4d.scale(5,5,5));
+        matrixStack.push(new Matrix4d().scale(5,5,5));
         super.draw(matrixStack);
         matrixStack.pop();
         glDisable(GL_DEPTH_TEST);

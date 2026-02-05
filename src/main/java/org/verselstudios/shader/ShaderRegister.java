@@ -1,7 +1,7 @@
 package org.verselstudios.shader;
 
 import org.verselstudios.json.JsonRegistry;
-import org.verselstudios.math.Matrix4d;
+import org.joml.Matrix4d;
 
 import java.io.InputStream;
 import java.util.HashMap;

@@ -2,8 +2,8 @@ package org.verselstudios.render;
 
 import org.verselstudios.Main;
 import org.verselstudios.model.RenderSystem;
-import org.verselstudios.math.Vector3d;
-import org.verselstudios.math.Vector4d;
+import org.joml.Vector3d;
+import org.joml.Vector4d;
 import org.verselstudios.shader.ShaderRegister;
 
 import static org.lwjgl.opengl.GL45.*;
@@ -45,13 +45,13 @@ public class AxisRenderer implements Renderer {
     }
 
     private static void addLine(Vector3d end, Vector4d color, RenderSystem system) {
-        system.addVertex(system.getProgram().getVaoBuilder().getNewVertex().setData("position", 0f, 0f, 0f).setData("color", (float) color.getX(), (float) color.getY(), (float) color.getZ(), (float) color.getW()));
-        system.addVertex(system.getProgram().getVaoBuilder().getNewVertex().setData("position", (float) end.getX(), (float) end.getY(), (float) end.getZ()).setData("color", (float) color.getX(), (float) color.getY(), (float) color.getZ(), (float) color.getW()));
+        system.addVertex(system.getProgram().getVaoBuilder().getNewVertex().setData("position", 0f, 0f, 0f).setData("color", (float) color.x, (float) color.y, (float) color.z, (float) color.w));
+        system.addVertex(system.getProgram().getVaoBuilder().getNewVertex().setData("position", (float) end.x, (float) end.y, (float) end.z).setData("color", (float) color.x, (float) color.y, (float) color.z, (float) color.w));
     }
 
     private static void addLine(Vector3d start, Vector3d end, Vector4d color, RenderSystem system) {
-        system.addVertex(system.getProgram().getVaoBuilder().getNewVertex().setData("position", (float) start.getX(), (float) start.getY(), (float) start.getZ()).setData("color", (float) color.getX(), (float) color.getY(), (float) color.getZ(), (float) color.getW()));
-        system.addVertex(system.getProgram().getVaoBuilder().getNewVertex().setData("position", (float) end.getX(), (float) end.getY(), (float) end.getZ()).setData("color", (float) color.getX(), (float) color.getY(), (float) color.getZ(), (float) color.getW()));
+        system.addVertex(system.getProgram().getVaoBuilder().getNewVertex().setData("position", (float) start.x, (float) start.y, (float) start.z).setData("color", (float) color.x, (float) color.y, (float) color.z, (float) color.w));
+        system.addVertex(system.getProgram().getVaoBuilder().getNewVertex().setData("position", (float) end.x, (float) end.y, (float) end.z).setData("color", (float) color.x, (float) color.y, (float) color.z, (float) color.w));
     }
 
     @Override

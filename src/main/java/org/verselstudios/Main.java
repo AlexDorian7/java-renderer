@@ -20,6 +20,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class Main {
 
+    private static final double MAX_MOUSE_DELTA = 50.0; // clamp extreme deltas
+
+    private double lastX = -1;
+    private double lastY = -1;
+
     public static void main(String[] args) {
         new Main().run();
     }
@@ -50,7 +55,7 @@ public class Main {
 
         renderManager = new RenderManager();
 
-        renderManager.getRenderStack().push(new CameraControllRenderer(renderManager.getRenderStack().getCamera()));
+        renderManager.getRenderStack().push(new CameraControlRenderer(renderManager.getRenderStack().getCamera()));
 
         renderManager.getRenderStack().push(new AxisRenderer(true));
     }
@@ -61,7 +66,7 @@ public class Main {
         GLFWErrorCallback.createPrint(System.err).set();
 
         // Initialize GLFW. Most GLFW functions will not work before doing this.
-        if ( !glfwInit() )
+        if (!glfwInit())
             throw new IllegalStateException("Unable to initialize GLFW");
 
         // Configure GLFW
@@ -71,12 +76,12 @@ public class Main {
 
         // Create the window
         window = glfwCreateWindow(1000, 1000, "Work In Progress", NULL, NULL);
-        if ( window == NULL )
+        if (window == NULL)
             throw new RuntimeException("Failed to create the GLFW window");
 
         // Setup a key callback. It will be called every time a key is pressed, repeated or released.
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+            if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
             renderManager.getRenderStack().onKeyPress(new KeyEvent(window, key, scancode, action, mods));
         });
@@ -93,10 +98,11 @@ public class Main {
             renderManager.getRenderStack().onMousePress(new MousePressEvent(window, button, action, mods));
         });
 
-        glfwSetCursorPosCallback(window, (window, xpos, ypos) -> {
-            renderManager.getRenderStack().onMouseMove(new MouseMoveEvent(window, xpos, ypos));
-        });
+        if (GLFW.glfwRawMouseMotionSupported()) {
+            GLFW.glfwSetInputMode(window, GLFW.GLFW_RAW_MOUSE_MOTION, GLFW.GLFW_TRUE);
+        }
 
+        initMouse(window);
 
 
         // Get the thread stack and push a new frame
@@ -144,6 +150,46 @@ public class Main {
             resize(pWidth.get(), pHeight.get());
         } // the stack frame is popped automatically
     }
+
+    // Call once after window creation
+    private void initMouse(long window) {
+        // Hide cursor
+        GLFW.glfwSetInputMode(window, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_HIDDEN);
+
+        // Enable raw motion if available
+        if (GLFW.glfwRawMouseMotionSupported()) {
+            GLFW.glfwSetInputMode(window, GLFW.GLFW_RAW_MOUSE_MOTION, GLFW.GLFW_TRUE);
+        }
+
+        // Start cursor at window center
+        int[] width = new int[1];
+        int[] height = new int[1];
+        GLFW.glfwGetWindowSize(window, width, height);
+        GLFW.glfwSetCursorPos(window, width[0]/2.0, height[0]/2.0);
+        lastX = width[0]/2.0;
+        lastY = height[0]/2.0;
+
+        // Set callback
+        GLFW.glfwSetCursorPosCallback(window, (win, xpos, ypos) -> {
+            double dx = xpos - lastX;
+            double dy = ypos - lastY;
+
+            // Clamp extreme deltas
+            dx = Math.max(-MAX_MOUSE_DELTA, Math.min(MAX_MOUSE_DELTA, dx));
+            dy = Math.max(-MAX_MOUSE_DELTA, Math.min(MAX_MOUSE_DELTA, dy));
+
+            lastX = xpos;
+            lastY = ypos;
+
+            renderManager.getRenderStack().onMouseMove(new MouseMoveEvent(window, xpos, ypos, dx, dy));
+
+            // Warp cursor back to center every frame to avoid leaving window
+            GLFW.glfwSetCursorPos(win, width[0]/2.0, height[0]/2.0);
+            lastX = width[0]/2.0;
+            lastY = height[0]/2.0;
+        });
+    }
+
 
     private static void resize(int width, int height) {
         glViewport(0, 0, width, height);

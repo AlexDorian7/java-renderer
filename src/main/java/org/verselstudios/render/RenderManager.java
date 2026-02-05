@@ -1,8 +1,8 @@
 package org.verselstudios.render;
 
+import org.joml.Matrix4d;
 import org.verselstudios.model.QuadRenderSystem;
 import org.verselstudios.model.RenderPostSystem;
-import org.verselstudios.math.Matrix4d;
 import org.verselstudios.shader.PostProcessStack;
 import org.verselstudios.shader.ShaderRegister;
 
@@ -112,10 +112,19 @@ public class RenderManager {
 
     public void render(int windowWidth, int windowHeight) {
 
+        if (windowWidth <= 0 || windowHeight <= 0) {
+            return; // Something is wrong with window size. Do not attempt to render a frame. (Maybe the window is minimized?)
+        }
+
         resizeIfNeeded(windowWidth, windowHeight);
 
         // Create Projection Matrix
-        ShaderRegister.PROJECTION_MATRIX = Matrix4d.perspective(90, 0.1, 100, windowWidth, windowHeight);
+        double aspect = (double) windowWidth / windowHeight;
+        if (ShaderRegister.PROJECTION_MATRIX == null) {
+            ShaderRegister.PROJECTION_MATRIX = new Matrix4d().perspective(Math.PI/2, aspect, 0.1, 100);
+        } else { // Do this to prevent garbage
+            ShaderRegister.PROJECTION_MATRIX.identity().perspective(Math.PI/2, aspect, 0.1, 100);
+        }
 
         // -----------------------------
         // 1. Geometry pass

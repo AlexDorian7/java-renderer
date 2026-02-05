@@ -1,9 +1,12 @@
 package org.verselstudios.render.font;
 
+import org.joml.Matrix4d;
+import org.joml.Vector3d;
+import org.joml.Vector4d;
 import org.verselstudios.Image.Texture;
+import org.verselstudios.math.MatrixStack;
 import org.verselstudios.model.FontRenderSystem;
 import org.verselstudios.model.RenderSystem;
-import org.verselstudios.math.*;
 import org.verselstudios.shader.ShaderProgram;
 import org.verselstudios.shader.ShaderRegister;
 import org.verselstudios.shader.Vertex;
@@ -51,17 +54,17 @@ public class Font {
 //                glEnable(GL_BLEND);
 //                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 //                glBindTexture(GL_TEXTURE_2D, texture.textureId());
-//                glColor4d(shadowColor.getX(), shadowColor.getY(), shadowColor.getZ(), shadowColor.getW());
+//                glColor4d(shadowColor.x, shadowColor.y, shadowColor.z, shadowColor.w);
 //                glBegin(GL_QUADS);
 //
 //                glTexCoord2d(x, y);
-//                glVertex3d(position.getX() + shadowPos*fontSize, position.getY() - fontSize/8D, position.getZ());
+//                glVertex3d(position.x + shadowPos*fontSize, position.y - fontSize/8D, position.z);
 //                glTexCoord2d(x, y1);
-//                glVertex3d(position.getX() + shadowPos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
+//                glVertex3d(position.x + shadowPos*fontSize + (style.italic ? fontSize/4D : 0), position.y + fontSize - fontSize/8D, position.z);
 //                glTexCoord2d(x1, y1);
-//                glVertex3d(position.getX() + shadowPos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize - fontSize/8D, position.getZ());
+//                glVertex3d(position.x + shadowPos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.y + fontSize - fontSize/8D, position.z);
 //                glTexCoord2d(x1, y);
-//                glVertex3d(position.getX() + shadowPos*fontSize + fontSize, position.getY() - fontSize/8D, position.getZ());
+//                glVertex3d(position.x + shadowPos*fontSize + fontSize, position.y - fontSize/8D, position.z);
 //                glEnd();
 //
 //                glDisable(GL_BLEND);
@@ -84,17 +87,17 @@ public class Font {
 //            glEnable(GL_BLEND);
 //            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 //            glBindTexture(GL_TEXTURE_2D, texture.textureId());
-//            glColor4d(style.color().getX(), style.color().getY(), style.color().getZ(), style.color().getW());
+//            glColor4d(style.color().x, style.color().y, style.color().z, style.color().w);
 //            glBegin(GL_QUADS);
 //
 //            glTexCoord2d(x, y);
-//            glVertex3d(position.getX() + pos*fontSize, position.getY(), position.getZ());
+//            glVertex3d(position.x + pos*fontSize, position.y, position.z);
 //            glTexCoord2d(x, y1);
-//            glVertex3d(position.getX() + pos*fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
+//            glVertex3d(position.x + pos*fontSize + (style.italic ? fontSize/4D : 0), position.y + fontSize, position.z);
 //            glTexCoord2d(x1, y1);
-//            glVertex3d(position.getX() + pos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.getY() + fontSize, position.getZ());
+//            glVertex3d(position.x + pos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.y + fontSize, position.z);
 //            glTexCoord2d(x1, y);
-//            glVertex3d(position.getX() + pos*fontSize + fontSize, position.getY(), position.getZ());
+//            glVertex3d(position.x + pos*fontSize + fontSize, position.y, position.z);
 //            glEnd();
 //
 //            glDisable(GL_BLEND);
@@ -111,9 +114,9 @@ public class Font {
             FontStyle style
     ) {
         double fontSize = style.size();
-        double x = position.getX();
-        double y = position.getY();
-        double z = position.getZ();
+        double x = position.x;
+        double y = position.y;
+        double z = position.z;
 
         double cursorX = 0;
         double cursorY = 0;
@@ -192,10 +195,10 @@ public class Font {
             double y = style.size;
             double italic = style.italic ? style.size * 0.25 : 0;
 
-            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + italic), (float) y, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1 + italic), (float) y, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + italic), (float) y, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1 + italic), (float) y, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
 
             // tri 1
             system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
@@ -259,10 +262,10 @@ public class Font {
                 double y1 = y + style.size;
                 double italic = style.italic ? style.size * 0.25 : 0;
 
-                Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, (float) y, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-                Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + italic), (float) y1, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-                Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1 + italic), (float) y1, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-                Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1), (float) y, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+                Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, (float) y, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+                Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + italic), (float) y1, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+                Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1 + italic), (float) y1, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+                Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x1), (float) y, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
 
                 // tri 1
                 system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
@@ -330,10 +333,10 @@ public class Font {
 
             double x = pos;
 
-            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
 
             // tri 1
             system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
@@ -357,10 +360,10 @@ public class Font {
 
             double x = pos;
 
-            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
-            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.getX(), (float) style.color.getY(), (float) style.color.getZ(), (float) style.color.getW());
+            Vertex vx0 = program.getVaoBuilder().getNewVertex().setData("position", (float) x, 0f, 0f).setData("texCoord", (float) u, (float) v).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx1 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u, (float) v1).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx2 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x + 1 + (style.italic ? 0.25 : 0)), 1f, 0f).setData("texCoord", (float) u1, (float) v1).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
+            Vertex vx3 = program.getVaoBuilder().getNewVertex().setData("position", (float) (x+1), 0f, 0f).setData("texCoord", (float) u1, (float) v).setData("color", (float) style.color.x, (float) style.color.y, (float) style.color.z, (float) style.color.w);
 
             // tri 1
             system.addVertex(vx0).addVertex(vx2).addVertex(vx1);
@@ -377,8 +380,8 @@ public class Font {
     @Deprecated
     public static void renderFontSystem(FontRenderSystem system, Vector3d position, MatrixStack matrixStack) {
         system.getProgram().use();
-        Matrix4d translate = Matrix4d.translation(position.getX(), position.getY(), position.getZ());
-        Matrix4d transform = translate.multiply(system.style.getScaleMat());
+        Matrix4d translate = new Matrix4d().translate(position.x, position.y, position.z);
+        Matrix4d transform = translate.mul(system.style.getScaleMat());
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_TEXTURE_2D);
@@ -407,7 +410,7 @@ public class Font {
         public static final FontStyle DEFAULT = new FontStyleBuilder().setSize(1).build();
 
         public Matrix4d getScaleMat() {
-            return Matrix4d.scale(size, size, size);
+            return new Matrix4d().scale(size);
         }
 
     }

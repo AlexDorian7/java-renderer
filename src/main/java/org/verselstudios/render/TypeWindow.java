@@ -6,7 +6,7 @@ import org.verselstudios.events.CharacterEvent;
 import org.verselstudios.events.KeyEvent;
 import org.verselstudios.model.FontRenderSystem;
 import org.verselstudios.math.Rectangle;
-import org.verselstudios.math.Vector3d;
+import org.joml.Vector3d;
 import org.verselstudios.render.font.Font;
 
 public class TypeWindow extends DraggableWindow {
@@ -30,7 +30,7 @@ public class TypeWindow extends DraggableWindow {
         super.render();
         Font.FontStyle style = system.style;
         //Font.DEFAULT.renderWrappedString(new Vector3d(getBounds().getPos().getX() + getBounds().getSize().getX()/16D, getBounds().getBound().getY() - style.size() - getBounds().getSize().getY()/8D, 0), text, getBounds().getSize().getX() - getBounds().getSize().getX()/8D, style);
-        Font.renderFontSystem(system, new Vector3d(getBounds().getPos().getX() + getBounds().getSize().getX()/16D, getBounds().getBound().getY() - style.size() - getBounds().getSize().getY()/8D, 0), Main.getRenderManager().getRenderStack().getMatrixStack());
+        Font.renderFontSystem(system, new Vector3d(getBounds().getPos().x + getBounds().getSize().x/16D, getBounds().getBound().y - style.size() - getBounds().getSize().y/8D, 0), Main.getRenderManager().getRenderStack().getMatrixStack());
     }
 
     public String getText() {

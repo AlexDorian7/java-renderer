@@ -29,6 +29,9 @@ dependencies {
     implementation "org.lwjgl:lwjgl-opengl::$lwjglNatives"
     implementation "org.lwjgl:lwjgl-stb::$lwjglNatives"
 
+    implementation("org.joml:joml:1.10.8")
+    implementation("org.joml:joml-primitives:1.10.0")
+
     implementation 'com.google.code.gson:gson:2.13.2'
 
     implementation "org.jetbrains:annotations:24.1.0"

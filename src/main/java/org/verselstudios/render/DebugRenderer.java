@@ -2,8 +2,7 @@ package org.verselstudios.render;
 
 import org.lwjgl.system.MemoryStack;
 import org.verselstudios.events.*;
-import org.verselstudios.math.Vector3d;
-import org.verselstudios.math.Vector4d;
+import org.joml.Vector3d;
 import org.verselstudios.render.font.Font;
 
 import java.nio.IntBuffer;

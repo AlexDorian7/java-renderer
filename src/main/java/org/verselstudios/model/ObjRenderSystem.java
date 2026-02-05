@@ -1,7 +1,7 @@
 package org.verselstudios.model;
 
-import org.verselstudios.math.Vector3d;
-import org.verselstudios.math.Vector4d;
+import org.joml.Vector3d;
+import org.joml.Vector4d;
 import org.verselstudios.shader.ShaderRegister;
 import org.verselstudios.shader.Vertex;
 
@@ -124,7 +124,7 @@ public class ObjRenderSystem extends RenderSystem {
                 .getVaoBuilder()
                 .getNewVertex()
                 .setData("position", vd.pos)
-                .setData("color", Vector4d.ONE)
+                .setData("color", new Vector4d(1))
                 .setData("texCoord", (float) vd.u, (float) vd.v);
     }
 
