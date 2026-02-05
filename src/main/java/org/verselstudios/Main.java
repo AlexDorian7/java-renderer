@@ -55,6 +55,8 @@ public class Main {
 
         renderManager = new RenderManager();
 
+        renderManager.getRenderStack().push(new MovementTestRenderer());
+
         renderManager.getRenderStack().push(new CameraControlRenderer(renderManager.getRenderStack().getCamera()));
 
         renderManager.getRenderStack().push(new AxisRenderer(true));

@@ -14,27 +14,34 @@ public class Texture {
     protected final int textureId;
     protected final int width;
     protected final int height;
-    protected final String resourcePath;
+    protected String resourcePath;
 
     public Texture(String resourcePath) {
         this(resourcePath, false);
     }
 
     public Texture(String resource, boolean isWeb) {
-        this.resourcePath = resource;
         Image image;
-        if (isWeb) {
-            image = ImageUtils.loadImageFromUrl(resource);
-        } else {
-            image = ImageUtils.loadImageFromResource(resource);
+        try {
+            if (isWeb) {
+                image = ImageUtils.loadImageFromUrl(resource);
+            } else {
+                image = ImageUtils.loadImageFromResource(resource);
+            }
+            this.resourcePath = resource;
+        } catch (Exception e) {
+            System.err.println("Failed to make texture");
+            e.printStackTrace();
+            this.resourcePath = "ERROR";
+            image = Image.ERROR;
         }
         width = image.width();
         height = image.height();
-        if (CACHE.containsKey(resource)) {
-            textureId = CACHE.get(resource);
+        if (CACHE.containsKey(this.resourcePath)) {
+            textureId = CACHE.get(this.resourcePath);
         } else {
             textureId = GLHelper.createGLTexture(image);
-            CACHE.put(resource, textureId);
+            CACHE.put(this.resourcePath, textureId);
         }
     }
 
