@@ -5,6 +5,7 @@ build/
 !**/src/test/**/build/
 
 blockbench_plugin/node_modules/
+logs/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

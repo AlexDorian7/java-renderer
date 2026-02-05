@@ -1,5 +1,7 @@
 package org.verselstudios.Image;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.verselstudios.gl.GLHelper;
 import org.verselstudios.shader.ShaderProgram;
 
@@ -9,6 +11,9 @@ import java.util.Objects;
 import static org.lwjgl.opengl.GL20.*;
 
 public class Texture {
+
+    private static final Logger LOGGER = LogManager.getLogger(Texture.class);
+
     private static final HashMap<String, Integer> CACHE = new HashMap<>();
 
     protected final int textureId;
@@ -30,8 +35,7 @@ public class Texture {
             }
             this.resourcePath = resource;
         } catch (Exception e) {
-            System.err.println("Failed to make texture");
-            e.printStackTrace();
+            LOGGER.error("Failed to make texture", e);
             this.resourcePath = "ERROR";
             image = Image.ERROR;
         }

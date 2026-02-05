@@ -1,5 +1,7 @@
 package org.verselstudios.shader;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4d;
 import org.joml.Vector4d;
@@ -13,6 +15,8 @@ import static org.lwjgl.opengl.GL20.*;
 
 
 public class ShaderProgram {
+
+    private static final Logger LOGGER = LogManager.getLogger(ShaderProgram.class);
 
     protected static FloatBuffer buf16Pool;
     /**
@@ -66,7 +70,7 @@ public class ShaderProgram {
 
         //if some log exists, append it
         if (infoLog!=null && !infoLog.trim().isEmpty())
-            System.out.println(infoLog);
+            LOGGER.info(infoLog);
 
         //if the link failed, throw some sort of exception
         if (glGetProgrami(program, GL_LINK_STATUS) == GL_FALSE)
@@ -93,7 +97,7 @@ public class ShaderProgram {
         String infoLog = glGetShaderInfoLog(shader,
                 glGetShaderi(shader, GL_INFO_LOG_LENGTH));
         if (infoLog!=null && !infoLog.trim().isEmpty())
-            System.out.println(getName(type) +": "+infoLog);
+            LOGGER.info(getName(type) +": "+infoLog);
 
         //if the compiling was unsuccessful, throw an exception
         if (glGetShaderi(shader, GL_COMPILE_STATUS) == GL_FALSE)

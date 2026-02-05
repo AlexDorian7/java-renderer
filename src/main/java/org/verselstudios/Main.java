@@ -1,5 +1,7 @@
 package org.verselstudios;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -20,6 +22,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class Main {
 
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+
     private static final double MAX_MOUSE_DELTA = 50.0; // clamp extreme deltas
 
     private double lastX = -1;
@@ -36,7 +40,7 @@ public class Main {
     private static RenderManager renderManager;
 
     public void run() {
-        System.out.println("Hello LWJGL " + Version.getVersion() + "!");
+        LOGGER.info("Hello LWJGL " + Version.getVersion() + "!");
 
         init();
         registerInternals();
