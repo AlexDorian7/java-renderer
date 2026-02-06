@@ -1,0 +1,9 @@
+{
+  "VAOs": [
+    {"name": "position", "amount": 3, "normalized":  false},
+    {"name": "color", "amount": 4, "normalized":  false},
+    {"name": "texCoord", "amount": 2, "normalized":  false},
+    {"name": "normal", "amount": 3, "normalized":  false},
+    {"name": "tangent", "amount": 3, "normalized":  false}
+  ]
+}

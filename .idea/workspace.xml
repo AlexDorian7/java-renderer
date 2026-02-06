@@ -5,13 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad50ed4a-995b-4ae0-8128-8464f59ee063" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/BoxRenderSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/TransformRenderSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/physics/PhysXConvert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/physics/Physical.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/physics/PhysicsWorld.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/physics/material/PhysicsMaterials.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/DynamicPhysicsObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/PhysicsObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/StaticPhysicsObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/DynamicBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/StaticBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex_normal_tangent.fsh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex_normal_tangent.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex_normal_tangent.vsh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/Texture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Transform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/MovementTestRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/MovementTestRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/Renderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/DepthObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/DepthObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/WorldObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/WorldObject.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +75,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="GLSL Shader" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -100,6 +118,8 @@
       <recent name="C:\Users\alexd\Documents\LWJGL\java_renderer\src\main\resources\assets\shaders\postProcess" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.verselstudios.world.objects" />
+      <recent name="org.verselstudios.world" />
       <recent name="org.verselstudios.render" />
       <recent name="org.verselstudios.surface" />
       <recent name="org.verselstudios.events" />

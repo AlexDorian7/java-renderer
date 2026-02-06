@@ -3,6 +3,10 @@ package org.verselstudios.math;
 import org.joml.Matrix4d;
 import org.joml.Quaterniond;
 import org.joml.Vector3d;
+import org.verselstudios.physics.PhysXConvert;
+import physx.common.PxQuat;
+import physx.common.PxTransform;
+import physx.common.PxVec3;
 
 public class Transform {
 
@@ -75,6 +79,38 @@ public class Transform {
         return new Matrix4d().rotateY(yaw);
     }
 
+    // PhysX does not support scale
+    public PxTransform toPxTransform() {
+        return new PxTransform(
+                PhysXConvert.toPx(position),
+                PhysXConvert.toPx(rotation)
+        );
+    }
+
+    public PxTransform toPxTransform(PxTransform pxTransform) {
+        pxTransform.setP(PhysXConvert.toPx(position));
+        pxTransform.setQ(PhysXConvert.toPx(rotation));
+        return pxTransform;
+    }
+
+    public void setFromPxTransform(PxTransform px) {
+        PxVec3 p = px.getP();
+        PxQuat q = px.getQ();
+
+        position.set(p.getX(), p.getY(), p.getZ());
+        rotation.set(q.getX(), q.getY(), q.getZ(), q.getW());
+    }
+
+    public static Transform fromPxTransform(PxTransform px) {
+        PxVec3 p = px.getP();
+        PxQuat q = px.getQ();
+
+        return new Transform(
+                new Vector3d(p.getX(), p.getY(), p.getZ()),
+                new Quaterniond(q.getX(), q.getY(), q.getZ(), q.getW()),
+                new Vector3d(1, 1, 1) // PhysX has no scale
+        );
+    }
 
     @Override
     public String toString() {

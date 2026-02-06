@@ -2,15 +2,23 @@ package org.verselstudios;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joml.Quaterniond;
+import org.joml.Vector3d;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryStack;
+import org.verselstudios.Image.Texture;
 import org.verselstudios.events.CharacterEvent;
 import org.verselstudios.events.KeyEvent;
 import org.verselstudios.events.MouseMoveEvent;
 import org.verselstudios.events.MousePressEvent;
+import org.verselstudios.math.Transform;
+import org.verselstudios.physics.PhysicsWorld;
+import org.verselstudios.physics.material.PhysicsMaterials;
 import org.verselstudios.render.*;
+import org.verselstudios.world.objects.DynamicBox;
+import org.verselstudios.world.objects.StaticBox;
 
 import java.nio.*;
 
@@ -57,13 +65,16 @@ public class Main {
 
     private void registerInternals() {
 
-        renderManager = new RenderManager();
+        PhysicsWorld.getInstance(); // Init Physics
 
-        renderManager.getRenderStack().push(new MovementTestRenderer());
+        renderManager = new RenderManager();
+        Texture texture = new Texture("assets/textures/border.png");
+        renderManager.getRenderStack().push(new StaticBox(new Transform(), new Vector3d(20,1,20), texture, PhysicsMaterials.DEFAULT)); // Ground
+        renderManager.getRenderStack().push(new DynamicBox(new Transform(new Vector3d(0, 10, 0), new Quaterniond(), new Vector3d(1)), new Vector3d(1,1,1), texture, PhysicsMaterials.DEFAULT)); // FallingBox
 
         renderManager.getRenderStack().push(new CameraControlRenderer(renderManager.getRenderStack().getCamera()));
 
-        renderManager.getRenderStack().push(new AxisRenderer(true));
+//        renderManager.getRenderStack().push(new AxisRenderer(true));
     }
 
     private void init() {

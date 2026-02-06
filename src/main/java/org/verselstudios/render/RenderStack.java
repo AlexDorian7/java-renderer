@@ -4,6 +4,7 @@ import org.verselstudios.events.*;
 import org.verselstudios.math.Camera;
 import org.verselstudios.math.MatrixStack;
 import org.verselstudios.math.Time;
+import org.verselstudios.physics.Physical;
 
 import java.util.ArrayList;
 
@@ -22,14 +23,17 @@ public class RenderStack {
     }
 
     public Renderer pop() {
-        return RENDERERS.removeLast();
+        Renderer renderer = RENDERERS.removeLast();
+        renderer.onRemove();
+        return renderer;
     }
 
     public void render() {
-        Time.update();
-
         MATRIX_STACK.pushView(camera.getTransform().getViewMatrix()); // Push view matrix
         for (Renderer renderer : RENDERERS) {
+            if (renderer instanceof Physical physical) {
+                physical.updatePhysics();
+            }
             renderer.render();
         }
         MATRIX_STACK.pop(); // Pop view matrix

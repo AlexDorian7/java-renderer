@@ -1,8 +1,10 @@
 package org.verselstudios.render;
 
 import org.joml.Matrix4d;
+import org.verselstudios.math.Time;
 import org.verselstudios.model.QuadRenderSystem;
 import org.verselstudios.model.RenderPostSystem;
+import org.verselstudios.physics.PhysicsWorld;
 import org.verselstudios.shader.PostProcessStack;
 import org.verselstudios.shader.ShaderRegister;
 
@@ -117,6 +119,12 @@ public class RenderManager {
         }
 
         resizeIfNeeded(windowWidth, windowHeight);
+
+        // Move time
+        Time.update();
+
+        // Simulate Physics
+        PhysicsWorld.getInstance().simulate();
 
         // Create Projection Matrix
         double aspect = (double) windowWidth / windowHeight;

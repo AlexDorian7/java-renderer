@@ -6,6 +6,8 @@ public interface Renderer {
 
     void render();
 
+    default void onRemove() {}
+
     default ActionType onKeyPress(KeyEvent event) {
         return ActionType.PASS;
     }

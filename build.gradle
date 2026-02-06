@@ -32,10 +32,11 @@ dependencies {
     implementation "org.joml:joml:1.10.8"
     implementation "org.joml:joml-primitives:1.10.0"
 
+    implementation "de.fabmax:physx-jni:2.7.1" // PhysX
+    runtimeOnly "de.fabmax:physx-jni:2.7.1:natives-windows"
+
     implementation "org.apache.logging.log4j:log4j-core:3.0.0-beta3"
-
     implementation 'com.google.code.gson:gson:2.13.2'
-
     implementation "org.jetbrains:annotations:24.1.0"
 }
 

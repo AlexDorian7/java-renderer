@@ -10,7 +10,7 @@ import org.verselstudios.world.DepthObject;
 public class MovementTestRenderer extends DepthObject {
 
 
-    private static final double speed = 0.25;
+    private static final double speed = 1;
     private static final double radius = 2;
 
     private double angle = 0;
@@ -26,9 +26,14 @@ public class MovementTestRenderer extends DepthObject {
         double dt = Time.deltaTime();
         angle += dt*speed;
 
-        double s = Math.sin(angle*Math.TAU)*radius;
-        double c = Math.cos(angle*Math.TAU)*radius;
+        double a = angle%1;
+        double b = Math.floor(angle)/64;
 
-        this.modelTransform = new Transform(c, 0, s, 0, -angle*Math.TAU - Math.PI/2, 0, 1, 1,1);
+        double y = Math.cos(b*Math.TAU)*radius;
+        double s = Math.sin(b*Math.TAU);
+        double z = Math.sin(a*Math.TAU)*radius*s;
+        double x = Math.cos(a*Math.TAU)*radius*s;
+
+        this.modelTransform = new Transform(x, y, z, 0, -a*Math.TAU - Math.PI/2, 0, 1, 1,1);
     }
 }
