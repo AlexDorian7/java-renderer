@@ -18,6 +18,7 @@ import org.verselstudios.physics.PhysicsWorld;
 import org.verselstudios.physics.material.PhysicsMaterials;
 import org.verselstudios.render.*;
 import org.verselstudios.world.objects.DynamicBox;
+import org.verselstudios.world.objects.FallingDynamicBox;
 import org.verselstudios.world.objects.StaticBox;
 
 import java.nio.*;
@@ -70,7 +71,7 @@ public class Main {
         renderManager = new RenderManager();
         Texture texture = new Texture("assets/textures/border.png");
         renderManager.getRenderStack().push(new StaticBox(new Transform(), new Vector3d(20,1,20), texture, PhysicsMaterials.DEFAULT)); // Ground
-        renderManager.getRenderStack().push(new DynamicBox(new Transform(new Vector3d(0, 10, 0), new Quaterniond(), new Vector3d(1)), new Vector3d(1,1,1), texture, PhysicsMaterials.DEFAULT)); // FallingBox
+        renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(0, 10, 0), new Quaterniond(), new Vector3d(1)), new Vector3d(1,1,1), texture, PhysicsMaterials.DEFAULT)); // FallingBox
 
         renderManager.getRenderStack().push(new CameraControlRenderer(renderManager.getRenderStack().getCamera()));
 

@@ -1,5 +1,7 @@
 package org.verselstudios.world;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.verselstudios.Image.Texture;
 import org.verselstudios.math.Transform;
 import org.verselstudios.model.RenderSystem;
@@ -8,6 +10,8 @@ import org.verselstudios.physics.PhysicsWorld;
 import physx.physics.PxRigidActor;
 
 public abstract class PhysicsObject extends DepthObject implements Physical {
+
+    private static final Logger LOGGER = LogManager.getLogger(PhysicsObject.class);
 
     private PxRigidActor rigidBody;
     protected PhysicsObject(Transform modelTransform, RenderSystem renderSystem, Texture texture, PxRigidActor rigidActor) {
@@ -20,7 +24,10 @@ public abstract class PhysicsObject extends DepthObject implements Physical {
      * Sets the physics transform to the model transform
      */
     public void teleport() {
-        modelTransform.toPxTransform(rigidBody.getGlobalPose());
+        LOGGER.debug("Teleporting");
+//        rigidBody.getGlobalPose().destroy();
+        rigidBody.setGlobalPose(modelTransform.toPxTransform());
+
     }
 
 
