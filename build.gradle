@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'org.verselstudios'
@@ -7,6 +9,12 @@ version = '1.0.0'
 
 project.ext.lwjglVersion = "3.4.0"
 project.ext.lwjglNatives = "natives-windows"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 repositories {
     mavenCentral()
@@ -42,25 +50,32 @@ dependencies {
 
 
 
-jar {
+application {
+    mainClass = 'org.verselstudios.Main'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.jar {
     manifest {
-        attributes "Main-Class": "org.verselstudios.Main"
+        attributes(
+                'Main-Class': application.mainClass
+        )
     }
 }
 
-task fatJar(type: Jar) {
-    manifest.from jar.manifest
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    } {
-        exclude "META-INF/*.SF"
-        exclude "META-INF/*.DSA"
-        exclude "META-INF/*.RSA"
-        duplicatesStrategy DuplicatesStrategy.EXCLUDE
-    }
-    with jar
+shadowJar {
+    archiveClassifier.set('all')
+
+    // THIS FIXES LOG4J 3 CRASH
+    mergeServiceFiles()
+
+//    // Optional but helpful
+//    minimize()
 }
 
-artifacts {
-    archives fatJar
+tasks.build {
+    dependsOn shadowJar
 }

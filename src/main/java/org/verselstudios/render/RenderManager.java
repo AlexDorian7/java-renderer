@@ -185,7 +185,7 @@ public class RenderManager {
         glClear(GL_COLOR_BUFFER_BIT);
 
         postSystem.draw(
-                postStack.getShaders().getFirst(),
+                postStack.getShaders().get(0),
                 readTex,
                 sceneDepthTex
         );
