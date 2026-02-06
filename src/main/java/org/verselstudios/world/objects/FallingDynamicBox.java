@@ -16,8 +16,11 @@ public class FallingDynamicBox extends DynamicPhysicsObject {
     private static final PxFilterData FILTER_DATA = new PxFilterData(1, 1, 0, 0);
     private double time = 0;
 
+    private final Transform spawn;
+
     public FallingDynamicBox(Transform modelTransform, Vector3d radius, Texture texture, PxMaterial material) {
         super(modelTransform, new BoxRenderSystem(radius), texture, createShape(radius, material));
+        spawn = new Transform(modelTransform);
     }
 
     private static PxShape createShape(Vector3d radius, PxMaterial material) {
@@ -34,8 +37,8 @@ public class FallingDynamicBox extends DynamicPhysicsObject {
         time += Time.deltaTime();
         if (time >= 5) {
             time = 0;
-            modelTransform.getPosition().set(0, 10, 0);
-            modelTransform.getRotation().set(0, 0, 0, 1);
+            modelTransform.getPosition().set(spawn.getPosition());
+            modelTransform.getRotation().set(spawn.getRotation());
             teleport();
         }
     }

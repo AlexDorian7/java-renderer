@@ -28,6 +28,12 @@ public class Transform {
         this.scale = scale;
     }
 
+    public Transform(Transform toClone) {
+        this.position = new Vector3d(toClone.position);
+        this.rotation = new Quaterniond(toClone.rotation);
+        this.scale = new Vector3d(toClone.scale);
+    }
+
     public Vector3d getPosition() {
         return position;
     }

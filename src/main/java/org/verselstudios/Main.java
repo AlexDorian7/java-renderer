@@ -70,8 +70,13 @@ public class Main {
 
         renderManager = new RenderManager();
         Texture texture = new Texture("assets/textures/border.png");
-        renderManager.getRenderStack().push(new StaticBox(new Transform(), new Vector3d(20,1,20), texture, PhysicsMaterials.DEFAULT)); // Ground
-        renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(0, 10, 0), new Quaterniond(), new Vector3d(1)), new Vector3d(1,1,1), texture, PhysicsMaterials.DEFAULT)); // FallingBox
+        Texture texture1 = new Texture("assets/textures/crate.png");
+        renderManager.getRenderStack().push(new StaticBox(new Transform(0,0,0, Math.PI/4,0,0, 1,1,1), new Vector3d(20,1,20), texture, PhysicsMaterials.DEFAULT)); // Slope
+        renderManager.getRenderStack().push(new StaticBox(new Transform(0,-20,0, 0,0,0, 1,1,1), new Vector3d(50,1,50), texture, PhysicsMaterials.DEFAULT)); // Ground
+        renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(-5, 10, 0), new Quaterniond(), new Vector3d(1)), new Vector3d(1,1,1), texture1, PhysicsMaterials.DEFAULT)); // FallingBox
+        renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(5, 10, 0), new Quaterniond(), new Vector3d(1)), new Vector3d(1,1,1), texture1, PhysicsMaterials.DEFAULT)); // FallingBox
+        renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(0, 10, -5), new Quaterniond(), new Vector3d(1)), new Vector3d(1,1,1), texture1, PhysicsMaterials.DEFAULT)); // FallingBox
+        renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(0, 10, 5), new Quaterniond(), new Vector3d(1)), new Vector3d(1,1,1), texture1, PhysicsMaterials.DEFAULT)); // FallingBox
 
         renderManager.getRenderStack().push(new CameraControlRenderer(renderManager.getRenderStack().getCamera()));
 

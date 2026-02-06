@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ad50ed4a-995b-4ae0-8128-8464f59ee063" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/Transform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/PhysicsObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/PhysicsObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/FallingDynamicBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/FallingDynamicBox.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +85,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.Upgrade Gradle wrapper.executor": "Run",
     "Gradle.java_renderer [:Main.main()].executor": "Run",
     "Gradle.java_renderer [build].executor": "Run",
     "Gradle.java_renderer [fatJar].executor": "Run",
@@ -91,7 +98,7 @@
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/alexd/Documents/LWJGL/java_renderer/src/main/resources/assets/shaders",
     "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
@@ -113,7 +120,7 @@
       <recent name="org.verselstudios.events" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.java_renderer [build]">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.verselstudios.Main" />
       <module name="java-renderer.main" />
