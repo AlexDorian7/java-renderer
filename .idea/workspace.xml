@@ -5,47 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad50ed4a-995b-4ae0-8128-8464f59ee063" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/light/Light.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/light/LightManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/CylinderRenderSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/LitRenderSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/PhysicsCameraControlRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/material/Material.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/DynamicCylinder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/font.fsh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/font.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/font.vsh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/lit.fsh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/lit.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/lit.vsh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/light/DirectionalLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/light/PointLight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Image/Texture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/MatrixStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/math/MatrixStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/BoxRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/BoxRenderSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/RenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/RenderSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/physics/material/PhysicsMaterials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/physics/material/PhysicsMaterials.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugRenderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/DebugTextRenderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/RenderStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/Font.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/FontStyleBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/render/font/FontStyleBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/light/Light.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/light/Light.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/light/LightManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/light/LightManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/LitRenderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/model/LitRenderSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/ShaderProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/VaoBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/VaoBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/DepthObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/DepthObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/DynamicPhysicsObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/DynamicPhysicsObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/PhysicsObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/PhysicsObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/StaticPhysicsObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/StaticPhysicsObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/WorldObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/WorldObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/DynamicBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/DynamicBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/FallingDynamicBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/FallingDynamicBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/StaticBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/world/objects/StaticBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/line.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/line.vsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex.vsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex_normal_tangent.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/position_color_tex_normal_tangent.vsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/postprocess.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/postprocess.vsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/textures/crate.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/crate.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/material/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/verselstudios/shader/material/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/shaders/lit.fsh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/shaders/lit.fsh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,8 +67,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="GLSL Shader" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
+        <option value="Record" />
       </list>
     </option>
   </component>

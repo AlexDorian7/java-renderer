@@ -8,11 +8,14 @@ import org.joml.Matrix4d;
 import org.joml.Vector3d;
 import org.joml.Vector4d;
 import org.lwjgl.BufferUtils;
+import org.verselstudios.light.DirectionalLight;
 import org.verselstudios.light.Light;
+import org.verselstudios.light.PointLight;
 import org.verselstudios.light.LightManager;
 import org.verselstudios.shader.material.Material;
 
 import java.nio.FloatBuffer;
+import java.util.List;
 import java.util.Map;
 
 
@@ -219,13 +222,18 @@ public class ShaderProgram {
         setUniformMatrix(getUniformLocation("projection"), false, mat);
     }
 
-    public void genLight() {
-        setUniformf(getUniformLocation("ambientStrength"), (float) LightManager.AMBIENT_STRENGTH);
-        setUniform3v(getUniformLocation("ambientColor"), LightManager.AMBIENT_COLOR);
+    public void genLight(Matrix4d modelMatrix) {
+        Vector3d position = new Vector3d();
+        modelMatrix.getTranslation(position);
+        setLight("directionalLight", LightManager.getDirectionalLight());
+        List<PointLight> lights = LightManager.getClosestLights(position);
+        setUniformi(getUniformLocation("lightAmount"), lights.size());
+        for (int i=0; i<lights.size(); i++) {
+            setLight("lights["+i+"]", lights.get(i));
+        }
     }
 
     public void setMaterial(String loc, Material material) {
-        setUniform3v(getUniformLocation(loc+".ambient"), material.ambient());
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, material.diffuse().textureId());
         setUniformi(getUniformLocation(loc+".diffuse"), 1);
@@ -236,10 +244,20 @@ public class ShaderProgram {
     }
 
     public void setLight(String loc, Light light) {
-        setUniform3v(getUniformLocation(loc+".position"), light.position());
-        setUniform3v(getUniformLocation(loc+".ambient"), light.ambient());
-        setUniform3v(getUniformLocation(loc+".diffuse"), light.diffuse());
-        setUniform3v(getUniformLocation(loc+".specular"), light.specular());
+        if (light instanceof PointLight pointLight) {
+            setUniform3v(getUniformLocation(loc+".position"), pointLight.position());
+            setUniform3v(getUniformLocation(loc+".ambient"), pointLight.ambient());
+            setUniform3v(getUniformLocation(loc+".diffuse"), pointLight.diffuse());
+            setUniform3v(getUniformLocation(loc+".specular"), pointLight.specular());
+            setUniform3v(getUniformLocation(loc+".attenuation"), pointLight.attenuation());
+        } else if (light instanceof DirectionalLight directionalLight) {
+            setUniform3v(getUniformLocation(loc+".direction"), directionalLight.direction());
+            setUniform3v(getUniformLocation(loc+".ambient"), directionalLight.ambient());
+            setUniform3v(getUniformLocation(loc+".diffuse"), directionalLight.diffuse());
+            setUniform3v(getUniformLocation(loc+".specular"), directionalLight.specular());
+        } else {
+            throw new IllegalArgumentException("Unknown light type: " + light.getClass().getName());
+        }
     }
 
 }

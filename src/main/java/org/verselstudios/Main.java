@@ -18,7 +18,6 @@ import org.verselstudios.physics.PhysicsWorld;
 import org.verselstudios.physics.material.PhysicsMaterials;
 import org.verselstudios.render.*;
 import org.verselstudios.shader.material.Material;
-import org.verselstudios.world.objects.DynamicBox;
 import org.verselstudios.world.objects.FallingDynamicBox;
 import org.verselstudios.world.objects.StaticBox;
 
@@ -70,17 +69,17 @@ public class Main {
         PhysicsWorld ignored = PhysicsWorld.getInstance();// Init Physics
 
         renderManager = new RenderManager();
-        Texture groundTexture = new Texture("assets/textures/ground.png");
+        Texture groundTexture = new Texture("assets/textures/ground_white.png");
         Texture crateTexture = new Texture("assets/textures/crate.png");
         Texture crateSpecularTexture = new Texture("assets/textures/crate_specular.png");
 
-        Material groundMaterial = new Material(new Vector3d(1), groundTexture, crateSpecularTexture, 64);
-        Material createMaterial = new Material(new Vector3d(1), crateTexture, crateSpecularTexture, 16);
+        Material groundMaterial = new Material(groundTexture, groundTexture, 64);
+        Material createMaterial = new Material(crateTexture, crateSpecularTexture, 16);
 
 //        renderManager.getRenderStack().push(new StaticBox(new Transform(0,-10,0, Math.PI/4,0,0, 1,1,1), new Vector3d(20,1,20), groundTexture, groundMaterial, PhysicsMaterials.DEFAULT)); // Slope
         renderManager.getRenderStack().push(new StaticBox(new Transform(0,-20,0, 0,0,0, 1,1,1), new Vector3d(50,1,50), groundTexture, groundMaterial, PhysicsMaterials.DEFAULT)); // Ground
         for (int x=-10; x<=10; x++) {
-            for (int y=0; y<2; y++) {
+            for (int y=0; y<10; y++) {
                 for (int z = -10; z <= 10; z++) {
                     renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(x * 5, y*5+10, z * 5), new Quaterniond(), new Vector3d(1)), new Vector3d(0.5), crateTexture, createMaterial, PhysicsMaterials.DEFAULT)); // FallingBox
                 }
