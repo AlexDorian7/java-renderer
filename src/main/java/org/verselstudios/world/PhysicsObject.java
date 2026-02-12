@@ -28,7 +28,7 @@ public abstract class PhysicsObject extends DepthObject implements Physical {
      * Sets the physics transform to the model transform and clears motion.
      */
     public void teleport() {
-        LOGGER.debug("Teleporting");
+//        LOGGER.debug("Teleporting");
 
         // Move instantly
         rigidActor.setGlobalPose(modelTransform.toPxTransform());

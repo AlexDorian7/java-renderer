@@ -18,7 +18,7 @@ out vec3 vNormal;
 void main() {
     vTexCoord = texCoord;
     vColor = color;
-    vNormal = normal;
+    vNormal = mat3(transpose(inverse(model))) * normal;
     vec4 worldPos = model * vec4(position, 1.0);
     vPos = worldPos;
     gl_Position = projection * view * worldPos;

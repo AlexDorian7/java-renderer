@@ -41,4 +41,8 @@ public abstract class WorldObject implements Renderer {
             glDisable(GL_DEPTH_TEST);
         }
     }
+
+    public Transform getModelTransform() {
+        return modelTransform;
+    }
 }

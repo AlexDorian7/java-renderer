@@ -29,14 +29,15 @@ public class RenderStack {
     }
 
     public void render() {
-        MATRIX_STACK.pushView(camera.getTransform().getViewMatrix()); // Push view matrix
+        // View matrix will now be a separate matrix
+        MATRIX_STACK.pushIdentity(); // Push view matrix
         for (Renderer renderer : RENDERERS) {
             if (renderer instanceof Physical physical) {
                 physical.updatePhysics();
             }
             renderer.render();
         }
-        MATRIX_STACK.pop(); // Pop view matrix
+        MATRIX_STACK.pop(); // Pop identity matrix
         if (!MATRIX_STACK.isEmpty()) {
             throw new IllegalStateException("Matrix stack not empty at end of frame!");
         }

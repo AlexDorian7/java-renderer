@@ -5,4 +5,5 @@ import physx.physics.PxMaterial;
 
 public class PhysicsMaterials {
     public static final PxMaterial DEFAULT = PhysicsWorld.getInstance().getPhysics().createMaterial(0.5f, 0.5f, 0.5f);
+    public static final PxMaterial CHARACTER = PhysicsWorld.getInstance().getPhysics().createMaterial(0.5f, 1.0f, 0.0f);
 }

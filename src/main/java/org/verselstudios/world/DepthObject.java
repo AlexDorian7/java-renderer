@@ -9,7 +9,6 @@ import static org.lwjgl.opengl.GL45.*;
 public class DepthObject extends TexturedObject {
     protected DepthObject(Transform modelTransform, RenderSystem renderSystem, Texture texture) {
         super(modelTransform, renderSystem, texture);
-        renderDebug = true;
     }
 
     @Override

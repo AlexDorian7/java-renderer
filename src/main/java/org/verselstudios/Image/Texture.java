@@ -35,7 +35,7 @@ public class Texture {
             }
             this.resourcePath = resource;
         } catch (Exception e) {
-            LOGGER.error("Failed to make texture", e);
+            LOGGER.error("Failed to make texture for " + resource, e);
             this.resourcePath = "ERROR";
             image = Image.ERROR;
         }

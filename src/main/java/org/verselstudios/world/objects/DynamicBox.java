@@ -5,6 +5,7 @@ import org.verselstudios.Image.Texture;
 import org.verselstudios.math.Transform;
 import org.verselstudios.model.BoxRenderSystem;
 import org.verselstudios.physics.PhysicsWorld;
+import org.verselstudios.shader.material.Material;
 import org.verselstudios.world.DynamicPhysicsObject;
 import physx.geometry.PxBoxGeometry;
 import physx.physics.*;
@@ -14,8 +15,8 @@ public class DynamicBox extends DynamicPhysicsObject {
     private static final PxShapeFlags SHAPE_FLAGS = new PxShapeFlags((byte) (PxShapeFlagEnum.eSCENE_QUERY_SHAPE.value | PxShapeFlagEnum.eSIMULATION_SHAPE.value));
     private static final PxFilterData FILTER_DATA = new PxFilterData(1, 1, 0, 0);
 
-    public DynamicBox(Transform modelTransform, Vector3d radius, Texture texture, PxMaterial material) {
-        super(modelTransform, new BoxRenderSystem(radius), texture, createShape(radius, material));
+    public DynamicBox(Transform modelTransform, Vector3d radius, Texture texture, Material material, PxMaterial pxMaterial) {
+        super(modelTransform, new BoxRenderSystem(radius, material), texture, createShape(radius, pxMaterial));
     }
 
     private static PxShape createShape(Vector3d radius, PxMaterial material) {

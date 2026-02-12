@@ -4,10 +4,11 @@ import org.joml.Vector3d;
 import org.joml.Vector4d;
 import org.verselstudios.shader.ShaderRegister;
 import org.verselstudios.shader.Vertex;
+import org.verselstudios.shader.material.Material;
 
-public class BoxRenderSystem extends RenderSystem {
-    public BoxRenderSystem(Vector3d radius) {
-        super(RenderType.GL_TRIANGLES, ShaderRegister.getProgram("position_color_tex_normal_tangent"));
+public class BoxRenderSystem extends LitRenderSystem {
+    public BoxRenderSystem(Vector3d radius, Material material) {
+        super(RenderType.GL_TRIANGLES, ShaderRegister.getProgram("lit"), material);
 
         Vector4d WHITE = new Vector4d(1);
 

@@ -6,6 +6,7 @@ import org.verselstudios.math.Time;
 import org.verselstudios.math.Transform;
 import org.verselstudios.model.BoxRenderSystem;
 import org.verselstudios.physics.PhysicsWorld;
+import org.verselstudios.shader.material.Material;
 import org.verselstudios.world.DynamicPhysicsObject;
 import physx.geometry.PxBoxGeometry;
 import physx.physics.*;
@@ -18,8 +19,8 @@ public class FallingDynamicBox extends DynamicPhysicsObject {
 
     private final Transform spawn;
 
-    public FallingDynamicBox(Transform modelTransform, Vector3d radius, Texture texture, PxMaterial material) {
-        super(modelTransform, new BoxRenderSystem(radius), texture, createShape(radius, material));
+    public FallingDynamicBox(Transform modelTransform, Vector3d radius, Texture texture, Material material, PxMaterial pxMaterial) {
+        super(modelTransform, new BoxRenderSystem(radius, material), texture, createShape(radius, pxMaterial));
         spawn = new Transform(modelTransform);
     }
 
@@ -35,7 +36,7 @@ public class FallingDynamicBox extends DynamicPhysicsObject {
     protected void postRender() {
         super.postRender();
         time += Time.deltaTime();
-        if (time >= 5) {
+        if (time >= 10) {
             time = 0;
             modelTransform.getPosition().set(spawn.getPosition());
             modelTransform.getRotation().set(spawn.getRotation());

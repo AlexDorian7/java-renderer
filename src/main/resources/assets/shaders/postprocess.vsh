@@ -4,7 +4,6 @@ in vec3 position;
 in vec2 texCoord;
 
 out vec2 vTexCoord;
-out vec4 vPos;
 
 void main() {
     vTexCoord = texCoord;

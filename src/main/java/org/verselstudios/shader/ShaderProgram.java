@@ -3,9 +3,14 @@ package org.verselstudios.shader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix3d;
 import org.joml.Matrix4d;
+import org.joml.Vector3d;
 import org.joml.Vector4d;
 import org.lwjgl.BufferUtils;
+import org.verselstudios.light.Light;
+import org.verselstudios.light.LightManager;
+import org.verselstudios.shader.material.Material;
 
 import java.nio.FloatBuffer;
 import java.util.Map;
@@ -19,6 +24,7 @@ public class ShaderProgram {
     private static final Logger LOGGER = LogManager.getLogger(ShaderProgram.class);
 
     protected static FloatBuffer buf16Pool;
+    protected static FloatBuffer buf9Pool;
     /**
      * Makes the "default shader" (0) the active program. In GL 3.1+ core profile,
      * you may run into glErrors if you try rendering with the default shader.
@@ -155,10 +161,21 @@ public class ShaderProgram {
         glUniform1i(loc, i);
     }
 
+    public void setUniformf(int loc, float i) {
+        if (loc==-1) return;
+        glUniform1f(loc, i);
+    }
+
+    public void setUniform3v(int loc, Vector3d vec) {
+        if (loc==-1) return;
+        glUniform3f(loc, (float) vec.x, (float) vec.y, (float) vec.z);
+    }
+
     public void setUniform4v(int loc, Vector4d vec) {
         if (loc==-1) return;
         glUniform4f(loc, (float) vec.x, (float) vec.y, (float) vec.z, (float) vec.w);
     }
+
 
     /**
      * Sends a 4x4 matrix to the shader program.
@@ -175,12 +192,54 @@ public class ShaderProgram {
         glUniformMatrix4fv(loc, transposed, buf16Pool);
     }
 
-    public void setModelViewMatrix(Matrix4d mat) {
-        setUniformMatrix(getUniformLocation("modelView"), false, mat);
+    /**
+     * Sends a 3x3 matrix to the shader program.
+     * @param loc the location of the mat4 uniform
+     * @param transposed whether the matrix should be transposed
+     * @param mat the matrix to send
+     */
+    public void setUniformMatrix(int loc, boolean transposed, Matrix3d mat) {
+        if (loc==-1) return;
+        if (buf9Pool == null)
+            buf9Pool = BufferUtils.createFloatBuffer(9);
+        buf9Pool.clear();
+        mat.get(buf9Pool);
+        glUniformMatrix4fv(loc, transposed, buf9Pool);
+    }
+
+    public void setModelMatrix(Matrix4d mat) {
+        setUniformMatrix(getUniformLocation("model"), false, mat);
+    }
+
+    public void setViewMatrix(Matrix4d mat) {
+        setUniformMatrix(getUniformLocation("view"), false, mat);
     }
 
     public void setProjectionMatrix(Matrix4d mat) {
         setUniformMatrix(getUniformLocation("projection"), false, mat);
+    }
+
+    public void genLight() {
+        setUniformf(getUniformLocation("ambientStrength"), (float) LightManager.AMBIENT_STRENGTH);
+        setUniform3v(getUniformLocation("ambientColor"), LightManager.AMBIENT_COLOR);
+    }
+
+    public void setMaterial(String loc, Material material) {
+        setUniform3v(getUniformLocation(loc+".ambient"), material.ambient());
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, material.diffuse().textureId());
+        setUniformi(getUniformLocation(loc+".diffuse"), 1);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, material.specular().textureId());
+        setUniformi(getUniformLocation(loc+".specular"), 2);
+        setUniformf(getUniformLocation(loc+".shininess"), (float) material.shininess());
+    }
+
+    public void setLight(String loc, Light light) {
+        setUniform3v(getUniformLocation(loc+".position"), light.position());
+        setUniform3v(getUniformLocation(loc+".ambient"), light.ambient());
+        setUniform3v(getUniformLocation(loc+".diffuse"), light.diffuse());
+        setUniform3v(getUniformLocation(loc+".specular"), light.specular());
     }
 
 }

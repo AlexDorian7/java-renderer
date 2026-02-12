@@ -27,6 +27,11 @@ public class MatrixStack {
         stack.add(new Matrix4d(viewMatrix));
     }
 
+    public void pushIdentity() {
+        if (!stack.isEmpty()) throw new IllegalStateException("Attempted to push identity matrix to non empty stack!");
+        stack.add(new Matrix4d().identity());
+    }
+
     public void pop() {
         if (stack.isEmpty()) {
             throw new IllegalStateException("Cannot pop! Stack is empty");

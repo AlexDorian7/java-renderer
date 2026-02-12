@@ -8,6 +8,7 @@ public class VaoBuilder {
     }
 
     private final ArrayList<Vao> VAOs = new ArrayList<>();
+    private final boolean lit = false;
 
     public ArrayList<Vao> getVAOs() {
         return VAOs;
@@ -26,4 +27,7 @@ public class VaoBuilder {
 
     }
 
+    public boolean isLit() {
+        return lit;
+    }
 }

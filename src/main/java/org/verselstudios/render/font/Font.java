@@ -1,5 +1,7 @@
 package org.verselstudios.render.font;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joml.Matrix4d;
 import org.joml.Vector3d;
 import org.joml.Vector4d;
@@ -15,6 +17,8 @@ import static org.lwjgl.opengl.GL45.*;
 
 public class Font {
 
+    private static final Logger LOGGER = LogManager.getLogger(Font.class);
+
     public static final Font DEFAULT = new Font("assets/textures/font/ascii.png");
     public static final Font EMOJI = new Font("assets/textures/font/emoji.png");
     public static final Font PROGRESS = new Font("assets/textures/font/progress.png");
@@ -28,154 +32,14 @@ public class Font {
         texture = new Texture(fontResource);
     }
 
-    @Deprecated
-    public void renderString(Vector3d position, String string) {
-        renderString(position, string, FontStyle.DEFAULT);
-    }
-
-    @Deprecated
-    public void renderString(Vector3d position, String string, FontStyle style) {
-        int pos = 0;
-        double fontSize = style.size;
-        if (style.shadow) {
-            Vector4d shadowColor = style.shadowColor;
-            for (char c : string.toCharArray()) {
-                double shadowPos = pos + 1/8D;
-                if (c > 255) {
-                    c = 0;
-                }
-                int yi = c/16;
-                int xi = c%16;
-                double x = xi/16D;
-                double y  = 1D - (yi + 1) / 16D;
-                double x1 = x + 1/16D;
-                double y1 = y + 1/16D;
-
-//                glEnable(GL_BLEND);
-//                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//                glBindTexture(GL_TEXTURE_2D, texture.textureId());
-//                glColor4d(shadowColor.x, shadowColor.y, shadowColor.z, shadowColor.w);
-//                glBegin(GL_QUADS);
-//
-//                glTexCoord2d(x, y);
-//                glVertex3d(position.x + shadowPos*fontSize, position.y - fontSize/8D, position.z);
-//                glTexCoord2d(x, y1);
-//                glVertex3d(position.x + shadowPos*fontSize + (style.italic ? fontSize/4D : 0), position.y + fontSize - fontSize/8D, position.z);
-//                glTexCoord2d(x1, y1);
-//                glVertex3d(position.x + shadowPos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.y + fontSize - fontSize/8D, position.z);
-//                glTexCoord2d(x1, y);
-//                glVertex3d(position.x + shadowPos*fontSize + fontSize, position.y - fontSize/8D, position.z);
-//                glEnd();
-//
-//                glDisable(GL_BLEND);
-
-                pos++;
-            }
-        }
-        pos = 0;
-        for (char c : string.toCharArray()) {
-            if (c > 255) {
-                c = 0;
-            }
-            int yi = c/16;
-            int xi = c%16;
-            double x = xi/16D;
-            double y  = 1D - (yi + 1) / 16D;
-            double x1 = x + 1/16D;
-            double y1 = y + 1/16D;
-
-//            glEnable(GL_BLEND);
-//            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//            glBindTexture(GL_TEXTURE_2D, texture.textureId());
-//            glColor4d(style.color().x, style.color().y, style.color().z, style.color().w);
-//            glBegin(GL_QUADS);
-//
-//            glTexCoord2d(x, y);
-//            glVertex3d(position.x + pos*fontSize, position.y, position.z);
-//            glTexCoord2d(x, y1);
-//            glVertex3d(position.x + pos*fontSize + (style.italic ? fontSize/4D : 0), position.y + fontSize, position.z);
-//            glTexCoord2d(x1, y1);
-//            glVertex3d(position.x + pos*fontSize + fontSize + (style.italic ? fontSize/4D : 0), position.y + fontSize, position.z);
-//            glTexCoord2d(x1, y);
-//            glVertex3d(position.x + pos*fontSize + fontSize, position.y, position.z);
-//            glEnd();
-//
-//            glDisable(GL_BLEND);
-
-            pos++;
-        }
-    }
-
-    @Deprecated
-    public void renderWrappedString(
-            Vector3d position,
-            String text,
-            double maxWidth,
-            FontStyle style
-    ) {
-        double fontSize = style.size();
-        double x = position.x;
-        double y = position.y;
-        double z = position.z;
-
-        double cursorX = 0;
-        double cursorY = 0;
-
-        StringBuilder line = new StringBuilder();
-
-        String[] words = text.split(" ");
-
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
-
-            double wordWidth = word.length() * fontSize;
-            double spaceWidth = fontSize;
-
-            boolean firstWord = line.isEmpty();
-
-            // Would this word overflow the line?
-            if ((!firstWord && cursorX + spaceWidth + wordWidth > maxWidth)) {
-                // Render current line
-                renderString(
-                        new Vector3d(x, y - cursorY, z),
-                        line.toString(),
-                        style
-                );
-
-                // Start new line
-                line.setLength(0);
-                cursorX = 0;
-                cursorY += fontSize;
-                firstWord = true;
-            }
-
-            // Add space if needed
-            if (!firstWord) {
-                line.append(" ");
-                cursorX += spaceWidth;
-            }
-
-            line.append(word);
-            cursorX += wordWidth;
-        }
-
-        // ALWAYS render the final line
-        if (!line.isEmpty()) {
-            renderString(
-                    new Vector3d(x, y - cursorY, z),
-                    line.toString(),
-                    style
-            );
-        }
-    }
-
     public FontRenderSystem createFontRenderSystem(String string) {
         return createFontRenderSystem(string, FontStyle.DEFAULT);
     }
 
     public FontRenderSystem createFontRenderSystem(String string, FontStyle style) {
+//        LOGGER.debug("Creating Font Render System for: " + string);
         if (string.isEmpty()) string = " "; // Should fix this later. this prevents empty RenderSystem
-        ShaderProgram program = ShaderRegister.getProgram("position_color_tex");
+        ShaderProgram program = ShaderRegister.getProgram("font");
         FontRenderSystem system = new FontRenderSystem(RenderSystem.RenderType.GL_TRIANGLES, program, this, style);
         system.begin();
         int pos = 0;
@@ -406,7 +270,7 @@ public class Font {
         glDisable(GL_TEXTURE_2D);
     }
 
-    public record FontStyle(double size, Vector4d color, @Deprecated Vector4d shadowColor, boolean italic, @Deprecated boolean shadow, boolean bold) {
+    public record FontStyle(double size, Vector4d color, boolean italic, @Deprecated boolean shadow, boolean bold) {
         public static final FontStyle DEFAULT = new FontStyleBuilder().setSize(1).build();
 
         public Matrix4d getScaleMat() {

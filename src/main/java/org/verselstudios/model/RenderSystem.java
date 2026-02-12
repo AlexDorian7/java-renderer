@@ -1,7 +1,11 @@
 package org.verselstudios.model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.joml.Vector3d;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL45;
+import org.verselstudios.Main;
 import org.verselstudios.math.MatrixStack;
 import org.verselstudios.shader.ShaderProgram;
 import org.verselstudios.shader.ShaderRegister;
@@ -14,6 +18,7 @@ import java.util.ArrayList;
 import static org.lwjgl.opengl.GL45.*;
 
 public class RenderSystem {
+    private static final Logger LOGGER = LogManager.getLogger(RenderSystem.class);
 
     private final int vao;
     private final int vbo;
@@ -95,7 +100,8 @@ public class RenderSystem {
             throw new IllegalStateException("Render system is in state " + state + " expected 2.");
         }
         program.use();
-        program.setModelViewMatrix(matrixStack.matrix());
+        program.setModelMatrix(matrixStack.matrix());
+        program.setViewMatrix(Main.getRenderManager().getRenderStack().getCamera().getTransform().getViewMatrix());
         program.setProjectionMatrix(ShaderRegister.PROJECTION_MATRIX);
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -107,15 +113,6 @@ public class RenderSystem {
     public void destroy() {
         glDeleteBuffers(vbo);
         glDeleteVertexArrays(vao);
-    }
-
-    private void put(FloatBuffer buf, float x, float y, float z, float u, float v, float r, float g, float b, float a, float nx, float ny, float nz, float tx, float ty, float tz, float bx, float by, float bz) {
-        buf.put(x).put(y).put(z);           // position
-        buf.put(u).put(v);                  // texcoord
-        buf.put(r).put(g).put(b).put(a);    // color
-        buf.put(nx).put(ny).put(nz);        // normal
-        buf.put(tx).put(ty).put(tz);        // tangent
-        buf.put(bx).put(by).put(bz);        // bitangent
     }
 
     public final ShaderProgram getProgram() {

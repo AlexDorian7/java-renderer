@@ -51,7 +51,7 @@ public class RenderManager {
         sceneFbo = glGenFramebuffers();
         glBindFramebuffer(GL_FRAMEBUFFER, sceneFbo);
 
-        sceneColorTex = createColorTexture(16, 16); // This will be rebuilt
+        sceneColorTex = createColorTextureFloat(16, 16); // This will be rebuilt
         glFramebufferTexture2D(
                 GL_FRAMEBUFFER,
                 GL_COLOR_ATTACHMENT0,
@@ -77,7 +77,7 @@ public class RenderManager {
         postFboA = glGenFramebuffers();
         glBindFramebuffer(GL_FRAMEBUFFER, postFboA);
 
-        postTexA = createColorTexture(16, 16); // This will be rebuilt
+        postTexA = createColorTextureFloat(16, 16); // This will be rebuilt
         glFramebufferTexture2D(
                 GL_FRAMEBUFFER,
                 GL_COLOR_ATTACHMENT0,
@@ -94,7 +94,7 @@ public class RenderManager {
         postFboB = glGenFramebuffers();
         glBindFramebuffer(GL_FRAMEBUFFER, postFboB);
 
-        postTexB = createColorTexture(16, 16); // This will be rebuilt
+        postTexB = createColorTextureFloat(16, 16); // This will be rebuilt
         glFramebufferTexture2D(
                 GL_FRAMEBUFFER,
                 GL_COLOR_ATTACHMENT0,
@@ -219,7 +219,7 @@ public class RenderManager {
         glBindFramebuffer(GL_FRAMEBUFFER, postFboA);
         glDeleteTextures(postTexA);
 
-        int a = createColorTexture(width, height);
+        int a = createColorTextureFloat(width, height);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, a, 0);
         checkFbo();
 
@@ -227,7 +227,7 @@ public class RenderManager {
         glBindFramebuffer(GL_FRAMEBUFFER, postFboB);
         glDeleteTextures(postTexB);
 
-        int b = createColorTexture(width, height);
+        int b = createColorTextureFloat(width, height);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, b, 0);
         checkFbo();
 
@@ -243,6 +243,30 @@ public class RenderManager {
                 GL_TEXTURE_2D,
                 0,
                 GL_RGBA8,
+                width,
+                height,
+                0,
+                GL_RGBA,
+                GL_UNSIGNED_BYTE,
+                (ByteBuffer) null
+        );
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+        return tex;
+    }
+
+    private int createColorTextureFloat(int width, int height) {
+        int tex = glGenTextures();
+        glBindTexture(GL_TEXTURE_2D, tex);
+
+        glTexImage2D(
+                GL_TEXTURE_2D,
+                0,
+                GL_RGBA32F,
                 width,
                 height,
                 0,

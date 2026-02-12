@@ -3,9 +3,8 @@ package org.verselstudios.render.font;
 import org.joml.Vector4d;
 
 public class FontStyleBuilder {
-    private double size = 1/64D;
-    private Vector4d color = new Vector4d(1, 1, 1, 1);
-    private Vector4d shadowColor = color.div(2);
+    private double size = 1;
+    private Vector4d color = new Vector4d(1);
     private boolean italic = false;
     private boolean shadow = false;
     private boolean bold = false;
@@ -17,11 +16,6 @@ public class FontStyleBuilder {
 
     public FontStyleBuilder setColor(Vector4d color) {
         this.color = color;
-        return this;
-    }
-
-    public FontStyleBuilder setShadowColor(Vector4d shadowColor) {
-        this.shadowColor = shadowColor;
         return this;
     }
 
@@ -41,6 +35,6 @@ public class FontStyleBuilder {
     }
 
     public Font.FontStyle build() {
-        return new Font.FontStyle(size, color, shadowColor, italic, shadow, bold);
+        return new Font.FontStyle(size, color, italic, shadow, bold);
     }
 }
