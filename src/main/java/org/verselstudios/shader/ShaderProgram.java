@@ -240,6 +240,12 @@ public class ShaderProgram {
         glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, material.specular().textureId());
         setUniformi(getUniformLocation(loc+".specular"), 2);
+        glActiveTexture(GL_TEXTURE3);
+        glBindTexture(GL_TEXTURE_2D, material.normal().textureId());
+        setUniformi(getUniformLocation(loc+".normal"), 3);
+        glActiveTexture(GL_TEXTURE4);
+        glBindTexture(GL_TEXTURE_2D, material.height().textureId());
+        setUniformi(getUniformLocation(loc+".height"), 3);
         setUniformf(getUniformLocation(loc+".shininess"), (float) material.shininess());
     }
 

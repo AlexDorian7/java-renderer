@@ -3,6 +3,8 @@
 struct Material {
     sampler2D diffuse;
     sampler2D specular;
+    sampler2D normal;
+    sampler2D height;
     float shininess;
 };
 
@@ -26,8 +28,10 @@ struct DirectionalLight {
 
 in vec2 vTexCoord;
 in vec4 vColor;
-in vec3 vNormal;
 in vec4 vPos;
+in mat3 TBN;
+in vec3 TangentViewPos;
+in vec3 TangentFragPos;
 
 uniform sampler2D sampler0;
 
@@ -79,11 +83,23 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     return (ambient + diffuse + specular);
 }
 
+vec2 ParallaxMapping(vec2 texCoords, vec3 viewDir) {
+    float height_scale = 1;
+    float height = texture(material.height, texCoords).r * 2.0 - 1.0;
+    vec2 p = viewDir.xy / viewDir.z * (height * height_scale);
+    return texCoords - p;
+}
+
 void main() {
-    vec4 color = texture(material.diffuse, vTexCoord);
+    vec3 tangentViewDir   = normalize(TangentViewPos - TangentFragPos);
+    vec2 texCoords = ParallaxMapping(vTexCoord,  tangentViewDir);
+
+    vec4 color = texture(material.diffuse, texCoords);
 
     // properties
-    vec3 norm = normalize(vNormal);
+    vec3 norm = texture(material.normal, texCoords).rgb;
+    norm = norm * 2.0 - 1.0;
+    norm = normalize(TBN * norm); // future maybe do this in vertex shader?
     vec3 viewDir = normalize(viewPos - vPos.xyz);
 
     // phase 1: Directional lighting
@@ -95,5 +111,6 @@ void main() {
     //result += CalcSpotLight(spotLight, norm, vPos.xyz, viewDir);
 
     FragColor = vec4(result, color.a);
+
     if (FragColor.a < 0.001) discard;
 }

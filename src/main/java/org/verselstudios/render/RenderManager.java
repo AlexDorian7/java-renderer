@@ -1,6 +1,7 @@
 package org.verselstudios.render;
 
 import org.joml.Matrix4d;
+import org.verselstudios.Main;
 import org.verselstudios.math.Time;
 import org.verselstudios.model.QuadRenderSystem;
 import org.verselstudios.model.RenderPostSystem;
@@ -17,141 +18,87 @@ public class RenderManager {
     private int fbWidth = -1;
     private int fbHeight = -1;
 
-
     private final RenderStack renderStack;
     private final PostProcessStack postStack;
 
     private final RenderPostSystem postSystem;
 
-    // Scene framebuffer
-    private final int sceneFbo;
-    private final int sceneColorTex;
-    private final int sceneDepthTex;
+    // -------------------
+    // Scene FBO (MSAA + HDR)
+    // -------------------
+    private int sceneFbo;
+    private int sceneColorTexMS;
+    private int sceneDepthTexMS;
 
-    // Ping-pong framebuffers
-    private final int postFboA;
-    private final int postFboB;
-    private final int postTexA;
-    private final int postTexB;
+    private int sceneResolveFbo;
+    private int sceneColorTex; // resolved single-sample for post-processing
+
+    // -------------------
+    // Post-processing ping-pong
+    // -------------------
+    private int postFboA;
+    private int postFboB;
+    private int postTexA;
+    private int postTexB;
+
+    private static final int MSAA_SAMPLES = 4;
 
     public RenderManager() {
-
         renderStack = new RenderStack();
         postStack = new PostProcessStack();
 
-        // Example stack (last shader outputs to screen)
-        postStack.push(ShaderRegister.loadPostProgram("blit"));
-//        postStack.push(ShaderRegister.loadPostProgram("depth"));
-
+        postStack.push(ShaderRegister.loadPostProgram("blit")); // final blit to screen
+        postStack.push(ShaderRegister.loadPostProgram("toneMap"));
+        postStack.push(ShaderRegister.loadPostProgram("gammaCorrect"));
         postSystem = QuadRenderSystem.makePostQuad();
-
-        // -----------------------------
-        // Scene framebuffer
-        // -----------------------------
-        sceneFbo = glGenFramebuffers();
-        glBindFramebuffer(GL_FRAMEBUFFER, sceneFbo);
-
-        sceneColorTex = createColorTextureFloat(16, 16); // This will be rebuilt
-        glFramebufferTexture2D(
-                GL_FRAMEBUFFER,
-                GL_COLOR_ATTACHMENT0,
-                GL_TEXTURE_2D,
-                sceneColorTex,
-                0
-        );
-
-        sceneDepthTex = createDepthTexture(16, 16); // This will be rebuilt
-        glFramebufferTexture2D(
-                GL_FRAMEBUFFER,
-                GL_DEPTH_ATTACHMENT,
-                GL_TEXTURE_2D,
-                sceneDepthTex,
-                0
-        );
-
-        checkFbo();
-
-        // -----------------------------
-        // Post-process ping-pong A
-        // -----------------------------
-        postFboA = glGenFramebuffers();
-        glBindFramebuffer(GL_FRAMEBUFFER, postFboA);
-
-        postTexA = createColorTextureFloat(16, 16); // This will be rebuilt
-        glFramebufferTexture2D(
-                GL_FRAMEBUFFER,
-                GL_COLOR_ATTACHMENT0,
-                GL_TEXTURE_2D,
-                postTexA,
-                0
-        );
-
-        checkFbo();
-
-        // -----------------------------
-        // Post-process ping-pong B
-        // -----------------------------
-        postFboB = glGenFramebuffers();
-        glBindFramebuffer(GL_FRAMEBUFFER, postFboB);
-
-        postTexB = createColorTextureFloat(16, 16); // This will be rebuilt
-        glFramebufferTexture2D(
-                GL_FRAMEBUFFER,
-                GL_COLOR_ATTACHMENT0,
-                GL_TEXTURE_2D,
-                postTexB,
-                0
-        );
-
-        checkFbo();
-
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
     // ============================================================
-    // Render
+    // Main render function
     // ============================================================
-
     public void render(int windowWidth, int windowHeight) {
-
-        if (windowWidth <= 0 || windowHeight <= 0) {
-            return; // Something is wrong with window size. Do not attempt to render a frame. (Maybe the window is minimized?)
-        }
+        if (windowWidth <= 0 || windowHeight <= 0) return;
 
         resizeIfNeeded(windowWidth, windowHeight);
-
-        // Move time
         Time.update();
 
-        // Simulate Physics
         PhysicsWorld.getInstance().simulate();
 
-        // Create Projection Matrix
         double aspect = (double) windowWidth / windowHeight;
         if (ShaderRegister.PROJECTION_MATRIX == null) {
-            ShaderRegister.PROJECTION_MATRIX = new Matrix4d().perspective(Math.PI/2, aspect, 0.1, 100);
-        } else { // Do this to prevent garbage
-            ShaderRegister.PROJECTION_MATRIX.identity().perspective(Math.PI/2, aspect, 0.1, 100);
+            ShaderRegister.PROJECTION_MATRIX = new Matrix4d().perspective(Math.PI / 2, aspect, 0.1, 100);
+        } else {
+            ShaderRegister.PROJECTION_MATRIX.identity().perspective(Math.PI / 2, aspect, 0.1, 100);
         }
 
         // -----------------------------
-        // 1. Geometry pass
+        // 1. Render scene to MSAA HDR FBO
         // -----------------------------
         glBindFramebuffer(GL_FRAMEBUFFER, sceneFbo);
         glViewport(0, 0, windowWidth, windowHeight);
 
         glEnable(GL_DEPTH_TEST);
         glDepthMask(true);
-        glDepthFunc(GL_LESS);
-        glCullFace(GL_BACK);
-        glEnable(GL_CULL_FACE);
-
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
 
         renderStack.render();
 
         // -----------------------------
-        // 2. Post-processing passes
+        // 2. Resolve MSAA → single-sample HDR
+        // -----------------------------
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, sceneFbo);
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, sceneResolveFbo);
+        glBlitFramebuffer(
+                0, 0, windowWidth, windowHeight,
+                0, 0, windowWidth, windowHeight,
+                GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT,
+                GL_NEAREST
+        );
+
+        // -----------------------------
+        // 3. Post-processing passes
         // -----------------------------
         glDisable(GL_DEPTH_TEST);
         glDepthMask(false);
@@ -159,7 +106,6 @@ public class RenderManager {
         int readTex = sceneColorTex;
 
         for (int i = postStack.getShaders().size() - 1; i > 0; i--) {
-
             boolean even = ((postStack.getShaders().size() - i) & 1) == 0;
             int writeFbo = even ? postFboA : postFboB;
             int writeTex = even ? postTexA : postTexB;
@@ -167,144 +113,96 @@ public class RenderManager {
             glBindFramebuffer(GL_FRAMEBUFFER, writeFbo);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            postSystem.draw(
-                    postStack.getShaders().get(i),
-                    readTex,
-                    sceneDepthTex
-            );
-
+            postSystem.draw(postStack.getShaders().get(i), readTex, sceneDepthTexMS);
             readTex = writeTex;
         }
 
         // -----------------------------
-        // 3. Final pass → screen
+        // 4. Final pass → screen
         // -----------------------------
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glViewport(0, 0, windowWidth, windowHeight);
-
         glClear(GL_COLOR_BUFFER_BIT);
-
-        postSystem.draw(
-                postStack.getShaders().get(0),
-                readTex,
-                sceneDepthTex
-        );
+        postSystem.draw(postStack.getShaders().get(0), readTex, sceneDepthTexMS);
     }
 
     // ============================================================
-    // Helpers
+    // Resize / FBO creation
     // ============================================================
-
     private void resizeIfNeeded(int width, int height) {
         if (width == fbWidth && height == fbHeight) return;
 
         fbWidth = width;
         fbHeight = height;
 
-        // ----- Scene FBO -----
+        // --- Scene MSAA HDR ---
+        if (sceneFbo != 0) {
+            glDeleteFramebuffers(sceneFbo);
+            glDeleteTextures(sceneColorTexMS);
+            glDeleteTextures(sceneDepthTexMS);
+            glDeleteFramebuffers(sceneResolveFbo);
+            glDeleteTextures(sceneColorTex);
+        }
+
+        sceneFbo = glGenFramebuffers();
         glBindFramebuffer(GL_FRAMEBUFFER, sceneFbo);
 
-        glDeleteTextures(sceneColorTex);
-        glDeleteTextures(sceneDepthTex);
+        sceneColorTexMS = createColorTextureMultisample(width, height, true);
+        sceneDepthTexMS = createDepthTextureMultisample(width, height);
 
-        int color = createColorTexture(width, height);
-        int depth = createDepthTexture(width, height);
-
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, color, 0);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, sceneColorTexMS, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, sceneDepthTexMS, 0);
 
         checkFbo();
 
-        // ----- Post A -----
+        // Single-sample resolved texture for post
+        sceneResolveFbo = glGenFramebuffers();
+        glBindFramebuffer(GL_FRAMEBUFFER, sceneResolveFbo);
+
+        sceneColorTex = createColorTextureFloat(width, height);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, sceneColorTex, 0);
+
+        checkFbo();
+
+        // --- Post-processing ping-pong ---
+        postFboA = glGenFramebuffers();
         glBindFramebuffer(GL_FRAMEBUFFER, postFboA);
-        glDeleteTextures(postTexA);
-
-        int a = createColorTextureFloat(width, height);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, a, 0);
+        postTexA = createColorTextureFloat(width, height);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, postTexA, 0);
         checkFbo();
 
-        // ----- Post B -----
+        postFboB = glGenFramebuffers();
         glBindFramebuffer(GL_FRAMEBUFFER, postFboB);
-        glDeleteTextures(postTexB);
-
-        int b = createColorTextureFloat(width, height);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, b, 0);
+        postTexB = createColorTextureFloat(width, height);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, postTexB, 0);
         checkFbo();
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-
-    private int createColorTexture(int width, int height) {
+    // ----------------------------
+    // Helpers
+    // ----------------------------
+    private int createColorTextureMultisample(int width, int height, boolean hdr) {
         int tex = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, tex);
+        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, tex);
+        glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, MSAA_SAMPLES, hdr ? GL_RGBA16F : GL_RGBA8, width, height, true);
+        return tex;
+    }
 
-        glTexImage2D(
-                GL_TEXTURE_2D,
-                0,
-                GL_RGBA8,
-                width,
-                height,
-                0,
-                GL_RGBA,
-                GL_UNSIGNED_BYTE,
-                (ByteBuffer) null
-        );
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
+    private int createDepthTextureMultisample(int width, int height) {
+        int tex = glGenTextures();
+        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, tex);
+        glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, MSAA_SAMPLES, GL_DEPTH_COMPONENT24, width, height, true);
         return tex;
     }
 
     private int createColorTextureFloat(int width, int height) {
         int tex = glGenTextures();
         glBindTexture(GL_TEXTURE_2D, tex);
-
-        glTexImage2D(
-                GL_TEXTURE_2D,
-                0,
-                GL_RGBA32F,
-                width,
-                height,
-                0,
-                GL_RGBA,
-                GL_UNSIGNED_BYTE,
-                (ByteBuffer) null
-        );
-
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-        return tex;
-    }
-
-    private int createDepthTexture(int width, int height) {
-        int tex = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, tex);
-
-        glTexImage2D(
-                GL_TEXTURE_2D,
-                0,
-                GL_DEPTH_COMPONENT24,
-                width,
-                height,
-                0,
-                GL_DEPTH_COMPONENT,
-                GL_FLOAT,
-                (ByteBuffer) null
-        );
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
         return tex;
     }
 
@@ -314,10 +212,9 @@ public class RenderManager {
         }
     }
 
-    // ============================================================
+    // ----------------------------
     // Accessors
-    // ============================================================
-
+    // ----------------------------
     public RenderStack getRenderStack() {
         return renderStack;
     }

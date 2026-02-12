@@ -72,9 +72,13 @@ public class Main {
         Texture groundTexture = new Texture("assets/textures/ground_white.png");
         Texture crateTexture = new Texture("assets/textures/crate.png");
         Texture crateSpecularTexture = new Texture("assets/textures/crate_specular.png");
+        Texture brickNormalTexture = new Texture("assets/textures/flat_normal.png");
+        Texture crateNormalTexture = new Texture("assets/textures/crate_normal.png");
+        Texture brickHeightTexture = new Texture("assets/textures/no_height.png");
+        Texture crateHeightTexture = new Texture("assets/textures/crate_height.png");
 
-        Material groundMaterial = new Material(groundTexture, groundTexture, 64);
-        Material createMaterial = new Material(crateTexture, crateSpecularTexture, 16);
+        Material groundMaterial = new Material(groundTexture, groundTexture, brickNormalTexture, brickHeightTexture, 256);
+        Material createMaterial = new Material(crateTexture, crateSpecularTexture, crateNormalTexture, crateHeightTexture, 16);
 
 //        renderManager.getRenderStack().push(new StaticBox(new Transform(0,-10,0, Math.PI/4,0,0, 1,1,1), new Vector3d(20,1,20), groundTexture, groundMaterial, PhysicsMaterials.DEFAULT)); // Slope
         renderManager.getRenderStack().push(new StaticBox(new Transform(0,-20,0, 0,0,0, 1,1,1), new Vector3d(50,1,50), groundTexture, groundMaterial, PhysicsMaterials.DEFAULT)); // Ground
@@ -182,6 +186,9 @@ public class Main {
 
             resize(pWidth.get(), pHeight.get());
         } // the stack frame is popped automatically
+
+        glfwWindowHint(GLFW_SAMPLES, 4); // tell glfw that we want to use MSAA (Anti aliasing)
+        glEnable(GL_MULTISAMPLE); // Tell OpenGL to do the same
     }
 
     // Call once after window creation
