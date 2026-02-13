@@ -18,6 +18,7 @@ import org.verselstudios.physics.PhysicsWorld;
 import org.verselstudios.physics.material.PhysicsMaterials;
 import org.verselstudios.render.*;
 import org.verselstudios.shader.material.Material;
+import org.verselstudios.world.objects.DynamicCylinder;
 import org.verselstudios.world.objects.FallingDynamicBox;
 import org.verselstudios.world.objects.StaticBox;
 
@@ -70,22 +71,23 @@ public class Main {
 
         renderManager = new RenderManager();
         Texture groundTexture = new Texture("assets/textures/ground_white.png");
-        Texture crateTexture = new Texture("assets/textures/crate.png");
+        Texture crateTexture = new Texture("assets/textures/coin/gold.png");
         Texture crateSpecularTexture = new Texture("assets/textures/crate_specular.png");
-        Texture brickNormalTexture = new Texture("assets/textures/flat_normal.png");
-        Texture crateNormalTexture = new Texture("assets/textures/crate_normal.png");
-        Texture brickHeightTexture = new Texture("assets/textures/no_height.png");
+        Texture brickNormalTexture = new Texture("assets/textures/brick_normal.png");
+        Texture crateNormalTexture = new Texture("assets/textures/coin/coin_normal.png");
+        Texture brickHeightTexture = new Texture("assets/textures/brick_height.png");
         Texture crateHeightTexture = new Texture("assets/textures/crate_height.png");
 
         Material groundMaterial = new Material(groundTexture, groundTexture, brickNormalTexture, brickHeightTexture, 256);
-        Material createMaterial = new Material(crateTexture, crateSpecularTexture, crateNormalTexture, crateHeightTexture, 16);
+        Material crateMaterial = new Material(crateTexture, crateSpecularTexture, crateNormalTexture, crateHeightTexture, 16);
 
 //        renderManager.getRenderStack().push(new StaticBox(new Transform(0,-10,0, Math.PI/4,0,0, 1,1,1), new Vector3d(20,1,20), groundTexture, groundMaterial, PhysicsMaterials.DEFAULT)); // Slope
         renderManager.getRenderStack().push(new StaticBox(new Transform(0,-20,0, 0,0,0, 1,1,1), new Vector3d(50,1,50), groundTexture, groundMaterial, PhysicsMaterials.DEFAULT)); // Ground
         for (int x=-10; x<=10; x++) {
-            for (int y=0; y<10; y++) {
+            for (int y=0; y<2; y++) {
                 for (int z = -10; z <= 10; z++) {
-                    renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(x * 5, y*5+10, z * 5), new Quaterniond(), new Vector3d(1)), new Vector3d(0.5), crateTexture, createMaterial, PhysicsMaterials.DEFAULT)); // FallingBox
+//                    renderManager.getRenderStack().push(new FallingDynamicBox(new Transform(new Vector3d(x * 5, y*5+10, z * 5), new Quaterniond(), new Vector3d(1)), new Vector3d(0.5), crateTexture, crateMaterial, PhysicsMaterials.DEFAULT)); // FallingBox
+                    renderManager.getRenderStack().push(new DynamicCylinder(new Transform(new Vector3d(x * 5, y*5+10, z * 5), new Quaterniond(), new Vector3d(1)), 1, 0.1, 16, crateTexture, crateMaterial, PhysicsMaterials.DEFAULT));
                 }
             }
         }

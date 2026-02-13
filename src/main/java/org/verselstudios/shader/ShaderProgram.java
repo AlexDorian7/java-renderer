@@ -245,7 +245,7 @@ public class ShaderProgram {
         setUniformi(getUniformLocation(loc+".normal"), 3);
         glActiveTexture(GL_TEXTURE4);
         glBindTexture(GL_TEXTURE_2D, material.height().textureId());
-        setUniformi(getUniformLocation(loc+".height"), 3);
+        setUniformi(getUniformLocation(loc+".height"), 4);
         setUniformf(getUniformLocation(loc+".shininess"), (float) material.shininess());
     }
 

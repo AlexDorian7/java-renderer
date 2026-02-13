@@ -1,7 +1,5 @@
 package org.verselstudios.world;
 
-import org.jetbrains.annotations.Nullable;
-import org.verselstudios.Image.Texture;
 import org.verselstudios.Main;
 import org.verselstudios.math.Transform;
 import org.verselstudios.model.RenderSystem;

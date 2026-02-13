@@ -5,6 +5,5 @@
     {"name": "texCoord", "amount": 2, "normalized":  false},
     {"name": "normal", "amount": 3, "normalized":  false},
     {"name": "tangent", "amount": 3, "normalized":  false}
-  ],
-  "lit": true
+  ]
 }
