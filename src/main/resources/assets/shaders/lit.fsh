@@ -89,7 +89,7 @@ float sampleHeightMap(vec2 texCoord) {
 
 vec2 ParallaxMapping(vec2 texCoords, vec3 viewDir)
 {
-    const float height_scale = 0.1;
+    const float height_scale = 1;
 
     // number of depth layers
     const float minLayers = 8.0;

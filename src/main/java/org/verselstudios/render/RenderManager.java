@@ -1,7 +1,6 @@
 package org.verselstudios.render;
 
 import org.joml.Matrix4d;
-import org.verselstudios.Main;
 import org.verselstudios.math.Time;
 import org.verselstudios.model.QuadRenderSystem;
 import org.verselstudios.model.RenderPostSystem;

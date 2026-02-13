@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CylinderRenderSystem extends LitRenderSystem {
     public CylinderRenderSystem(double radius, double halfHeight, int steps, Material material) {
-        super(RenderType.GL_TRIANGLES, ShaderRegister.getProgram("lit"), material);
+        super(RenderType.GL_TRIANGLES, material);
 
         Vector4d WHITE = new Vector4d(1);
 

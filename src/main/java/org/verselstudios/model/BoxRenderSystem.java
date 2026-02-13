@@ -2,13 +2,12 @@ package org.verselstudios.model;
 
 import org.joml.Vector3d;
 import org.joml.Vector4d;
-import org.verselstudios.shader.ShaderRegister;
 import org.verselstudios.shader.Vertex;
 import org.verselstudios.shader.material.Material;
 
 public class BoxRenderSystem extends LitRenderSystem {
     public BoxRenderSystem(Vector3d radius, Material material) {
-        super(RenderType.GL_TRIANGLES, ShaderRegister.getProgram("lit"), material);
+        super(RenderType.GL_TRIANGLES, material);
 
         Vector4d WHITE = new Vector4d(1);
 

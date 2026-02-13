@@ -12,9 +12,9 @@ public class LightManager {
 
     static {
 //        LIGHTS.add(new PointLight(new Vector3d(), new Vector3d(0), new Vector3d(1), new Vector3d(1), new Vector3d(1, 0.022, 0.0019)));
-        LIGHTS.add(new PointLight(new Vector3d(-20, -15, 0), new Vector3d(0,0,0), new Vector3d(1,0,0), new Vector3d(1,0,0), new Vector3d(1, 0.022, 0.0019)));
-        LIGHTS.add(new PointLight(new Vector3d(0, -15, 0), new Vector3d(0,0,0), new Vector3d(0,1,0), new Vector3d(0,1,0), new Vector3d(1, 0.022, 0.0019)));
-        LIGHTS.add(new PointLight(new Vector3d(20, -15, 0), new Vector3d(0,0,0), new Vector3d(0,0,1), new Vector3d(0,0,1), new Vector3d(1, 0.022, 0.0019)));
+        LIGHTS.add(new PointLight(new Vector3d(-20, 5, 0), new Vector3d(0,0,0), new Vector3d(1,0,0), new Vector3d(1,0,0), new Vector3d(1, 0.022, 0.0019)));
+        LIGHTS.add(new PointLight(new Vector3d(0, 5, 0), new Vector3d(0,0,0), new Vector3d(0,1,0), new Vector3d(0,1,0), new Vector3d(1, 0.022, 0.0019)));
+        LIGHTS.add(new PointLight(new Vector3d(20, 5, 0), new Vector3d(0,0,0), new Vector3d(0,0,1), new Vector3d(0,0,1), new Vector3d(1, 0.022, 0.0019)));
     }
 
     public static DirectionalLight getDirectionalLight() {
